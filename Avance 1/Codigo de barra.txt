@@ -1,0 +1,5 @@
+
+Codigos de Barra
+Generador: HD Automation
+Impresora: Marca Zebra 
+Lector: Marca MegaTk

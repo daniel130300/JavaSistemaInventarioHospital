@@ -114,10 +114,8 @@ public class UsuarioController extends GeneralController
                 case "insertar":
                     if(!Validaciones.validarContrasenia(contrasenia))
                     {
-                        errContrasenia.setText("La contraseña debe contener una letra mayúscula"
-                        + "\ndebe contener una letra minuscula,"
-                        + "\ndebe contener un digito y"
-                        + "\nun caracter especial!");
+                        errContrasenia.setText("La contraseña debe contener al menos una mayúscula, "
+                                + "una letra minuscula, un digito y un caracter especial!");
                         contraseniaValidacionError = true;
                     }
 
@@ -131,6 +129,7 @@ public class UsuarioController extends GeneralController
                     {
                         id = 0; 
                         estado = "Activo";
+                        
                         UsuarioModel usuarioModel = new UsuarioModel();
                         usuarioModel.setUsrId(id);
                         usuarioModel.setUsrIdentidad(identidad);
@@ -143,39 +142,87 @@ public class UsuarioController extends GeneralController
                         usuarioModel.setAreId(id_area+1);
                         
                         String resultado = UsuarioConexion.MantenimientoUsuarios(accion, usuarioModel);
-                        System.out.println(resultado);
-                        /*
-                        if(resultado.equals("correcto"))
+                        
+                        if(resultado.equals("OK"))
                         {
-                            JOptionPane.showMessageDialog(null, "Se ha ingresado el usuario con éxito");
+                            JOptionPane.showMessageDialog(null, "Se ha ingresado el usuario con éxito.");
                         }
                         else if (resultado.equals("errIdentidad"))
                         {
-                            JOptionPane.showMessageDialog(null, "La identidad ya se encuentra ingresada en la bdd");
+                            JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
                             mntError = true;
                         }
                         else if (resultado.equals("errCorreo"))
                         {
-                            JOptionPane.showMessageDialog(null, "El correo ya se encuentra ingresado en la bdd");
+                            JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
                             mntError = true;
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación");
+                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
                             mntError = true;
                         }
-                        */
                     }  
                 break;
                 
                 case "editar":
+                    if(contrasenia == "")
+                    {
+                        if(!Validaciones.validarContrasenia(contrasenia))
+                        {
+                            errContrasenia.setText("La contraseña debe contener al menos una mayúscula, "
+                                    + "una letra minuscula, un digito y un caracter especial!");
+                            contraseniaValidacionError = true;
+                        }
+                    }
                     
-                    
+                    if(contraseniaValidacionError == false)
+                    {
+                        UsuarioModel usuarioModel = new UsuarioModel();
+                        usuarioModel.setUsrId(id);
+                        usuarioModel.setUsrIdentidad(identidad);
+                        usuarioModel.setUsrNombre(nombre);
+                        usuarioModel.setUsrApellido(apellido);
+                        usuarioModel.setUsrCorreo(correo);
+                        usuarioModel.setUsrUsuario(usuario);
+                        usuarioModel.setUsrContrasenia(contrasenia);
+                        usuarioModel.setUsrEstado(estado);
+                        usuarioModel.setAreId(id_area+1);
+                        
+                        String resultado = UsuarioConexion.MantenimientoUsuarios(accion, usuarioModel);
+                        
+                        if(resultado.equals("OK"))
+                        {
+                            JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario con éxito.");
+                        }
+                        else if (resultado.equals("errIdentidad"))
+                        {
+                            JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
+                            mntError = true;
+                        }
+                        else if (resultado.equals("errCorreo"))
+                        {
+                            JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
+                            mntError = true;
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                            mntError = true;
+                        }
+                    }    
                 break;
             }
         }
         
-        return mntError;
+        if (mntError == false && generalValidacionError == false && contraseniaValidacionError == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     
     public static void LlenarCmbAreas(JComboBox cmbAreas)

@@ -8,13 +8,8 @@ package Views.Mantenimientos;
 import Controllers.Controllers.UsuarioController;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
-import java.sql.Date;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 
 /**
  *
@@ -193,7 +188,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblCorreo.setText("Correo: ");
         pnlMenu.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
-        txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoActionPerformed(evt);
@@ -206,7 +200,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorCorreo.setForeground(new java.awt.Color(231, 0, 2));
         pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 220, -1));
 
-        txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
@@ -214,7 +207,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         pnlMenu.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 220, -1));
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -227,7 +219,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblApellido.setText("Apellido: ");
         pnlMenu.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
-        txtApellido.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
@@ -265,6 +256,9 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableUsuariosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tableUsuariosMouseEntered(evt);
+            }
         });
         jScrollPane1.setViewportView(tableUsuarios);
 
@@ -275,8 +269,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblContrasenia.setText("Contraseña: ");
         pnlMenu.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
-        cmbEstado.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,7 +284,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblPrivilegios.setText("Seleccionados");
         pnlMenu.add(lblPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, -1, -1));
 
-        txtIdentidad.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtIdentidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentidadActionPerformed(evt);
@@ -332,8 +324,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         );
 
         pnlMenu.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1035, 340, 130, -1));
-
-        txtContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         pnlMenu.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 220, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -341,7 +331,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblBuscar.setText("Buscar: ");
         pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -430,7 +419,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblArea.setText("Área:");
         pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
 
-        cmbArea.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cmbArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreaActionPerformed(evt);
@@ -475,6 +463,11 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         btnEditar.setForeground(new java.awt.Color(242, 242, 242));
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 270, 90, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1210, 530));
@@ -575,7 +568,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.txtApellido.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 3)));
         this.txtCorreo.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 4)));
         this.txtUsuario.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 5)));
-        this.cmbEstado.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 7)));
+        this.cmbEstado.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,6)));
         this.cmbArea.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,8)));
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
@@ -589,8 +582,8 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
             this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
             this.lblErrorEstado))
         {
-            //this.LimpiarInputs();
-            //UsuarioController.LlenarTableUsuarios(tableUsuarios);
+            this.LimpiarInputs();
+            UsuarioController.LlenarTableUsuarios(tableUsuarios);
         }        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -603,6 +596,25 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.LimpiarInputs();
         this.LimpiarErrLabels();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if(!UsuarioController.MantenimientoUsuarios("editar", this.Id_usuario, 
+            this.txtIdentidad.getText(), this.txtNombre.getText(), 
+            this.txtApellido.getText(), this.txtCorreo.getText(), 
+            this.txtUsuario.getText(), this.txtContrasenia.getText(), 
+            this.cmbEstado.getSelectedItem().toString(), this.cmbArea.getSelectedIndex(),
+            this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
+            this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
+            this.lblErrorEstado))
+        {
+            this.LimpiarInputs();
+            UsuarioController.LlenarTableUsuarios(tableUsuarios);
+        }    
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tableUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableUsuariosMouseEntered
 
     /**
      * @param args the command line arguments

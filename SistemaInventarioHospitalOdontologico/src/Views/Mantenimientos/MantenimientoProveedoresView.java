@@ -5,6 +5,7 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.ProveedorController;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
      */
     public MantenimientoProveedoresView() {
         initComponents();
+        ProveedorController.LlenarTableProveedores(tableProveedores);
     }
 
     /**
@@ -55,7 +57,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblTelefono = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
-        txtRegistroSanitario = new javax.swing.JTextField();
+        txtContacto = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProveedores = new javax.swing.JTable();
         btnEditar = new javax.swing.JPanel();
@@ -68,12 +70,12 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         btnVisualizar = new javax.swing.JPanel();
         lblVisualizar = new javax.swing.JLabel();
-        lblRegistroSanitario = new javax.swing.JLabel();
+        lblContacto = new javax.swing.JLabel();
         lblErrorDireccion = new javax.swing.JLabel();
         lblErrorRTN = new javax.swing.JLabel();
         lblErrorNombre = new javax.swing.JLabel();
         lblErrorCorreo = new javax.swing.JLabel();
-        lblErrorRegistroSanitario = new javax.swing.JLabel();
+        lblErrorContacto = new javax.swing.JLabel();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -146,27 +148,25 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(242, 242, 242));
         lblCorreo.setText("Correo: ");
-        pnlMenu.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        pnlMenu.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
         lblErrorTelefono.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorTelefono.setForeground(new java.awt.Color(231, 0, 2));
         lblErrorTelefono.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
+        pnlMenu.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
 
-        txtRTN.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtRTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRTNActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtRTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, -1));
+        pnlMenu.add(txtRTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 220, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
         pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -177,47 +177,44 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblRTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblRTN.setForeground(new java.awt.Color(242, 242, 242));
         lblRTN.setText("RTN:");
-        pnlMenu.add(lblRTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        pnlMenu.add(lblRTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
-        txtIdentidad5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtIdentidad5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentidad5ActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtIdentidad5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 220, -1));
+        pnlMenu.add(txtIdentidad5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 220, -1));
 
-        txtCorreo1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtCorreo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreo1ActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 220, -1));
+        pnlMenu.add(txtCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 220, -1));
 
         lblDireccion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDireccion.setForeground(new java.awt.Color(242, 242, 242));
         lblDireccion.setText("Dirección: ");
-        pnlMenu.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+        pnlMenu.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, -1));
 
         lblTelefono.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTelefono.setForeground(new java.awt.Color(242, 242, 242));
         lblTelefono.setText("Teléfono:");
-        pnlMenu.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+        pnlMenu.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 310, 100));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 310, 100));
 
-        txtRegistroSanitario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        txtRegistroSanitario.addActionListener(new java.awt.event.ActionListener() {
+        txtContacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRegistroSanitarioActionPerformed(evt);
+                txtContactoActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtRegistroSanitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 220, -1));
+        pnlMenu.add(txtContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 220, -1));
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,7 +224,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id proveedor", "Registro Sanitario", "RTN", "Nombre", "Correo", "Telefono", "Direccion"
+                "Id proveedor", "RTN", "Nombre", "Correo", "Telefono", "Contacto", "Direccion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -272,7 +269,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 80, -1));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 80, -1));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
@@ -304,7 +301,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 .addComponent(lblAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, -1, -1));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
@@ -336,20 +333,19 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 .addComponent(lblCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 80, -1));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 80, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));
         lblNombre.setText("Nombre:");
-        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 220, -1));
+        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, -1));
 
         btnVisualizar.setBackground(new java.awt.Color(59, 103, 181));
         btnVisualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
@@ -380,35 +376,35 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         pnlMenu.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, 130, -1));
 
-        lblRegistroSanitario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRegistroSanitario.setForeground(new java.awt.Color(242, 242, 242));
-        lblRegistroSanitario.setText("Reg Sanitario:");
-        pnlMenu.add(lblRegistroSanitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        lblContacto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblContacto.setForeground(new java.awt.Color(242, 242, 242));
+        lblContacto.setText("Contacto:");
+        pnlMenu.add(lblContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
 
         lblErrorDireccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDireccion.setForeground(new java.awt.Color(231, 0, 2));
         lblErrorDireccion.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, -1));
+        pnlMenu.add(lblErrorDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
 
         lblErrorRTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorRTN.setForeground(new java.awt.Color(231, 0, 2));
         lblErrorRTN.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorRTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        pnlMenu.add(lblErrorRTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
         lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorNombre.setForeground(new java.awt.Color(231, 0, 2));
         lblErrorNombre.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
         lblErrorCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorCorreo.setForeground(new java.awt.Color(231, 0, 2));
         lblErrorCorreo.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
+        pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
 
-        lblErrorRegistroSanitario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorRegistroSanitario.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorRegistroSanitario.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorRegistroSanitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        lblErrorContacto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorContacto.setForeground(new java.awt.Color(231, 0, 2));
+        lblErrorContacto.setText("Error este campo es requerido");
+        pnlMenu.add(lblErrorContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
@@ -493,9 +489,9 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRTNActionPerformed
 
-    private void txtRegistroSanitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegistroSanitarioActionPerformed
+    private void txtContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContactoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRegistroSanitarioActionPerformed
+    }//GEN-LAST:event_txtContactoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -809,21 +805,21 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JLabel lblAgregar;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCancelar;
+    private javax.swing.JLabel lblContacto;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblEditar;
+    private javax.swing.JLabel lblErrorContacto;
     private javax.swing.JLabel lblErrorCorreo;
     private javax.swing.JLabel lblErrorDireccion;
     private javax.swing.JLabel lblErrorNombre;
     private javax.swing.JLabel lblErrorRTN;
-    private javax.swing.JLabel lblErrorRegistroSanitario;
     private javax.swing.JLabel lblErrorTelefono;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuario;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRTN;
-    private javax.swing.JLabel lblRegistroSanitario;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTitulo;
@@ -836,11 +832,11 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlUsuario;
     private javax.swing.JTable tableProveedores;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtContacto;
     private javax.swing.JTextField txtCorreo1;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtIdentidad5;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRTN;
-    private javax.swing.JTextField txtRegistroSanitario;
     // End of variables declaration//GEN-END:variables
 }

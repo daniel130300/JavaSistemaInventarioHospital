@@ -6,14 +6,17 @@
 package Models.Conexion;
 
 import Models.Models.AreasModel;
+import Models.Models.PrivilegiosModel;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Models.Models.UsuarioModel;
+import java.security.MessageDigest;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +37,7 @@ public class UsuarioConexion
             con = Conexion.getConexion(con);
             stm = con.createStatement();
             String query = "SELECT u.*, a.AreDescripcion FROM usuarios u "
-                     + "INNER JOIN areas a ON u.AreId = a.AreId;";
+                     + "INNER JOIN areas a ON u.AreId = a.AreId ORDER BY u.UsrId asc";
              
             rss = stm.executeQuery(query);
             
@@ -95,6 +98,65 @@ public class UsuarioConexion
         return areas;
     }
     
+    /*
+     public static ArrayList<PrivilegiosModel> ListadoPrivilegios() 
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        
+        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
+
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+            String query = "SELECT * FROM privilegios;";
+             
+            rss = stm.executeQuery(query);
+            
+            while (rss.next()) 
+            {
+                AreasModel area = new AreasModel();
+                area.setAreId(rss.getInt("AreId"));
+                area.setAreDescripcion(rss.getString("AreDescripcion"));
+                areas.add(area);
+            }
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+
+        return areas;
+    }
+    */
+    
+    private static String sha256Encryption(final String base) 
+    {
+        try
+        {
+            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            final byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            final StringBuilder hexString = new StringBuilder();
+            
+            for (int i = 0; i < hash.length; i++) 
+            {
+                final String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) 
+                  hexString.append('0');
+                hexString.append(hex);
+            }
+            
+            return hexString.toString();
+        } 
+        catch(Exception ex)
+        {
+           throw new RuntimeException(ex);
+        }
+    }
+    
     public static String MantenimientoUsuarios(String accion, UsuarioModel usuario)
     {
         String estado = "";
@@ -103,29 +165,31 @@ public class UsuarioConexion
         {
             String query;
             con = Conexion.getConexion(con);
-            query = "{CALL mantenimiento_usuarios(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
-
+            String hashedpassword = sha256Encryption(usuario.getUsrContrasenia());
+            
+            System.out.println(hashedpassword);
+            
+            query = "{CALL MantenimientoUsuarios(?,?,?,?,?,?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
-            cs.setString    (1, accion);
-            cs.setInt       (2, usuario.getUsrId());
-            cs.setString    (3, usuario.getUsrIdentidad());
-            cs.setString    (4, usuario.getUsrNombre());
-            cs.setString    (5, usuario.getUsrApellido());
-            cs.setString    (6, usuario.getUsrCorreo());
-            cs.setString    (7, usuario.getUsrUsuario());
-            cs.setString    (8, usuario.getUsrContrasenia());
-            cs.setString    (9, usuario.getUsrEstado());
-            cs.setInt       (10, usuario.getAreId());
-            cs.registerOutParameter(11, java.sql.Types.VARCHAR);
+            cs.setString            (1, accion);
+            cs.setInt               (2, usuario.getUsrId());
+            cs.setString            (3, usuario.getUsrIdentidad());
+            cs.setString            (4, usuario.getUsrNombre());
+            cs.setString            (5, usuario.getUsrApellido());
+            cs.setString            (6, usuario.getUsrCorreo());
+            cs.setString            (7, usuario.getUsrUsuario());
+            cs.setString            (8, hashedpassword);
+            cs.setString            (9, usuario.getUsrEstado());
+            cs.setInt               (10, usuario.getAreId());
+            cs.registerOutParameter (11, Types.VARCHAR);
+            cs.executeUpdate();
             estado = cs.getString(11);
-            cs.execute();
             con.close();
         }
         catch (SQLException e)
         {
             estado = e.toString();
         } 
-        
         return estado;
     }   
 }

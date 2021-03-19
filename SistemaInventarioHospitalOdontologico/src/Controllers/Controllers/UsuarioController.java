@@ -7,17 +7,16 @@ package Controllers.Controllers;
 
 import Models.Conexion.UsuarioConexion;
 import Models.Models.AreasModel;
+import Models.Models.PrivilegiosModel;
 import Models.Models.UsuarioModel;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -235,7 +234,7 @@ public class UsuarioController extends GeneralController
             cmbAreas.addItem(areas.get(i).getAreDescripcion());
         }
     }
-
+    
     public static void LlenarTableUsuarios(JTable tableUsuarios) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUsuarios.getModel(); 
@@ -261,5 +260,34 @@ public class UsuarioController extends GeneralController
             );
         }
         FormatoTabla(tableUsuarios, modelo.getColumnCount());
+    }
+    
+    public static void LlenarListPrivilegios(DefaultListModel modelo)
+    {
+        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
+        privilegios = UsuarioConexion.ListadoPrivilegios();
+        
+        for (int i = 0; i<privilegios.size(); i++)
+        {
+            modelo.add(privilegios.get(i).getPriId()-1, privilegios.get(i).getPriDescripcion());
+        }
+    }
+        
+    public static void AgregarListPrivilegiosSeleccionados(DefaultListModel modeloLstPrivilegiosSeleccionados, JList lstPrivilegiosDisponibles, DefaultListModel modeloLstPrivilegiosDisponibles)
+    {
+        for(Object selectedValue:lstPrivilegiosDisponibles.getSelectedValuesList())
+        {
+            modeloLstPrivilegiosSeleccionados.addElement(selectedValue);  
+            modeloLstPrivilegiosDisponibles.removeElement(selectedValue);
+        }
+    }
+    
+    public static void QuitarListPrivilegiosSeleccionados(DefaultListModel modeloLstPrivilegiosSeleccionados, JList lstPrivilegiosSeleccionados, DefaultListModel modeloLstPrivilegiosDisponibles)
+    {
+        for(Object selectedValue:lstPrivilegiosSeleccionados.getSelectedValuesList())
+        {
+            modeloLstPrivilegiosDisponibles.addElement(selectedValue);  
+            modeloLstPrivilegiosSeleccionados.removeElement(selectedValue);
+        }
     }
 }

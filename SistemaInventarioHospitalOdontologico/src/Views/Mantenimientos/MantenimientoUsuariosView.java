@@ -10,6 +10,10 @@ import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
+import java.awt.event.ActionEvent;
+import java.util.Vector;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,13 +24,21 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    public MantenimientoUsuariosView() {
-        initComponents();
-        UsuarioController.LlenarTableUsuarios(tableUsuarios);
-        UsuarioController.LlenarCmbAreas(cmbArea);
-    }
     
     Integer Id_usuario; 
+    private DefaultListModel modeloLstPrivilegiosSeleccionados = new DefaultListModel();
+    private DefaultListModel modeloLstPrivilegiosDisponibles = new DefaultListModel();
+    
+    public MantenimientoUsuariosView() 
+    {
+        initComponents();
+        this.lstPrivilegiosSeleccionados.setModel(modeloLstPrivilegiosSeleccionados);
+        this.lstPrivilegiosDisponibles.setModel(modeloLstPrivilegiosDisponibles);
+        UsuarioController.LlenarTableUsuarios(tableUsuarios);
+        UsuarioController.LlenarCmbAreas(cmbArea);
+        UsuarioController.LlenarListPrivilegios(modeloLstPrivilegiosDisponibles);
+    }
+    
     
     private void LimpiarInputs()
     {
@@ -87,8 +99,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblPrivilegios = new javax.swing.JLabel();
         txtIdentidad = new javax.swing.JTextField();
         lblEstado = new javax.swing.JLabel();
-        btnConsultar = new javax.swing.JPanel();
-        lblConsultar = new javax.swing.JLabel();
         txtContrasenia = new javax.swing.JPasswordField();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -112,8 +122,9 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         cmbArea = new javax.swing.JComboBox<>();
         lblErrorArea = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
+        btnVisualizarTabla = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        btnAgregar1 = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -186,14 +197,14 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(242, 242, 242));
         lblCorreo.setText("Correo: ");
-        pnlMenu.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        pnlMenu.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 220, -1));
+        pnlMenu.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 210, -1));
 
         lblErrorCorreo.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -205,36 +216,36 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 220, -1));
+        pnlMenu.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 210, -1));
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 220, -1));
+        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 210, -1));
 
         lblApellido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblApellido.setForeground(new java.awt.Color(242, 242, 242));
         lblApellido.setText("Apellido: ");
-        pnlMenu.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+        pnlMenu.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 220, -1));
+        pnlMenu.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 210, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));
         lblNombre.setText("Nombre:");
-        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuario.setText("Usuario: ");
-        pnlMenu.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+        pnlMenu.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, -1));
 
         tableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -262,12 +273,12 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableUsuarios);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 1140, 120));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 1230, 130));
 
         lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblContrasenia.setForeground(new java.awt.Color(242, 242, 242));
         lblContrasenia.setText("Contraseña: ");
-        pnlMenu.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
+        pnlMenu.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
@@ -276,55 +287,26 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 110, -1));
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 110, -1));
 
         lblPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios.setForeground(new java.awt.Color(242, 242, 242));
         lblPrivilegios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrivilegios.setText("Seleccionados");
-        pnlMenu.add(lblPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, -1, -1));
+        pnlMenu.add(lblPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 50, -1, -1));
 
         txtIdentidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdentidadActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 220, -1));
+        pnlMenu.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 210, -1));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
         lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
-
-        btnConsultar.setBackground(new java.awt.Color(59, 103, 181));
-        btnConsultar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConsultarMouseClicked(evt);
-            }
-        });
-
-        lblConsultar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblConsultar.setForeground(new java.awt.Color(242, 242, 242));
-        lblConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblConsultar.setText("Visualizar Tabla");
-
-        javax.swing.GroupLayout btnConsultarLayout = new javax.swing.GroupLayout(btnConsultar);
-        btnConsultar.setLayout(btnConsultarLayout);
-        btnConsultarLayout.setHorizontalGroup(
-            btnConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-        );
-        btnConsultarLayout.setVerticalGroup(
-            btnConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnConsultarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1035, 340, 130, -1));
-        pnlMenu.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 220, -1));
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
+        pnlMenu.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 210, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -338,45 +320,45 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 590, -1));
 
-        lstPrivilegiosDisponibles.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(lstPrivilegiosDisponibles);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 100, 130));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 200, 160));
 
         btnQuitarPrivilegios.setText("Quitar");
-        pnlMenu.add(btnQuitarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 140, 70, -1));
+        btnQuitarPrivilegios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarPrivilegiosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnQuitarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 140, 70, -1));
 
         btnAgregarPrivilegios.setText("Agregar");
-        pnlMenu.add(btnAgregarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 100, -1, -1));
+        btnAgregarPrivilegios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPrivilegiosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnAgregarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 100, -1, -1));
 
         lblPrivilegios1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios1.setForeground(new java.awt.Color(242, 242, 242));
         lblPrivilegios1.setText("Privilegios:");
-        pnlMenu.add(lblPrivilegios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, -1, -1));
+        pnlMenu.add(lblPrivilegios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, -1, -1));
 
         lblPrivilegios2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios2.setForeground(new java.awt.Color(242, 242, 242));
         lblPrivilegios2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrivilegios2.setText("Disponibles");
-        pnlMenu.add(lblPrivilegios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 100, -1));
+        pnlMenu.add(lblPrivilegios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 100, -1));
 
-        lstPrivilegiosSeleccionados.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(lstPrivilegiosSeleccionados);
 
-        pnlMenu.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 80, 100, 130));
+        pnlMenu.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 80, 200, 160));
 
         lblIdentidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblIdentidad.setForeground(new java.awt.Color(242, 242, 242));
         lblIdentidad.setText("Identidad: ");
-        pnlMenu.add(lblIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        pnlMenu.add(lblIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -402,7 +384,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorPrivilegios.setForeground(new java.awt.Color(231, 0, 2));
         lblErrorPrivilegios.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 220, 150, -1));
+        pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 250, 200, -1));
 
         lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -417,14 +399,14 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblArea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblArea.setForeground(new java.awt.Color(242, 242, 242));
         lblArea.setText("Área:");
-        pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
+        pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
 
         cmbArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreaActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 110, -1));
+        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 110, -1));
 
         lblErrorArea.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -440,23 +422,23 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 270, 90, -1));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 290, 90, -1));
 
-        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
+        btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVisualizarTabla.setForeground(new java.awt.Color(242, 242, 242));
+        btnVisualizarTabla.setText("Visualizar Tabla");
+        btnVisualizarTabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAgregarMouseClicked(evt);
+                btnVisualizarTablaMouseClicked(evt);
             }
         });
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnVisualizarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnVisualizarTablaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 270, 90, -1));
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 340, 140, -1));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -468,9 +450,25 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 270, 90, -1));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 290, 90, -1));
 
-        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1210, 530));
+        btnAgregar1.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar1.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregar1.setText("Agregar");
+        btnAgregar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregar1MouseClicked(evt);
+            }
+        });
+        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregar1ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 90, -1));
+
+        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 130, 1280, 530));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -537,12 +535,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentidadActionPerformed
 
-    private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
-        TablaGrandeUsuariosView consultaUsuariosView = new TablaGrandeUsuariosView();
-        consultaUsuariosView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnConsultarMouseClicked
-
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
@@ -551,15 +543,15 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAreaActionPerformed
 
-    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+    private void btnVisualizarTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarTablaMouseClicked
         
-    }//GEN-LAST:event_btnAgregarMouseClicked
+    }//GEN-LAST:event_btnVisualizarTablaMouseClicked
 
     private void tableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseClicked
         int seleccion = this.tableUsuarios.rowAtPoint(evt.getPoint()); 
         
         this.btnEditar.setEnabled(true);
-        btnAgregar.setEnabled(false);
+        btnVisualizarTabla.setEnabled(false);
         cmbEstado.setEnabled(true);
         
         this.Id_usuario = Integer.parseInt((String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
@@ -572,27 +564,18 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.cmbArea.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,8)));
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if(!UsuarioController.MantenimientoUsuarios("insertar", 0, 
-            this.txtIdentidad.getText(), this.txtNombre.getText(), 
-            this.txtApellido.getText(), this.txtCorreo.getText(), 
-            this.txtUsuario.getText(), this.txtContrasenia.getText(), 
-            "Activo", this.cmbArea.getSelectedIndex(),
-            this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
-            this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
-            this.lblErrorEstado))
-        {
-            this.LimpiarInputs();
-            UsuarioController.LlenarTableUsuarios(tableUsuarios);
-        }        
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
+        TablaGrandeUsuariosView tablaGrandeUsuariosView = new TablaGrandeUsuariosView();
+        tablaGrandeUsuariosView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVisualizarTablaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.btnAgregar.setEnabled(true);
+        this.btnVisualizarTabla.setEnabled(true);
         this.btnEditar.setEnabled(false);
         this.cmbEstado.setEnabled(false);
         this.tableUsuarios.clearSelection();
-        this.btnAgregar.setEnabled(true);
+        this.btnVisualizarTabla.setEnabled(true);
         this.LimpiarInputs();
         this.LimpiarErrLabels();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -615,6 +598,22 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private void tableUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_tableUsuariosMouseEntered
+
+    private void btnAgregar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregar1MouseClicked
+
+    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregar1ActionPerformed
+
+    private void btnAgregarPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPrivilegiosActionPerformed
+        UsuarioController.AgregarListPrivilegiosSeleccionados(this.modeloLstPrivilegiosSeleccionados, this.lstPrivilegiosDisponibles, this.modeloLstPrivilegiosDisponibles);
+    }//GEN-LAST:event_btnAgregarPrivilegiosActionPerformed
+
+    private void btnQuitarPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarPrivilegiosActionPerformed
+        UsuarioController.QuitarListPrivilegiosSeleccionados(this.modeloLstPrivilegiosSeleccionados, this.lstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles);
+    }//GEN-LAST:event_btnQuitarPrivilegiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -789,13 +788,13 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
     private javax.swing.JButton btnAgregarPrivilegios;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JPanel btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnQuitarPrivilegios;
     private javax.swing.JPanel btnRegresar;
+    private javax.swing.JButton btnVisualizarTabla;
     private javax.swing.JComboBox<String> cmbArea;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel1;
@@ -805,7 +804,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblConsultar;
     private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblErrorApellido;

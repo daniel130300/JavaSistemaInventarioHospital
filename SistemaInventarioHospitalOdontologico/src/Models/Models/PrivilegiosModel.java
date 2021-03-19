@@ -3,23 +3,24 @@ package Models.Models;
 
 public class PrivilegiosModel 
 {
-    private Integer AreId;
-    private String AreDescripcion;
+    private Integer PriId;
+    private String PriDescripcion;
 
-    public Integer getAreId() {
-        return AreId;
+    public Integer getPriId() {
+        return PriId;
     }
 
-    public void setAreId(Integer AreId) {
-        this.AreId = AreId;
+    public void setPriId(Integer PriId) {
+        this.PriId = PriId;
     }
 
-    public String getAreDescripcion() {
-        return AreDescripcion;
+    public String getPriDescripcion() {
+        return PriDescripcion;
     }
 
-    public void setAreDescripcion(String AreDescripcion) 
-    {
-        this.AreDescripcion = AreDescripcion;
+    public void setPriDescripcion(String PriDescripcion) {
+        this.PriDescripcion = PriDescripcion;
     }
+
+   
 }

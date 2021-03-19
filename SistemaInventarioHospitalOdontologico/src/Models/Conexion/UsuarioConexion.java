@@ -6,6 +6,7 @@
 package Models.Conexion;
 
 import Models.Models.AreasModel;
+import Models.Models.DetalleUsuariosModel;
 import Models.Models.PrivilegiosModel;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -18,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -98,8 +101,7 @@ public class UsuarioConexion
         return areas;
     }
     
-    /*
-     public static ArrayList<PrivilegiosModel> ListadoPrivilegios() 
+    public static ArrayList<PrivilegiosModel> ListadoPrivilegios() 
     {
         Connection con = null;
         Statement stm;
@@ -117,10 +119,10 @@ public class UsuarioConexion
             
             while (rss.next()) 
             {
-                AreasModel area = new AreasModel();
-                area.setAreId(rss.getInt("AreId"));
-                area.setAreDescripcion(rss.getString("AreDescripcion"));
-                areas.add(area);
+                PrivilegiosModel privilegio = new PrivilegiosModel();
+                privilegio.setPriId(rss.getInt("PriId"));
+                privilegio.setPriDescripcion(rss.getString("PriDescripcion"));
+                privilegios.add(privilegio);
             }
             con.close();
         } 
@@ -129,9 +131,8 @@ public class UsuarioConexion
             JOptionPane.showMessageDialog(null,e);
         }
 
-        return areas;
+        return privilegios;
     }
-    */
     
     private static String sha256Encryption(final String base) 
     {
@@ -191,5 +192,30 @@ public class UsuarioConexion
             estado = e.toString();
         } 
         return estado;
-    }   
+    }
+    
+    public static String MantenimientoDetalleUsuarios(String accion, DetalleUsuariosModel detalleUsuario)
+    {
+        String estado = "";
+        Connection con = null;
+        try
+        {
+            String query;
+            con = Conexion.getConexion(con);
+
+            query = "{CALL MantenimientoDetalleUsuarios(?,?,?,?)}";
+            CallableStatement cs = con.prepareCall(query);
+            cs.setString            (1, accion);
+            cs.setInt               (2, detalleUsuario.getDtuId());
+            cs.setInt               (3, detalleUsuario.getUsrId());
+            cs.setInt               (4, detalleUsuario.getPriId());
+            cs.executeUpdate();
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            estado = e.toString();
+        } 
+        return estado;
+    }
 }

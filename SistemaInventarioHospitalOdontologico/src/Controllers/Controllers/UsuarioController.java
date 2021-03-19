@@ -7,10 +7,14 @@ package Controllers.Controllers;
 
 import Models.Conexion.UsuarioConexion;
 import Models.Models.AreasModel;
+import Models.Models.DetalleUsuariosModel;
 import Models.Models.PrivilegiosModel;
 import Models.Models.UsuarioModel;
 import Utils.Validators.Validaciones;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -32,7 +36,7 @@ public class UsuarioController extends GeneralController
             String usuario, String contrasenia, String estado, Integer id_area,
             JLabel errIdentidad, JLabel errNombre, JLabel errApellido, 
             JLabel errCorreo, JLabel errUsuario, JLabel errContrasenia, 
-            JLabel errEstado)
+            JLabel errEstado, DefaultListModel modeloLstPrivilegiosSeleccionados)
     { 
         Boolean contraseniaValidacionError = false;
         Boolean generalValidacionError = false;
@@ -104,7 +108,7 @@ public class UsuarioController extends GeneralController
         {
             errUsuario.setText("El usuario es un campo obligatorio");
             generalValidacionError = true;
-        }
+        }        
         
         if(generalValidacionError == false)
         {
@@ -144,7 +148,14 @@ public class UsuarioController extends GeneralController
                         
                         if(resultado.equals("OK"))
                         {
-                            JOptionPane.showMessageDialog(null, "Se ha ingresado el usuario con éxito.");
+                            if(MantenimientoDetalleUsuarios(accion, modeloLstPrivilegiosSeleccionados) == false)
+                            {
+                                JOptionPane.showMessageDialog(null, "Usuario ingresado con éxito.");
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Error ingresando los privilegios.");
+                            }    
                         }
                         else if (resultado.equals("errIdentidad"))
                         {
@@ -224,6 +235,48 @@ public class UsuarioController extends GeneralController
         }
     }
     
+    private static Boolean MantenimientoDetalleUsuarios(String accion, DefaultListModel modeloLstPrivilegiosSeleccionados)
+    {
+        boolean error = false;
+        DetalleUsuariosModel detalleUsuariosModel = new DetalleUsuariosModel();
+        ArrayList<Integer> Indexes = new ArrayList<>();
+        ArrayList<String> Privilegios = new ArrayList<>();
+        
+        for(int i=0; i<modeloLstPrivilegiosSeleccionados.getSize(); i++)
+        {
+            Privilegios.add(modeloLstPrivilegiosSeleccionados.get(i).toString());
+        }
+
+        Indexes = UsuarioConexion.getIndexesofLstElements(Privilegios);
+        
+        switch(accion)
+        {
+            case "insertar":
+                error = false;
+                for(int i=0; i<modeloLstPrivilegiosSeleccionados.getSize(); i++)
+                {
+                    detalleUsuariosModel.setDtuId(0);
+                    detalleUsuariosModel.setUsrId(0);
+                    detalleUsuariosModel.setPriId(Indexes.get(i));
+                    String estado = UsuarioConexion.MantenimientoDetalleUsuarios(accion, detalleUsuariosModel);
+                    
+                    System.out.println(estado);
+                    
+                    if(!estado.equals("OK"))
+                    {
+                        error = true;
+                    }
+                }
+            break;
+            
+            case "editar":
+                
+            break;
+        }
+        
+        return error;
+    }
+    
     public static void LlenarCmbAreas(JComboBox cmbAreas)
     {
         ArrayList<AreasModel> areas = new ArrayList<>();
@@ -269,7 +322,7 @@ public class UsuarioController extends GeneralController
         
         for (int i = 0; i<privilegios.size(); i++)
         {
-            modelo.add(privilegios.get(i).getPriId()-1, privilegios.get(i).getPriDescripcion());
+            modelo.add(Integer.valueOf(privilegios.get(i).getPriId())-1, privilegios.get(i).getPriDescripcion());
         }
     }
         

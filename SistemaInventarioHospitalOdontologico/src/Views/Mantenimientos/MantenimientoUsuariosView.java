@@ -209,7 +209,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorCorreo.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorCorreo.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 220, -1));
+        pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 210, 20));
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,7 +287,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 110, -1));
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 130, -1));
 
         lblPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios.setForeground(new java.awt.Color(242, 242, 242));
@@ -320,6 +320,11 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 590, -1));
 
+        lstPrivilegiosDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstPrivilegiosDisponiblesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstPrivilegiosDisponibles);
 
         pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 200, 160));
@@ -363,22 +368,22 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 160, -1));
+        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 160, 20));
 
         lblErrorNombre.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorNombre.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 220, -1));
+        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 210, 20));
 
         lblErrorIdentidad.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorIdentidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorIdentidad.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 220, -1));
+        pnlMenu.add(lblErrorIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 210, 20));
 
         lblErrorUsuario.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorUsuario.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 220, -1));
+        pnlMenu.add(lblErrorUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 210, 20));
 
         lblErrorPrivilegios.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -389,12 +394,12 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorContrasenia.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 220, -1));
+        pnlMenu.add(lblErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 210, 20));
 
         lblErrorApellido.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorApellido.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorApellido.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 220, -1));
+        pnlMenu.add(lblErrorApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 210, 20));
 
         lblArea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblArea.setForeground(new java.awt.Color(242, 242, 242));
@@ -406,12 +411,12 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 cmbAreaActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 110, -1));
+        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 130, -1));
 
         lblErrorArea.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorArea.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, 160, -1));
+        pnlMenu.add(lblErrorArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 160, 20));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -588,7 +593,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
             this.cmbEstado.getSelectedItem().toString(), this.cmbArea.getSelectedIndex(),
             this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
             this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
-            this.lblErrorEstado))
+            this.lblErrorEstado, this.modeloLstPrivilegiosSeleccionados))
         {
             this.LimpiarInputs();
             UsuarioController.LlenarTableUsuarios(tableUsuarios);
@@ -604,7 +609,18 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregar1MouseClicked
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        // TODO add your handling code here:
+        if(!UsuarioController.MantenimientoUsuarios("insertar", 0, 
+            this.txtIdentidad.getText(), this.txtNombre.getText(), 
+            this.txtApellido.getText(), this.txtCorreo.getText(), 
+            this.txtUsuario.getText(), this.txtContrasenia.getText(), 
+            "Activo", this.cmbArea.getSelectedIndex(),
+            this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
+            this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
+            this.lblErrorEstado, this.modeloLstPrivilegiosSeleccionados))
+        {
+            this.LimpiarInputs();
+            UsuarioController.LlenarTableUsuarios(tableUsuarios);
+        }    
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     private void btnAgregarPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPrivilegiosActionPerformed
@@ -614,6 +630,10 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private void btnQuitarPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarPrivilegiosActionPerformed
         UsuarioController.QuitarListPrivilegiosSeleccionados(this.modeloLstPrivilegiosSeleccionados, this.lstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles);
     }//GEN-LAST:event_btnQuitarPrivilegiosActionPerformed
+
+    private void lstPrivilegiosDisponiblesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPrivilegiosDisponiblesMouseClicked
+    
+    }//GEN-LAST:event_lstPrivilegiosDisponiblesMouseClicked
 
     /**
      * @param args the command line arguments

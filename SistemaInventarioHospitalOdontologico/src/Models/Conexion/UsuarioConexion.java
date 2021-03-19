@@ -14,13 +14,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Models.Models.UsuarioModel;
 import java.security.MessageDigest;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 
 /**
  *
@@ -158,6 +155,40 @@ public class UsuarioConexion
         }
     }
     
+    public static ArrayList<Integer> getIndexesofLstElements(ArrayList<String> LstElements)
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        
+        ArrayList<Integer> Indexes = new ArrayList<>();
+        
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+            
+            for(int i=0; i<LstElements.size(); i++)
+            {
+                String query = "SELECT PriId FROM privilegios WHERE priDescripcion = '"+LstElements.get(i)+"';";
+             
+                rss = stm.executeQuery(query);
+
+                while (rss.next()) 
+                {
+                    Indexes.add(rss.getInt("PriId"));
+                }
+            }
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+
+        return Indexes;
+    }
+    
     public static String MantenimientoUsuarios(String accion, UsuarioModel usuario)
     {
         String estado = "";
@@ -167,8 +198,6 @@ public class UsuarioConexion
             String query;
             con = Conexion.getConexion(con);
             String hashedpassword = sha256Encryption(usuario.getUsrContrasenia());
-            
-            System.out.println(hashedpassword);
             
             query = "{CALL MantenimientoUsuarios(?,?,?,?,?,?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
@@ -203,13 +232,15 @@ public class UsuarioConexion
             String query;
             con = Conexion.getConexion(con);
 
-            query = "{CALL MantenimientoDetalleUsuarios(?,?,?,?)}";
+            query = "{CALL MantenimientoDetalleUsuarios(?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
             cs.setInt               (2, detalleUsuario.getDtuId());
             cs.setInt               (3, detalleUsuario.getUsrId());
             cs.setInt               (4, detalleUsuario.getPriId());
+            cs.registerOutParameter (5, Types.VARCHAR);
             cs.executeUpdate();
+            estado = cs.getString(5);
             con.close();
         }
         catch (SQLException e)

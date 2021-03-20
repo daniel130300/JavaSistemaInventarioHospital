@@ -10,10 +10,8 @@ import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
-import java.awt.event.ActionEvent;
-import java.util.Vector;
 import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -27,18 +25,19 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     
     Integer Id_usuario; 
     private DefaultListModel modeloLstPrivilegiosSeleccionados = new DefaultListModel();
-    private DefaultListModel modeloLstPrivilegiosDisponibles = new DefaultListModel();
-    
+    private DefaultListModel modeloLstPrivilegiosDisponibles = new DefaultListModel(); 
+
     public MantenimientoUsuariosView() 
     {
         initComponents();
+        this.tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.lstPrivilegiosSeleccionados.setModel(modeloLstPrivilegiosSeleccionados);
         this.lstPrivilegiosDisponibles.setModel(modeloLstPrivilegiosDisponibles);
-        UsuarioController.LlenarTableUsuarios(tableUsuarios);
-        UsuarioController.LlenarCmbAreas(cmbArea);
-        UsuarioController.LlenarListPrivilegios(modeloLstPrivilegiosDisponibles);
+        UsuarioController.LlenarTableUsuarios(this.tableUsuarios);
+        UsuarioController.LlenarCmbAreas(this.cmbArea);
+        UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
+        UsuarioController.FiltroTableUsuarios(tableUsuarios, txtBuscar);
     }
-    
     
     private void LimpiarInputs()
     {
@@ -53,7 +52,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.cmbEstado.setSelectedIndex(0);
     }
     
-    public void LimpiarErrLabels()
+    private void LimpiarErrLabels()
     {
         this.lblErrorIdentidad.setText(null);
         this.lblErrorNombre.setText(null);
@@ -63,8 +62,16 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.lblErrorContrasenia.setText(null);
         this.lblErrorArea.setText(null);
         this.lblErrorEstado.setText(null);
+        this.lblErrorPrivilegios.setText(null);
     }
-
+    
+    private void ResetJlists()
+    {
+        this.modeloLstPrivilegiosSeleccionados.clear();
+        this.modeloLstPrivilegiosDisponibles.clear();
+        UsuarioController.LlenarListPrivilegios(modeloLstPrivilegiosDisponibles);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,7 +131,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnVisualizarTabla = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnAgregar1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -354,7 +361,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblPrivilegios2.setForeground(new java.awt.Color(242, 242, 242));
         lblPrivilegios2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrivilegios2.setText("Disponibles");
-        pnlMenu.add(lblPrivilegios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 100, -1));
+        pnlMenu.add(lblPrivilegios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 50, 100, -1));
 
         jScrollPane4.setViewportView(lstPrivilegiosSeleccionados);
 
@@ -388,8 +395,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorPrivilegios.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorPrivilegios.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorPrivilegios.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 250, 200, -1));
+        pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 250, 240, 20));
 
         lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -457,21 +463,21 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 290, 90, -1));
 
-        btnAgregar1.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAgregar1.setForeground(new java.awt.Color(242, 242, 242));
-        btnAgregar1.setText("Agregar");
-        btnAgregar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregar.setText("Agregar");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAgregar1MouseClicked(evt);
+                btnAgregarMouseClicked(evt);
             }
         });
-        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregar1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 90, -1));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 90, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 130, 1280, 530));
 
@@ -555,18 +561,20 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private void tableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseClicked
         int seleccion = this.tableUsuarios.rowAtPoint(evt.getPoint()); 
         
+        this.btnAgregar.setEnabled(false);
         this.btnEditar.setEnabled(true);
-        btnVisualizarTabla.setEnabled(false);
         cmbEstado.setEnabled(true);
         
-        this.Id_usuario = Integer.parseInt((String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
-        this.txtIdentidad.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 1)));
-        this.txtNombre.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 2)));
-        this.txtApellido.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 3)));
-        this.txtCorreo.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 4)));
-        this.txtUsuario.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 5)));
-        this.cmbEstado.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,6)));
-        this.cmbArea.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,8)));
+        this.Id_usuario = Integer.parseInt((String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
+        this.txtIdentidad.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 1)));
+        this.txtNombre.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 2)));
+        this.txtApellido.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 3)));
+        this.txtCorreo.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 4)));
+        this.txtUsuario.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 5)));
+        this.cmbEstado.setSelectedItem(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,6)));
+        this.cmbArea.setSelectedItem(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,8)));
+        UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
+        UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
@@ -577,14 +585,16 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.btnVisualizarTabla.setEnabled(true);
+        this.btnAgregar.setEnabled(true);
         this.btnEditar.setEnabled(false);
         this.cmbEstado.setEnabled(false);
         this.tableUsuarios.clearSelection();
-        this.btnVisualizarTabla.setEnabled(true);
+        this.btnVisualizarTabla.setEnabled(true); 
+        this.ResetJlists();
         this.LimpiarInputs();
         this.LimpiarErrLabels();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if(!UsuarioController.MantenimientoUsuarios("editar", this.Id_usuario, 
             this.txtIdentidad.getText(), this.txtNombre.getText(), 
@@ -593,9 +603,13 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
             this.cmbEstado.getSelectedItem().toString(), this.cmbArea.getSelectedIndex(),
             this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
             this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
-            this.lblErrorEstado, this.modeloLstPrivilegiosSeleccionados))
+            this.lblErrorEstado, this.lblErrorPrivilegios, this.modeloLstPrivilegiosSeleccionados))
         {
+            this.btnAgregar.setEnabled(true);
+            this.btnEditar.setEnabled(false);
+            this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
+            this.ResetJlists();
             UsuarioController.LlenarTableUsuarios(tableUsuarios);
         }    
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -604,11 +618,11 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tableUsuariosMouseEntered
 
-    private void btnAgregar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregar1MouseClicked
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregar1MouseClicked
+    }//GEN-LAST:event_btnAgregarMouseClicked
 
-    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if(!UsuarioController.MantenimientoUsuarios("insertar", 0, 
             this.txtIdentidad.getText(), this.txtNombre.getText(), 
             this.txtApellido.getText(), this.txtCorreo.getText(), 
@@ -616,12 +630,13 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
             "Activo", this.cmbArea.getSelectedIndex(),
             this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
             this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
-            this.lblErrorEstado, this.modeloLstPrivilegiosSeleccionados))
+            this.lblErrorEstado, this.lblErrorPrivilegios, this.modeloLstPrivilegiosSeleccionados))
         {
             this.LimpiarInputs();
+            this.ResetJlists();
             UsuarioController.LlenarTableUsuarios(tableUsuarios);
         }    
-    }//GEN-LAST:event_btnAgregar1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPrivilegiosActionPerformed
         UsuarioController.AgregarListPrivilegiosSeleccionados(this.modeloLstPrivilegiosSeleccionados, this.lstPrivilegiosDisponibles, this.modeloLstPrivilegiosDisponibles);
@@ -808,7 +823,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar1;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarPrivilegios;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;

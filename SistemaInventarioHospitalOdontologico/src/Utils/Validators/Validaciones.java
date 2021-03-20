@@ -23,7 +23,7 @@ public class Validaciones
     
     public static Boolean validarUsuario(String usuario)
     {
-        return usuario.matches("^[a-zA-Z0-9]*$");
+        return usuario.matches("^[a-zA-Z0-9ÁÉÍÓÚÜÑáéíóúüñ]*$");
     }
     
     public static Boolean validarNumeros(String num) 
@@ -33,7 +33,7 @@ public class Validaciones
 
     public static Boolean validarLetras(String letras) 
     {
-        return letras.matches("[a-zA-ZÁÉÍÓÚÜáéíóúü ]+");
+        return letras.matches("[a-zA-ZÁÉÍÓÚÜÑáéíóúüñ ]+");
     }
 
     public static Boolean validarCorreo(String correo) 

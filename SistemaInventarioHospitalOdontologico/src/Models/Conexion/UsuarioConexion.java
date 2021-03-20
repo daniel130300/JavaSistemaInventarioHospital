@@ -130,31 +130,7 @@ public class UsuarioConexion
 
         return privilegios;
     }
-    
-    private static String sha256Encryption(final String base) 
-    {
-        try
-        {
-            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            final byte[] hash = digest.digest(base.getBytes("UTF-8"));
-            final StringBuilder hexString = new StringBuilder();
-            
-            for (int i = 0; i < hash.length; i++) 
-            {
-                final String hex = Integer.toHexString(0xff & hash[i]);
-                if(hex.length() == 1) 
-                  hexString.append('0');
-                hexString.append(hex);
-            }
-            
-            return hexString.toString();
-        } 
-        catch(Exception ex)
-        {
-           throw new RuntimeException(ex);
-        }
-    }
-    
+
     public static ArrayList<Integer> getIndexesofLstElements(ArrayList<String> LstElements)
     {
         Connection con = null;
@@ -187,6 +163,94 @@ public class UsuarioConexion
         }
 
         return Indexes;
+    }
+    
+    public static ArrayList<Integer> getDtuIndexesofUsr(Integer UsrId)
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        
+        ArrayList<Integer> Indexes = new ArrayList<>();
+        
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+
+            String query = "SELECT DtuId FROM detalleusuarios WHERE UsrId = "+UsrId+";";
+            rss = stm.executeQuery(query);
+            
+            while (rss.next()) 
+            {
+                Indexes.add(rss.getInt("DtuId"));
+            }
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        return Indexes;
+    }
+    
+     public static ArrayList<PrivilegiosModel> getUsrPrivilegiosDescripcion(Integer UsrId)
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        
+        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
+        
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+
+            String query = "SELECT PriDescripcion "
+                    + "FROM detalleusuarios Dtu INNER JOIN privilegios Pri "
+                    + "ON Dtu.PriId = Pri.PriId WHERE UsrId = "+UsrId +";";
+            rss = stm.executeQuery(query);
+            
+            while (rss.next()) 
+            {
+                PrivilegiosModel privilegio = new PrivilegiosModel();
+                privilegio.setPriDescripcion(rss.getString("PriDescripcion"));
+                privilegios.add(privilegio);
+            }
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        return privilegios;
+    }
+    
+    private static String sha256Encryption(final String base) 
+    {
+        try
+        {
+            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            final byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            final StringBuilder hexString = new StringBuilder();
+            
+            for (int i = 0; i < hash.length; i++) 
+            {
+                final String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) 
+                  hexString.append('0');
+                hexString.append(hex);
+            }
+            
+            return hexString.toString();
+        } 
+        catch(Exception ex)
+        {
+           throw new RuntimeException(ex);
+        }
     }
     
     public static String MantenimientoUsuarios(String accion, UsuarioModel usuario)

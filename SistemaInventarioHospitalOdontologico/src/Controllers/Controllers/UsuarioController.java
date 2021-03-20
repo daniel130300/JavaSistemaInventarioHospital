@@ -11,17 +11,20 @@ import Models.Models.DetalleUsuariosModel;
 import Models.Models.PrivilegiosModel;
 import Models.Models.UsuarioModel;
 import Utils.Validators.Validaciones;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 
 /**
@@ -36,7 +39,7 @@ public class UsuarioController extends GeneralController
             String usuario, String contrasenia, String estado, Integer id_area,
             JLabel errIdentidad, JLabel errNombre, JLabel errApellido, 
             JLabel errCorreo, JLabel errUsuario, JLabel errContrasenia, 
-            JLabel errEstado, DefaultListModel modeloLstPrivilegiosSeleccionados)
+            JLabel errEstado, JLabel errPrivilegios, DefaultListModel modeloLstPrivilegiosSeleccionados)
     { 
         Boolean contraseniaValidacionError = false;
         Boolean generalValidacionError = false;
@@ -49,80 +52,94 @@ public class UsuarioController extends GeneralController
         errUsuario.setText(null);
         errContrasenia.setText(null);
         errEstado.setText(null);
+        errPrivilegios.setText(null);
+        
+        String trimmedIdentidad = identidad.trim();
+        String trimmedNombre = nombre.trim();
+        String trimmedApellido = apellido.trim();
+        String trimmedCorreo = correo.trim();
+        String trimmedUsuario = usuario.trim();
+        String trimmedContrasenia = contrasenia.trim();
 
-        if(!Validaciones.validarIdentidad(identidad))
+        if(!Validaciones.validarIdentidad(trimmedIdentidad))
         {
            errIdentidad.setText("La identidad ingresada es incorrecta");
            generalValidacionError = true;
         }
         
-        if(Validaciones.validarCampoVacio(identidad))
+        if(Validaciones.validarCampoVacio(trimmedIdentidad))
         {
            errIdentidad.setText("La identidad es un campo obligatorio");
            generalValidacionError = true;
         }
                
-        if(!Validaciones.validarLetras(nombre))
+        if(!Validaciones.validarLetras(trimmedNombre))
         {
             errNombre.setText("El nombre ingresado es incorrecto");
             generalValidacionError = true;
         }
         
-        if(Validaciones.validarCampoVacio(nombre))
+        if(Validaciones.validarCampoVacio(trimmedNombre))
         {
            errNombre.setText("El nombre es un campo obligatorio");
            generalValidacionError = true;
         }
         
-        if(!Validaciones.validarLetras(apellido))
+        if(!Validaciones.validarLetras(trimmedApellido))
         {
            errApellido.setText("El apellido ingresado es incorrecto");
            generalValidacionError = true;
         }
         
-        if(Validaciones.validarCampoVacio(apellido))
+        if(Validaciones.validarCampoVacio(trimmedApellido))
         {
            errApellido.setText("El apellido es un campo obligatorio");
            generalValidacionError = true;
         }
         
-        if(!Validaciones.validarCorreo(correo))
+        if(!Validaciones.validarCorreo(trimmedCorreo))
         {
             errCorreo.setText("El correo ingresado es incorrecto");
             generalValidacionError = true;
         }
         
-        if(Validaciones.validarCampoVacio(correo))
+        if(Validaciones.validarCampoVacio(trimmedCorreo))
         {
            errCorreo.setText("El correo es un campo obligatorio");
            generalValidacionError = true;
         }
         
-        if(!Validaciones.validarUsuario(usuario))
+        if(!Validaciones.validarUsuario(trimmedUsuario))
         {
             errUsuario.setText("El usuario ingresado es incorrecto");
             generalValidacionError = true;
         }
         
-        if(Validaciones.validarCampoVacio(usuario))
+        if(Validaciones.validarCampoVacio(trimmedUsuario))
         {
             errUsuario.setText("El usuario es un campo obligatorio");
             generalValidacionError = true;
-        }        
+        } 
+        
+        if(modeloLstPrivilegiosSeleccionados.getSize() == 0)
+        {
+            errPrivilegios.setText("No ha seleccioando ningún privilegio");
+            generalValidacionError = true;
+        }
         
         if(generalValidacionError == false)
         {
             switch(accion)
             {
                 case "insertar":
-                    if(!Validaciones.validarContrasenia(contrasenia))
+                    if(!Validaciones.validarContrasenia(trimmedContrasenia))
                     {
                         errContrasenia.setText("La contraseña debe contener al menos una mayúscula, "
                                 + "una letra minuscula, un digito y un caracter especial!");
                         contraseniaValidacionError = true;
                     }
 
-                    if(Validaciones.validarCampoVacio(contrasenia))
+                    if(Validaciones.validarCampoVacio(trimmedContrasenia))
                     {
                         errContrasenia.setText("La contraseña es un campo obligatorio");
                         contraseniaValidacionError = true;
@@ -135,53 +152,55 @@ public class UsuarioController extends GeneralController
                         
                         UsuarioModel usuarioModel = new UsuarioModel();
                         usuarioModel.setUsrId(id);
-                        usuarioModel.setUsrIdentidad(identidad);
-                        usuarioModel.setUsrNombre(nombre);
-                        usuarioModel.setUsrApellido(apellido);
-                        usuarioModel.setUsrCorreo(correo);
-                        usuarioModel.setUsrUsuario(usuario);
-                        usuarioModel.setUsrContrasenia(contrasenia);
+                        usuarioModel.setUsrIdentidad(trimmedIdentidad);
+                        usuarioModel.setUsrNombre(trimmedNombre);
+                        usuarioModel.setUsrApellido(trimmedApellido);
+                        usuarioModel.setUsrCorreo(trimmedCorreo);
+                        usuarioModel.setUsrUsuario(trimmedUsuario);
+                        usuarioModel.setUsrContrasenia(trimmedContrasenia);
                         usuarioModel.setUsrEstado(estado);
                         usuarioModel.setAreId(id_area+1);
                         
                         String resultado = UsuarioConexion.MantenimientoUsuarios(accion, usuarioModel);
                         
-                        if(resultado.equals("OK"))
+                        switch (resultado) 
                         {
-                            if(MantenimientoDetalleUsuarios(accion, modeloLstPrivilegiosSeleccionados) == false)
-                            {
-                                JOptionPane.showMessageDialog(null, "Usuario ingresado con éxito.");
-                            }
-                            else
-                            {
-                                JOptionPane.showMessageDialog(null, "Error ingresando los privilegios.");
-                            }    
-                        }
-                        else if (resultado.equals("errIdentidad"))
-                        {
-                            JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
-                            mntError = true;
-                        }
-                        else if (resultado.equals("errCorreo"))
-                        {
-                            JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
-                            mntError = true;
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                            mntError = true;
+                            case "OK":
+                                if(MantenimientoDetalleUsuarios(accion, id, modeloLstPrivilegiosSeleccionados) == false)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Usuario ingresado con éxito.");    
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "Error ingresando los privilegios.");
+                                }
+                            break;
+                            
+                            case "errIdentidad":
+                                JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
+                                mntError = true;
+                            break;
+                            
+                            case "errCorreo":
+                                JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
+                                mntError = true;
+                            break;
+                            
+                            default:
+                                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                                mntError = true;
+                            break;
                         }
                     }  
                 break;
                 
                 case "editar":
-                    if(contrasenia == "")
+                    if(!trimmedContrasenia.equals(""))
                     {
-                        if(!Validaciones.validarContrasenia(contrasenia))
+                        if(!Validaciones.validarContrasenia(trimmedContrasenia))
                         {
                             errContrasenia.setText("La contraseña debe contener al menos una mayúscula, "
-                                    + "una letra minuscula, un digito y un caracter especial!");
+                                    + "una letra minuscula, un digito y un caracter especial.");
                             contraseniaValidacionError = true;
                         }
                     }
@@ -190,35 +209,49 @@ public class UsuarioController extends GeneralController
                     {
                         UsuarioModel usuarioModel = new UsuarioModel();
                         usuarioModel.setUsrId(id);
-                        usuarioModel.setUsrIdentidad(identidad);
-                        usuarioModel.setUsrNombre(nombre);
-                        usuarioModel.setUsrApellido(apellido);
-                        usuarioModel.setUsrCorreo(correo);
-                        usuarioModel.setUsrUsuario(usuario);
-                        usuarioModel.setUsrContrasenia(contrasenia);
+                        usuarioModel.setUsrIdentidad(trimmedIdentidad);
+                        usuarioModel.setUsrNombre(trimmedNombre);
+                        usuarioModel.setUsrApellido(trimmedApellido);
+                        usuarioModel.setUsrCorreo(trimmedCorreo);
+                        usuarioModel.setUsrUsuario(trimmedUsuario);
+                        usuarioModel.setUsrContrasenia(trimmedContrasenia);
                         usuarioModel.setUsrEstado(estado);
                         usuarioModel.setAreId(id_area+1);
                         
                         String resultado = UsuarioConexion.MantenimientoUsuarios(accion, usuarioModel);
                         
-                        if(resultado.equals("OK"))
+                        switch (resultado) 
                         {
-                            JOptionPane.showMessageDialog(null, "Se ha actualizado el usuario con éxito.");
-                        }
-                        else if (resultado.equals("errIdentidad"))
-                        {
-                            JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
-                            mntError = true;
-                        }
-                        else if (resultado.equals("errCorreo"))
-                        {
-                            JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
-                            mntError = true;
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                            mntError = true;
+                            case "OK":
+                                if(MantenimientoDetalleUsuarios(accion, id, modeloLstPrivilegiosSeleccionados) == false)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Usuario actualizado con éxito.");    
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "Error actualizando los privilegios.");
+                                }
+                            break;
+                            
+                            case "errIdentidad":
+                                JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
+                                mntError = true;
+                            break;
+                            
+                            case "errCorreo":
+                                JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
+                                mntError = true;
+                            break;
+                            
+                            case "errUsuario":
+                                JOptionPane.showMessageDialog(null, "El usuario ya se encuentra registrado.");
+                                mntError = true;
+                            break;
+                            
+                            default:
+                                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                                mntError = true;
+                            break;
                         }
                     }    
                 break;
@@ -235,7 +268,7 @@ public class UsuarioController extends GeneralController
         }
     }
     
-    private static Boolean MantenimientoDetalleUsuarios(String accion, DefaultListModel modeloLstPrivilegiosSeleccionados)
+    private static Boolean MantenimientoDetalleUsuarios(String accion, Integer UsrId, DefaultListModel modeloLstPrivilegiosSeleccionados)
     {
         boolean error = false;
         DetalleUsuariosModel detalleUsuariosModel = new DetalleUsuariosModel();
@@ -260,8 +293,6 @@ public class UsuarioController extends GeneralController
                     detalleUsuariosModel.setPriId(Indexes.get(i));
                     String estado = UsuarioConexion.MantenimientoDetalleUsuarios(accion, detalleUsuariosModel);
                     
-                    System.out.println(estado);
-                    
                     if(!estado.equals("OK"))
                     {
                         error = true;
@@ -270,7 +301,38 @@ public class UsuarioController extends GeneralController
             break;
             
             case "editar":
+                error = false;
+                ArrayList<Integer> DtuIds = new ArrayList<>();
+                DtuIds = UsuarioConexion.getDtuIndexesofUsr(UsrId);
                 
+                for(Integer Id:DtuIds)
+                {
+                    detalleUsuariosModel.setDtuId(Id);
+                    detalleUsuariosModel.setUsrId(0);
+                    detalleUsuariosModel.setPriId(0);
+                    String estado = UsuarioConexion.MantenimientoDetalleUsuarios("eliminar", detalleUsuariosModel);
+                    
+                    if(!estado.equals("OK"))
+                    {
+                        error = true;
+                    }
+                }
+                
+                if(!error)
+                {
+                    for(int i=0; i<modeloLstPrivilegiosSeleccionados.getSize(); i++)
+                    {
+                        detalleUsuariosModel.setDtuId(0);
+                        detalleUsuariosModel.setUsrId(UsrId);
+                        detalleUsuariosModel.setPriId(Indexes.get(i));
+                        String estado = UsuarioConexion.MantenimientoDetalleUsuarios(accion, detalleUsuariosModel);
+
+                        if(!estado.equals("OK"))
+                        {
+                            error = true;
+                        }
+                    }
+                }
             break;
         }
         
@@ -315,14 +377,69 @@ public class UsuarioController extends GeneralController
         FormatoTabla(tableUsuarios, modelo.getColumnCount());
     }
     
+    public static void FiltroTableUsuarios(JTable tableUsuarios, JTextField fieldBusqueda)
+    {
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUsuarios.getModel());
+        tableUsuarios.setRowSorter(rowSorter);
+        fieldBusqueda.getDocument().addDocumentListener(new DocumentListener()
+        {
+            @Override
+            public void insertUpdate(DocumentEvent e) 
+            {
+                String text = fieldBusqueda.getText();
+
+                if (text.trim().length() == 0) 
+                {
+                    rowSorter.setRowFilter(null);
+                } 
+                else 
+                {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = fieldBusqueda.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) 
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        }
+        );  
+    }
+    
     public static void LlenarListPrivilegios(DefaultListModel modelo)
     {
+        modelo.clear();
         ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
         privilegios = UsuarioConexion.ListadoPrivilegios();
         
         for (int i = 0; i<privilegios.size(); i++)
         {
-            modelo.add(Integer.valueOf(privilegios.get(i).getPriId())-1, privilegios.get(i).getPriDescripcion());
+            modelo.addElement(privilegios.get(i).getPriDescripcion());
+        }
+    }
+    
+    public static void LlenarListPrivilegiosUsuario(DefaultListModel modeloLstPrivilegiosSeleccionados, DefaultListModel modeloLstPrivilegiosDisponibles, Integer UsrId)
+    {
+        modeloLstPrivilegiosSeleccionados.clear();
+        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
+        privilegios = UsuarioConexion.getUsrPrivilegiosDescripcion(UsrId);
+        
+        for (int i = 0; i<privilegios.size(); i++)
+        {
+            modeloLstPrivilegiosSeleccionados.addElement(privilegios.get(i).getPriDescripcion());
+            modeloLstPrivilegiosDisponibles.removeElement(privilegios.get(i).getPriDescripcion());
         }
     }
         

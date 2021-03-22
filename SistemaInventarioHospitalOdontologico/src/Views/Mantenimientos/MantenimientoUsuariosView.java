@@ -6,11 +6,13 @@
 package Views.Mantenimientos;
 
 import Controllers.Controllers.UsuarioController;
+import Utils.Cache.UsuariosCache;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -26,6 +28,10 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     Integer Id_usuario; 
     private DefaultListModel modeloLstPrivilegiosSeleccionados = new DefaultListModel();
     private DefaultListModel modeloLstPrivilegiosDisponibles = new DefaultListModel(); 
+    private JFrame getFrame()
+    {
+        return this;
+    }
 
     public MantenimientoUsuariosView() 
     {
@@ -70,6 +76,28 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.modeloLstPrivilegiosSeleccionados.clear();
         this.modeloLstPrivilegiosDisponibles.clear();
         UsuarioController.LlenarListPrivilegios(modeloLstPrivilegiosDisponibles);
+    }
+    
+    private void LlenarDatos()
+    {
+        UsuariosCache usuarioCache = new UsuariosCache();
+        if(usuarioCache.isDatosCompartidos())
+        {
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+            cmbEstado.setEnabled(true);
+            
+            this.Id_usuario = usuarioCache.getUsuario().getUsrId();
+            this.txtIdentidad.setText(usuarioCache.getUsuario().getUsrIdentidad());
+            this.txtNombre.setText(usuarioCache.getUsuario().getUsrNombre());
+            this.txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
+            this.txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
+            this.txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
+            this.cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
+            this.cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
+            UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
+            UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
+        }
     }
     
     /**
@@ -270,6 +298,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableUsuarios.setMinimumSize(new java.awt.Dimension(130, 0));
         tableUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableUsuariosMouseClicked(evt);
@@ -280,7 +309,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableUsuarios);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 1230, 130));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 1260, 140));
 
         lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblContrasenia.setForeground(new java.awt.Color(242, 242, 242));
@@ -300,7 +329,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblPrivilegios.setForeground(new java.awt.Color(242, 242, 242));
         lblPrivilegios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrivilegios.setText("Seleccionados");
-        pnlMenu.add(lblPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 50, -1, -1));
+        pnlMenu.add(lblPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, -1, -1));
 
         txtIdentidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,7 +363,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lstPrivilegiosDisponibles);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 200, 160));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 220, 170));
 
         btnQuitarPrivilegios.setText("Quitar");
         btnQuitarPrivilegios.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +371,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnQuitarPrivilegiosActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnQuitarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 140, 70, -1));
+        pnlMenu.add(btnQuitarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 140, 70, -1));
 
         btnAgregarPrivilegios.setText("Agregar");
         btnAgregarPrivilegios.addActionListener(new java.awt.event.ActionListener() {
@@ -350,7 +379,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnAgregarPrivilegiosActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 100, -1, -1));
+        pnlMenu.add(btnAgregarPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 100, -1, -1));
 
         lblPrivilegios1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios1.setForeground(new java.awt.Color(242, 242, 242));
@@ -361,11 +390,11 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblPrivilegios2.setForeground(new java.awt.Color(242, 242, 242));
         lblPrivilegios2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrivilegios2.setText("Disponibles");
-        pnlMenu.add(lblPrivilegios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 50, 100, -1));
+        pnlMenu.add(lblPrivilegios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 50, 90, -1));
 
         jScrollPane4.setViewportView(lstPrivilegiosSeleccionados);
 
-        pnlMenu.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 80, 200, 160));
+        pnlMenu.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 80, 220, 170));
 
         lblIdentidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblIdentidad.setForeground(new java.awt.Color(242, 242, 242));
@@ -395,7 +424,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorPrivilegios.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorPrivilegios.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 250, 240, 20));
+        pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 260, 240, 20));
 
         lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -433,7 +462,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 290, 90, -1));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 300, 90, -1));
 
         btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
         btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -449,7 +478,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnVisualizarTablaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 340, 140, -1));
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 340, 140, -1));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -461,7 +490,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 290, 90, -1));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 300, 90, -1));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -477,9 +506,9 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 90, -1));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 90, -1));
 
-        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 130, 1280, 530));
+        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1310, 530));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -578,7 +607,18 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
-        TablaGrandeUsuariosView tablaGrandeUsuariosView = new TablaGrandeUsuariosView();
+
+        TablaGrandeUsuariosView tablaGrandeUsuariosView = new TablaGrandeUsuariosView()
+        {
+            @Override
+            public void dispose()
+            {
+                LlenarDatos();
+                getFrame().setVisible(true);
+                super.dispose();
+            }
+        };
+        
         tablaGrandeUsuariosView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed

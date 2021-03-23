@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/UsuarioController.java</file>
             <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoUsuariosView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Utils/Validators/Validaciones.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Models/Conexion/UsuarioConexion.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Utils/Cache/UsuariosCache.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeUsuariosView.java</file>
         </group>
     </open-files>
 </project-private>

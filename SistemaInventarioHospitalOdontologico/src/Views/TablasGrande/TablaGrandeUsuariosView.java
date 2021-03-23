@@ -7,10 +7,8 @@ package Views.TablasGrande;
 
 import Controllers.Controllers.UsuarioController;
 import Models.Models.UsuarioModel;
-import Utils.Cache.UsuariosCache;
-import Views.Mantenimientos.MantenimientoUsuariosView;
+import Utils.Cache.UsuarioCache;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
@@ -220,7 +218,7 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
         usuarioModel.setUsrUsuario(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 5)));
         usuarioModel.setUsrEstado(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,6)));
         usuarioModel.setAreDescripcion(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,8)));
-        UsuariosCache usuarioCache = new UsuariosCache();
+        UsuarioCache usuarioCache = new UsuarioCache();
         usuarioCache.setDatosCompartidos(true);
         usuarioCache.setUsuario(usuarioModel);
         dispose();

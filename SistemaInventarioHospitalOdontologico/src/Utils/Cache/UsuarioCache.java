@@ -8,7 +8,7 @@ package Utils.Cache;
 import Models.Models.UsuarioModel;
 
 
-public class UsuariosCache 
+public class UsuarioCache 
 {
     private static boolean DatosCompartidos = false;
     private static UsuarioModel usuario;
@@ -18,7 +18,7 @@ public class UsuariosCache
     }
 
     public void setDatosCompartidos(boolean DatosCompartidos) {
-        UsuariosCache.DatosCompartidos = DatosCompartidos;
+        UsuarioCache.DatosCompartidos = DatosCompartidos;
     }
     
     public UsuarioModel getUsuario() {
@@ -26,7 +26,7 @@ public class UsuariosCache
     }
 
     public void setUsuario(UsuarioModel usr) {
-        UsuariosCache.usuario = usr;
+        UsuarioCache.usuario = usr;
     }
     
 }

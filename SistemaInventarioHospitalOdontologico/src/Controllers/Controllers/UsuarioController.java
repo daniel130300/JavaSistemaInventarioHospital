@@ -10,7 +10,6 @@ import Models.Models.AreasModel;
 import Models.Models.DetalleUsuariosModel;
 import Models.Models.PrivilegiosModel;
 import Models.Models.UsuarioModel;
-import Utils.Cache.UsuarioCache;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -417,47 +416,6 @@ public class UsuarioController extends GeneralController
             }
         }
         );  
-    }
-    
-    public static Integer setDatosEditarFromTable(int seleccion, JTable tableUsuarios, 
-            JTextField txtIdentidad,JTextField txtNombre, JTextField txtApellido,
-            JTextField txtCorreo, JTextField txtUsuario, JComboBox cmbEstado, JComboBox cmbArea)
-    {
-        Integer UsrId = null;
-        
-        UsrId = Integer.parseInt((String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
-        txtIdentidad.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 1)));
-        txtNombre.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 2)));
-        txtApellido.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 3)));
-        txtCorreo.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 4)));
-        txtUsuario.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 5)));
-        cmbEstado.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,6)));
-        cmbArea.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,8)));
-        
-        return UsrId;
-    }
-    
-    
-    public static Integer setDatosEditarFromCache(JTextField txtIdentidad, 
-             JTextField txtNombre, JTextField txtApellido, JTextField txtCorreo, 
-             JTextField txtUsuario, JComboBox cmbEstado, JComboBox cmbArea)
-    {
-        UsuarioCache usuarioCache = new UsuarioCache();
-        Integer UsrId = null;
-        
-        if(usuarioCache.isDatosCompartidos())
-        {   
-            UsrId = usuarioCache.getUsuario().getUsrId();
-            txtIdentidad.setText(usuarioCache.getUsuario().getUsrIdentidad());
-            txtNombre.setText(usuarioCache.getUsuario().getUsrNombre());
-            txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
-            txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
-            txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
-            cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
-            cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
-        }
-        
-        return UsrId;
     }
     
     public static void LlenarListPrivilegios(DefaultListModel modelo)

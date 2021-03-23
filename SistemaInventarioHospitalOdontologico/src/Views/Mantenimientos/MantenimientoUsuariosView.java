@@ -6,15 +6,13 @@
 package Views.Mantenimientos;
 
 import Controllers.Controllers.UsuarioController;
-import Utils.Cache.UsuarioCache;
+import Utils.Cache.UsuariosCache;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
 import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -27,10 +25,9 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
      * Creates new form LoginView
      */
     
-    Integer Id_usuario = null; 
+    Integer Id_usuario; 
     private DefaultListModel modeloLstPrivilegiosSeleccionados = new DefaultListModel();
     private DefaultListModel modeloLstPrivilegiosDisponibles = new DefaultListModel(); 
-    
     private JFrame getFrame()
     {
         return this;
@@ -83,15 +80,21 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     
     private void LlenarDatos()
     {
-        Integer UsrId = UsuarioController.setDatosEditarFromCache(txtIdentidad, 
-               this.txtNombre, this.txtApellido, this.txtCorreo, 
-               this.txtUsuario, this.cmbEstado, this.cmbArea);
-        if(UsrId != null)
+        UsuariosCache usuarioCache = new UsuariosCache();
+        if(usuarioCache.isDatosCompartidos())
         {
-            this.Id_usuario = UsrId;
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
             cmbEstado.setEnabled(true);
+            
+            this.Id_usuario = usuarioCache.getUsuario().getUsrId();
+            this.txtIdentidad.setText(usuarioCache.getUsuario().getUsrIdentidad());
+            this.txtNombre.setText(usuarioCache.getUsuario().getUsrNombre());
+            this.txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
+            this.txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
+            this.txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
+            this.cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
+            this.cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
             UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
             UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
         }
@@ -587,20 +590,20 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private void tableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseClicked
         int seleccion = this.tableUsuarios.rowAtPoint(evt.getPoint()); 
         
-        Integer UsrId = UsuarioController.setDatosEditarFromTable(seleccion, 
-                this.tableUsuarios, this.txtIdentidad, this.txtNombre, 
-                this.txtApellido, this.txtCorreo, this.txtUsuario, 
-                this.cmbEstado, this.cmbArea);
- 
-        if(UsrId != null)
-        {
-            this.Id_usuario = UsrId;
-            this.btnAgregar.setEnabled(false);
-            this.btnEditar.setEnabled(true);
-            cmbEstado.setEnabled(true);
-            UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
-            UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
-        }
+        this.btnAgregar.setEnabled(false);
+        this.btnEditar.setEnabled(true);
+        cmbEstado.setEnabled(true);
+        
+        this.Id_usuario = Integer.parseInt((String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
+        this.txtIdentidad.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 1)));
+        this.txtNombre.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 2)));
+        this.txtApellido.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 3)));
+        this.txtCorreo.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 4)));
+        this.txtUsuario.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 5)));
+        this.cmbEstado.setSelectedItem(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,6)));
+        this.cmbArea.setSelectedItem(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,8)));
+        UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
+        UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed

@@ -1,0 +1,9 @@
+1. Revisar el diseño de las pantallas.
+
+2. Realizarán cambios sobre los suministros y el catalogo de producto en bodega de forma recurrente?
+	- Si es así entonces no incorporar bítactora, de lo contrario si.
+
+3. Revisar las especificaciones de las máquinas que se utilizan en el hospital.
+
+4. Establecer por medio de un correo, el acuero de ser una aplicación de escritorio la que se 
+desarrollará y que se esta conforme con el diseño de las pantallas de ser así.

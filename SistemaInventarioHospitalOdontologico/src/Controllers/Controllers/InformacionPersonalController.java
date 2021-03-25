@@ -19,7 +19,6 @@ import javax.swing.JTextField;
  */
 public class InformacionPersonalController 
 {
-    
     public static boolean EditarInformacionPersonal(String nombre, 
             String apellido, String correo, JLabel errNombre, 
             JLabel errApellido, JLabel errCorreo)

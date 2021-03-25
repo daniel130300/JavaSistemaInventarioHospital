@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import Views.Mantenimientos.GenerarSuministrosView;
 import Views.Mantenimientos.InventarioSuministroView;
 import Views.Mantenimientos.MantenimientoProductosCompuestosView;
+import Views.Mantenimientos.MantenimientoSuministrosView;
 
 /**
  *
@@ -33,7 +34,7 @@ public class MenuSuministrosView extends javax.swing.JFrame {
     
     private void noFocusJButtons()
     {
-        this.btnInventarioSuministros.setFocusable(false);
+        this.btnMantenimientoInventarioSuministros.setFocusable(false);
         this.btnInventarioSuministros.setFocusable(false);
         this.btnGenerarSuministro.setFocusable(false);
         this.btnMantenimientoProductosCompuestos.setFocusable(false);
@@ -249,7 +250,9 @@ public class MenuSuministrosView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarSuministroActionPerformed
 
     private void btnMantenimientoInventarioSuministrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoInventarioSuministrosActionPerformed
-        // TODO add your handling code here:
+        MantenimientoSuministrosView mantenimientoSuministrosView = new MantenimientoSuministrosView();
+        mantenimientoSuministrosView.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnMantenimientoInventarioSuministrosActionPerformed
 
     /**

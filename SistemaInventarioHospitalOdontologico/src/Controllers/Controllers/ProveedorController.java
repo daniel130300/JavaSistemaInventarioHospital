@@ -29,7 +29,6 @@ import javax.swing.table.TableRowSorter;
  */
 public class ProveedorController 
 {
-    
     public static Boolean MantenimientoProveedores(String accion, Integer id, 
             String rtn, String nombre, String correo, String telefono, 
             String contacto, String direccion,JLabel errRTN, JLabel errNombre,

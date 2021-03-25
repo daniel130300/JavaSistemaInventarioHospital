@@ -8,6 +8,7 @@ package Controllers.Controllers;
 import Utils.Cache.UsuarioLogueadoCache;
 import java.util.HashMap;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,7 +39,7 @@ public class MenuInicioController
         }
         else
         {
-            btnVentas.setEnabled(false);
+            this.setModuloBloqueado(btnVentas);
         }
     }
     
@@ -50,7 +51,7 @@ public class MenuInicioController
         }
         else
         {
-            btnSuministros.setEnabled(false);
+           this.setModuloBloqueado(btnSuministros);
         }
     }
     
@@ -62,7 +63,7 @@ public class MenuInicioController
         }
         else
         {
-            btnProveedores.setEnabled(false);
+           this.setModuloBloqueado(btnProveedores);
         }
     }
     
@@ -74,7 +75,7 @@ public class MenuInicioController
         }
         else
         {
-            btnCompras.setEnabled(false);
+            this.setModuloBloqueado(btnCompras);
         }
     }
     
@@ -86,7 +87,7 @@ public class MenuInicioController
         }
         else
         {
-            btnBodega.setEnabled(false);
+            this.setModuloBloqueado(btnBodega);
         }
     }
     
@@ -98,7 +99,7 @@ public class MenuInicioController
         }
         else
         {
-            btnUsuarios.setEnabled(false);
+           this.setModuloBloqueado(btnUsuarios);
         }
     }
     
@@ -110,7 +111,26 @@ public class MenuInicioController
         }
         else
         {
-            btnAlerta.setEnabled(false);
+            this.setModuloBloqueado(btnAlerta);
         }
+    }
+    
+    private void setIconoCandado(JButton boton)
+    {
+        try 
+        {
+            boton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_padlock8_32px.png")));
+        } 
+        catch (Exception ex) 
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
+    private void setModuloBloqueado(JButton boton)
+    {
+        boton.setEnabled(false);
+        boton.setText(null);
+        this.setIconoCandado(boton);
     }
 }

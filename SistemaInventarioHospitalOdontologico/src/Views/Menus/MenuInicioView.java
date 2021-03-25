@@ -7,7 +7,6 @@ package Views.Menus;
 
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.MenuInicioController;
-import Utils.Cache.UsuarioLogueadoCache;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.AlertasView;

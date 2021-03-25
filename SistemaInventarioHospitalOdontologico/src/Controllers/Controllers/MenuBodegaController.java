@@ -8,6 +8,7 @@ package Controllers.Controllers;
 import Utils.Cache.UsuarioLogueadoCache;
 import java.util.HashMap;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +37,7 @@ public class MenuBodegaController
         }
         else
         {
-            btnMantenimientoCatalogoBodega.setEnabled(false);
+            this.setModuloBloqueado(btnMantenimientoCatalogoBodega);
         }
     }
     
@@ -49,7 +50,7 @@ public class MenuBodegaController
         }
         else
         {
-            btnInventarioBodega.setEnabled(false);
+            this.setModuloBloqueado(btnInventarioBodega);
         }
     }
     
@@ -63,7 +64,26 @@ public class MenuBodegaController
         }
         else
         {
-            btnMantenimientoInventarioBodega.setEnabled(false);
+            this.setModuloBloqueado(btnMantenimientoInventarioBodega);
         }
+    }
+    
+    private void setIconoCandado(JButton boton)
+    {
+        try 
+        {
+            boton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_padlock8_32px.png")));
+        } 
+        catch (Exception ex) 
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
+    private void setModuloBloqueado(JButton boton)
+    {
+        boton.setEnabled(false);
+        boton.setText(null);
+        this.setIconoCandado(boton);
     }
 }

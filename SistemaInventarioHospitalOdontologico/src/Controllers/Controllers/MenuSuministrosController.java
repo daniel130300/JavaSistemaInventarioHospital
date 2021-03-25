@@ -6,10 +6,7 @@
 package Controllers.Controllers;
 
 import Utils.Cache.UsuarioLogueadoCache;
-import java.awt.Image;
 import java.util.HashMap;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -41,7 +38,7 @@ public class MenuSuministrosController
         }
         else
         {
-            btnMantenimientoInventarioSuministros.setEnabled(false);
+           this.setModuloBloqueado(btnMantenimientoInventarioSuministros);
         }
     }
     
@@ -54,7 +51,7 @@ public class MenuSuministrosController
         }
         else
         {
-            btnInventarioSuministros.setEnabled(false);
+            this.setModuloBloqueado(btnInventarioSuministros);
         }
     }
     
@@ -67,7 +64,7 @@ public class MenuSuministrosController
         }
         else
         {
-            btnGenerarSuministro.setEnabled(false);
+            this.setModuloBloqueado(btnGenerarSuministro);
         }
     }
     
@@ -81,20 +78,26 @@ public class MenuSuministrosController
         }
         else
         {
-            btnMantenimientoProductosCompuestos.setEnabled(false);
+            this.setModuloBloqueado(btnMantenimientoProductosCompuestos);
         }
     }
     
-    public void setIconoCandado(JButton boton)
+    private void setIconoCandado(JButton boton)
     {
         try 
         {
-            Image img = ImageIO.read(getClass().getResource("Views/Images/icons8_padlock8_32px.png"));
-            boton.setIcon(new ImageIcon(img));
+            boton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_padlock8_32px.png")));
         } 
         catch (Exception ex) 
         {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
+    }
+    
+    private void setModuloBloqueado(JButton boton)
+    {
+        boton.setEnabled(false);
+        boton.setText(null);
+        this.setIconoCandado(boton);
     }
 }

@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import Views.Mantenimientos.GenerarSuministrosView;
 import Views.Mantenimientos.InventarioSuministroView;
 import Views.Mantenimientos.MantenimientoProductosCompuestosView;
-import Views.Mantenimientos.MantenimientoSuministrosView;
 
 /**
  *
@@ -34,7 +33,7 @@ public class MenuSuministrosView extends javax.swing.JFrame {
     
     private void noFocusJButtons()
     {
-        this.btnMantenimientoInventarioSuministros.setFocusable(false);
+        this.btnInventarioSuministros.setFocusable(false);
         this.btnInventarioSuministros.setFocusable(false);
         this.btnGenerarSuministro.setFocusable(false);
         this.btnMantenimientoProductosCompuestos.setFocusable(false);
@@ -59,9 +58,9 @@ public class MenuSuministrosView extends javax.swing.JFrame {
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
         btnMantenimientoProductosCompuestos = new javax.swing.JButton();
-        btnMantenimientoInventarioSuministros = new javax.swing.JButton();
         btnInventarioSuministros = new javax.swing.JButton();
         btnGenerarSuministro = new javax.swing.JButton();
+        btnMantenimientoInventarioSuministros = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -144,20 +143,6 @@ public class MenuSuministrosView extends javax.swing.JFrame {
         });
         pnlMenu.add(btnMantenimientoProductosCompuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 180, 130));
 
-        btnMantenimientoInventarioSuministros.setBackground(new java.awt.Color(45, 83, 150));
-        btnMantenimientoInventarioSuministros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnMantenimientoInventarioSuministros.setForeground(new java.awt.Color(242, 242, 242));
-        btnMantenimientoInventarioSuministros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_box_32px.png"))); // NOI18N
-        btnMantenimientoInventarioSuministros.setText("Mantenimiento Inventario Suministros");
-        btnMantenimientoInventarioSuministros.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMantenimientoInventarioSuministros.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnMantenimientoInventarioSuministros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMantenimientoInventarioSuministrosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnMantenimientoInventarioSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 180, 130));
-
         btnInventarioSuministros.setBackground(new java.awt.Color(45, 83, 150));
         btnInventarioSuministros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnInventarioSuministros.setForeground(new java.awt.Color(242, 242, 242));
@@ -170,7 +155,7 @@ public class MenuSuministrosView extends javax.swing.JFrame {
                 btnInventarioSuministrosActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnInventarioSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, -1, 130));
+        pnlMenu.add(btnInventarioSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 180, 130));
 
         btnGenerarSuministro.setBackground(new java.awt.Color(45, 83, 150));
         btnGenerarSuministro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -185,6 +170,20 @@ public class MenuSuministrosView extends javax.swing.JFrame {
             }
         });
         pnlMenu.add(btnGenerarSuministro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 180, 130));
+
+        btnMantenimientoInventarioSuministros.setBackground(new java.awt.Color(45, 83, 150));
+        btnMantenimientoInventarioSuministros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMantenimientoInventarioSuministros.setForeground(new java.awt.Color(242, 242, 242));
+        btnMantenimientoInventarioSuministros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_box_32px.png"))); // NOI18N
+        btnMantenimientoInventarioSuministros.setText("Mantenimiento Inventario Suministros");
+        btnMantenimientoInventarioSuministros.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMantenimientoInventarioSuministros.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMantenimientoInventarioSuministros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMantenimientoInventarioSuministrosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnMantenimientoInventarioSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 180, 130));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 920, 420));
 
@@ -237,12 +236,6 @@ public class MenuSuministrosView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMantenimientoProductosCompuestosActionPerformed
 
-    private void btnMantenimientoInventarioSuministrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoInventarioSuministrosActionPerformed
-        MantenimientoSuministrosView mantenimientoSuministrosView = new MantenimientoSuministrosView();
-        mantenimientoSuministrosView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnMantenimientoInventarioSuministrosActionPerformed
-
     private void btnInventarioSuministrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioSuministrosActionPerformed
         InventarioSuministroView inventarioSuministroView = new InventarioSuministroView();
         inventarioSuministroView.setVisible(true);
@@ -254,6 +247,10 @@ public class MenuSuministrosView extends javax.swing.JFrame {
         generarSuministrosView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGenerarSuministroActionPerformed
+
+    private void btnMantenimientoInventarioSuministrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoInventarioSuministrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMantenimientoInventarioSuministrosActionPerformed
 
     /**
      * @param args the command line arguments

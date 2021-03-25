@@ -85,7 +85,6 @@
                   <Color blue="f2" green="f2" red="f2" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Dra. Lourdes"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -131,7 +130,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Views/Images/Isotipo.HospitalOdontol&#xf3;gico.UNICAH (4).png"/>
+                  <Image iconType="3" name="/Views/Images/Isotipo.HospitalOdontol&#xf3;gico.UNICAH_SM.png"/>
                 </Property>
               </Properties>
               <Constraints>

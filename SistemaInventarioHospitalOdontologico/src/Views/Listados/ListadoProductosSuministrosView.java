@@ -5,9 +5,9 @@
  */
 package Views.Listados;
 
+import Controllers.Controllers.LoginController;
 import Views.Mantenimientos.MantenimientoSuministrosView;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +21,7 @@ public class ListadoProductosSuministrosView extends javax.swing.JFrame {
      */
     public ListadoProductosSuministrosView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
     }
 
     /**
@@ -68,7 +69,6 @@ public class ListadoProductosSuministrosView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -122,7 +122,6 @@ public class ListadoProductosSuministrosView extends javax.swing.JFrame {
         lblVisualizar.setText("Visualizar:");
         pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -161,13 +160,11 @@ public class ListadoProductosSuministrosView extends javax.swing.JFrame {
         rdbProductosSimples.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rdbProductosSimples.setForeground(new java.awt.Color(242, 242, 242));
         rdbProductosSimples.setText("Productos simples");
-        rdbProductosSimples.setOpaque(false);
         pnlMenu.add(rdbProductosSimples, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
 
         rdbProductosCompuestos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rdbProductosCompuestos.setForeground(new java.awt.Color(242, 242, 242));
         rdbProductosCompuestos.setText("Productos compuestos");
-        rdbProductosCompuestos.setOpaque(false);
         pnlMenu.add(rdbProductosCompuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
@@ -187,7 +184,7 @@ public class ListadoProductosSuministrosView extends javax.swing.JFrame {
         lblModulo.setText("Listado de Productos para Suministros");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 390, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));

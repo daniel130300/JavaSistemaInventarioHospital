@@ -5,13 +5,10 @@
  */
 package Views.Mantenimientos;
 
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
+import Controllers.Controllers.LoginController;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import Views.Menus.MenuBodegaView;
 import Views.Menus.MenuInicioView;
-import Views.Menus.MenuSuministrosView;
 
 /**
  *
@@ -24,6 +21,7 @@ public class AlertasView extends javax.swing.JFrame {
      */
     public AlertasView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
     }
 
     /**
@@ -66,7 +64,6 @@ public class AlertasView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -155,7 +152,7 @@ public class AlertasView extends javax.swing.JFrame {
         lblModulo.setText("Alertas");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 200, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));

@@ -5,9 +5,10 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.InformacionPersonalController;
+import Controllers.Controllers.LoginController;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -21,8 +22,11 @@ public class InformacionPersonalView extends javax.swing.JFrame {
      */
     public InformacionPersonalView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        InformacionPersonalController.setCamposEditar(this.txtNombre, 
+                this.txtApellido, this.txtCorreo);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,15 +38,13 @@ public class InformacionPersonalView extends javax.swing.JFrame {
 
         pnlBackbround = new javax.swing.JPanel();
         pnlUsuario = new javax.swing.JPanel();
-        lblIconoUsuario = new javax.swing.JLabel();
-        lblVentas = new javax.swing.JLabel();
-        lblVentas2 = new javax.swing.JLabel();
+        lblIconoUsuarioActual = new javax.swing.JLabel();
+        lblUsuarioActual = new javax.swing.JLabel();
+        lblMensajeBienvenida = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
-        btnRealizarCambios = new javax.swing.JPanel();
-        lblRealizarCambios = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblErrorNombre = new javax.swing.JLabel();
@@ -50,8 +52,9 @@ public class InformacionPersonalView extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         lblErrorApellido = new javax.swing.JLabel();
         lblCorreo = new javax.swing.JLabel();
-        txtxCorreo = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         lblErrorCorreo = new javax.swing.JLabel();
+        btnRealizarCambios = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -66,20 +69,19 @@ public class InformacionPersonalView extends javax.swing.JFrame {
         pnlUsuario.setBackground(new java.awt.Color(0, 49, 110));
         pnlUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIconoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_32px.png"))); // NOI18N
-        pnlUsuario.add(lblIconoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        lblIconoUsuarioActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_32px.png"))); // NOI18N
+        pnlUsuario.add(lblIconoUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
-        lblVentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVentas.setForeground(new java.awt.Color(242, 242, 242));
-        lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas.setText("Dra. Lourdes");
-        pnlUsuario.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
+        lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
+        lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
 
-        lblVentas2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVentas2.setForeground(new java.awt.Color(242, 242, 242));
-        lblVentas2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas2.setText("Bienvenido(a)");
-        pnlUsuario.add(lblVentas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, 28));
+        lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMensajeBienvenida.setForeground(new java.awt.Color(242, 242, 242));
+        lblMensajeBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMensajeBienvenida.setText("Bienvenido(a)");
+        pnlUsuario.add(lblMensajeBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, 28));
 
         pnlBackbround.add(pnlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 130));
 
@@ -121,43 +123,11 @@ public class InformacionPersonalView extends javax.swing.JFrame {
 
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, 30));
 
-        btnRealizarCambios.setBackground(new java.awt.Color(59, 103, 181));
-        btnRealizarCambios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRealizarCambios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRealizarCambios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRealizarCambiosMouseClicked(evt);
-            }
-        });
-
-        lblRealizarCambios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRealizarCambios.setForeground(new java.awt.Color(242, 242, 242));
-        lblRealizarCambios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRealizarCambios.setText("Realizar cambios");
-
-        javax.swing.GroupLayout btnRealizarCambiosLayout = new javax.swing.GroupLayout(btnRealizarCambios);
-        btnRealizarCambios.setLayout(btnRealizarCambiosLayout);
-        btnRealizarCambiosLayout.setHorizontalGroup(
-            btnRealizarCambiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnRealizarCambiosLayout.createSequentialGroup()
-                .addComponent(lblRealizarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        btnRealizarCambiosLayout.setVerticalGroup(
-            btnRealizarCambiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRealizarCambiosLayout.createSequentialGroup()
-                .addComponent(lblRealizarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        pnlMenu.add(btnRealizarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 130, 30));
-
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));
         lblNombre.setText("Nombre:");
         pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -167,15 +137,13 @@ public class InformacionPersonalView extends javax.swing.JFrame {
 
         lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorNombre.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorNombre.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 220, 20));
 
         lblApellido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblApellido.setForeground(new java.awt.Color(242, 242, 242));
         lblApellido.setText("Apellido:");
         pnlMenu.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        txtApellido.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
@@ -185,26 +153,34 @@ public class InformacionPersonalView extends javax.swing.JFrame {
 
         lblErrorApellido.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorApellido.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorApellido.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
+        pnlMenu.add(lblErrorApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 220, 20));
 
         lblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(242, 242, 242));
         lblCorreo.setText("Correo:");
         pnlMenu.add(lblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
-        txtxCorreo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        txtxCorreo.addActionListener(new java.awt.event.ActionListener() {
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtxCorreoActionPerformed(evt);
+                txtCorreoActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtxCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 220, -1));
+        pnlMenu.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 220, -1));
 
         lblErrorCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorCorreo.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorCorreo.setText("Error este campo es requerido");
-        pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+        pnlMenu.add(lblErrorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 220, 20));
+
+        btnRealizarCambios.setBackground(new java.awt.Color(59, 103, 181));
+        btnRealizarCambios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRealizarCambios.setForeground(new java.awt.Color(242, 242, 242));
+        btnRealizarCambios.setText("Realizar Cambios");
+        btnRealizarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarCambiosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnRealizarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 150, 30));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 340));
 
@@ -223,7 +199,7 @@ public class InformacionPersonalView extends javax.swing.JFrame {
         lblModulo.setText("Información Personal");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 200, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));
@@ -249,10 +225,6 @@ public class InformacionPersonalView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
-    private void btnRealizarCambiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRealizarCambiosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRealizarCambiosMouseClicked
-
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
@@ -261,9 +233,20 @@ public class InformacionPersonalView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
 
-    private void txtxCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtxCorreoActionPerformed
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtxCorreoActionPerformed
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnRealizarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarCambiosActionPerformed
+        
+        if(!InformacionPersonalController.EditarInformacionPersonal(this.txtNombre.getText(), 
+                this.txtApellido.getText(), this.txtCorreo.getText(), 
+                this.lblErrorNombre, this.lblErrorApellido, this.lblErrorCorreo))
+        {
+            InformacionPersonalController.setCamposEditar(this.txtNombre, 
+                this.txtApellido, this.txtCorreo);
+        }
+    }//GEN-LAST:event_btnRealizarCambiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1334,7 +1317,7 @@ public class InformacionPersonalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnRealizarCambios;
+    private javax.swing.JButton btnRealizarCambios;
     private javax.swing.JPanel btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblApellido;
@@ -1343,20 +1326,19 @@ public class InformacionPersonalView extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorCorreo;
     private javax.swing.JLabel lblErrorNombre;
     private javax.swing.JLabel lblIconoRegresar;
-    private javax.swing.JLabel lblIconoUsuario;
+    private javax.swing.JLabel lblIconoUsuarioActual;
+    private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblRealizarCambios;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblVentas;
-    private javax.swing.JLabel lblVentas2;
+    private javax.swing.JLabel lblUsuarioActual;
     private javax.swing.JPanel pnlBackbround;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtxCorreo;
     // End of variables declaration//GEN-END:variables
 }

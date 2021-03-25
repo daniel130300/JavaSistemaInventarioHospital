@@ -5,18 +5,17 @@
  */
 package Views.Menus;
 
+import Controllers.Controllers.LoginController;
+import Controllers.Controllers.MenuInicioController;
+import Utils.Cache.UsuarioLogueadoCache;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import Views.Mantenimientos.AlertasView;
 import Views.Mantenimientos.FacturacionView;
 import Views.Mantenimientos.InformacionPersonalView;
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
 import Views.Mantenimientos.MantenimientoProveedoresView;
 import Views.Mantenimientos.MantenimientoUsuariosView;
-import Views.Mantenimientos.MantenimientoUsuariosView;
-import Views.Mantenimientos.RegistrarCompraView;
+import Views.Mantenimientos.MantenimientoComprasView;
 import Views.Menus.MenuSuministrosView;
 
 /**
@@ -28,8 +27,28 @@ public class MenuInicioView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    public MenuInicioView() {
+    public MenuInicioView() 
+    {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        MenuInicioController menuIncioController = new MenuInicioController();
+        menuIncioController.AccesoModulos(this.btnVentas, this.btnSuministros, 
+                this.btnProveedores, this.btnCompras, this.btnBodega,
+                this.btnUsuarios, this.btnAlertas);
+        noFocusJButtons();
+    }
+    
+    private void noFocusJButtons()
+    {
+        this.btnVentas.setFocusable(false);
+        this.btnSuministros.setFocusable(false);
+        this.btnProveedores.setFocusable(false);
+        this.btnCompras.setFocusable(false);
+        this.btnBodega.setFocusable(false);
+        this.btnUsuarios.setFocusable(false);
+        this.btnAlertas.setFocusable(false);
+        this.btnInformacionPersonal.setFocusable(false);
+        this.btnCerrarSesion.setFocusable(false);
     }
 
     /**
@@ -43,33 +62,15 @@ public class MenuInicioView extends javax.swing.JFrame {
 
         pnlBackbround = new javax.swing.JPanel();
         pnlMenu = new javax.swing.JPanel();
-        btnVentas = new javax.swing.JPanel();
-        lblIconoVentas = new javax.swing.JLabel();
-        lblVentas = new javax.swing.JLabel();
-        btnSuministros = new javax.swing.JPanel();
-        lblIconoSuministros = new javax.swing.JLabel();
-        lblSuministros = new javax.swing.JLabel();
-        btnProveedores = new javax.swing.JPanel();
-        lblIconoProveedores = new javax.swing.JLabel();
-        lblProveedores = new javax.swing.JLabel();
-        btnCompras = new javax.swing.JPanel();
-        lblIconoCompras = new javax.swing.JLabel();
-        lblCompras = new javax.swing.JLabel();
-        btnCerrarSesion = new javax.swing.JPanel();
-        lblCerrarSesion = new javax.swing.JLabel();
-        lblIconoCerrarSesion = new javax.swing.JLabel();
-        btnBodega = new javax.swing.JPanel();
-        lblIconoBodega = new javax.swing.JLabel();
-        lblBodega = new javax.swing.JLabel();
-        btnUsuarios = new javax.swing.JPanel();
-        lblIconoUsuarios = new javax.swing.JLabel();
-        lblUsuarios = new javax.swing.JLabel();
-        btnAlertas = new javax.swing.JPanel();
-        lblIconoAlertas = new javax.swing.JLabel();
-        lblAlertas = new javax.swing.JLabel();
-        btnInformacionPersonal = new javax.swing.JPanel();
-        lblIconoInformacionPersonal = new javax.swing.JLabel();
-        lblInformacionPersonal = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
+        btnVentas = new javax.swing.JButton();
+        btnBodega = new javax.swing.JButton();
+        btnSuministros = new javax.swing.JButton();
+        btnUsuarios = new javax.swing.JButton();
+        btnCompras = new javax.swing.JButton();
+        btnInformacionPersonal = new javax.swing.JButton();
+        btnProveedores = new javax.swing.JButton();
+        btnAlertas = new javax.swing.JButton();
         pnlUsuario = new javax.swing.JPanel();
         lblIconoUsuarioActual = new javax.swing.JLabel();
         lblUsuarioActual = new javax.swing.JLabel();
@@ -88,194 +89,131 @@ public class MenuInicioView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnVentas.setBackground(new java.awt.Color(45, 83, 150));
-        btnVentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVentasMouseClicked(evt);
-            }
-        });
-        btnVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblIconoVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_sales_performance_32px_1.png"))); // NOI18N
-        btnVentas.add(lblIconoVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 18, -1, -1));
-
-        lblVentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVentas.setForeground(new java.awt.Color(242, 242, 242));
-        lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas.setText("Ventas");
-        btnVentas.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        pnlMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 150, 100));
-
-        btnSuministros.setBackground(new java.awt.Color(45, 83, 150));
-        btnSuministros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnSuministros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSuministros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSuministrosMouseClicked(evt);
-            }
-        });
-        btnSuministros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblIconoSuministros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_medical_bag_32px_3.png"))); // NOI18N
-        btnSuministros.add(lblIconoSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 20, -1, -1));
-
-        lblSuministros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblSuministros.setForeground(new java.awt.Color(242, 242, 242));
-        lblSuministros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSuministros.setText("Suministros");
-        btnSuministros.add(lblSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        pnlMenu.add(btnSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 150, 100));
-
-        btnProveedores.setBackground(new java.awt.Color(45, 83, 150));
-        btnProveedores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnProveedoresMouseClicked(evt);
-            }
-        });
-        btnProveedores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblIconoProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_supplier_32px.png"))); // NOI18N
-        btnProveedores.add(lblIconoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 18, -1, -1));
-
-        lblProveedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblProveedores.setForeground(new java.awt.Color(242, 242, 242));
-        lblProveedores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblProveedores.setText("Proveedores");
-        btnProveedores.add(lblProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        pnlMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 150, 100));
-
-        btnCompras.setBackground(new java.awt.Color(45, 83, 150));
-        btnCompras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCompras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnComprasMouseClicked(evt);
-            }
-        });
-        btnCompras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblIconoCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_purchase_order_32px.png"))); // NOI18N
-        btnCompras.add(lblIconoCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 18, -1, -1));
-
-        lblCompras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCompras.setForeground(new java.awt.Color(242, 242, 242));
-        lblCompras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCompras.setText("Compras");
-        btnCompras.add(lblCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 56, 65, 28));
-
-        pnlMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 150, 100));
-
         btnCerrarSesion.setBackground(new java.awt.Color(45, 83, 150));
-        btnCerrarSesion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCerrarSesionMouseClicked(evt);
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(242, 242, 242));
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_exit_32px.png"))); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
             }
         });
-        btnCerrarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMenu.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 180, 100));
 
-        lblCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCerrarSesion.setForeground(new java.awt.Color(242, 242, 242));
-        lblCerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCerrarSesion.setText("Cerrar Sesión");
-        btnCerrarSesion.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        lblIconoCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_exit_32px.png"))); // NOI18N
-        btnCerrarSesion.add(lblIconoCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, 40));
-
-        pnlMenu.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 150, 100));
+        btnVentas.setBackground(new java.awt.Color(45, 83, 150));
+        btnVentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVentas.setForeground(new java.awt.Color(242, 242, 242));
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_sales_performance_32px_1.png"))); // NOI18N
+        btnVentas.setText("Ventas");
+        btnVentas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVentas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 180, 100));
 
         btnBodega.setBackground(new java.awt.Color(45, 83, 150));
-        btnBodega.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnBodega.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBodega.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBodegaMouseClicked(evt);
+        btnBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBodega.setForeground(new java.awt.Color(242, 242, 242));
+        btnBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
+        btnBodega.setText("Bodega");
+        btnBodega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBodega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBodegaActionPerformed(evt);
             }
         });
-        btnBodega.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMenu.add(btnBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 180, 100));
 
-        lblIconoBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
-        btnBodega.add(lblIconoBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 18, -1, -1));
-
-        lblBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBodega.setForeground(new java.awt.Color(242, 242, 242));
-        lblBodega.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBodega.setText("Bodega");
-        btnBodega.add(lblBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        pnlMenu.add(btnBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 150, 100));
+        btnSuministros.setBackground(new java.awt.Color(45, 83, 150));
+        btnSuministros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSuministros.setForeground(new java.awt.Color(242, 242, 242));
+        btnSuministros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_medical_bag_32px_3.png"))); // NOI18N
+        btnSuministros.setText("Suministros");
+        btnSuministros.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSuministros.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSuministros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuministrosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnSuministros, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 180, 100));
 
         btnUsuarios.setBackground(new java.awt.Color(45, 83, 150));
-        btnUsuarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUsuariosMouseClicked(evt);
+        btnUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUsuarios.setForeground(new java.awt.Color(242, 242, 242));
+        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_groups_32px.png"))); // NOI18N
+        btnUsuarios.setText("Usuarios");
+        btnUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
             }
         });
-        btnUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMenu.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 180, 100));
 
-        lblIconoUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_groups_32px.png"))); // NOI18N
-        btnUsuarios.add(lblIconoUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 18, -1, -1));
-
-        lblUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblUsuarios.setForeground(new java.awt.Color(242, 242, 242));
-        lblUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarios.setText("Usuarios");
-        btnUsuarios.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        pnlMenu.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 150, 100));
-
-        btnAlertas.setBackground(new java.awt.Color(45, 83, 150));
-        btnAlertas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnAlertas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAlertas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAlertasMouseClicked(evt);
+        btnCompras.setBackground(new java.awt.Color(45, 83, 150));
+        btnCompras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCompras.setForeground(new java.awt.Color(242, 242, 242));
+        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_purchase_order_32px.png"))); // NOI18N
+        btnCompras.setText("Compras");
+        btnCompras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCompras.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprasActionPerformed(evt);
             }
         });
-        btnAlertas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblIconoAlertas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_box_important_32px.png"))); // NOI18N
-        btnAlertas.add(lblIconoAlertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 18, -1, -1));
-
-        lblAlertas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblAlertas.setForeground(new java.awt.Color(242, 242, 242));
-        lblAlertas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAlertas.setText("Alertas");
-        btnAlertas.add(lblAlertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 56, 128, 28));
-
-        pnlMenu.add(btnAlertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 150, 100));
+        pnlMenu.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 180, 100));
 
         btnInformacionPersonal.setBackground(new java.awt.Color(45, 83, 150));
-        btnInformacionPersonal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnInformacionPersonal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInformacionPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInformacionPersonalMouseClicked(evt);
+        btnInformacionPersonal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInformacionPersonal.setForeground(new java.awt.Color(242, 242, 242));
+        btnInformacionPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_32px.png"))); // NOI18N
+        btnInformacionPersonal.setText("Información Personal");
+        btnInformacionPersonal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInformacionPersonal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInformacionPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformacionPersonalActionPerformed(evt);
             }
         });
-        btnInformacionPersonal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlMenu.add(btnInformacionPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 180, 100));
 
-        lblIconoInformacionPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_32px.png"))); // NOI18N
-        btnInformacionPersonal.add(lblIconoInformacionPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+        btnProveedores.setBackground(new java.awt.Color(45, 83, 150));
+        btnProveedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnProveedores.setForeground(new java.awt.Color(242, 242, 242));
+        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_supplier_32px.png"))); // NOI18N
+        btnProveedores.setText("Proveedores");
+        btnProveedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProveedores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedoresActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 180, 100));
 
-        lblInformacionPersonal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblInformacionPersonal.setForeground(new java.awt.Color(242, 242, 242));
-        lblInformacionPersonal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblInformacionPersonal.setText("Información Personal");
-        btnInformacionPersonal.add(lblInformacionPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 56, 148, 28));
-
-        pnlMenu.add(btnInformacionPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 150, 100));
+        btnAlertas.setBackground(new java.awt.Color(45, 83, 150));
+        btnAlertas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAlertas.setForeground(new java.awt.Color(242, 242, 242));
+        btnAlertas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_box_important_32px.png"))); // NOI18N
+        btnAlertas.setText("Alertas");
+        btnAlertas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAlertas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAlertas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlertasActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnAlertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 180, 100));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 920, 420));
 
@@ -288,7 +226,6 @@ public class MenuInicioView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -314,7 +251,7 @@ public class MenuInicioView extends javax.swing.JFrame {
         lblModulo.setText("Menú Inicio");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 180, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 720, 130));
@@ -334,59 +271,60 @@ public class MenuInicioView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnInformacionPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformacionPersonalMouseClicked
-        InformacionPersonalView informacionPersonalView = new InformacionPersonalView();
-        informacionPersonalView.setVisible(true);
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        LoginController.Logout();
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnInformacionPersonalMouseClicked
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void btnAlertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlertasMouseClicked
-        AlertasView alertasView = new AlertasView();
-        alertasView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnAlertasMouseClicked
-
-    private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
-       MantenimientoUsuariosView mantenimientoUsuariosView = new MantenimientoUsuariosView();
-       mantenimientoUsuariosView.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_btnUsuariosMouseClicked
-
-    private void btnBodegaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBodegaMouseClicked
-        MenuBodegaView menuBodegaView = new MenuBodegaView();
-        menuBodegaView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnBodegaMouseClicked
-
-    private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
-        RegistrarCompraView registrarCompraView = new RegistrarCompraView();
-        registrarCompraView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnComprasMouseClicked
-
-    private void btnProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseClicked
-        MantenimientoProveedoresView mantenimientoProveedoresView = new MantenimientoProveedoresView();
-        mantenimientoProveedoresView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnProveedoresMouseClicked
-
-    private void btnSuministrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuministrosMouseClicked
-        MenuSuministrosView menuSuministrosView = new MenuSuministrosView();
-        menuSuministrosView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnSuministrosMouseClicked
-
-    private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         FacturacionView facturacionView = new FacturacionView();
         facturacionView.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnVentasMouseClicked
+    }//GEN-LAST:event_btnVentasActionPerformed
 
-    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
-        LoginView login = new LoginView();
-        login.setVisible(true);
+    private void btnBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBodegaActionPerformed
+        MenuBodegaView menuBodegaView = new MenuBodegaView();
+        menuBodegaView.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnCerrarSesionMouseClicked
+    }//GEN-LAST:event_btnBodegaActionPerformed
+
+    private void btnInformacionPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformacionPersonalActionPerformed
+        InformacionPersonalView informacionPersonalView = new InformacionPersonalView();
+        informacionPersonalView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnInformacionPersonalActionPerformed
+
+    private void btnSuministrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuministrosActionPerformed
+        MenuSuministrosView menuSuministrosView  = new MenuSuministrosView();
+        menuSuministrosView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSuministrosActionPerformed
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        MantenimientoUsuariosView mantenimientoUsuariosView = new MantenimientoUsuariosView();
+        mantenimientoUsuariosView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
+        MantenimientoComprasView registrarCompraView = new MantenimientoComprasView();
+        registrarCompraView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnComprasActionPerformed
+
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        MantenimientoProveedoresView mantenimientoProveedoresView = new MantenimientoProveedoresView();
+        mantenimientoProveedoresView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnProveedoresActionPerformed
+
+    private void btnAlertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlertasActionPerformed
+        AlertasView alertasView = new AlertasView();
+        alertasView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAlertasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,39 +379,21 @@ public class MenuInicioView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnAlertas;
-    private javax.swing.JPanel btnBodega;
-    private javax.swing.JPanel btnCerrarSesion;
-    private javax.swing.JPanel btnCompras;
-    private javax.swing.JPanel btnInformacionPersonal;
-    private javax.swing.JPanel btnProveedores;
-    private javax.swing.JPanel btnSuministros;
-    private javax.swing.JPanel btnUsuarios;
-    private javax.swing.JPanel btnVentas;
+    private javax.swing.JButton btnAlertas;
+    private javax.swing.JButton btnBodega;
+    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnCompras;
+    private javax.swing.JButton btnInformacionPersonal;
+    private javax.swing.JButton btnProveedores;
+    private javax.swing.JButton btnSuministros;
+    private javax.swing.JButton btnUsuarios;
+    private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblAlertas;
-    private javax.swing.JLabel lblBodega;
-    private javax.swing.JLabel lblCerrarSesion;
-    private javax.swing.JLabel lblCompras;
-    private javax.swing.JLabel lblIconoAlertas;
-    private javax.swing.JLabel lblIconoBodega;
-    private javax.swing.JLabel lblIconoCerrarSesion;
-    private javax.swing.JLabel lblIconoCompras;
-    private javax.swing.JLabel lblIconoInformacionPersonal;
-    private javax.swing.JLabel lblIconoProveedores;
-    private javax.swing.JLabel lblIconoSuministros;
     private javax.swing.JLabel lblIconoUsuarioActual;
-    private javax.swing.JLabel lblIconoUsuarios;
-    private javax.swing.JLabel lblIconoVentas;
-    private javax.swing.JLabel lblInformacionPersonal;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
-    private javax.swing.JLabel lblProveedores;
-    private javax.swing.JLabel lblSuministros;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuarioActual;
-    private javax.swing.JLabel lblUsuarios;
-    private javax.swing.JLabel lblVentas;
     private javax.swing.JPanel pnlBackbround;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;

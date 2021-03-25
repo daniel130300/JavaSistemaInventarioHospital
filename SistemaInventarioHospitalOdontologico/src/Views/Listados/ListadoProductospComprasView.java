@@ -5,11 +5,10 @@
  */
 package Views.Listados;
 
-import Views.Mantenimientos.MantenimientoProductosCompuestosView;
+import Controllers.Controllers.LoginController;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import Views.Mantenimientos.RegistrarCompraView;
+import Views.Mantenimientos.MantenimientoComprasView;
 
 /**
  *
@@ -22,6 +21,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
      */
     public ListadoProductospComprasView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
     }
 
     /**
@@ -66,7 +66,6 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -120,7 +119,6 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
         lblBuscar.setText("Buscar: ");
         pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -168,7 +166,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
         lblModulo.setText("Listado de Productos para Compras");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 350, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));
@@ -191,7 +189,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        RegistrarCompraView registrarCompraView = new RegistrarCompraView();
+        MantenimientoComprasView registrarCompraView = new MantenimientoComprasView();
         registrarCompraView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked

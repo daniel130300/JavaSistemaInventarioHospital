@@ -5,14 +5,13 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.LoginController;
 import Controllers.Controllers.UsuarioController;
-import Utils.Cache.UsuariosCache;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -28,14 +27,11 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     Integer Id_usuario; 
     private DefaultListModel modeloLstPrivilegiosSeleccionados = new DefaultListModel();
     private DefaultListModel modeloLstPrivilegiosDisponibles = new DefaultListModel(); 
-    private JFrame getFrame()
-    {
-        return this;
-    }
 
     public MantenimientoUsuariosView() 
     {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.lstPrivilegiosSeleccionados.setModel(modeloLstPrivilegiosSeleccionados);
         this.lstPrivilegiosDisponibles.setModel(modeloLstPrivilegiosDisponibles);
@@ -43,13 +39,13 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         UsuarioController.LlenarCmbAreas(this.cmbArea);
         UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
         UsuarioController.FiltroTableUsuarios(tableUsuarios, txtBuscar);
+        this.LlenarDatos();
     }
     
     private void LimpiarInputs()
     {
         this.txtIdentidad.setText(null);
         this.txtNombre.setText(null);
-        this.txtApellido.setText(null);
         this.txtApellido.setText(null);
         this.txtCorreo.setText(null);
         this.txtUsuario.setText(null);
@@ -80,21 +76,16 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     
     private void LlenarDatos()
     {
-        UsuariosCache usuarioCache = new UsuariosCache();
-        if(usuarioCache.isDatosCompartidos())
+        this.Id_usuario = UsuarioController.setDatosEditarFromCache(this.tableUsuarios, 
+                this.txtIdentidad, this.txtNombre, this.txtApellido, this.txtCorreo, 
+                this.txtUsuario, this.cmbEstado, this.cmbArea);
+        
+        if(Id_usuario != null)
         {
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
             cmbEstado.setEnabled(true);
-            
-            this.Id_usuario = usuarioCache.getUsuario().getUsrId();
-            this.txtIdentidad.setText(usuarioCache.getUsuario().getUsrIdentidad());
-            this.txtNombre.setText(usuarioCache.getUsuario().getUsrNombre());
-            this.txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
-            this.txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
-            this.txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
-            this.cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
-            this.cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
+
             UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
             UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
         }
@@ -180,7 +171,6 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -309,7 +299,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableUsuarios);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 1260, 140));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 1260, 130));
 
         lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblContrasenia.setForeground(new java.awt.Color(242, 242, 242));
@@ -323,7 +313,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 130, -1));
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 130, -1));
 
         lblPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios.setForeground(new java.awt.Color(242, 242, 242));
@@ -341,20 +331,20 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
         lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
         pnlMenu.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 210, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 590, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 590, -1));
 
         lstPrivilegiosDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -404,7 +394,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 160, 20));
+        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 160, 20));
 
         lblErrorNombre.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -429,7 +419,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorContrasenia.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 210, 20));
+        pnlMenu.add(lblErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 300, 50));
 
         lblErrorApellido.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorApellido.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -439,14 +429,14 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblArea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblArea.setForeground(new java.awt.Color(242, 242, 242));
         lblArea.setText("Área:");
-        pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
+        pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
 
         cmbArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreaActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 130, -1));
+        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 130, -1));
 
         lblErrorArea.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -462,7 +452,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 300, 90, -1));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 280, 90, -1));
 
         btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
         btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -478,7 +468,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnVisualizarTablaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 340, 140, -1));
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 350, 140, -1));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -490,7 +480,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 300, 90, -1));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 280, 90, -1));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -506,9 +496,9 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 90, -1));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 90, -1));
 
-        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1310, 530));
+        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1310, 540));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -525,7 +515,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblModulo.setText("Mantenimiento Usuarios");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 300, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 1010, 130));
@@ -590,35 +580,24 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private void tableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseClicked
         int seleccion = this.tableUsuarios.rowAtPoint(evt.getPoint()); 
         
-        this.btnAgregar.setEnabled(false);
-        this.btnEditar.setEnabled(true);
-        cmbEstado.setEnabled(true);
-        
-        this.Id_usuario = Integer.parseInt((String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
-        this.txtIdentidad.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 1)));
-        this.txtNombre.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 2)));
-        this.txtApellido.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 3)));
-        this.txtCorreo.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 4)));
-        this.txtUsuario.setText(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 5)));
-        this.cmbEstado.setSelectedItem(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,6)));
-        this.cmbArea.setSelectedItem(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,8)));
-        UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
-        UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
+        this.Id_usuario = UsuarioController.setDatosEditarFromTable(seleccion, 
+                this.tableUsuarios, this.txtIdentidad, this.txtNombre, 
+                this.txtApellido, this.txtCorreo, this.txtUsuario, 
+                this.cmbEstado, this.cmbArea);
+        if(this.Id_usuario != null)
+        {
+            this.LimpiarErrLabels();
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+            cmbEstado.setEnabled(true);
+            UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
+            UsuarioController.LlenarListPrivilegiosUsuario(this.modeloLstPrivilegiosSeleccionados, this.modeloLstPrivilegiosDisponibles, this.Id_usuario);
+        }
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
 
-        TablaGrandeUsuariosView tablaGrandeUsuariosView = new TablaGrandeUsuariosView()
-        {
-            @Override
-            public void dispose()
-            {
-                LlenarDatos();
-                getFrame().setVisible(true);
-                super.dispose();
-            }
-        };
-        
+        TablaGrandeUsuariosView tablaGrandeUsuariosView = new TablaGrandeUsuariosView();
         tablaGrandeUsuariosView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed

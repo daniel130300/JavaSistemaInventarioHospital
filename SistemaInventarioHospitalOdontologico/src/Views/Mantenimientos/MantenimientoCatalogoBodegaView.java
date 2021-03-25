@@ -5,9 +5,8 @@
  */
 package Views.Mantenimientos;
 
-import Views.Menus.MenuInicioView;
+import Controllers.Controllers.LoginController;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
 import Views.Listados.ListadoProveedoresView;
@@ -24,6 +23,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
      */
     public MantenimientoCatalogoBodegaView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
     }
 
     /**
@@ -142,7 +142,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblStockMinimo.setText("Stock Mínimo:");
         pnlMenu.add(lblStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
-        txtStockMinimo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtStockMinimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockMinimoActionPerformed(evt);
@@ -161,7 +160,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblStockMaximo.setText("Stock Máximo:");
         pnlMenu.add(lblStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
 
-        txtStockMaximo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtStockMaximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockMaximoActionPerformed(evt);
@@ -197,7 +195,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
 
         pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 900, 120));
 
-        cmbEstado.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +203,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         });
         pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 110, -1));
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -352,7 +348,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblBuscar.setText("Buscar: ");
         pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -394,7 +389,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblCategoria.setText("Categoría:");
         pnlMenu.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
 
-        cmbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría 1", "Categoría 2", "Categoría 3", "Categoría 4", " " }));
         cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,7 +409,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblErrorUnidad.setText("Este campo es requerido");
         pnlMenu.add(lblErrorUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
 
-        cmbUnidad.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cmbUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libras", "Unidades", "Galones", " " }));
         cmbUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,7 +526,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -559,7 +551,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblModulo.setText("Mantenimiento Catalógo Bodegas");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 300, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 750, 130));

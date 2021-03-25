@@ -5,12 +5,11 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import Views.TablasGrande.TablaGrandeProveedoresView;
 import Views.TablasGrande.TablaGrandeProveedoresView;
 
 /**
@@ -24,6 +23,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
      */
     public MantenimientoProveedoresView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         ProveedorController.LlenarTableProveedores(tableProveedores);
     }
 
@@ -38,9 +38,9 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         pnlBackbround = new javax.swing.JPanel();
         pnlUsuario = new javax.swing.JPanel();
-        lblIconoUsuario = new javax.swing.JLabel();
-        lblVentas = new javax.swing.JLabel();
-        lblVentas2 = new javax.swing.JLabel();
+        lblIconoUsuarioActual = new javax.swing.JLabel();
+        lblUsuarioActual = new javax.swing.JLabel();
+        lblMensajeBienvenida = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
@@ -90,20 +90,19 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         pnlUsuario.setBackground(new java.awt.Color(0, 49, 110));
         pnlUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIconoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_32px.png"))); // NOI18N
-        pnlUsuario.add(lblIconoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        lblIconoUsuarioActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_user_32px.png"))); // NOI18N
+        pnlUsuario.add(lblIconoUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
-        lblVentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVentas.setForeground(new java.awt.Color(242, 242, 242));
-        lblVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas.setText("Dra. Lourdes");
-        pnlUsuario.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
+        lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
+        lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
 
-        lblVentas2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVentas2.setForeground(new java.awt.Color(242, 242, 242));
-        lblVentas2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentas2.setText("Bienvenido(a)");
-        pnlUsuario.add(lblVentas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, 28));
+        lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMensajeBienvenida.setForeground(new java.awt.Color(242, 242, 242));
+        lblMensajeBienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMensajeBienvenida.setText("Bienvenido(a)");
+        pnlUsuario.add(lblMensajeBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 130, 28));
 
         pnlBackbround.add(pnlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 130));
 
@@ -423,7 +422,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblModulo.setText("Mantenimiento Proveedores");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 260, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));
@@ -816,15 +815,15 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorRTN;
     private javax.swing.JLabel lblErrorTelefono;
     private javax.swing.JLabel lblIconoRegresar;
-    private javax.swing.JLabel lblIconoUsuario;
+    private javax.swing.JLabel lblIconoUsuarioActual;
+    private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRTN;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblVentas;
-    private javax.swing.JLabel lblVentas2;
+    private javax.swing.JLabel lblUsuarioActual;
     private javax.swing.JLabel lblVisualizar;
     private javax.swing.JPanel pnlBackbround;
     private javax.swing.JPanel pnlMenu;

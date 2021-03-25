@@ -5,6 +5,7 @@
  */
 package Views.TablasGrande;
 
+import Controllers.Controllers.LoginController;
 import Controllers.Controllers.UsuarioController;
 import Models.Models.UsuarioModel;
 import Utils.Cache.UsuariosCache;
@@ -25,6 +26,7 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
      */
     public TablaGrandeUsuariosView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         UsuarioController.LlenarTableUsuarios(this.tableUsuarios);
         UsuarioController.FiltroTableUsuarios(tableUsuarios, txtBuscar);
@@ -72,7 +74,6 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -86,7 +87,7 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 80, 90));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -203,6 +204,8 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         this.dispose();
+        MantenimientoUsuariosView mantenimientoUsuariosView = new MantenimientoUsuariosView();
+        mantenimientoUsuariosView.setVisible(true);
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -223,7 +226,10 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
         UsuariosCache usuarioCache = new UsuariosCache();
         usuarioCache.setDatosCompartidos(true);
         usuarioCache.setUsuario(usuarioModel);
+        
         dispose();
+        MantenimientoUsuariosView mantenimientoUsuariosView = new MantenimientoUsuariosView();
+        mantenimientoUsuariosView.setVisible(true);
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
     private void tableUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseEntered

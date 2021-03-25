@@ -5,8 +5,8 @@
  */
 package Views.Menus;
 
+import Controllers.Controllers.LoginController;
 import Views.Menus.MenuInicioView;
-import java.awt.Color;
 
 /**
  *
@@ -34,14 +34,18 @@ public class LoginView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblUsuario = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        lblContrasenia = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtContrasenia = new javax.swing.JPasswordField();
         btnIniciarSesion = new javax.swing.JButton();
+        lblContrasenia1 = new javax.swing.JLabel();
+        errContrasenia = new javax.swing.JLabel();
+        errGeneral = new javax.swing.JLabel();
+        errUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -52,37 +56,40 @@ public class LoginView extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(42, 74, 132));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/unicah_logo_bg.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 230));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontologico.UNICAH_BG.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 200, 210));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel2.setText("UNICAH");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Monseñor Agustín Hombach");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 100, 40));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 240, 20));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(242, 242, 242));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("HOSPITAL ODONTOLÓGICO");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 240, 20));
 
         pnlBackground.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 450));
 
         jPanel2.setBackground(new java.awt.Color(0, 21, 64));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuario.setText("Usuario: ");
-        jPanel2.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel2.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(0, 21, 64));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 410, 10));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 410, 10));
 
         jSeparator2.setBackground(new java.awt.Color(0, 21, 64));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 410, 10));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 410, 10));
 
-        lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblContrasenia.setForeground(new java.awt.Color(242, 242, 242));
-        lblContrasenia.setText("Contraseña:");
-        jPanel2.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
-
-        txtUsuario.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(242, 242, 242));
         txtUsuario.setBorder(null);
         txtUsuario.setOpaque(false);
@@ -91,13 +98,13 @@ public class LoginView extends javax.swing.JFrame {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 410, 30));
+        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 410, 30));
 
-        txtContrasenia.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txtContrasenia.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         txtContrasenia.setForeground(new java.awt.Color(242, 242, 242));
         txtContrasenia.setBorder(null);
         txtContrasenia.setOpaque(false);
-        jPanel2.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 410, 30));
+        jPanel2.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 410, 30));
 
         btnIniciarSesion.setBackground(new java.awt.Color(0, 78, 178));
         btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -112,7 +119,27 @@ public class LoginView extends javax.swing.JFrame {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        jPanel2.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 220, 40));
+        jPanel2.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 220, 40));
+
+        lblContrasenia1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblContrasenia1.setForeground(new java.awt.Color(242, 242, 242));
+        lblContrasenia1.setText("Contraseña:");
+        jPanel2.add(lblContrasenia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+
+        errContrasenia.setBackground(new java.awt.Color(255, 51, 51));
+        errContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        errContrasenia.setForeground(new java.awt.Color(231, 0, 2));
+        jPanel2.add(errContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 410, 20));
+
+        errGeneral.setBackground(new java.awt.Color(255, 51, 51));
+        errGeneral.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        errGeneral.setForeground(new java.awt.Color(231, 0, 2));
+        jPanel2.add(errGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 410, 20));
+
+        errUsuario.setBackground(new java.awt.Color(255, 51, 51));
+        errUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        errUsuario.setForeground(new java.awt.Color(231, 0, 2));
+        jPanel2.add(errUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 410, 20));
 
         pnlBackground.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 520, 450));
 
@@ -136,9 +163,14 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        MenuInicioView homeView = new MenuInicioView();
-        homeView.setVisible(true);
-        this.dispose();
+        if(LoginController.verificarIniciarSesion(this.txtUsuario.getText(), 
+                this.txtContrasenia.getText(), this.errUsuario, this.errContrasenia, 
+                this.errGeneral))
+        {
+            MenuInicioView homeView = new MenuInicioView();
+            homeView.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
@@ -178,13 +210,17 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JLabel errContrasenia;
+    private javax.swing.JLabel errGeneral;
+    private javax.swing.JLabel errUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblContrasenia;
+    private javax.swing.JLabel lblContrasenia1;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JPasswordField txtContrasenia;

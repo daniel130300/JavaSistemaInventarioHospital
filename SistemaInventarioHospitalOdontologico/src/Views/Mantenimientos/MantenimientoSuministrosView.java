@@ -5,13 +5,10 @@
  */
 package Views.Mantenimientos;
 
-import Views.Menus.MenuInicioView;
+import Controllers.Controllers.LoginController;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import Views.Listados.ListadoProductosSuministrosView;
-import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
-import Views.Listados.ListadoProductospProductosCompuestosView;
 import Views.Menus.MenuSuministrosView;
 import Views.TablasGrande.TablaGrandeInventarioSuministrosView;
 
@@ -26,6 +23,7 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
      */
     public MantenimientoSuministrosView() {
         initComponents();
+        LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
     }
 
     /**
@@ -314,7 +312,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblBuscar.setText("Buscar: ");
         pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
 
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -333,7 +330,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblNombre.setText("Nombre:");
         pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -346,7 +342,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblPrecioVenta.setText("Precio Venta: ");
         pnlMenu.add(lblPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
-        txtPrecioVenta.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtPrecioVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrecioVentaActionPerformed(evt);
@@ -371,7 +366,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblEstado.setText("Estado: ");
         pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
 
-        cmbEstado.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +379,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblCategoria.setText("Categoría:");
         pnlMenu.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, -1, -1));
 
-        cmbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría 1", "Categoría 2", "Categoría 3", "Categoría 4", " " }));
         cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,7 +404,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblStockMinimo.setText("Stock Mínimo:");
         pnlMenu.add(lblStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
-        txtStockMinimo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtStockMinimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockMinimoActionPerformed(evt);
@@ -424,7 +416,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblStockMaximo.setText("Stock Máximo:");
         pnlMenu.add(lblStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
 
-        txtStockMaximo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtStockMaximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockMaximoActionPerformed(evt);
@@ -443,7 +434,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblCostosFijos.setText("Costos Fijos:");
         pnlMenu.add(lblCostosFijos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
-        txtCostosFijos.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtCostosFijos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCostosFijosActionPerformed(evt);
@@ -462,7 +452,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblStock.setText("Stock:");
         pnlMenu.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
-        txtStock.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockActionPerformed(evt);
@@ -568,7 +557,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         pnlMenu1.add(lblFechaCaducidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         txtFechaCaducidadProducto.setEditable(false);
-        txtFechaCaducidadProducto.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtFechaCaducidadProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaCaducidadProductoActionPerformed(evt);
@@ -576,7 +564,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         });
         pnlMenu1.add(txtFechaCaducidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 200, -1));
 
-        txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadKeyTyped(evt);
@@ -650,7 +637,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         pnlMenu1.add(lblDescripcionProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
         txtNombreProducto.setEditable(false);
-        txtNombreProducto.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreProductoActionPerformed(evt);
@@ -673,7 +659,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblErrorCantidad1.setText("Error este campo es requerido");
         pnlMenu1.add(lblErrorCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, 20));
 
-        txtPrecioVentaProducto.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtPrecioVentaProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioVentaProductoKeyTyped(evt);
@@ -694,7 +679,6 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblUsuarioActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsuarioActual.setForeground(new java.awt.Color(242, 242, 242));
         lblUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblUsuarioActual.setText("Dra. Lourdes");
         pnlUsuario.add(lblUsuarioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 130, 28));
 
         lblMensajeBienvenida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -720,7 +704,7 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
         lblModulo.setText("Mantenimiento Inventario Suministros");
         pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 350, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH (4).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, 90));
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 590, 140));

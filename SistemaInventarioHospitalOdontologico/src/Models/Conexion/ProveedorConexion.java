@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.sql.CallableStatement;
+import java.sql.Types;
 
 /**
  *
@@ -57,5 +59,34 @@ public class ProveedorConexion
         return proveedores;
     }
     
-    
+    public static String MantenimientoProveedores(String accion, ProveedorModel proveedor)
+    {
+        String estado = "";
+        Connection con = null;
+        try
+        {
+            String query;
+            con = Conexion.getConexion(con);
+                        
+            query = "{CALL MantenimientoProveedores(?,?,?,?,?,?,?,?,?)}";
+            CallableStatement cs = con.prepareCall(query);
+            cs.setString            (1, accion);
+            cs.setInt               (2, proveedor.getProId());
+            cs.setString            (3, proveedor.getProRTN());
+            cs.setString            (4, proveedor.getProNombre());
+            cs.setString            (5, proveedor.getProCorreo());
+            cs.setString            (6, proveedor.getProTelefono());
+            cs.setString            (7, proveedor.getProContacto());
+            cs.setString            (8, proveedor.getProDireccion());
+            cs.registerOutParameter (9, Types.VARCHAR);
+            cs.executeUpdate();
+            estado = cs.getString(9);
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            estado = e.toString();
+        } 
+        return estado;
+    }   
 }

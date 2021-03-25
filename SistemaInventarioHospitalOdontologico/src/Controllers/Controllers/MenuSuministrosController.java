@@ -42,7 +42,6 @@ public class MenuSuministrosController
         else
         {
             btnMantenimientoInventarioSuministros.setEnabled(false);
-            setIconoCandado(btnMantenimientoInventarioSuministros);
         }
     }
     
@@ -56,7 +55,6 @@ public class MenuSuministrosController
         else
         {
             btnInventarioSuministros.setEnabled(false);
-            setIconoCandado(btnInventarioSuministros);
         }
     }
     

@@ -24,6 +24,8 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         ProveedorController.LlenarTableProveedores(tableProveedores);
+        ProveedorController.FiltroTableProveedores(tableProveedores, txtBuscar);
+        this.LlenarDatos();
     }
     
     private void LimpiarInputs()
@@ -44,6 +46,18 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         this.lblErrorTelefono.setText(null);
         this.lblErrorContacto.setText(null);
         this.lblErrorDireccion.setText(null);
+    }
+        private void LlenarDatos()
+    {
+        this.Id_proveedor = ProveedorController.setDatosEditarFromCache(this.tableProveedores, 
+                this.txtRTN, this.txtNombre, this.txtCorreo, this.txtTelefono,
+                this.txtContacto, this.txtDireccion);
+        
+        if(Id_proveedor != null)
+        {
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+        }
     }
 
     /**
@@ -235,6 +249,11 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProveedoresMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tableProveedores);
@@ -464,6 +483,21 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         this.LimpiarInputs();
         this.LimpiarErrLabels();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
+        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint()); 
+        
+        this.Id_proveedor = ProveedorController.setDatosEditarFromTable(seleccion, 
+                this.tableProveedores, this.txtRTN, this.txtNombre, 
+                this.txtCorreo, this.txtTelefono, this.txtContacto, 
+                this.txtDireccion);
+        if(this.Id_proveedor != null)
+        {
+            this.LimpiarErrLabels();
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+        }     
+    }//GEN-LAST:event_tableProveedoresMouseClicked
 
     /**
      * @param args the command line arguments

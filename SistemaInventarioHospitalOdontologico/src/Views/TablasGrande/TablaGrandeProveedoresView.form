@@ -312,6 +312,9 @@
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableProveedoresMouseClicked"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="TablaGrandeProveedoresView_tableProveedores"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

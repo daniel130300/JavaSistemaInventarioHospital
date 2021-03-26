@@ -6,6 +6,9 @@
 package Views.TablasGrande;
 
 import Controllers.Controllers.LoginController;
+import Controllers.Controllers.ProveedorController;
+import Models.Models.ProveedorModel;
+import Utils.Cache.ProveedorCache;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.MantenimientoProveedoresView;
@@ -22,6 +25,8 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     public TablaGrandeProveedoresView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        ProveedorController.LlenarTableProveedores(tableProveedores);
+        ProveedorController.FiltroTableProveedores(tableProveedores, txtBuscar);
     }
 
     /**
@@ -101,7 +106,7 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -165,6 +170,11 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProveedoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableProveedores);
 
         pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 810, 390));
@@ -197,6 +207,24 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
+        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint()); ;
+        ProveedorModel proveedorModel = new ProveedorModel();
+        proveedorModel.setProId(Integer.parseInt(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 0)))); 
+        proveedorModel.setProRTN(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 1)));
+        proveedorModel.setProNombre(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 2)));
+        proveedorModel.setProCorreo(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 3)));
+        proveedorModel.setProTelefono(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 4)));
+        proveedorModel.setProContacto(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 5)));
+        proveedorModel.setProDireccion(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion,6)));
+        ProveedorCache proveedorCache = new ProveedorCache();
+        proveedorCache.setDatosCompartidos(true);
+        proveedorCache.setid(proveedorModel);
+        dispose();
+        MantenimientoProveedoresView mantenimientoUsuariosView = new MantenimientoProveedoresView();
+        mantenimientoUsuariosView.setVisible(true);      
+    }//GEN-LAST:event_tableProveedoresMouseClicked
 
     /**
      * @param args the command line arguments

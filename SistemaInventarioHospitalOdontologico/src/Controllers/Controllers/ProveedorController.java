@@ -211,7 +211,7 @@ public class ProveedorController
         return UsrId;
     }  
     
-    public static Integer setDatosEditarFromCache(JTextField txtRTN, 
+    public static Integer setDatosEditarFromCache(JTable tableProveeodres,JTextField txtRTN, 
              JTextField txtNombre, JTextField txtCorreo, JTextField txtTelefono, 
              JTextField txtContacto, JTextArea txtDireccion)
     {
@@ -221,19 +221,12 @@ public class ProveedorController
         if(proveedorCache.isDatosCompartidos())
         {   
             UsrId = proveedorCache.getid().getProId();
-            JOptionPane.showMessageDialog(null, UsrId);
             txtRTN.setText(proveedorCache.getid().getProRTN());
-            JOptionPane.showMessageDialog(null, txtRTN);
             txtNombre.setText(proveedorCache.getid().getProNombre());
-            JOptionPane.showMessageDialog(null, txtNombre);
             txtCorreo.setText(proveedorCache.getid().getProCorreo());
-            JOptionPane.showMessageDialog(null, txtCorreo);
             txtTelefono.setText(proveedorCache.getid().getProTelefono());
-            JOptionPane.showMessageDialog(null, txtTelefono);
             txtContacto.setText(proveedorCache.getid().getProContacto());
-            JOptionPane.showMessageDialog(null, txtContacto);
             txtDireccion.setText(proveedorCache.getid().getProDireccion());
-            JOptionPane.showMessageDialog(null, txtDireccion);
         }
         
         return UsrId;

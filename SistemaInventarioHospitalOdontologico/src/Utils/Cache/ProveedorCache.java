@@ -28,6 +28,7 @@ public class ProveedorCache {
     }
 
     public void setid(ProveedorModel id) {
+
         ProveedorCache.id = id;
     }    
 }

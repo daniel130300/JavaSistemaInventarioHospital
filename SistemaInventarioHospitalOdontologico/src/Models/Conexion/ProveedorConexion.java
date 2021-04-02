@@ -47,6 +47,8 @@ public class ProveedorConexion
                 proveedor.setProTelefono(rss.getString("ProTelefono"));
                 proveedor.setProContacto(rss.getString("ProContacto"));
                 proveedor.setProDireccion(rss.getString("ProDireccion"));
+                proveedor.setProEstado(rss.getString("ProEstado"));
+                
                 proveedores.add(proveedor);
             } 
             con.close();
@@ -68,7 +70,7 @@ public class ProveedorConexion
             String query;
             con = Conexion.getConexion(con);
                         
-            query = "{CALL MantenimientoProveedores(?,?,?,?,?,?,?,?,?)}";
+            query = "{CALL MantenimientoProveedores(?,?,?,?,?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
             cs.setInt               (2, proveedor.getProId());
@@ -78,9 +80,10 @@ public class ProveedorConexion
             cs.setString            (6, proveedor.getProTelefono());
             cs.setString            (7, proveedor.getProContacto());
             cs.setString            (8, proveedor.getProDireccion());
-            cs.registerOutParameter (9, Types.VARCHAR);
+            cs.setString            (9, proveedor.getProEstado());
+            cs.registerOutParameter (10, Types.VARCHAR);
             cs.executeUpdate();
-            estado = cs.getString(9);
+            estado = cs.getString(10);
             con.close();
         }
         catch (SQLException e)

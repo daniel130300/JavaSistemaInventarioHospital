@@ -36,6 +36,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         this.txtTelefono.setText(null);
         this.txtContacto.setText(null);
         this.txtDireccion.setText(null);
+        this.cmbEstado.setSelectedIndex(0);
     }
     
     private void LimpiarErrLabels()
@@ -51,12 +52,13 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     {
         this.Id_proveedor = ProveedorController.setDatosEditarFromCache(this.tableProveedores, 
                 this.txtRTN, this.txtNombre, this.txtCorreo, this.txtTelefono,
-                this.txtContacto, this.txtDireccion);
+                this.txtContacto, this.txtDireccion, this.cmbEstado);
         
         if(Id_proveedor != null)
         {
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
+            this.cmbEstado.setEnabled(true);
         }
     }
 
@@ -106,6 +108,8 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        lblEstado = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -234,17 +238,17 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id proveedor", "RTN", "Nombre", "Correo", "Telefono", "Contacto", "Direccion"
+                "Id proveedor", "RTN", "Nombre", "Correo", "Telefono", "Contacto", "Direccion", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -335,7 +339,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 300, 90, 30));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 90, 30));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -346,7 +350,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 80, 30));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 80, 30));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -358,7 +362,21 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, 80, 30));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 80, 30));
+
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(242, 242, 242));
+        lblEstado.setText("Estado: ");
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, -1, -1));
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmbEstado.setEnabled(false);
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 130, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
@@ -451,7 +469,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         if(!ProveedorController.MantenimientoProveedores("insertar", 0, 
             this.txtRTN.getText(), this.txtNombre.getText(), 
             this.txtCorreo.getText(), this.txtTelefono.getText(), 
-            this.txtContacto.getText(), this.txtDireccion.getText(), 
+            this.txtContacto.getText(), this.txtDireccion.getText(),this.cmbEstado.getSelectedItem().toString(), 
             this.lblErrorRTN, this.lblErrorNombre, this.lblErrorCorreo, 
             this.lblErrorTelefono, this.lblErrorContacto , this.lblErrorDireccion) )
         {
@@ -464,12 +482,13 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         if(!ProveedorController.MantenimientoProveedores("editar", this.Id_proveedor,
             this.txtRTN.getText(), this.txtNombre.getText(),
             this.txtCorreo.getText(), this.txtTelefono.getText(),
-            this.txtContacto.getText(), this.txtDireccion.getText(),
+            this.txtContacto.getText(), this.txtDireccion.getText(),this.cmbEstado.getSelectedItem().toString(),
             this.lblErrorRTN, this.lblErrorNombre, this.lblErrorCorreo,
             this.lblErrorTelefono, this.lblErrorContacto , this.lblErrorDireccion))
         {
             this.btnAgregar.setEnabled(true);
             this.btnEditar.setEnabled(false);
+            this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
             ProveedorController.LlenarTableProveedores(tableProveedores);
         }
@@ -478,6 +497,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.btnAgregar.setEnabled(true);
         this.btnEditar.setEnabled(false);
+        this.cmbEstado.setEnabled(false);
         this.tableProveedores.clearSelection();
         this.btnVisualizar.setEnabled(true); 
         this.LimpiarInputs();
@@ -490,14 +510,19 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         this.Id_proveedor = ProveedorController.setDatosEditarFromTable(seleccion, 
                 this.tableProveedores, this.txtRTN, this.txtNombre, 
                 this.txtCorreo, this.txtTelefono, this.txtContacto, 
-                this.txtDireccion);
+                this.txtDireccion,this.cmbEstado);
         if(this.Id_proveedor != null)
         {
             this.LimpiarErrLabels();
+            this.cmbEstado.setEnabled(true);
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
         }     
     }//GEN-LAST:event_tableProveedoresMouseClicked
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -805,6 +830,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JPanel btnRegresar;
     private javax.swing.JPanel btnVisualizar;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -818,6 +844,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorNombre;
     private javax.swing.JLabel lblErrorRTN;
     private javax.swing.JLabel lblErrorTelefono;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;

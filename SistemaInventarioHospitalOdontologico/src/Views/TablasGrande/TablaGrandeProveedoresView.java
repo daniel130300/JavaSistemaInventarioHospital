@@ -153,17 +153,17 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id proveedor", "Registro Sanitario", "RTN", "Nombre", "Correo", "Telefono", "Direccion"
+                "Id proveedor", "Registro Sanitario", "RTN", "Nombre", "Correo", "Telefono", "Direccion", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -218,6 +218,7 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
         proveedorModel.setProTelefono(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 4)));
         proveedorModel.setProContacto(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 5)));
         proveedorModel.setProDireccion(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion,6)));
+        proveedorModel.setProEstado(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion,7))); 
         ProveedorCache proveedorCache = new ProveedorCache();
         proveedorCache.setDatosCompartidos(true);
         proveedorCache.setid(proveedorModel);

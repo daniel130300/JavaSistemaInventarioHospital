@@ -10,6 +10,7 @@ public class ProveedorModel
     private String ProTelefono;
     private String ProContacto;
     private String ProDireccion;
+    private String ProEstado;
 
     public Integer getProId() {
         return ProId;
@@ -18,6 +19,13 @@ public class ProveedorModel
     public void setProId(Integer ProId) {
         this.ProId = ProId;
     }
+    public String getProEstado() {
+        return ProEstado;
+    }
+
+    public void setProEstado(String ProEstado) {
+        this.ProEstado = ProEstado;
+    }    
 
     public String getProRTN() {
         return ProRTN;

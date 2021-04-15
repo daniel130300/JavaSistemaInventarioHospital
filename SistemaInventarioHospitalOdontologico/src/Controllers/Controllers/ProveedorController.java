@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import Utils.Cache.ProveedorCache;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.RowFilter;
@@ -31,7 +32,7 @@ public class ProveedorController
 {
     public static Boolean MantenimientoProveedores(String accion, Integer id, 
             String rtn, String nombre, String correo, String telefono, 
-            String contacto, String direccion,JLabel errRTN, JLabel errNombre,
+            String contacto, String direccion,String estado ,JLabel errRTN, JLabel errNombre,
             JLabel errCorreo,JLabel errTelefono, JLabel errContacto, JLabel errDireccion)
     {
         
@@ -52,6 +53,7 @@ public class ProveedorController
         String trimmedTelefono = telefono.trim();
         String trimmedContacto = contacto.trim();
         String trimmedDireccion = direccion.trim();
+        String trimmedEstado= estado.trim();
         
         if(!Validaciones.validarNumeros(trimmedRTN))
         {
@@ -161,7 +163,8 @@ public class ProveedorController
                         proveedoModel.setProCorreo(trimmedCorreo);
                         proveedoModel.setProTelefono(trimmedTelefono);
                         proveedoModel.setProContacto(trimmedContacto);
-                        proveedoModel.setProDireccion(trimmedDireccion);            
+                        proveedoModel.setProDireccion(trimmedDireccion);
+                        proveedoModel.setProEstado(trimmedEstado);
 
                         String resultados = ProveedorConexion.MantenimientoProveedores(accion, proveedoModel);
                         
@@ -196,47 +199,42 @@ public class ProveedorController
     
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableProveedores, 
             JTextField txtRTN,JTextField txtNombre, JTextField txtCorreo,
-            JTextField txtTelefono, JTextField txtContacto,JTextArea txtDescripcion)
+            JTextField txtTelefono, JTextField txtContacto,JTextArea txtDescripcion,JComboBox cmbEstado )
     {
-        Integer UsrId = null;
-        UsrId = Integer.parseInt((String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 0)))); 
+        Integer ProId = null;
+        ProId = Integer.parseInt((String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 0)))); 
         txtRTN.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 1)));
         txtNombre.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 2)));
         txtCorreo.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 3)));
         txtTelefono.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 4)));
         txtContacto.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 5)));
         txtDescripcion.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 6)));
+        cmbEstado.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,7)));
 
         
-        return UsrId;
+        return ProId;
     }  
     
-    public static Integer setDatosEditarFromCache(JTextField txtRTN, 
+    public static Integer setDatosEditarFromCache(JTable tableProveeodres,JTextField txtRTN, 
              JTextField txtNombre, JTextField txtCorreo, JTextField txtTelefono, 
-             JTextField txtContacto, JTextArea txtDireccion)
+             JTextField txtContacto, JTextArea txtDireccion,JComboBox cmbEstado)
     {
         ProveedorCache proveedorCache = new ProveedorCache();
-        Integer UsrId = null;
+        Integer ProId = null;
    
         if(proveedorCache.isDatosCompartidos())
         {   
-            UsrId = proveedorCache.getid().getProId();
-            JOptionPane.showMessageDialog(null, UsrId);
+            ProId = proveedorCache.getid().getProId();
             txtRTN.setText(proveedorCache.getid().getProRTN());
-            JOptionPane.showMessageDialog(null, txtRTN);
             txtNombre.setText(proveedorCache.getid().getProNombre());
-            JOptionPane.showMessageDialog(null, txtNombre);
             txtCorreo.setText(proveedorCache.getid().getProCorreo());
-            JOptionPane.showMessageDialog(null, txtCorreo);
             txtTelefono.setText(proveedorCache.getid().getProTelefono());
-            JOptionPane.showMessageDialog(null, txtTelefono);
             txtContacto.setText(proveedorCache.getid().getProContacto());
-            JOptionPane.showMessageDialog(null, txtContacto);
             txtDireccion.setText(proveedorCache.getid().getProDireccion());
-            JOptionPane.showMessageDialog(null, txtDireccion);
+            cmbEstado.setSelectedItem(proveedorCache.getid().getProEstado());
         }
         
-        return UsrId;
+        return ProId;
     }     
     
     public static void FiltroTableProveedores(JTable tableUsuarios, JTextField fieldBusqueda)
@@ -298,7 +296,8 @@ public class ProveedorController
                     proveedores.get(i).getProCorreo(),
                     proveedores.get(i).getProTelefono(),
                     proveedores.get(i).getProContacto(),
-                    proveedores.get(i).getProDireccion()
+                    proveedores.get(i).getProDireccion(),
+                    proveedores.get(i).getProEstado()
                 }
             );
         }

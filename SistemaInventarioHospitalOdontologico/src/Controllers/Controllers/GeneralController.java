@@ -49,5 +49,4 @@ public abstract class GeneralController
             columnModel.getColumn(columna).setPreferredWidth(ancho); 
         } 
     } 
-     
 }

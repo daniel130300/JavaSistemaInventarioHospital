@@ -71,7 +71,7 @@ public class InformacionPersonalController
         errCorreo.setText(null);
     }
     
-     private static boolean validacionesGenerales(String trimmedNombre, 
+    private static boolean validacionesGenerales(String trimmedNombre, 
             String trimmedApellido, String trimmedCorreo, JLabel errNombre, 
             JLabel errApellido, JLabel errCorreo)
     {
@@ -116,7 +116,6 @@ public class InformacionPersonalController
         return error;
     }
     
-    
     public static void setCamposEditar(JTextField txtNombre, 
             JTextField txtApellido, JTextField txtCorreo)
     {
@@ -124,5 +123,4 @@ public class InformacionPersonalController
         txtApellido.setText(UsuarioLogueadoCache.getUsrApellido());
         txtCorreo.setText(UsuarioLogueadoCache.getUsrCorreo());
     }
-    
 }

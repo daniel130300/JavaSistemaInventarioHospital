@@ -8,9 +8,7 @@ package Views.Mantenimientos;
 import Controllers.Controllers.LoginController;
 import java.awt.Color;
 import javax.swing.JPanel;
-import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
-import Views.Listados.ListadoProveedoresView;
-import Views.Menus.MenuBodegaView;
+
 
 /**
  *
@@ -36,52 +34,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackbround = new javax.swing.JPanel();
-        pnlGeneral = new javax.swing.JTabbedPane();
-        pnlMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JPanel();
-        lblIconoRegresar = new javax.swing.JLabel();
-        lblRegresar = new javax.swing.JLabel();
-        lblStockMinimo = new javax.swing.JLabel();
-        txtStockMinimo = new javax.swing.JTextField();
-        lblErrorStockMinimo = new javax.swing.JLabel();
-        lblStockMaximo = new javax.swing.JLabel();
-        txtStockMaximo = new javax.swing.JTextField();
-        lblDescripcion = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableProductos = new javax.swing.JTable();
-        cmbEstado = new javax.swing.JComboBox<>();
-        txtNombre = new javax.swing.JTextField();
-        lblEstado = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JPanel();
-        lblEditar = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JPanel();
-        lblAgregar = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JPanel();
-        lblCancelar = new javax.swing.JLabel();
-        btnVisualizar = new javax.swing.JPanel();
-        lblVisualizar = new javax.swing.JLabel();
-        lblBuscar = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
-        lblNombre = new javax.swing.JLabel();
-        lblErrorEstado = new javax.swing.JLabel();
-        lblErrorDescripcion = new javax.swing.JLabel();
-        lblErrorNombre = new javax.swing.JLabel();
-        lblErrorStockMaximo = new javax.swing.JLabel();
-        lblCategoria = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox<>();
-        lblErrorCategoria = new javax.swing.JLabel();
-        lblErrorUnidad = new javax.swing.JLabel();
-        cmbUnidad = new javax.swing.JComboBox<>();
-        lblUnidad = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
-        pnlMenu1 = new javax.swing.JPanel();
-        btnEliminarProveedor = new javax.swing.JPanel();
-        lblEliminarProveedor = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableProveedores = new javax.swing.JTable();
-        btnAgregarProveedor = new javax.swing.JPanel();
-        lblAgregarProveedor = new javax.swing.JLabel();
         pnlUsuario = new javax.swing.JPanel();
         lblIconoUsuarioActual = new javax.swing.JLabel();
         lblUsuarioActual = new javax.swing.JLabel();
@@ -90,432 +42,32 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        pnlMenu = new javax.swing.JPanel();
+        btnRegresar = new javax.swing.JPanel();
+        lblIconoRegresar = new javax.swing.JLabel();
+        lblRegresar = new javax.swing.JLabel();
+        txtFechaCaducidad = new javax.swing.JTextField();
+        lblBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        lblStock = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableCategorias = new javax.swing.JTable();
+        lblErrorStock = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        lblEstado = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
+        lblFechaCaducidad = new javax.swing.JLabel();
+        numStock = new javax.swing.JSpinner();
+        lblErrorDescripcion1 = new javax.swing.JLabel();
+        lblErrorFechaCaducidad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         pnlBackbround.setBackground(new java.awt.Color(0, 49, 110));
         pnlBackbround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnlGeneral.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
-        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
-        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
-
-        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
-
-        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
-        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRegresar.setText("Regresar");
-
-        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
-        btnRegresar.setLayout(btnRegresarLayout);
-        btnRegresarLayout.setHorizontalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRegresarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconoRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnRegresarLayout.setVerticalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
-
-        lblStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblStockMinimo.setForeground(new java.awt.Color(242, 242, 242));
-        lblStockMinimo.setText("Stock Mínimo:");
-        pnlMenu.add(lblStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
-
-        txtStockMinimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockMinimoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 70, -1));
-
-        lblErrorStockMinimo.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorStockMinimo.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorStockMinimo.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 220, -1));
-
-        lblStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblStockMaximo.setForeground(new java.awt.Color(242, 242, 242));
-        lblStockMaximo.setText("Stock Máximo:");
-        pnlMenu.add(lblStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
-
-        txtStockMaximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockMaximoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 70, -1));
-
-        lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
-        lblDescripcion.setText("Descripción:");
-        pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
-
-        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Categoría", "Unidad", "Estado"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tableProductos);
-
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 900, 120));
-
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
-        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEstadoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 110, -1));
-
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 260, -1));
-
-        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEstado.setForeground(new java.awt.Color(242, 242, 242));
-        lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
-
-        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
-        btnEditar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditarMouseClicked(evt);
-            }
-        });
-
-        lblEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEditar.setForeground(new java.awt.Color(242, 242, 242));
-        lblEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEditar.setText("Editar");
-
-        javax.swing.GroupLayout btnEditarLayout = new javax.swing.GroupLayout(btnEditar);
-        btnEditar.setLayout(btnEditarLayout);
-        btnEditarLayout.setHorizontalGroup(
-            btnEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnEditarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        btnEditarLayout.setVerticalGroup(
-            btnEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 80, -1));
-
-        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAgregarMouseClicked(evt);
-            }
-        });
-
-        lblAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblAgregar.setForeground(new java.awt.Color(242, 242, 242));
-        lblAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAgregar.setText("Agregar");
-
-        javax.swing.GroupLayout btnAgregarLayout = new javax.swing.GroupLayout(btnAgregar);
-        btnAgregar.setLayout(btnAgregarLayout);
-        btnAgregarLayout.setHorizontalGroup(
-            btnAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnAgregarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        btnAgregarLayout.setVerticalGroup(
-            btnAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAgregarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
-
-        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
-        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
-
-        lblCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCancelar.setForeground(new java.awt.Color(242, 242, 242));
-        lblCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCancelar.setText("Cancelar");
-
-        javax.swing.GroupLayout btnCancelarLayout = new javax.swing.GroupLayout(btnCancelar);
-        btnCancelar.setLayout(btnCancelarLayout);
-        btnCancelarLayout.setHorizontalGroup(
-            btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnCancelarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnCancelarLayout.setVerticalGroup(
-            btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCancelarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 270, 80, -1));
-
-        btnVisualizar.setBackground(new java.awt.Color(59, 103, 181));
-        btnVisualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVisualizarMouseClicked(evt);
-            }
-        });
-
-        lblVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVisualizar.setForeground(new java.awt.Color(242, 242, 242));
-        lblVisualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVisualizar.setText("Visualizar tabla");
-
-        javax.swing.GroupLayout btnVisualizarLayout = new javax.swing.GroupLayout(btnVisualizar);
-        btnVisualizar.setLayout(btnVisualizarLayout);
-        btnVisualizarLayout.setHorizontalGroup(
-            btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnVisualizarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblVisualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        btnVisualizarLayout.setVerticalGroup(
-            btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVisualizarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, -1, -1));
-
-        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
-        lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
-
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 590, -1));
-
-        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(242, 242, 242));
-        lblNombre.setText("Nombre:");
-        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
-
-        lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorEstado.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 140, -1));
-
-        lblErrorDescripcion.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorDescripcion.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 220, -1));
-
-        lblErrorNombre.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorNombre.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorNombre.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 220, -1));
-
-        lblErrorStockMaximo.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorStockMaximo.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorStockMaximo.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 220, -1));
-
-        lblCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCategoria.setForeground(new java.awt.Color(242, 242, 242));
-        lblCategoria.setText("Categoría:");
-        pnlMenu.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
-
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría 1", "Categoría 2", "Categoría 3", "Categoría 4", " " }));
-        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoriaActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 110, -1));
-
-        lblErrorCategoria.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorCategoria.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorCategoria.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorCategoria.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 140, -1));
-
-        lblErrorUnidad.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorUnidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorUnidad.setForeground(new java.awt.Color(231, 0, 2));
-        lblErrorUnidad.setText("Este campo es requerido");
-        pnlMenu.add(lblErrorUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
-
-        cmbUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libras", "Unidades", "Galones", " " }));
-        cmbUnidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbUnidadActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 110, -1));
-
-        lblUnidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblUnidad.setForeground(new java.awt.Color(242, 242, 242));
-        lblUnidad.setText("Unidad:");
-        pnlMenu.add(lblUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, -1, -1));
-
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        txtDescripcion.setRows(4);
-        jScrollPane3.setViewportView(txtDescripcion);
-
-        pnlMenu.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 260, 70));
-
-        pnlGeneral.addTab("General", pnlMenu);
-
-        pnlMenu1.setBackground(new java.awt.Color(0, 49, 110));
-        pnlMenu1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnEliminarProveedor.setBackground(new java.awt.Color(59, 103, 181));
-        btnEliminarProveedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnEliminarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarProveedorMouseClicked(evt);
-            }
-        });
-
-        lblEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEliminarProveedor.setForeground(new java.awt.Color(242, 242, 242));
-        lblEliminarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEliminarProveedor.setText("Eliminar Proveedor");
-
-        javax.swing.GroupLayout btnEliminarProveedorLayout = new javax.swing.GroupLayout(btnEliminarProveedor);
-        btnEliminarProveedor.setLayout(btnEliminarProveedorLayout);
-        btnEliminarProveedorLayout.setHorizontalGroup(
-            btnEliminarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarProveedorLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(lblEliminarProveedor)
-                .addGap(21, 21, 21))
-        );
-        btnEliminarProveedorLayout.setVerticalGroup(
-            btnEliminarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarProveedorLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu1.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 180, -1));
-
-        tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Id proveedor", "RTN proveedor", "Nombre proveedor"
-            }
-        ));
-        jScrollPane2.setViewportView(tableProveedores);
-
-        pnlMenu1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 680, 450));
-
-        btnAgregarProveedor.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregarProveedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnAgregarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAgregarProveedorMouseClicked(evt);
-            }
-        });
-
-        lblAgregarProveedor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblAgregarProveedor.setForeground(new java.awt.Color(242, 242, 242));
-        lblAgregarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAgregarProveedor.setText("Agregar Proveedor");
-
-        javax.swing.GroupLayout btnAgregarProveedorLayout = new javax.swing.GroupLayout(btnAgregarProveedor);
-        btnAgregarProveedor.setLayout(btnAgregarProveedorLayout);
-        btnAgregarProveedorLayout.setHorizontalGroup(
-            btnAgregarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnAgregarProveedorLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblAgregarProveedor)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        btnAgregarProveedorLayout.setVerticalGroup(
-            btnAgregarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAgregarProveedorLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblAgregarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu1.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 180, -1));
-
-        pnlGeneral.addTab("Proveedores", pnlMenu1);
-
-        pnlBackbround.add(pnlGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 126, 960, 560));
 
         pnlUsuario.setBackground(new java.awt.Color(0, 49, 110));
         pnlUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -556,17 +108,181 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
         pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 750, 130));
 
+        pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
+        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
+        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
+
+        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
+
+        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
+        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegresar.setText("Regresar");
+
+        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
+        btnRegresar.setLayout(btnRegresarLayout);
+        btnRegresarLayout.setHorizontalGroup(
+            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnRegresarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIconoRegresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnRegresarLayout.setVerticalGroup(
+            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
+        txtFechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaCaducidadActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 220, -1));
+
+        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
+        lblBuscar.setText("Buscar: ");
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 490, -1));
+
+        lblStock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblStock.setForeground(new java.awt.Color(242, 242, 242));
+        lblStock.setText("Stock:");
+        pnlMenu.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+
+        tableCategorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Id Categoría", "Descripción", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCategoriasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableCategorias);
+
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 930, 240));
+
+        lblErrorStock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorStock.setForeground(new java.awt.Color(231, 0, 2));
+        lblErrorStock.setText("Este campo es obligatorio");
+        pnlMenu.add(lblErrorStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 150, 20));
+
+        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(242, 242, 242));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 90, 30));
+
+        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 100, 30));
+
+        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(242, 242, 242));
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 80, 30));
+
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(242, 242, 242));
+        lblEstado.setText("Estado: ");
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmbEstado.setEnabled(false);
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 130, -1));
+
+        lblFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblFechaCaducidad.setForeground(new java.awt.Color(242, 242, 242));
+        lblFechaCaducidad.setText("Fecha de caducidad: ");
+        pnlMenu.add(lblFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        pnlMenu.add(numStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
+
+        lblErrorDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcion1.setForeground(new java.awt.Color(231, 0, 2));
+        lblErrorDescripcion1.setText("Este campo es obligatorio");
+        pnlMenu.add(lblErrorDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 200, 20));
+
+        lblErrorFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorFechaCaducidad.setForeground(new java.awt.Color(231, 0, 2));
+        lblErrorFechaCaducidad.setText("Este campo es obligatorio");
+        pnlMenu.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 220, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, 954, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlBackbround, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
+                    .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -574,66 +290,77 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MenuBodegaView menuBodegaView = new MenuBodegaView();
-        menuBodegaView.setVisible(true);
+        /*
+        MenuInicioView homeView = new MenuInicioView();
+        homeView.setVisible(true);
         this.dispose();
+        */
     }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void txtStockMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMinimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStockMinimoActionPerformed
-
-    private void txtStockMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMaximoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStockMaximoActionPerformed
-
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarMouseClicked
-
-    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarMouseClicked
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarMouseClicked
-        TablaGrandeCatalogoBodegaView consultaCatalogoProductosView = new TablaGrandeCatalogoBodegaView();
-        consultaCatalogoProductosView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnVisualizarMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCategoriaActionPerformed
+    private void tableCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCategoriasMouseClicked
+        /*
+        int seleccion = this.tableCategorias.rowAtPoint(evt.getPoint());
 
-    private void cmbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUnidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbUnidadActionPerformed
+        this.CprId = CategoriasController.setDatosEditarFromTable(seleccion,
+            this.tableCategorias, this.txtDescripcion, this.cmbEstado);
+        if(this.CprId != null)
+        {
+            this.LimpiarErrLabels();
+            this.cmbEstado.setEnabled(true);
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+        }
+        */
+    }//GEN-LAST:event_tableCategoriasMouseClicked
 
-    private void btnEliminarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProveedorMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarProveedorMouseClicked
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        /*
+        this.btnAgregar.setEnabled(true);
+        this.btnEditar.setEnabled(false);
+        this.cmbEstado.setEnabled(false);
+        this.tableCategorias.clearSelection();
+        this.LimpiarInputs();
+        this.LimpiarErrLabels();
+        */
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
-        ListadoProveedoresView listadoProveedoresView = new ListadoProveedoresView();
-        listadoProveedoresView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnAgregarProveedorMouseClicked
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    /*
+        if(!CategoriasController.MantenimientoCategorias("insertar", 0,
+            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
+        {
+            this.LimpiarInputs();
+            CategoriasController.LlenarTableCategorias(tableCategorias);
+        }
+    */
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    /*
+        if(!CategoriasController.MantenimientoCategorias("editar", this.CprId,
+            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),
+            this.lblErrorDescripcion))
+        {
+            this.btnAgregar.setEnabled(true);
+            this.btnEditar.setEnabled(false);
+            this.cmbEstado.setEnabled(false);
+            this.LimpiarInputs();
+            CategoriasController.LlenarTableCategorias(tableCategorias);
+        }
+    */
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
+
+    private void txtFechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCaducidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaCaducidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4776,60 +4503,34 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnAgregar;
-    private javax.swing.JPanel btnAgregarProveedor;
-    private javax.swing.JPanel btnCancelar;
-    private javax.swing.JPanel btnEditar;
-    private javax.swing.JPanel btnEliminarProveedor;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JPanel btnRegresar;
-    private javax.swing.JPanel btnVisualizar;
-    private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JComboBox<String> cmbUnidad;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblAgregar;
-    private javax.swing.JLabel lblAgregarProveedor;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblCancelar;
-    private javax.swing.JLabel lblCategoria;
-    private javax.swing.JLabel lblDescripcion;
-    private javax.swing.JLabel lblEditar;
-    private javax.swing.JLabel lblEliminarProveedor;
-    private javax.swing.JLabel lblErrorCategoria;
-    private javax.swing.JLabel lblErrorDescripcion;
-    private javax.swing.JLabel lblErrorEstado;
-    private javax.swing.JLabel lblErrorNombre;
-    private javax.swing.JLabel lblErrorStockMaximo;
-    private javax.swing.JLabel lblErrorStockMinimo;
-    private javax.swing.JLabel lblErrorUnidad;
+    private javax.swing.JLabel lblErrorDescripcion1;
+    private javax.swing.JLabel lblErrorFechaCaducidad;
+    private javax.swing.JLabel lblErrorStock;
     private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblFechaCaducidad;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
-    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRegresar;
-    private javax.swing.JLabel lblStockMaximo;
-    private javax.swing.JLabel lblStockMinimo;
+    private javax.swing.JLabel lblStock;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblUnidad;
     private javax.swing.JLabel lblUsuarioActual;
-    private javax.swing.JLabel lblVisualizar;
+    private javax.swing.JSpinner numStock;
     private javax.swing.JPanel pnlBackbround;
-    private javax.swing.JTabbedPane pnlGeneral;
     private javax.swing.JPanel pnlMenu;
-    private javax.swing.JPanel pnlMenu1;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
-    private javax.swing.JTable tableProductos;
-    private javax.swing.JTable tableProveedores;
+    private javax.swing.JTable tableCategorias;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtStockMaximo;
-    private javax.swing.JTextField txtStockMinimo;
+    private javax.swing.JTextField txtFechaCaducidad;
     // End of variables declaration//GEN-END:variables
 }

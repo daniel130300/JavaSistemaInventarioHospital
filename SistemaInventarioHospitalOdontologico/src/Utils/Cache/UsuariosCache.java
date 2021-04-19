@@ -27,6 +27,5 @@ public class UsuariosCache
 
     public void setUsuario(UsuarioModel usr) {
         UsuariosCache.usuario = usr;
-    }
-    
+    }  
 }

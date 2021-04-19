@@ -74,6 +74,4 @@ public class ProveedorModel
     public void setProDireccion(String ProDireccion) {
         this.ProDireccion = ProDireccion;
     }
-
-  
 }

@@ -106,7 +106,6 @@ public class LoginController
        return valido;
     }
     
-    
     private static boolean setUsrLogueadoPrivilegios(Integer UsrId, boolean autorizacion)
     {
         boolean hasPrivileges = false;
@@ -139,5 +138,4 @@ public class LoginController
         UsuarioLogueadoCache.setUsrApellido(null);
         UsuarioLogueadoCache.setUsrCorreo(null);
     }
-    
 }

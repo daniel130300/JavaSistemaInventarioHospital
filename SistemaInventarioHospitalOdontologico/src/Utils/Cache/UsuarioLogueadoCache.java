@@ -127,5 +127,4 @@ public class UsuarioLogueadoCache
        
        return privilegiosModulos;
     }
-    
 }

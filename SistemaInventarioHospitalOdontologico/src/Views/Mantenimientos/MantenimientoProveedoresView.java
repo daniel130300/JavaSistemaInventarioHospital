@@ -350,7 +350,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 80, 30));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 90, 30));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

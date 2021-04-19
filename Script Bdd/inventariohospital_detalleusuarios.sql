@@ -26,12 +26,8 @@ CREATE TABLE `detalleusuarios` (
   `DtuId` int NOT NULL AUTO_INCREMENT,
   `UsrId` int NOT NULL,
   `PriId` int NOT NULL,
-  PRIMARY KEY (`DtuId`),
-  KEY `Usuarios_DetalleUsuarios` (`UsrId`),
-  KEY `DetalleUsuarios_Privilegios` (`PriId`),
-  CONSTRAINT `DetalleUsuarios_Privilegios` FOREIGN KEY (`PriId`) REFERENCES `privilegios` (`PriId`),
-  CONSTRAINT `Usuarios_DetalleUsuarios` FOREIGN KEY (`UsrId`) REFERENCES `usuarios` (`UsrId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`DtuId`)
+) ENGINE=InnoDB AUTO_INCREMENT=416 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +36,7 @@ CREATE TABLE `detalleusuarios` (
 
 LOCK TABLES `detalleusuarios` WRITE;
 /*!40000 ALTER TABLE `detalleusuarios` DISABLE KEYS */;
+INSERT INTO `detalleusuarios` VALUES (15,12,1),(16,12,2),(17,12,3),(18,12,4),(19,12,5),(20,12,6),(21,12,7),(22,12,8),(23,12,9),(24,12,10),(25,12,11),(26,12,12),(27,12,13),(28,13,1),(29,13,2),(30,13,3),(31,13,4),(32,13,5),(33,13,6),(34,13,7),(35,13,8),(36,13,9),(37,13,10),(38,13,11),(39,13,12),(40,13,13),(41,14,1),(42,14,2),(43,14,3),(44,14,4),(45,14,5),(46,14,6),(47,14,7),(48,14,8),(49,14,9),(50,14,10),(51,14,11),(52,14,12),(53,14,13),(78,11,12),(79,11,13),(199,3,1),(200,3,2),(201,3,3),(202,3,4),(203,3,5),(204,3,6),(205,3,7),(206,3,8),(207,3,10),(208,3,11),(209,3,12),(210,3,13),(211,3,9),(281,5,2),(282,5,3),(283,5,4),(284,5,5),(285,5,14),(293,16,12),(294,16,13),(309,17,12),(310,17,13),(311,17,6),(312,17,7),(313,17,8),(314,17,10),(315,17,2),(316,17,3),(317,17,4),(319,17,14),(320,17,5),(322,17,11),(361,15,7),(362,15,8),(363,18,4),(364,18,5),(365,1,1),(366,1,2),(367,1,3),(368,1,4),(369,1,5),(370,1,6),(371,1,7),(372,1,8),(373,1,9),(374,1,10),(375,1,11),(376,1,12),(377,1,13),(378,2,6),(379,2,10),(380,2,7),(381,2,12),(382,2,13),(383,2,8),(384,2,2),(385,2,3),(386,2,4),(387,2,5),(388,2,11),(389,2,1),(390,2,9),(405,4,6),(406,4,7),(407,4,10),(408,1,14),(409,1,15),(410,1,16),(411,2,14),(412,2,15),(413,2,16),(414,19,12),(415,19,13);
 /*!40000 ALTER TABLE `detalleusuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-17 22:44:37
+-- Dump completed on 2021-04-18 18:26:02

@@ -24,6 +24,10 @@ BEGIN
 		IF (SELECT COUNT(UsrId) FROM usuarios WHERE UsrCorreo = _UsrCorreo) !=0 THEN
 			SET _Estado = "errCorreo";
 		END IF;
+        
+        IF (SELECT COUNT(UsrId) FROM usuarios WHERE UsrUsuario = _UsrUsuario) !=0 THEN
+			SET _Estado = "errUsuario";
+		END IF;
 		
 		IF _Estado = "OK" THEN
 			INSERT INTO usuarios 
@@ -51,6 +55,10 @@ BEGIN
 		
 		IF (SELECT COUNT(UsrId) FROM usuarios WHERE UsrId != _UsrId AND UsrCorreo = _UsrCorreo) != 0 THEN
 			SET _Estado = "errCorreo";
+		END IF;
+        
+         IF (SELECT COUNT(UsrId) FROM usuarios WHERE UsrId != _UsrId AND UsrUsuario = _UsrUsuario) !=0 THEN
+			SET _Estado = "errUsuario";
 		END IF;
 		
 		IF _Estado = "OK" THEN

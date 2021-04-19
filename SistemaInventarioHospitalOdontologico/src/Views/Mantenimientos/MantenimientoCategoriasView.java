@@ -257,7 +257,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         lblModulo.setForeground(new java.awt.Color(242, 242, 242));
         lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblModulo.setText("Mantenimiento Categorías");
-        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 260, 30));
+        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 260, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 90));

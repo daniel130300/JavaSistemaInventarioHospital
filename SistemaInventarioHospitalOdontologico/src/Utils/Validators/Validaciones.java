@@ -35,6 +35,11 @@ public class Validaciones
     {
         return letras.matches("[a-zA-ZÁÉÍÓÚÜÑáéíóúüñ ]+");
     }
+    
+    public static Boolean ValidarNumerosyLetras(String campo)
+    {
+       return campo.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"); 
+    }
 
     public static Boolean validarCorreo(String correo) 
     {

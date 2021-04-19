@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.InventarioBodegaView;
 import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
+import Views.Mantenimientos.MantenimientoCategoriasView;
 
 /**
  *
@@ -26,13 +27,18 @@ public class MenuBodegaView extends javax.swing.JFrame {
         noFocusJButtons();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         MenuBodegaController menuBodegaController = new MenuBodegaController();
-        menuBodegaController.AccesoModulos(this.btnMantenimientoCatalogoBodega, 
-                this.btnInventarioBodega, this.btnMantenimientoInventarioBodega);
+        menuBodegaController.AccesoModulos(
+                this.btnMantenimientoCatalogoBodega,
+                this.btnBitacoraCatalogoBodega,
+                this.btnMantenimientoInventarioBodega,
+                this.btnInventarioBodega, 
+                this.btnMantenimientoCategorias,
+                this.btnMantenimientoUnidades);
     }
     
     private void noFocusJButtons()
     {
-        this.btnMantenimientoCatalogoBodega.setFocusable(false);
+        this.btnMantenimientoUnidades.setFocusable(false);
         this.btnInventarioBodega.setFocusable(false);
         this.btnMantenimientoInventarioBodega.setFocusable(false);
     }
@@ -56,8 +62,11 @@ public class MenuBodegaView extends javax.swing.JFrame {
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
         btnMantenimientoInventarioBodega = new javax.swing.JButton();
-        btnMantenimientoCatalogoBodega = new javax.swing.JButton();
+        btnMantenimientoUnidades = new javax.swing.JButton();
         btnInventarioBodega = new javax.swing.JButton();
+        btnBitacoraCatalogoBodega = new javax.swing.JButton();
+        btnMantenimientoCategorias = new javax.swing.JButton();
+        btnMantenimientoCatalogoBodega = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -140,19 +149,19 @@ public class MenuBodegaView extends javax.swing.JFrame {
         });
         pnlMenu.add(btnMantenimientoInventarioBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 180, 130));
 
-        btnMantenimientoCatalogoBodega.setBackground(new java.awt.Color(45, 83, 150));
-        btnMantenimientoCatalogoBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnMantenimientoCatalogoBodega.setForeground(new java.awt.Color(242, 242, 242));
-        btnMantenimientoCatalogoBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
-        btnMantenimientoCatalogoBodega.setText("Mantenimiento Catálogo Bodega");
-        btnMantenimientoCatalogoBodega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnMantenimientoCatalogoBodega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnMantenimientoCatalogoBodega.addActionListener(new java.awt.event.ActionListener() {
+        btnMantenimientoUnidades.setBackground(new java.awt.Color(45, 83, 150));
+        btnMantenimientoUnidades.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMantenimientoUnidades.setForeground(new java.awt.Color(242, 242, 242));
+        btnMantenimientoUnidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_conversion_32px.png"))); // NOI18N
+        btnMantenimientoUnidades.setText("Mantenimiento Unidades");
+        btnMantenimientoUnidades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMantenimientoUnidades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMantenimientoUnidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMantenimientoCatalogoBodegaActionPerformed(evt);
+                btnMantenimientoUnidadesActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnMantenimientoCatalogoBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 180, 130));
+        pnlMenu.add(btnMantenimientoUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 180, 130));
 
         btnInventarioBodega.setBackground(new java.awt.Color(45, 83, 150));
         btnInventarioBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -166,7 +175,49 @@ public class MenuBodegaView extends javax.swing.JFrame {
                 btnInventarioBodegaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnInventarioBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 180, 130));
+        pnlMenu.add(btnInventarioBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 180, 130));
+
+        btnBitacoraCatalogoBodega.setBackground(new java.awt.Color(45, 83, 150));
+        btnBitacoraCatalogoBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBitacoraCatalogoBodega.setForeground(new java.awt.Color(242, 242, 242));
+        btnBitacoraCatalogoBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
+        btnBitacoraCatalogoBodega.setText("Bitacora Catálogo Bodega");
+        btnBitacoraCatalogoBodega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBitacoraCatalogoBodega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBitacoraCatalogoBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBitacoraCatalogoBodegaActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnBitacoraCatalogoBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 180, 130));
+
+        btnMantenimientoCategorias.setBackground(new java.awt.Color(45, 83, 150));
+        btnMantenimientoCategorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMantenimientoCategorias.setForeground(new java.awt.Color(242, 242, 242));
+        btnMantenimientoCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_sorting_32px.png"))); // NOI18N
+        btnMantenimientoCategorias.setText("Mantenimiento Categorías");
+        btnMantenimientoCategorias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMantenimientoCategorias.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMantenimientoCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMantenimientoCategoriasActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnMantenimientoCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 180, 130));
+
+        btnMantenimientoCatalogoBodega.setBackground(new java.awt.Color(45, 83, 150));
+        btnMantenimientoCatalogoBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMantenimientoCatalogoBodega.setForeground(new java.awt.Color(242, 242, 242));
+        btnMantenimientoCatalogoBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
+        btnMantenimientoCatalogoBodega.setText("Mantenimiento Catálogo Bodega");
+        btnMantenimientoCatalogoBodega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMantenimientoCatalogoBodega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnMantenimientoCatalogoBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMantenimientoCatalogoBodegaActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnMantenimientoCatalogoBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 180, 130));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 920, 420));
 
@@ -219,17 +270,33 @@ public class MenuBodegaView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMantenimientoInventarioBodegaActionPerformed
 
-    private void btnMantenimientoCatalogoBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoCatalogoBodegaActionPerformed
+    private void btnMantenimientoUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoUnidadesActionPerformed
         MantenimientoCatalogoBodegaView mantenimientoCatalogoBodegaView = new MantenimientoCatalogoBodegaView();
         mantenimientoCatalogoBodegaView.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnMantenimientoCatalogoBodegaActionPerformed
+    }//GEN-LAST:event_btnMantenimientoUnidadesActionPerformed
 
     private void btnInventarioBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioBodegaActionPerformed
         InventarioBodegaView inventarioBodegaView = new InventarioBodegaView();
         inventarioBodegaView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnInventarioBodegaActionPerformed
+
+    private void btnBitacoraCatalogoBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBitacoraCatalogoBodegaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBitacoraCatalogoBodegaActionPerformed
+
+    private void btnMantenimientoCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoCategoriasActionPerformed
+        MantenimientoCategoriasView mantenimientoCategoriasView = new  MantenimientoCategoriasView();
+        mantenimientoCategoriasView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMantenimientoCategoriasActionPerformed
+
+    private void btnMantenimientoCatalogoBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoCatalogoBodegaActionPerformed
+        MantenimientoCatalogoBodegaView mantenimientoCatalogoBodegaView = new MantenimientoCatalogoBodegaView();
+        mantenimientoCatalogoBodegaView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMantenimientoCatalogoBodegaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,9 +375,12 @@ public class MenuBodegaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBitacoraCatalogoBodega;
     private javax.swing.JButton btnInventarioBodega;
     private javax.swing.JButton btnMantenimientoCatalogoBodega;
+    private javax.swing.JButton btnMantenimientoCategorias;
     private javax.swing.JButton btnMantenimientoInventarioBodega;
+    private javax.swing.JButton btnMantenimientoUnidades;
     private javax.swing.JPanel btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblIconoRegresar;

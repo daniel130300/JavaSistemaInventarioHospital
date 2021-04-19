@@ -18,13 +18,19 @@ public class MenuBodegaController
 {
     HashMap<String, HashMap<Integer, String>> privilegios = UsuarioLogueadoCache.getHashUsrPrivilegios();
     
-    public void AccesoModulos(JButton btnMantenimientoCatalogoBodega, 
+    public void AccesoModulos(
+            JButton btnMantenimientoCatalogoBodega,
+            JButton btnBitacoraCatalogoBodega,
+            JButton btnMantenimientoInventarioBodega,
             JButton btnInventarioBodega, 
-            JButton btnMantenimientoInventarioBodega)
+            JButton btnMantenimientoCategorias,
+            JButton btnMantenimientoUnidades
+            )
     {
         this.AccessoModuloMantenimientoCatalogoBodega(btnMantenimientoCatalogoBodega);
         this.AccessoModuloInventarioBodega(btnInventarioBodega);
         this.AccessoModuloMantenimientoInventarioBodega(btnMantenimientoInventarioBodega);
+        this.AccessoModuloMantenimientoCategorias(btnMantenimientoCategorias);
     }
     
     private void AccessoModuloMantenimientoCatalogoBodega(JButton btnMantenimientoCatalogoBodega)
@@ -38,6 +44,20 @@ public class MenuBodegaController
         else
         {
             this.setModuloBloqueado(btnMantenimientoCatalogoBodega);
+        }
+    }  
+       
+    private void AccessoModuloMantenimientoInventarioBodega(JButton btnMantenimientoInventarioBodega)
+    {  
+       if(privilegios.get("bodega")
+                .get(5) != null)
+        {
+            btnMantenimientoInventarioBodega.setEnabled(true);
+                        btnMantenimientoInventarioBodega.setText("<html><center>Mantenimiento<br/>Inventario<br/>Bodega</center></html>");
+        }
+        else
+        {
+            this.setModuloBloqueado(btnMantenimientoInventarioBodega);
         }
     }
     
@@ -54,17 +74,17 @@ public class MenuBodegaController
         }
     }
     
-    private void AccessoModuloMantenimientoInventarioBodega(JButton btnMantenimientoInventarioBodega)
+    private void AccessoModuloMantenimientoCategorias(JButton btnMantenimientoCategorias)
     {  
        if(privilegios.get("bodega")
                 .get(5) != null)
         {
-            btnMantenimientoInventarioBodega.setEnabled(true);
-                        btnMantenimientoInventarioBodega.setText("<html><center>Mantenimiento<br/>Inventario<br/>Bodega</center></html>");
+            btnMantenimientoCategorias.setEnabled(true);
+                        btnMantenimientoCategorias.setText("<html><center>Mantenimiento<br/>Categorías</center></html>");
         }
         else
         {
-            this.setModuloBloqueado(btnMantenimientoInventarioBodega);
+            this.setModuloBloqueado(btnMantenimientoCategorias);
         }
     }
     

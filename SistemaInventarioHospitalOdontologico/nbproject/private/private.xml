@@ -3,29 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/MenuBodegaController.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/GenerarSuministrosView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Menus/MenuInicioView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/UsuarioController.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Models/Models/UsuarioModel.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/MenuSuministrosController.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/InformacionPersonalController.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoCategoriasView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/FacturacionView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/LoginController.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Menus/LoginView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Menus/MenuSuministrosView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/InformacionPersonalView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeProductosCompuestosView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeProveedoresView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoComprasView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoInventarioBodegaView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeCatalogoBodegaView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeMantenimientoInventarioBodegaView.java</file>
             <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoUsuariosView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/CategoriasController.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Controllers/Controllers/ProveedorController.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeUsuariosView.java</file>
             <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/InventarioBodegaView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoSuministrosView.java</file>
+            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/TablasGrande/TablaGrandeInventarioSuministrosView.java</file>
             <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Menus/MenuBodegaView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/AlertasView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Models/Models/ProveedorModel.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Views/Mantenimientos/MantenimientoProveedoresView.java</file>
-            <file>file:/C:/Users/danie/Documentos/GitHub/JavaSistemaInventarioHospital/SistemaInventarioHospitalOdontologico/src/Models/Conexion/CategoriaConexion.java</file>
         </group>
     </open-files>
 </project-private>

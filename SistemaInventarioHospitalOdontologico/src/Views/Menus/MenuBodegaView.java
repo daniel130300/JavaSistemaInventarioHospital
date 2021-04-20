@@ -13,6 +13,7 @@ import Views.Mantenimientos.InventarioBodegaView;
 import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
 import Views.Mantenimientos.MantenimientoCategoriasView;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
+import Views.Mantenimientos.MantenimientoUnidadesView;
 
 /**
  *
@@ -272,8 +273,8 @@ public class MenuBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientoInventarioBodegaActionPerformed
 
     private void btnMantenimientoUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoUnidadesActionPerformed
-        MantenimientoCatalogoBodegaView mantenimientoCatalogoBodegaView = new MantenimientoCatalogoBodegaView();
-        mantenimientoCatalogoBodegaView.setVisible(true);
+        MantenimientoUnidadesView mantenimientoUnidadesView = new MantenimientoUnidadesView();
+        mantenimientoUnidadesView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMantenimientoUnidadesActionPerformed
 

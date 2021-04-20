@@ -5,6 +5,7 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.BitacoraCatalogoController;
 import Controllers.Controllers.LoginController;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
     public BitacoraCatalogoProductoView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        BitacoraCatalogoController.LlenarTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto);
     }
 
     /**
@@ -119,7 +121,7 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 510, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 510, -1));
 
         tableBitacoraCatalogoProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,11 +131,11 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Id ", "Usuario", "Accion", "Descripción Cambios", "Fecha", "Id Producto"
+                "Id Bitacora", "Usuario", "Id Producto", "Accion", "Descripción Cambios", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -147,12 +149,12 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBitacoraCatalogoProducto);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 810, 350));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 810, 420));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 

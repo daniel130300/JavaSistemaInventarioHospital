@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class BitacoraCatalogoConexion {
     
-     public static ArrayList<BitacoraCatalogoModel> ListadoBitacoraCatalogo() 
+    public static ArrayList<BitacoraCatalogoModel> ListadoBitacoraCatalogo() 
     {
         Connection con = null;
         Statement stm;
@@ -32,19 +32,19 @@ public class BitacoraCatalogoConexion {
         {
             con = Conexion.getConexion(con);
             stm = con.createStatement();
-            String query = "SELECT * FROM bitacoracatalogoproductos;";
+            String query = "SELECT BcpId, UsrUsuario, PrdId, BcpAccion, BcpDescripcionCambios, BcpFecha FROM bitacoracatalogoproductos;";
             
             rss = stm.executeQuery(query);
             
             while (rss.next()) 
             {
-               BitacoraCatalogoModel bitacoracatalogo = new BitacoraCatalogoModel();
+                BitacoraCatalogoModel bitacoracatalogo = new BitacoraCatalogoModel();
                 bitacoracatalogo.setBcpId(rss.getInt("BcpId"));
                 bitacoracatalogo.setUsrUsuario(rss.getString("UsrUsuario"));
+                bitacoracatalogo.setPrdId(rss.getInt("PrdId"));
                 bitacoracatalogo.setBcpAccion(rss.getString("BcpAccion"));
                 bitacoracatalogo.setBcpDescripcionCambios(rss.getString("BcpDescripcionCambios"));
                 bitacoracatalogo.setBcpFecha(rss.getString("BcpFecha"));
-                bitacoracatalogo.setPrdId(rss.getInt("PrdId"));
                 bitacorascatalogo.add(bitacoracatalogo);
             } 
             con.close();
@@ -56,34 +56,4 @@ public class BitacoraCatalogoConexion {
         
         return bitacorascatalogo;
     }
-     
-     public static String BitacoraCatalogoProductos(String accion, BitacoraCatalogoModel bitacoracatalogo)
-    {
-        String estado = "";
-        Connection con = null;
-        try
-        {
-            String query;
-            con = Conexion.getConexion(con);
-                        
-            query = "{CALL BitacoraCatalogoProductos(?,?,?,?,?,?,?,?)}";
-            CallableStatement cs = con.prepareCall(query);
-            cs.setString            (1, accion);
-            cs.setInt               (2, bitacoracatalogo.getBcpId());
-            cs.setString            (3, bitacoracatalogo.getUsrUsuario());
-            cs.setString            (4, bitacoracatalogo.getBcpAccion());
-            cs.setString            (5, bitacoracatalogo.getBcpDescripcionCambios());
-            cs.setString            (6, bitacoracatalogo.getBcpFecha());
-            cs.setInt               (7, bitacoracatalogo.getPrdId());
-            cs.registerOutParameter (8, Types.VARCHAR);
-            cs.executeUpdate();
-            estado = cs.getString(8);
-            con.close();
-        }
-        catch (SQLException e)
-        {
-            estado = e.toString();
-        } 
-        return estado;
-    }   
 }

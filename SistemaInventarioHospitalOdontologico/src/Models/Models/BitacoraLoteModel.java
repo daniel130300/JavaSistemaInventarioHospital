@@ -9,12 +9,16 @@ package Models.Models;
  *
  * @author may_g
  */
-public class BitacoraLoteModel {
-     private Integer BcpId;
-     private String UsrUsuario;
-     private String BcpAccion;
-     private String BcpDescripcionCambios;
-     private String BcpFecha;
+public class BitacoraLoteModel 
+{
+    private Integer BcpId;
+    private String UsrUsuario;
+    private Integer LprId;
+    private Integer PrdId;
+    private String PrdNombre;
+    private String BcpAccion;
+    private String BcpDescripcionCambios;
+    private String BcpFecha;
 
     public Integer getBcpId() {
         return BcpId;
@@ -55,6 +59,28 @@ public class BitacoraLoteModel {
     public void setBcpFecha(String BcpFecha) {
         this.BcpFecha = BcpFecha;
     }
-     
-     
+
+    public Integer getPrdId() {
+        return PrdId;
+    }
+
+    public void setPrdId(Integer PrdId) {
+        this.PrdId = PrdId;
+    }
+
+    public String getPrdNombre() {
+        return PrdNombre;
+    }
+
+    public void setPrdNombre(String PrdNombre) {
+        this.PrdNombre = PrdNombre;
+    } 
+
+    public Integer getLprId() {
+        return LprId;
+    }
+
+    public void setLprId(Integer LprId) {
+        this.LprId = LprId;
+    }
 }

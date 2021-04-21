@@ -5,6 +5,8 @@
  */
 package Utils.Validators;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author danie
@@ -51,5 +53,13 @@ public class Validaciones
     {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         return contrasenia.matches(regex);
-    }    
+    }   
+    
+    public static Boolean validarStocks(String n1 , String n2)
+    {
+        Integer N1,N2;
+        N1= Integer.parseInt(n1);
+        N2= Integer.parseInt(n2);
+        if(N1>=N2){return  true;}else{return  false;}
+    }
 }

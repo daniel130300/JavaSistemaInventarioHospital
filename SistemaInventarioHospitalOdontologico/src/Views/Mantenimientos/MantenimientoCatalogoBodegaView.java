@@ -32,6 +32,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos); 
         CatalogoProductoController.FiltroTableProducto(tableProductos, txtBuscar);
+        this.LlenarDatos();
     }
     private void LimpiarInputs()
     {
@@ -50,7 +51,19 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         this.lblErrorStockMaximo.setText(null);
         this.lblErrorStockMinimo.setText(null);
     }
-    
+        private void LlenarDatos()
+    {
+        this.Id_producto = CatalogoProductoController.setDatosEditarFromCache(this.tableProductos, 
+                this.txtNombre, this.txtDescripcion, this.txtStockMaximo, this.txtStockMinimo,
+                this.cmbCategoria, this.cmbUnidad, this.cmbEstado);
+        
+        if(Id_producto != null)
+        {
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+            this.cmbEstado.setEnabled(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,7 +186,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblErrorStockMinimo.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorStockMinimo.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 220, 20));
+        pnlMenu.add(lblErrorStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 290, 20));
 
         lblStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblStockMaximo.setForeground(new java.awt.Color(242, 242, 242));
@@ -276,7 +289,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         lblErrorStockMaximo.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorStockMaximo.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 170, 30));
+        pnlMenu.add(lblErrorStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 280, 30));
 
         lblCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCategoria.setForeground(new java.awt.Color(242, 242, 242));
@@ -358,7 +371,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
                 btnVisualizarTablaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, -1, 30));
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, -1, 30));
 
         pnlGeneral.addTab("General", pnlMenu);
 
@@ -572,7 +585,11 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
-        // TODO add your handling code here:
+        TablaGrandeCatalogoBodegaView consultaProductoView = new TablaGrandeCatalogoBodegaView();
+        consultaProductoView.setVisible(true);
+        this.dispose();       
+        
+        
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed
 
     private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked

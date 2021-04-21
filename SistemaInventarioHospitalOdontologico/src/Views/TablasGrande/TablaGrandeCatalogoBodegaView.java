@@ -5,10 +5,15 @@
  */
 package Views.TablasGrande;
 
+import Controllers.Controllers.CatalogoProductoController;
 import Controllers.Controllers.LoginController;
+import Controllers.Controllers.ProveedorController;
+import Models.Models.CatalogoProductoModel;
+import Utils.Cache.CatalogoProductoCache;
 import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -23,8 +28,9 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     public TablaGrandeCatalogoBodegaView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        CatalogoProductoController.LlenarTableProductos(tableProductos);
+        ProveedorController.FiltroTableProveedores(tableProductos, txtBuscar);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,7 +108,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -149,21 +155,26 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
         tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Categoría", "Unidad", "Estado"
+                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Id Unidad", "Unidad", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, true, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableProductos);
@@ -198,6 +209,25 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
+         int seleccion = this.tableProductos.rowAtPoint(evt.getPoint()); 
+        CatalogoProductoModel productoModel = new CatalogoProductoModel();
+        productoModel.setPrdId(Integer.parseInt(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 0)))); 
+        productoModel.setPrdNombre(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 1)));
+        productoModel.setPrdDescripcion(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 2)));
+        productoModel.setPrdStockMaximo(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 3)));
+        productoModel.setPrdStockMinimo(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 4)));
+        productoModel.setCprDescripcion(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 6)));
+        productoModel.setUndDescripcion(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,8)));
+        productoModel.setProdEstado(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,9))); 
+        CatalogoProductoCache productoCache = new CatalogoProductoCache();
+        productoCache.setDatosCompartidos(true);
+        productoCache.setProducto(productoModel);
+        dispose();
+        MantenimientoCatalogoBodegaView mantenimientoproductoView = new MantenimientoCatalogoBodegaView();
+        mantenimientoproductoView.setVisible(true);         
+    }//GEN-LAST:event_tableProductosMouseClicked
 
     /**
      * @param args the command line arguments

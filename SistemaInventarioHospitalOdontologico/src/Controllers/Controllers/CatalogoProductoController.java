@@ -11,6 +11,7 @@ import Models.Conexion.CatalogoProductoConexion;
 import Models.Models.CatalogoProductoModel;
 import Models.Models.CategoriasModel;
 import Models.Models.UnidadesModel;
+import Utils.Cache.CatalogoProductoCache;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -46,11 +47,9 @@ public class CatalogoProductoController
         String trimmedDescripcion = descripcion.trim();
         String trimmedStockMaximo = stockmaximo.trim();
         String trimmedStockMinimo = stockminimo.trim();
-
         generalValidacionError = CatalogoProductoController.validacionesGenerales( trimmedNombre, 
                trimmedDescripcion, trimmedStockMaximo, trimmedStockMinimo,errnombre, errdescripcion, 
                errstockmaximo, errstockminimo);
-        
         if(generalValidacionError == false)
         {
             switch(accion)
@@ -78,17 +77,14 @@ public class CatalogoProductoController
             Integer id_categoria, Integer id_unidad)
     {
         boolean error = false;
-        
         Integer id = 0; 
         String estado = "Activo";
         JOptionPane.showMessageDialog(null, "Cate: "+id_categoria+" Uni: "+id_unidad);
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
-        
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
                 trimmedStockMinimo, id_categoria,id_unidad, estado);
         String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("insertar", productoModel);
-          
        switch (resultado) 
         {
             case "OK":
@@ -134,7 +130,28 @@ public class CatalogoProductoController
             break;
         }
         return error;
-    }    
+    }
+    public static Integer setDatosEditarFromCache(JTable tableProveedores, 
+            JTextField txtNombre, JTextArea txtDescripcion, 
+            JTextField txtStockMaximo, JTextField txtStockMinimo,JComboBox cmbCategoria,
+            JComboBox cmbUnidad, JComboBox cmbEstado)
+    {
+        Integer PrdId = null;
+        CatalogoProductoCache productoCache = new CatalogoProductoCache();
+        if(productoCache.isDatosCompartidos())
+        {
+            PrdId = productoCache.getProducto().getPrdId();
+            txtNombre.setText(productoCache.getProducto().getPrdNombre());
+            txtDescripcion.setText(productoCache.getProducto().getPrdDescripcion());
+            txtStockMaximo.setText(productoCache.getProducto().getPrdStockMaximo());
+            txtStockMinimo.setText(productoCache.getProducto().getPrdStockMinimo());
+            cmbCategoria.setSelectedItem(productoCache.getProducto().getCprDescripcion());
+            cmbUnidad.setSelectedItem(productoCache.getProducto().getUndDescripcion());
+            cmbEstado.setSelectedItem(productoCache.getProducto().getProdEstado());
+        }
+        return PrdId;
+    }
+    
     private static CatalogoProductoModel setProductoModel(Integer id,String trimmedNombre,
             String trimmedDescripcion, String trimmedStockMaximo, String trimmedStockMinimo,
             Integer id_categoria,Integer id_unidad,String estado)
@@ -191,9 +208,6 @@ public class CatalogoProductoController
         }
         );  
     }  
-        
-    
-    
     private static boolean validacionesGenerales(String trimmedNombre,String trimmedDescripcion,
         String trimmedStockMaximo, String trimmedStockMinimo, JLabel errNombre, JLabel errDescripcion,
         JLabel errStockMaximo, JLabel errStockMinimo)
@@ -222,7 +236,11 @@ public class CatalogoProductoController
            errStockMaximo.setText("El stock máximo ingresado es incorrecto");
            error = true;
         }
-        
+        if(!Validaciones.validarStocks(trimmedStockMaximo,trimmedStockMinimo ))
+        {
+           errStockMinimo.setText("El stock máximo es menor que el stock mínimo");
+           error = true;
+        }        
         if(Validaciones.validarCampoVacio(trimmedStockMaximo))
         {
            errStockMaximo.setText("El stock máximo es un campo obligatorio");
@@ -311,11 +329,7 @@ public class CatalogoProductoController
                     productos.get(i).getProdEstado()    
                 }
             );
-        }
-        
+        } 
         FormatoTabla(tableProductos, modelo.getColumnCount());
     }   
-    
-    
-   
 }

@@ -16,11 +16,26 @@ import javax.swing.JLabel;
  */
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+*/
 public class LoginController 
 {
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
+    
+    /**
+    * 
+    * @param usuario String
+    * @param contrasenia String
+    * @param errUsuario JLabel
+    * @param errContrasenia JLabel
+    * @param errGeneral JLabel
+    * Si las credenciales del usuario son correctas y tiene privilegios
+    * retorna true, de lo contrario retorna false.
+    * @return boolean
+    */
     public static boolean verificarIniciarSesion(String usuario, 
             String contrasenia, JLabel errUsuario, JLabel errContrasenia, 
             JLabel errGeneral)
@@ -90,7 +105,43 @@ public class LoginController
         
         return autorizacion && privilegios;
     }
+    
+    /**
+    * 
+    * @param lblUsrLogueado JLabel
+    * Método que se encarga de establecer en el JLabel que recibe como parámetro
+    * el usuario logueado.
+    */
+    public static void setLabelUsrLogueado(JLabel lblUsrLogueado)
+    {
+        lblUsrLogueado.setText(UsuarioLogueadoCache.getUsrUsuario());
+    }
+    
+    /**
+    * Método que se encarga de borrar los datos del usuario logueado en la 
+    * clase UsuarioLogeadoCache
+    */
+    public static void Logout()
+    {
+        UsuarioLogueadoCache.setUsrId(null);
+        UsuarioLogueadoCache.setUsrUsuario(null);
+        UsuarioLogueadoCache.setUsrNombre(null);
+        UsuarioLogueadoCache.setUsrApellido(null);
+        UsuarioLogueadoCache.setUsrCorreo(null);
+    }
+    
+    // **************************************************
+    // Métodos Privados
+    // **************************************************
 
+    /**
+    * 
+    * @param cotraseniaBdd String
+    * @param contraseniaIngresada String
+    * Método que se encarga de comparar la contraseña ingresada con la contraseña en la bdd,
+    * si las contraseñas coinciden retorna true, de los contrario retorna false.
+    * @return boolean
+    */
     private static boolean compararContraseniaEncriptada(String cotraseniaBdd, 
             String contraseniaIngresada)
     {
@@ -106,6 +157,15 @@ public class LoginController
        return valido;
     }
     
+    /**
+     * 
+     * @param UsrId Integer
+     * @param autorizacion boolean
+     * Método que se encarga de setear los privilegios del usuario logueado,
+     * si el usuario logueado tiene privilegios retorna true de lo contrario 
+     * retorna false
+     * @return boolean
+     */
     private static boolean setUsrLogueadoPrivilegios(Integer UsrId, boolean autorizacion)
     {
         boolean hasPrivileges = false;
@@ -123,19 +183,5 @@ public class LoginController
         }
         
         return hasPrivileges;
-    }
-    
-    public static void setLabelUsrLogueado(JLabel lblUsrLogueado)
-    {
-        lblUsrLogueado.setText(UsuarioLogueadoCache.getUsrUsuario());
-    }
-    
-    public static void Logout()
-    {
-        UsuarioLogueadoCache.setUsrId(null);
-        UsuarioLogueadoCache.setUsrUsuario(null);
-        UsuarioLogueadoCache.setUsrNombre(null);
-        UsuarioLogueadoCache.setUsrApellido(null);
-        UsuarioLogueadoCache.setUsrCorreo(null);
     }
 }

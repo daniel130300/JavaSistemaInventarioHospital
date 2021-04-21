@@ -63,9 +63,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         pnlBackbround = new javax.swing.JPanel();
         pnlGeneral = new javax.swing.JTabbedPane();
         pnlMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JPanel();
-        lblIconoRegresar = new javax.swing.JLabel();
-        lblRegresar = new javax.swing.JLabel();
         lblStockMinimo = new javax.swing.JLabel();
         txtStockMinimo = new javax.swing.JTextField();
         lblErrorStockMinimo = new javax.swing.JLabel();
@@ -96,6 +93,9 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnVisualizarTabla = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JPanel();
+        lblIconoRegresar = new javax.swing.JLabel();
+        lblRegresar = new javax.swing.JLabel();
         pnlMenu1 = new javax.swing.JPanel();
         btnEliminarProveedor = new javax.swing.JPanel();
         lblEliminarProveedor = new javax.swing.JLabel();
@@ -122,41 +122,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
 
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
-        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
-
-        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
-
-        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
-        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRegresar.setText("Regresar");
-
-        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
-        btnRegresar.setLayout(btnRegresarLayout);
-        btnRegresarLayout.setHorizontalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRegresarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconoRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnRegresarLayout.setVerticalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
 
         lblStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblStockMinimo.setForeground(new java.awt.Color(242, 242, 242));
@@ -360,6 +325,41 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         });
         pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, -1, 30));
 
+        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
+        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
+
+        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
+
+        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
+        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegresar.setText("Regresar");
+
+        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
+        btnRegresar.setLayout(btnRegresarLayout);
+        btnRegresarLayout.setHorizontalGroup(
+            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnRegresarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIconoRegresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnRegresarLayout.setVerticalGroup(
+            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
         pnlGeneral.addTab("General", pnlMenu);
 
         pnlMenu1.setBackground(new java.awt.Color(0, 49, 110));
@@ -502,12 +502,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MenuBodegaView menuBodegaView = new MenuBodegaView();
-        menuBodegaView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMouseClicked
-
     private void txtStockMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMinimoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockMinimoActionPerformed
@@ -607,6 +601,12 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
             CatalogoProductoController.LlenarTableProductos(tableProductos);
         }       
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        MenuBodegaView menuBodegaView = new MenuBodegaView();
+        menuBodegaView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
      * @param args the command line arguments

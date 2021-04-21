@@ -30,12 +30,39 @@ import javax.swing.table.TableRowSorter;
 
 
 /**
- *
- * @author danie
- */
+* @author Héctor López
+*/
 public class UsuarioController extends GeneralController
 {   
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
     
+    /**
+    * 
+    * @param accion String
+    * @param id Integer
+    * @param identidad String
+    * @param nombre String
+    * @param apellido String
+    * @param correo String
+    * @param usuario String
+    * @param contrasenia String
+    * @param estado String
+    * @param id_area Integer
+    * @param errIdentidad JLabel
+    * @param errNombre JLabel
+    * @param errApellido JLabel
+    * @param errCorreo JLabel
+    * @param errUsuario JLabel
+    * @param errContrasenia JLabel
+    * @param errEstado JLabel
+    * @param errPrivilegios JLabel
+    * @param modeloLstPrivilegiosSeleccionados JLabel
+    * Si los datos ingresados son incorrectos de acorde a las validaciones
+    * retorna true, de lo contrario retorna false 
+    * @return Boolean
+    */
     public static Boolean MantenimientoUsuarios(String accion, Integer id, 
             String identidad, String nombre, String apellido, String correo, 
             String usuario, String contrasenia, String estado, Integer id_area,
@@ -117,6 +144,296 @@ public class UsuarioController extends GeneralController
                 && contraseniaValidacionError == false);
     }
     
+    /**
+    * 
+    * @param data String
+    * Método que se encarga de encriptar el parámetro que recibe
+    * @return String encriptado por medio del algoritmo sha256
+    */
+    public static String sha256Encryption(String data)
+    {
+        StringBuffer sb = new StringBuffer();
+        try
+        {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(data.getBytes());
+            byte byteData[] = md.digest();
+
+            for (int i = 0; i < byteData.length; i++) 
+            {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+    
+    /**
+    * 
+    * @param cmbAreas JComboBox
+    * Método que se encarga de llenar el JComboBox cmbAreas
+    * con los datos que se obtienen del método ListadoAreas() 
+    * de la clase UsuarioConexion
+    */
+    public static void LlenarCmbAreas(JComboBox cmbAreas)
+    {
+        ArrayList<AreasModel> areas = new ArrayList<>();
+        areas = UsuarioConexion.ListadoAreas();
+        
+        for (int i = 0; i<areas.size(); i++)
+        {
+            cmbAreas.addItem(areas.get(i).getAreDescripcion());
+        }
+    }
+    
+    /**
+    * @param tableUsuarios JTable
+    * Método que se encarga de llenar el JTable tableUsuarios
+    * con los datos que se obtienen del método ListadoUsuarios() 
+    * de la clase UsuarioConexion
+    */
+    public static void LlenarTableUsuarios(JTable tableUsuarios) 
+    {  
+        DefaultTableModel modelo = (DefaultTableModel) tableUsuarios.getModel(); 
+        modelo.setRowCount(0);
+        ArrayList<UsuarioModel> usuarios = new ArrayList<>();
+        usuarios = UsuarioConexion.ListadoUsuarios();
+        
+        for (int i = 0; i <usuarios.size(); i++) 
+        {
+            modelo.addRow
+            (new Object[]
+                {
+                    usuarios.get(i).getUsrId(), 
+                    usuarios.get(i).getUsrIdentidad(),
+                    usuarios.get(i).getUsrNombre(),
+                    usuarios.get(i).getUsrApellido(),
+                    usuarios.get(i).getUsrCorreo(),
+                    usuarios.get(i).getUsrUsuario(),
+                    usuarios.get(i).getUsrEstado(),
+                    usuarios.get(i).getAreId(),
+                    usuarios.get(i).getAreDescripcion()
+                }
+            );
+        }
+        
+        FormatoTabla(tableUsuarios, modelo.getColumnCount());
+    }
+    
+    /**
+    * 
+    * @param tableUsuarios JTable
+    * @param fieldBusqueda JTextField 
+    * Método que se encarga de filtrar la tabla tableBitacoraLoteProductos
+    * a partir de la busqueda del usuario
+    */
+    public static void FiltroTableUsuarios(JTable tableUsuarios, JTextField fieldBusqueda)
+    {
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUsuarios.getModel());
+        tableUsuarios.setRowSorter(rowSorter);
+        fieldBusqueda.getDocument().addDocumentListener(new DocumentListener()
+        {
+            @Override
+            public void insertUpdate(DocumentEvent e) 
+            {
+                String text = fieldBusqueda.getText();
+
+                if (text.trim().length() == 0) 
+                {
+                    rowSorter.setRowFilter(null);
+                } 
+                else 
+                {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = fieldBusqueda.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } 
+                else 
+                {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) 
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        }
+        );  
+    }
+    
+    /**
+     * 
+     * @param seleccion Integer
+     * @param tableUsuarios JTable
+     * @param txtIdentidad JTextField
+     * @param txtNombre JTextField
+     * @param txtApellido JTextField
+     * @param txtCorreo JTextField
+     * @param txtUsuario String
+     * @param cmbEstado JComboBox
+     * @param cmbArea JComboBox
+     * Método que se encarga de pasar los campos de la tabla a los JTextFields
+     * y JComboxes correspondientes para poder ser editados 
+     * y retorna el Id del usuario de la tabla
+     * @return Integer
+     */
+    public static Integer setDatosEditarFromTable(Integer seleccion, JTable tableUsuarios, 
+            JTextField txtIdentidad, JTextField txtNombre, 
+            JTextField txtApellido, JTextField txtCorreo, JTextField txtUsuario,
+            JComboBox cmbEstado, JComboBox cmbArea)
+    {
+        Integer UsrId = null;
+        UsrId = Integer.parseInt((String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
+        txtIdentidad.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 1)));
+        txtNombre.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 2)));
+        txtApellido.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 3)));
+        txtCorreo.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 4)));
+        txtUsuario.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 5)));
+        cmbEstado.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,6)));
+        cmbArea.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,8)));
+        
+        return UsrId;
+    }
+    
+    /**
+    * 
+    * @param tableUsuarios JTable
+    * @param txtIdentidad JTextField
+    * @param txtNombre JTextField
+    * @param txtApellido JTextField
+    * @param txtCorreo JTextField
+    * @param txtUsuario JTextField
+    * @param cmbEstado JComboBox
+    * @param cmbArea JComboBox
+    * Método que se encarga de pasar los campos de la clase usuarioCache a 
+    * los JTextFields y JComboxes correspondientes para poder ser editados y
+    * retorna el Id del usuario
+    * @return 
+    */
+    public static Integer setDatosEditarFromCache(JTable tableUsuarios, 
+            JTextField txtIdentidad, JTextField txtNombre, 
+            JTextField txtApellido, JTextField txtCorreo, JTextField txtUsuario,
+            JComboBox cmbEstado, JComboBox cmbArea)
+    {
+        Integer UsrId = null;
+        UsuariosCache usuarioCache = new UsuariosCache();
+        if(usuarioCache.isDatosCompartidos())
+        {
+            UsrId = usuarioCache.getUsuario().getUsrId();
+            txtIdentidad.setText(usuarioCache.getUsuario().getUsrIdentidad());
+            txtNombre.setText(usuarioCache.getUsuario().getUsrNombre());
+            txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
+            txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
+            txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
+            cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
+            cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
+        }
+        
+        return UsrId;
+    }
+    
+    /**
+    * 
+    * @param modelo DefaultListModel
+    * Método que se encarga de llenar el DefaultListModel del JList 
+    * lstPrivilegiosDisponibles con los datos que se obtienen del método 
+    * ListadoPrivilegios() de la clase UsuarioConexion
+    */
+    public static void LlenarListPrivilegios(DefaultListModel modelo)
+    {
+        modelo.clear();
+        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
+        privilegios = UsuarioConexion.ListadoPrivilegios();
+        
+        for (int i = 0; i<privilegios.size(); i++)
+        {
+            modelo.addElement(privilegios.get(i).getPriDescripcion());
+        }
+    }
+    
+    /**
+    * 
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel
+    * @param modeloLstPrivilegiosDisponibles DefaultListModel
+    * @param UsrId Integer
+    * Método que se encarga de llenar el DefaultListModel del JList 
+    * lstPrivilegiosSeleccionados con los datos que se obtienen del método 
+    * getUsrPrivilegiosDescripcion(Integer UsrId) de la clase UsuarioConexion
+    * y de remover los privilegios seleccionados de los privilegios disponibles.
+    */
+    public static void LlenarListPrivilegiosUsuario(DefaultListModel modeloLstPrivilegiosSeleccionados, DefaultListModel modeloLstPrivilegiosDisponibles, Integer UsrId)
+    {
+        modeloLstPrivilegiosSeleccionados.clear();
+        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
+        privilegios = UsuarioConexion.getUsrPrivilegiosDescripcion(UsrId);
+        
+        for (int i = 0; i<privilegios.size(); i++)
+        {
+            modeloLstPrivilegiosSeleccionados.addElement(privilegios.get(i).getPriDescripcion());
+            modeloLstPrivilegiosDisponibles.removeElement(privilegios.get(i).getPriDescripcion());
+        }
+    }
+    
+    /**
+    * 
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel 
+    * @param lstPrivilegiosDisponibles JList
+    * @param modeloLstPrivilegiosDisponibles DefaultListModel
+    * Método que se encarga de mover los privilegios seleccionados en el modeloLstPrivilegiosDisponibles a el modeloLstPrivilegiosSeleccionados
+    */    
+    public static void AgregarListPrivilegiosSeleccionados(DefaultListModel modeloLstPrivilegiosSeleccionados, JList lstPrivilegiosDisponibles, DefaultListModel modeloLstPrivilegiosDisponibles)
+    {
+        for(Object selectedValue:lstPrivilegiosDisponibles.getSelectedValuesList())
+        {
+            modeloLstPrivilegiosSeleccionados.addElement(selectedValue);  
+            modeloLstPrivilegiosDisponibles.removeElement(selectedValue);
+        }
+    }
+    
+    /**
+    * 
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel
+    * @param lstPrivilegiosSeleccionados JList
+    * @param modeloLstPrivilegiosDisponibles DefaultListModel
+    * Método que se encarga de mover los privilegios seleccionados en el modeloLstPrivilegiosSeleccionados a el modeloLstPrivilegiosDisponibles
+    */
+    public static void QuitarListPrivilegiosSeleccionados(DefaultListModel modeloLstPrivilegiosSeleccionados, JList lstPrivilegiosSeleccionados, DefaultListModel modeloLstPrivilegiosDisponibles)
+    {
+        for(Object selectedValue:lstPrivilegiosSeleccionados.getSelectedValuesList())
+        {
+            modeloLstPrivilegiosDisponibles.addElement(selectedValue);  
+            modeloLstPrivilegiosSeleccionados.removeElement(selectedValue);
+        }
+    }
+    
+    // **************************************************
+    // Métodos Privados
+    // **************************************************
+    
+    /**
+    * 
+    * @param errIdentidad JLabel
+    * @param errNombre JLabel
+    * @param errApellido JLabel
+    * @param errCorreo JLabel
+    * @param errUsuario JLabel
+    * @param errContrasenia JLabel
+    * @param errEstado JLabel
+    * @param errPrivilegios JLabel
+    * Método que se encarga de limpiar el texto dentro de los JLabels que recibe
+    */
     private static void setErroresToNull(JLabel errIdentidad, JLabel errNombre, 
             JLabel errApellido, JLabel errCorreo, JLabel errUsuario, 
             JLabel errContrasenia, JLabel errEstado, JLabel errPrivilegios)
@@ -131,6 +448,23 @@ public class UsuarioController extends GeneralController
         errPrivilegios.setText(null);
     }
     
+    /**
+    * 
+    * @param trimmedIdentidad String
+    * @param trimmedNombre String
+    * @param trimmedApellido String 
+    * @param trimmedCorreo String
+    * @param trimmedUsuario String
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel
+    * @param errIdentidad JLabel
+    * @param errNombre JLabel
+    * @param errApellido JLabel
+    * @param errCorreo JLabel
+    * @param errUsuario JLabel
+    * @param errPrivilegios JLabel
+    * Método 
+    * @return 
+    */
     private static boolean validacionesGenerales(String trimmedIdentidad, 
             String trimmedNombre,String trimmedApellido, String trimmedCorreo, 
             String trimmedUsuario,DefaultListModel modeloLstPrivilegiosSeleccionados, 
@@ -208,6 +542,19 @@ public class UsuarioController extends GeneralController
         return error;
     }
     
+    /**
+     * 
+    * @param id Integer
+    * @param trimmedIdentidad String
+    * @param trimmedNombre String
+    * @param trimmedApellido String
+    * @param trimmedCorreo String
+    * @param trimmedUsuario String
+    * @param hashedpassword String
+    * @param estado String
+    * @param id_area Integer
+    * @return 
+    */
     private static UsuarioModel setUsuarioModel(Integer id, String trimmedIdentidad,
             String trimmedNombre, String trimmedApellido, String trimmedCorreo,
             String trimmedUsuario, String hashedpassword, String estado,
@@ -227,6 +574,18 @@ public class UsuarioController extends GeneralController
         return usuarioModel;
     }
     
+    /**
+    * 
+    * @param trimmedIdentidad String
+    * @param trimmedNombre String
+    * @param trimmedApellido String
+    * @param trimmedCorreo String
+    * @param trimmedUsuario String
+    * @param trimmedContrasenia String
+    * @param id_area Integer
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel
+    * @return 
+    */
     private static boolean insertarUsuario(String trimmedIdentidad, 
             String trimmedNombre, String trimmedApellido, String trimmedCorreo, 
             String trimmedUsuario, String trimmedContrasenia, Integer id_area, 
@@ -280,6 +639,21 @@ public class UsuarioController extends GeneralController
         return error;
     }
     
+    /**
+    * 
+    * @param dohash boolean
+    * @param id Integer
+    * @param trimmedIdentidad String
+    * @param trimmedNombre String
+    * @param trimmedApellido String
+    * @param trimmedCorreo String
+    * @param trimmedUsuario String
+    * @param trimmedContrasenia String
+    * @param estado String
+    * @param id_area Integer
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel
+    * @return 
+    */
     private static boolean editarUsuario(boolean dohash, 
             Integer id, String trimmedIdentidad, String trimmedNombre,
             String trimmedApellido, String trimmedCorreo, String trimmedUsuario,
@@ -339,27 +713,13 @@ public class UsuarioController extends GeneralController
         return error;
     }
     
-    public static String sha256Encryption(String data)
-    {
-        StringBuffer sb = new StringBuffer();
-        try
-        {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(data.getBytes());
-            byte byteData[] = md.digest();
-
-            for (int i = 0; i < byteData.length; i++) 
-            {
-                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-    
+    /**
+    * 
+    * @param accion String 
+    * @param UsrId Integer
+    * @param modeloLstPrivilegiosSeleccionados DefaultListModel
+    * @return 
+    */
     private static Boolean MantenimientoDetalleUsuarios(String accion, 
             Integer UsrId, DefaultListModel modeloLstPrivilegiosSeleccionados)
     {
@@ -428,172 +788,6 @@ public class UsuarioController extends GeneralController
                 }
             break;
         }
-        
         return error;
-    }
-    
-    public static void LlenarCmbAreas(JComboBox cmbAreas)
-    {
-        ArrayList<AreasModel> areas = new ArrayList<>();
-        areas = UsuarioConexion.ListadoAreas();
-        
-        for (int i = 0; i<areas.size(); i++)
-        {
-            cmbAreas.addItem(areas.get(i).getAreDescripcion());
-        }
-    }
-    
-    public static void LlenarTableUsuarios(JTable tableUsuarios) 
-    {  
-        DefaultTableModel modelo = (DefaultTableModel) tableUsuarios.getModel(); 
-        modelo.setRowCount(0);
-        ArrayList<UsuarioModel> usuarios = new ArrayList<>();
-        usuarios = UsuarioConexion.ListadoUsuarios();
-        
-        for (int i = 0; i <usuarios.size(); i++) 
-        {
-            modelo.addRow
-            (new Object[]
-                {
-                    usuarios.get(i).getUsrId(), 
-                    usuarios.get(i).getUsrIdentidad(),
-                    usuarios.get(i).getUsrNombre(),
-                    usuarios.get(i).getUsrApellido(),
-                    usuarios.get(i).getUsrCorreo(),
-                    usuarios.get(i).getUsrUsuario(),
-                    usuarios.get(i).getUsrEstado(),
-                    usuarios.get(i).getAreId(),
-                    usuarios.get(i).getAreDescripcion()
-                }
-            );
-        }
-        
-        FormatoTabla(tableUsuarios, modelo.getColumnCount());
-    }
-    
-    public static void FiltroTableUsuarios(JTable tableUsuarios, JTextField fieldBusqueda)
-    {
-        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUsuarios.getModel());
-        tableUsuarios.setRowSorter(rowSorter);
-        fieldBusqueda.getDocument().addDocumentListener(new DocumentListener()
-        {
-            @Override
-            public void insertUpdate(DocumentEvent e) 
-            {
-                String text = fieldBusqueda.getText();
-
-                if (text.trim().length() == 0) 
-                {
-                    rowSorter.setRowFilter(null);
-                } 
-                else 
-                {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                String text = fieldBusqueda.getText();
-
-                if (text.trim().length() == 0) {
-                    rowSorter.setRowFilter(null);
-                } 
-                else 
-                {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) 
-            {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-        }
-        );  
-    }
-    
-    public static Integer setDatosEditarFromTable(Integer seleccion, JTable tableUsuarios, 
-            JTextField txtIdentidad, JTextField txtNombre, 
-            JTextField txtApellido, JTextField txtCorreo, JTextField txtUsuario,
-            JComboBox cmbEstado, JComboBox cmbArea)
-    {
-        Integer UsrId = null;
-        UsrId = Integer.parseInt((String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
-        txtIdentidad.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 1)));
-        txtNombre.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 2)));
-        txtApellido.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 3)));
-        txtCorreo.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 4)));
-        txtUsuario.setText(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion, 5)));
-        cmbEstado.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,6)));
-        cmbArea.setSelectedItem(String.valueOf(tableUsuarios.getModel().getValueAt(seleccion,8)));
-        
-        return UsrId;
-    }
-    
-    public static Integer setDatosEditarFromCache(JTable tableUsuarios, 
-            JTextField txtIdentidad, JTextField txtNombre, 
-            JTextField txtApellido, JTextField txtCorreo, JTextField txtUsuario,
-            JComboBox cmbEstado, JComboBox cmbArea)
-    {
-        Integer UsrId = null;
-        UsuariosCache usuarioCache = new UsuariosCache();
-        if(usuarioCache.isDatosCompartidos())
-        {
-            UsrId = usuarioCache.getUsuario().getUsrId();
-            txtIdentidad.setText(usuarioCache.getUsuario().getUsrIdentidad());
-            txtNombre.setText(usuarioCache.getUsuario().getUsrNombre());
-            txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
-            txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
-            txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
-            cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
-            cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
-        }
-        
-        return UsrId;
-    }
-    
-    public static void LlenarListPrivilegios(DefaultListModel modelo)
-    {
-        modelo.clear();
-        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
-        privilegios = UsuarioConexion.ListadoPrivilegios();
-        
-        for (int i = 0; i<privilegios.size(); i++)
-        {
-            modelo.addElement(privilegios.get(i).getPriDescripcion());
-        }
-    }
-    
-    public static void LlenarListPrivilegiosUsuario(DefaultListModel modeloLstPrivilegiosSeleccionados, DefaultListModel modeloLstPrivilegiosDisponibles, Integer UsrId)
-    {
-        modeloLstPrivilegiosSeleccionados.clear();
-        ArrayList<PrivilegiosModel> privilegios = new ArrayList<>();
-        privilegios = UsuarioConexion.getUsrPrivilegiosDescripcion(UsrId);
-        
-        for (int i = 0; i<privilegios.size(); i++)
-        {
-            modeloLstPrivilegiosSeleccionados.addElement(privilegios.get(i).getPriDescripcion());
-            modeloLstPrivilegiosDisponibles.removeElement(privilegios.get(i).getPriDescripcion());
-        }
-    }
-        
-    public static void AgregarListPrivilegiosSeleccionados(DefaultListModel modeloLstPrivilegiosSeleccionados, JList lstPrivilegiosDisponibles, DefaultListModel modeloLstPrivilegiosDisponibles)
-    {
-        for(Object selectedValue:lstPrivilegiosDisponibles.getSelectedValuesList())
-        {
-            modeloLstPrivilegiosSeleccionados.addElement(selectedValue);  
-            modeloLstPrivilegiosDisponibles.removeElement(selectedValue);
-        }
-    }
-    
-    public static void QuitarListPrivilegiosSeleccionados(DefaultListModel modeloLstPrivilegiosSeleccionados, JList lstPrivilegiosSeleccionados, DefaultListModel modeloLstPrivilegiosDisponibles)
-    {
-        for(Object selectedValue:lstPrivilegiosSeleccionados.getSelectedValuesList())
-        {
-            modeloLstPrivilegiosDisponibles.addElement(selectedValue);  
-            modeloLstPrivilegiosSeleccionados.removeElement(selectedValue);
-        }
     }
 }

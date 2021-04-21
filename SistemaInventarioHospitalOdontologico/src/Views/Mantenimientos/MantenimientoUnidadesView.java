@@ -7,8 +7,7 @@ package Views.Mantenimientos;
 
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.UnidadesController;
-import Views.Menus.MenuInicioView;
-import javax.lang.model.SourceVersion;
+import Views.Menus.MenuBodegaView;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -54,9 +53,6 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         lblUsuarioActual = new javax.swing.JLabel();
         lblMensajeBienvenida = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JPanel();
-        lblIconoRegresar = new javax.swing.JLabel();
-        lblRegresar = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -69,6 +65,9 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         lblEstado = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
+        btnRegresar = new javax.swing.JPanel();
+        lblIconoRegresar = new javax.swing.JLabel();
+        lblRegresar = new javax.swing.JLabel();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -102,47 +101,12 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
-        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
-
-        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
-
-        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
-        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRegresar.setText("Regresar");
-
-        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
-        btnRegresar.setLayout(btnRegresarLayout);
-        btnRegresarLayout.setHorizontalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRegresarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconoRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnRegresarLayout.setVerticalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
-
         txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescripcionActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 220, 30));
+        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 220, 30));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -159,7 +123,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
         lblDescripcion.setText("Descripción:");
-        pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         tableUnidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,7 +133,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Id Unidades", "Descripción", "Estado"
+                "Id Unidad", "Descripción", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -202,7 +166,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 90, 30));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 90, 30));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -213,7 +177,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 100, 30));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, 30));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -225,12 +189,12 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 80, 30));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 80, 30));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
         lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, -1));
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
@@ -239,9 +203,44 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 130, -1));
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 130, -1));
 
-        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 790, 550));
+        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
+        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
+
+        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
+
+        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
+        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegresar.setText("Regresar");
+
+        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
+        btnRegresar.setLayout(btnRegresarLayout);
+        btnRegresarLayout.setHorizontalGroup(
+            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnRegresarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIconoRegresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnRegresarLayout.setVerticalGroup(
+            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
+        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 810, 540));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -261,7 +260,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
         pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 90));
 
-        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 580, 130));
+        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 600, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,19 +277,9 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MenuInicioView homeView = new MenuInicioView();
-        homeView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMouseClicked
-
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarMouseClicked
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         // TODO add your handling code here:
@@ -308,33 +297,39 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentidad5ActionPerformed
 
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        MenuBodegaView menuBodegaView = new MenuBodegaView();
+        menuBodegaView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-        if(!UnidadesController.MantenimientoUnidades("insertar", 0, 
-           this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
-        {
-            this.LimpiarInputs();
-            UnidadesController.LlenarTableUnidades(tableUnidades);
-        }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-        if(!UnidadesController.MantenimientoUnidades("editar", this.UndId, 
-        this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), 
-        this.lblErrorDescripcion))
-        {
-            this.btnAgregar.setEnabled(true);
-            this.btnEditar.setEnabled(false);
-            this.cmbEstado.setEnabled(false);
-            this.LimpiarInputs();
-            UnidadesController.LlenarTableUnidades(tableUnidades);
+
+        if(!UnidadesController.MantenimientoUnidades("editar", this.UndId,
+            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),
+            this.lblErrorDescripcion))
+    {
+        this.btnAgregar.setEnabled(true);
+        this.btnEditar.setEnabled(false);
+        this.cmbEstado.setEnabled(false);
+        this.LimpiarInputs();
+        UnidadesController.LlenarTableUnidades(tableUnidades);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        if(!UnidadesController.MantenimientoUnidades("insertar", 0,
+            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
+    {
+        this.LimpiarInputs();
+        UnidadesController.LlenarTableUnidades(tableUnidades);
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.btnAgregar.setEnabled(true);
@@ -345,23 +340,27 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         this.LimpiarErrLabels();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoActionPerformed
-
     private void tableUnidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUnidadesMouseClicked
-       int seleccion = this.tableUnidades.rowAtPoint(evt.getPoint()); 
-        
-        this.UndId = UnidadesController.setDatosEditarFromTable(seleccion, 
-                this.tableUnidades, this.txtDescripcion, this.cmbEstado);
+        int seleccion = this.tableUnidades.rowAtPoint(evt.getPoint());
+
+        this.UndId = UnidadesController.setDatosEditarFromTable(seleccion,
+            this.tableUnidades, this.txtDescripcion, this.cmbEstado);
         if(this.UndId != null)
         {
             this.LimpiarErrLabels();
             this.cmbEstado.setEnabled(true);
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
-        }     
+        }
     }//GEN-LAST:event_tableUnidadesMouseClicked
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionActionPerformed
 
     /**
      * @param args the command line arguments

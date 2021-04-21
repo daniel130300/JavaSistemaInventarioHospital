@@ -11,13 +11,32 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author danie
- */
+*
+* @author danie
+*/
+
 public class MenuInicioController 
 {
+    //Hashmap de Hashmaps que contiene los privilegios del usuario. 
     private HashMap<String, HashMap<Integer, String>> privilegios = UsuarioLogueadoCache.getHashUsrPrivilegios();
     
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
+    
+    /**
+    * 
+    * @param btnVentas JButton
+    * @param btnSuministros JButton
+    * @param btnProveedores JButton
+    * @param btnCompras JButton
+    * @param btnBodega JButton
+    * @param btnUsuarios JButton
+    * @param btnAlertas JButton 
+    * Método que se encarga de establecer el acceso o no al usuario a los
+    * módulos que recibe como parámetros a partir de los privilegios 
+    * que el usuario logueado dispone.
+    */
     public void AccesoModulos(JButton btnVentas, JButton btnSuministros, 
             JButton btnProveedores, JButton btnCompras, JButton btnBodega,
             JButton btnUsuarios, JButton btnAlertas)
@@ -31,6 +50,14 @@ public class MenuInicioController
         this.AccessoModuloAlertas(btnAlertas);
     }
     
+    // **************************************************
+    // Métodos Privados
+    // **************************************************
+    
+    /** 
+    * @param btnVentas JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Ventas
+    */
     private void AccessoModuloVentas(JButton btnVentas)
     {  
         if(privilegios.get("ventas") != null)
@@ -43,6 +70,10 @@ public class MenuInicioController
         }
     }
     
+    /** 
+    * @param btnVentas JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Ventas
+    */
     private void AccessoModuloSuministros(JButton btnSuministros)
     {  
         if(privilegios.get("suministros") != null)
@@ -55,6 +86,10 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * @param btnProveedores JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Proveedores
+    */
     private void AccessoModuloProveedores(JButton btnProveedores)
     {  
         if(privilegios.get("proveedores") != null)
@@ -67,6 +102,11 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * 
+    * @param btnCompras JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Compras
+    */
     private void AccessoModuloCompras(JButton btnCompras)
     {  
         if(privilegios.get("compras") != null)
@@ -79,6 +119,10 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * @param btnBodega JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Bodega
+    */
     private void AccessoModuloBodega(JButton btnBodega)
     {  
         if(privilegios.get("bodega") != null)
@@ -91,6 +135,10 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * @param btnUsuarios JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Usuarios
+    */
     private void AccessoModuloUsuarios(JButton btnUsuarios)
     {  
         if(privilegios.get("usuarios") != null)
@@ -103,6 +151,11 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * 
+    * @param btnAlerta JButton
+    * Método que se encarga de proporcionar o no acceso al módulo Alertas
+    */
     private void AccessoModuloAlertas(JButton btnAlerta)
     {  
         if(privilegios.get("usuarios") != null)
@@ -115,6 +168,10 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * @param boton JButton
+    * Método que se encarga de establecer un icono de candado al botón
+    */
     private void setIconoCandado(JButton boton)
     {
         try 
@@ -127,6 +184,10 @@ public class MenuInicioController
         }
     }
     
+    /**
+    * @param boton JButton
+    * Método que se encarga de bloquear un módulo.
+    */
     private void setModuloBloqueado(JButton boton)
     {
         boton.setEnabled(false);

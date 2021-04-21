@@ -6,9 +6,7 @@
 package Controllers.Controllers;
 
 import static Controllers.Controllers.GeneralController.FormatoTabla;
-import Models.Conexion.CategoriaConexion;
 import Models.Conexion.UnidadesConexion;
-import Models.Models.CategoriasModel;
 import Models.Models.UnidadesModel;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;

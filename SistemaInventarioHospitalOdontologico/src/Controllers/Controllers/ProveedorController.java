@@ -25,9 +25,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *
- * @author danie
- */
+* @author Francisco Godoy
+*/
 public class ProveedorController 
 {
     public static Boolean MantenimientoProveedores(String accion, Integer id, 

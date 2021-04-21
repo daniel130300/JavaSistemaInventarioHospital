@@ -13,17 +13,23 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+*/
 public abstract class GeneralController 
 {
+    /**
+    * 
+    * @param tabla JTable
+    * @param columnas Número de columnas que contiene la tabla
+    * Método que se encarga de ajustar el ancho y centrar las columnas de la 
+    * tabla de acorde a su contenido.
+    */
     protected static void FormatoTabla(JTable tabla, Integer columnas)  
     {
         DefaultTableCellRenderer centrado = new DefaultTableCellRenderer();
         centrado.setHorizontalAlignment(JLabel.CENTER);  
 
-        
         for (int i = 0; i<columnas; i++)
         {
             tabla.getColumnModel().getColumn(i).setCellRenderer(centrado);
@@ -32,13 +38,13 @@ public abstract class GeneralController
         final TableColumnModel columnModel = tabla.getColumnModel(); 
         for (int columna = 0; columna < tabla.getColumnCount(); columna++) 
         { 
-            int ancho = 100;  
+            int ancho = 100;
             
             for (int fila = 0; fila < tabla.getRowCount(); fila++) 
             { 
                 TableCellRenderer renderer = tabla.getCellRenderer(fila, columna); 
                 Component comp = tabla.prepareRenderer(renderer, fila, columna); 
-                ancho = Math.max(comp.getPreferredSize().width +1 , ancho); 
+                ancho = Math.max(comp.getPreferredSize().width+1 , ancho);              
             }
             
             if(ancho > 300)
@@ -47,6 +53,6 @@ public abstract class GeneralController
             }
             
             columnModel.getColumn(columna).setPreferredWidth(ancho); 
-        } 
+        }
     } 
 }

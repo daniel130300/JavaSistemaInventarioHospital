@@ -14,10 +14,18 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author may_g
+ * 
+ * @author Héctor López
  */
-public class BitacoraLoteConexion {
+
+public class BitacoraLoteConexion 
+{
+    /**
+     * Método que retorna los registros de la tabla bitacoraloteproductos 
+     * desde la bdd.
+     * 
+     * @return ArrayList de Objetos Tipo BitacoraLoteModel
+     */
     public static ArrayList<BitacoraLoteModel> ListadoBitacoraLote() 
     {
         Connection con = null;
@@ -40,6 +48,7 @@ public class BitacoraLoteConexion {
                 bitacoralote.setUsrUsuario(rss.getString("UsrUsuario"));
                 bitacoralote.setLprId(rss.getInt("LprId"));
                 bitacoralote.setPrdId(rss.getInt("PrdId"));
+                bitacoralote.setPrdNombre(rss.getString("PrdNombre"));
                 bitacoralote.setBcpAccion(rss.getString("BcpAccion"));
                 bitacoralote.setBcpDescripcionCambios(rss.getString("BcpDescripcionCambios"));
                 bitacoralote.setBcpFecha(rss.getString("BcpFecha"));

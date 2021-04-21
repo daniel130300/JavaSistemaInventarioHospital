@@ -204,7 +204,7 @@
                   </Border>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor de Mano"/>
+                  <Color id="Default Cursor"/>
                 </Property>
               </Properties>
               <Events>
@@ -298,13 +298,15 @@
                 <Component class="javax.swing.JTable" name="tableProductos">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="8" rowCount="4">
+                      <Table columnCount="10" rowCount="4">
                         <Column editable="false" title="Id producto" type="java.lang.Object"/>
                         <Column editable="false" title="Nombre" type="java.lang.Object"/>
                         <Column editable="false" title="Descripci&#xf3;n" type="java.lang.Object"/>
                         <Column editable="false" title="Stock m&#xe1;ximo" type="java.lang.Object"/>
                         <Column editable="false" title="Stock m&#xed;nimo" type="java.lang.Object"/>
+                        <Column editable="true" title="Id Categor&#xed;a" type="java.lang.Object"/>
                         <Column editable="false" title="Categor&#xed;a" type="java.lang.Object"/>
+                        <Column editable="true" title="Id Unidad" type="java.lang.Object"/>
                         <Column editable="false" title="Unidad" type="java.lang.Object"/>
                         <Column editable="false" title="Estado" type="java.lang.Object"/>
                       </Table>
@@ -357,6 +359,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableProductosMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

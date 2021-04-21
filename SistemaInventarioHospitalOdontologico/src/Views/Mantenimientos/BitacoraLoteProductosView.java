@@ -5,6 +5,7 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.BitacoraLoteController;
 import Controllers.Controllers.LoginController;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
     public BitacoraLoteProductosView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        BitacoraLoteController.LlenarTableBitacoraLote(this.tableBitacoraLoteProductos);
     }
 
     /**
@@ -119,21 +121,21 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 510, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 510, -1));
 
         tableBitacoraLoteProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id ", "Usuario", "Accion", "Descripción Cambios", "Fecha"
+                "Id Bitacora", "Usuario", "Id Lote", "Id Producto", "Nombre del Producto", "Accion", "Descripción Cambios", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -147,12 +149,12 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBitacoraLoteProductos);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 810, 350));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 810, 430));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 

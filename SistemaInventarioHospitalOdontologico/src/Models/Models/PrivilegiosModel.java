@@ -1,6 +1,13 @@
 
 package Models.Models;
 
+/**
+*
+* @author Héctor López
+* Clase que se encarga de definir el modelo para los datos del JList 
+* privilegioseleccionados y privilegiosdisponibles en MatenimientoUsuariosView
+*/
+
 public class PrivilegiosModel 
 {
     private Integer PriId;

@@ -16,12 +16,15 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author danie
- */
+* @author Héctor López
+*/
 public class CategoriaConexion 
 {
-    
+    /**
+    * Método que retorna los registros de la tabla categoriasproductos
+    * desde la bdd.
+    * @return ArrayList de objeto tipo CategoriasModel
+    */
     public static ArrayList<CategoriasModel> ListadoCategorias() 
     {
         Connection con = null;
@@ -55,7 +58,14 @@ public class CategoriaConexion
         return categorias;
     }
     
-    
+    /**
+    * 
+    * @param accion String
+    * @param categoria Objeto de tipo CategoriasModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoCategorias
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoCategorias(String accion, CategoriasModel categoria)
     {
         String estado = "";

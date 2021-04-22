@@ -227,7 +227,7 @@ public class UsuarioController extends GeneralController
     * 
     * @param tableUsuarios JTable
     * @param fieldBusqueda JTextField 
-    * Método que se encarga de filtrar la tabla tableBitacoraLoteProductos
+    * Método que se encarga de filtrar la tabla Usuarios
     * a partir de la busqueda del usuario
     */
     public static void FiltroTableUsuarios(JTable tableUsuarios, JTextField fieldBusqueda)
@@ -462,8 +462,10 @@ public class UsuarioController extends GeneralController
     * @param errCorreo JLabel
     * @param errUsuario JLabel
     * @param errPrivilegios JLabel
-    * Método 
-    * @return 
+    * Si los datos ingresados son incorrectos de acorde a las validaciones
+    * establece los errores en los JLabels correspondientes y retorna true, 
+    * de lo contrario retorna false. 
+    * @return boolean
     */
     private static boolean validacionesGenerales(String trimmedIdentidad, 
             String trimmedNombre,String trimmedApellido, String trimmedCorreo, 
@@ -553,7 +555,9 @@ public class UsuarioController extends GeneralController
     * @param hashedpassword String
     * @param estado String
     * @param id_area Integer
-    * @return 
+    * Método que se encarga de crear un objeto de tipo UsuarioModel a partir 
+    * de los parametros recibidos y retornar este mismo. 
+    * @return Objeto de tipo UsuarioModel
     */
     private static UsuarioModel setUsuarioModel(Integer id, String trimmedIdentidad,
             String trimmedNombre, String trimmedApellido, String trimmedCorreo,
@@ -584,7 +588,10 @@ public class UsuarioController extends GeneralController
     * @param trimmedContrasenia String
     * @param id_area Integer
     * @param modeloLstPrivilegiosSeleccionados DefaultListModel
-    * @return 
+    * Método que se encarga de insertar un usuario en la bdd, si los datos 
+    * como la identidad, correo o usuario no se encuentran ya registrados, 
+    * de ser así se muestra el respectivo mensaje de error.
+    * @return Si hay un error de validación retorna true de lo contrario false.
     */
     private static boolean insertarUsuario(String trimmedIdentidad, 
             String trimmedNombre, String trimmedApellido, String trimmedCorreo, 
@@ -652,7 +659,10 @@ public class UsuarioController extends GeneralController
     * @param estado String
     * @param id_area Integer
     * @param modeloLstPrivilegiosSeleccionados DefaultListModel
-    * @return 
+    * Método que se encarga de editar un usuario en la bdd, si los datos 
+    * como la identidad, correo o usuario no se encuentran ya registrados, 
+    * de ser así se muestra el respectivo mensaje de error.
+    * @return Si hay un error de validación retorna true de lo contrario false.
     */
     private static boolean editarUsuario(boolean dohash, 
             Integer id, String trimmedIdentidad, String trimmedNombre,
@@ -718,7 +728,9 @@ public class UsuarioController extends GeneralController
     * @param accion String 
     * @param UsrId Integer
     * @param modeloLstPrivilegiosSeleccionados DefaultListModel
-    * @return 
+    * Método que se encarga de insertar o editar los privilegios seleccionados 
+    * para el usuario
+    * @return Si hay un error de validación retorna true de lo contrario false.
     */
     private static Boolean MantenimientoDetalleUsuarios(String accion, 
             Integer UsrId, DefaultListModel modeloLstPrivilegiosSeleccionados)

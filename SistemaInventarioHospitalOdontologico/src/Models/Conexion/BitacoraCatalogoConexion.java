@@ -21,11 +21,11 @@ import javax.swing.JOptionPane;
 public class BitacoraCatalogoConexion {
     
     /**
-     * Método que retorna los registros de la tabla bitacoracatalogoproductos
-     * desde la bdd.
-     * 
-     * @return ArrayList de Objetos Tipo BitacoraCatalogoModel
-     */
+    * Método que retorna los registros de la tabla bitacoracatalogoproductos
+    * desde la bdd.
+    * 
+    * @return ArrayList de Objetos Tipo BitacoraCatalogoModel
+    */
     public static ArrayList<BitacoraCatalogoModel> ListadoBitacoraCatalogo() 
     {
         Connection con = null;

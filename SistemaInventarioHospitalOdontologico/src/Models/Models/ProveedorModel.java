@@ -1,6 +1,12 @@
 
 package Models.Models;
 
+/**
+*
+* @author Francisco Godoy
+* Clase que se encarga de definir el modelo para los datos a mandar al 
+* procedimiento MantenimientoProveedores en PrveedorController
+*/
 public class ProveedorModel 
 {    
     private Integer ProId;

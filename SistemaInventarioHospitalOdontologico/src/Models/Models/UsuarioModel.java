@@ -6,11 +6,11 @@
 package Models.Models;
 
 /**
- *
- * @author Héctor López
- * Clase que se encarga de definir el modelo para los datos de la tabla usuarios 
- * en MatenimientoUsuariosView.
- */
+*
+* @author Héctor López
+* Clase que se encarga de definir el modelo para los datos a mandar al 
+* procedimiento MantenimientoUsuarios en UsuarioControllerView
+*/
 public class UsuarioModel 
 {
     private Integer UsrId;

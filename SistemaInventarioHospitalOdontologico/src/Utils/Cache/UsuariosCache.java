@@ -7,12 +7,18 @@ package Utils.Cache;
 
 import Models.Models.UsuarioModel;
 
+/**
+* 
+* @author Héctor López
+* Clase que permite pasar los datos seleccionados en la pantalla 
+* TablaGrandeUsuariosView a MantenimientoUsuariosView
+*/
 
 public class UsuariosCache 
 {
     private static boolean DatosCompartidos = false;
     private static UsuarioModel usuario;
-
+    
     public boolean isDatosCompartidos() {
         return DatosCompartidos;
     }

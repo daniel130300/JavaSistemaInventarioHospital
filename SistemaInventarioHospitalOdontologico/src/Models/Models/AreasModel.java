@@ -7,9 +7,10 @@ package Models.Models;
  */
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+*/
+
 public class AreasModel 
 {
     private Integer AreId;

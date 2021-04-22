@@ -7,9 +7,11 @@ package Models.Models;
  */
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López 
+* Clase que se encarga de definir el modelo para los datos a mandar al 
+* procedimiento MantenimientoDetalleUsuarios en UsuarioControllerView
+*/
 public class DetalleUsuariosModel 
 {
     private Integer DtuId;

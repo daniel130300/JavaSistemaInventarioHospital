@@ -14,18 +14,18 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- * 
- * @author Héctor López
- */
+* 
+* @author Héctor López
+*/
 
 public class BitacoraLoteConexion 
 {
     /**
-     * Método que retorna los registros de la tabla bitacoraloteproductos 
-     * desde la bdd.
-     * 
-     * @return ArrayList de Objetos Tipo BitacoraLoteModel
-     */
+    * Método que retorna los registros de la tabla bitacoraloteproductos 
+    * desde la bdd.
+    * 
+    * @return ArrayList de Objetos Tipo BitacoraLoteModel
+    */
     public static ArrayList<BitacoraLoteModel> ListadoBitacoraLote() 
     {
         Connection con = null;

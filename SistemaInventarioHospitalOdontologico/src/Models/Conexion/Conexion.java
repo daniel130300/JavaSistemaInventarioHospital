@@ -13,9 +13,13 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+* 
+* Clase que se encarga de establecer la conexión a MySQL de acorde 
+* a las credenciales proporcionadas
+*/
+
 public abstract class Conexion 
 {
     private static final String driver = "com.mysql.jdbc.Driver";

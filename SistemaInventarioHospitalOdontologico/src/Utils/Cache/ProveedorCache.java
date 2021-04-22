@@ -8,9 +8,11 @@ package Utils.Cache;
 import Models.Models.ProveedorModel;
 
 /**
- *
- * @author fgodo
- */
+*
+* @author Francisco Godoy
+* Clase que permite pasar los datos seleccionados en la pantalla 
+* TablaGrandeProveedoresView a MantenimientoProveedoresView
+*/
 public class ProveedorCache {
     private static boolean DatosCompartidos = false;
     private static ProveedorModel id;

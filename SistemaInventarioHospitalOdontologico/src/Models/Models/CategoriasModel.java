@@ -6,9 +6,11 @@
 package Models.Models;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+* Clase que se encarga de definir el modelo para los datos 
+* en CategoriasController.
+*/
 public class CategoriasModel 
 {
     

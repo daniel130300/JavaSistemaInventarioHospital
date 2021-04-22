@@ -19,11 +19,18 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+*/
+
 public class UsuarioConexion
 { 
+    
+    /**
+    * 
+    * Método que retorna los registros de la tabla usuarios y areas desde la bdd.
+    * @return ArrayList de objetos tipo UsuarioModel
+    */
     public static ArrayList<UsuarioModel> ListadoUsuarios() 
     {
         Connection con = null;
@@ -65,6 +72,11 @@ public class UsuarioConexion
         return usuarios;
     }
     
+    /**
+    * 
+    * Método que retorna los registros de la tabla areas desde la bdd. 
+    * @return ArrayList de objetos tipo AreasModel
+    */
     public static ArrayList<AreasModel> ListadoAreas() 
     {
         Connection con = null;
@@ -98,6 +110,10 @@ public class UsuarioConexion
         return areas;
     }
     
+    /**
+    * Método que retorna los registros de la tabla privilegios desde la bdd.
+    * @return ArrayList de objetos tipo PrivilegiosModel
+    */
     public static ArrayList<PrivilegiosModel> ListadoPrivilegios() 
     {
         Connection con = null;
@@ -131,6 +147,13 @@ public class UsuarioConexion
         return privilegios;
     }
 
+    /**
+    * 
+    * @param LstElements ArrayList de tipo String
+    * Método que se encarga de obtener los indices para los elementos dentro de
+    * la lista
+    * @return ArrayList de tipo Integer
+    */
     public static ArrayList<Integer> getIndexesofLstElements(ArrayList<String> LstElements)
     {
         Connection con = null;
@@ -165,6 +188,13 @@ public class UsuarioConexion
         return Indexes;
     }
     
+    /**
+    * 
+    * @param UsrId Integer
+    * Método que se encarga de obtener todos los indices de la tabla 
+    * detalleusuarios para el id del usuario que se le manda como paramétro
+    * @return ArrayList de tipo Integer
+    */
     public static ArrayList<Integer> getDtuIndexesofUsr(Integer UsrId)
     {
         Connection con = null;
@@ -195,6 +225,13 @@ public class UsuarioConexion
         return Indexes;
     }
     
+    /**
+    * 
+    * @param UsrId Integer
+    * Método que se encarga de obtener las descripciones para los privilegios 
+    * de el usuario 
+    * @return ArrayList de objetos tipo PrivilegiosModel
+    */
     public static ArrayList<PrivilegiosModel> getUsrPrivilegiosDescripcion(Integer UsrId)
     {
         Connection con = null;
@@ -229,6 +266,14 @@ public class UsuarioConexion
         return privilegios;
     }
   
+    /**
+    * 
+    * @param accion String
+    * @param usuario Objeto tipo UsuarioModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoUsuario
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoUsuarios(String accion, UsuarioModel usuario)
     {
         String estado = "";
@@ -262,6 +307,14 @@ public class UsuarioConexion
         return estado;
     }
     
+    /**
+    * 
+    * @param accion String
+    * @param detalleUsuario Objeto de tipo DetalleUsuariosModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoDetalleUsuarios
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoDetalleUsuarios(String accion, DetalleUsuariosModel detalleUsuario)
     {
         String estado = "";

@@ -7,7 +7,8 @@ package Models.Models;
 
 /**
  *
- * @author may_g
+ * @author Maryury Zuniga
+ * 
  */
 public class BitacoraCatalogoModel {
     

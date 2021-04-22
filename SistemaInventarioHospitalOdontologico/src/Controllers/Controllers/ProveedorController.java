@@ -29,9 +29,34 @@ import javax.swing.table.TableRowSorter;
 */
 public class ProveedorController 
 {
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
+    
+    /**
+    * 
+    * @param accion String
+    * @param id Integer
+    * @param rtn String
+    * @param nombre String
+    * @param correo String
+    * @param telefono String
+    * @param contacto String
+    * @param direccion String
+    * @param estado String
+    * @param errRTN JLabel
+    * @param errNombre JLabel
+    * @param errCorreo JLabel
+    * @param errTelefono JLabel
+    * @param errContacto JLabel
+    * @param errDireccion JLabel
+    * Si los datos ingresados son incorrectos de acorde a las validaciones
+    * retorna true, de lo contrario retorna false 
+    * @return Boolean
+    */
     public static Boolean MantenimientoProveedores(String accion, Integer id, 
             String rtn, String nombre, String correo, String telefono, 
-            String contacto, String direccion,String estado ,JLabel errRTN, JLabel errNombre,
+            String contacto, String direccion, String estado ,JLabel errRTN, JLabel errNombre,
             JLabel errCorreo,JLabel errTelefono, JLabel errContacto, JLabel errDireccion)
     {
         
@@ -196,6 +221,22 @@ public class ProveedorController
         }
     }    
     
+    /**
+    * 
+    * @param seleccion int
+    * @param tableProveedores JTable
+    * @param txtRTN JTextField
+    * @param txtNombre JTextField
+    * @param txtCorreo JTextField
+    * @param txtTelefono JTextField
+    * @param txtContacto JTextField
+    * @param txtDescripcion JTextField
+    * @param cmbEstado JComboBox
+    * Método que se encarga de pasar los campos de la tabla a los JTextFields
+    * y JComboxes correspondientes para poder ser editados 
+    * y retorna el Id del proveedor de la tabla
+    * @return Integer
+    */
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableProveedores, 
             JTextField txtRTN,JTextField txtNombre, JTextField txtCorreo,
             JTextField txtTelefono, JTextField txtContacto,JTextArea txtDescripcion,JComboBox cmbEstado )
@@ -210,10 +251,24 @@ public class ProveedorController
         txtDescripcion.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 6)));
         cmbEstado.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,7)));
 
-        
         return ProId;
     }  
     
+    /**
+    * 
+    * @param tableProveeodres JTable
+    * @param txtRTN JTextField
+    * @param txtNombre JTextField
+    * @param txtCorreo JTextField
+    * @param txtTelefono JTextField
+    * @param txtContacto JTextField
+    * @param txtDireccion JTexttField
+    * @param cmbEstado JComboBox
+    * Método que se encarga de pasar los campos de la clase proveedorCache a 
+    * los JTextFields y JComboxes correspondientes para poder ser editados y
+    * retorna el Id del proveedor
+    * @return Integer
+    */
     public static Integer setDatosEditarFromCache(JTable tableProveeodres,JTextField txtRTN, 
              JTextField txtNombre, JTextField txtCorreo, JTextField txtTelefono, 
              JTextField txtContacto, JTextArea txtDireccion,JComboBox cmbEstado)
@@ -236,6 +291,12 @@ public class ProveedorController
         return ProId;
     }     
     
+    /**
+    * @param tableUsuarios JTable
+    * @param fieldBusqueda JTextField
+    * Método que se encarga de filtrar la tabla Proveedores
+    * a partir de la busqueda del usuario
+    */
     public static void FiltroTableProveedores(JTable tableUsuarios, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUsuarios.getModel());
@@ -277,6 +338,13 @@ public class ProveedorController
         );  
     }  
     
+    /**
+    * 
+    * @param tableProveedores JTable
+    * Método que se encarga de llenar el JTable tableProveedores
+    * con los datos que se obtienen del método ListadoProveedores() 
+    * de la clase ProveedorConexion
+    */
     public static void LlenarTableProveedores(JTable tableProveedores) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableProveedores.getModel(); 

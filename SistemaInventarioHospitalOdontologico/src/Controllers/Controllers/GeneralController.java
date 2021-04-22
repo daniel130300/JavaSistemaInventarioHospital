@@ -18,6 +18,10 @@ import javax.swing.table.TableColumnModel;
 */
 public abstract class GeneralController 
 {
+    // **************************************************
+    // Métodos Protegidos
+    // **************************************************
+    
     /**
     * 
     * @param tabla JTable

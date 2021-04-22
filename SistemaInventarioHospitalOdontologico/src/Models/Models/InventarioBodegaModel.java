@@ -9,7 +9,8 @@ package Models.Models;
  *
  * @author Katering Osorto
  */
-public class InventarioBodegaModel {
+public class InventarioBodegaModel 
+{
 
     private Integer LprId;
     private Integer PrdId;

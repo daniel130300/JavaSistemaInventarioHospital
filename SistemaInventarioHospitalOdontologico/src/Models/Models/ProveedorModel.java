@@ -4,11 +4,14 @@ package Models.Models;
 /**
 *
 * @author Francisco Godoy
-* Clase que se encarga de definir el modelo para los datos a mandar al 
-* procedimiento MantenimientoProveedores en PrveedorController
+* Clase que se encarga de establecer el modelo de datos para los proveedores
 */
 public class ProveedorModel 
 {    
+    // **************************************************
+    // Variables
+    // **************************************************
+    
     private Integer ProId;
     private String ProRTN;
     private String ProNombre;
@@ -18,50 +21,65 @@ public class ProveedorModel
     private String ProDireccion;
     private String ProEstado;
 
-    public Integer getProId() {
+    // **************************************************
+    // Getters y Setters
+    // **************************************************
+    
+    public Integer getProId() 
+    {
         return ProId;
     }
 
-    public void setProId(Integer ProId) {
+    public void setProId(Integer ProId) 
+    {
         this.ProId = ProId;
     }
     public String getProEstado() {
         return ProEstado;
     }
 
-    public void setProEstado(String ProEstado) {
+    public void setProEstado(String ProEstado) 
+    {
         this.ProEstado = ProEstado;
     }    
 
-    public String getProRTN() {
+    public String getProRTN() 
+    {
         return ProRTN;
     }
 
-    public void setProRTN(String ProRTN) {
+    public void setProRTN(String ProRTN) 
+    {
         this.ProRTN = ProRTN;
     }
 
-    public String getProNombre() {
+    public String getProNombre() 
+    {
         return ProNombre;
     }
 
-    public void setProNombre(String ProNombre) {
+    public void setProNombre(String ProNombre) 
+    {
         this.ProNombre = ProNombre;
     }
 
-    public String getProTelefono() {
+    public String getProTelefono() 
+    {
         return ProTelefono;
     }
 
-    public void setProTelefono(String ProTelefono) {
+    public void setProTelefono(String ProTelefono) 
+    {
         this.ProTelefono = ProTelefono;
     }
 
-    public String getProCorreo() {
+    public String getProCorreo() 
+    {
         return ProCorreo;
     }
 
-    public void setProCorreo(String ProCorreo) {
+    public void setProCorreo(String ProCorreo) 
+    {
         this.ProCorreo = ProCorreo;
     }
     
@@ -69,15 +87,18 @@ public class ProveedorModel
         return ProContacto;
     }
 
-    public void setProContacto(String ProContacto) {
+    public void setProContacto(String ProContacto) 
+    {
         this.ProContacto = ProContacto;
     }
 
-    public String getProDireccion() {
+    public String getProDireccion() 
+    {
         return ProDireccion;
     }
 
-    public void setProDireccion(String ProDireccion) {
+    public void setProDireccion(String ProDireccion) 
+    {
         this.ProDireccion = ProDireccion;
     }
 }

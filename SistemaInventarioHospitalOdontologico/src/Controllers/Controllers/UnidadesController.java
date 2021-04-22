@@ -26,20 +26,21 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Maryury Zuniga
  */
-public class UnidadesController {
+public class UnidadesController 
+{
     //**************************
-    // Metodos publicos
+    // Metodos Públicos
     //**************************
     
     /*
-    *@ param accion String
+    * @param accion String
     * @param id Integer
     * @param descripcion String
     * @param estado Srting
     * @param errDescripcion JLabel
-    *   Dependiendo si los datos ingresados son incorrectos segun las validaciones 
-    *   se retornara true de no ser asi false.
-    *   @return Boolean
+    * Dependiendo si los datos ingresados son incorrectos segun las validaciones 
+    * se retornara true de no ser asi false.
+    * @return Boolean
     */
     public static Boolean MantenimientoUnidades(String accion, Integer id, 
             String descripcion, String estado, JLabel errDescripcion)
@@ -83,56 +84,16 @@ public class UnidadesController {
         return !(mntError == false && generalValidacionError == false); 
     }   
     
-    private static boolean mensajesRetroalimentacion(String msj, String resultado)
-    {
-        boolean error = false;
-        
-        switch (resultado) 
-        {
-            case "OK":
-                JOptionPane.showMessageDialog(null, msj);                   
-            break;
-
-            case "errDescripcion":
-                JOptionPane.showMessageDialog(null, "La descripción ya se encuentra registrada.");
-                error = true;
-            break;
-        }
-        
-        return error;
-    }  
-    
-     private static boolean validacionesGenerales(String trimmedDescripcion,
-        JLabel errDescripcion)
-    {
-        boolean error = false;
-        
-        errDescripcion.setText(null);
-       
-        if(Validaciones.validarCampoVacio(trimmedDescripcion))
-        {
-           errDescripcion.setText("La descripción es un campo obligatorio");
-           error = true;
-        }
-               
-        if(!Validaciones.ValidarNumerosyLetras(trimmedDescripcion))
-        {
-            errDescripcion.setText("La descripción ingresada es incorrecta");
-            error = true;
-        }
-        
-        return error;
-    }
-     /**
-      * Metodo encargado de pasar los datos de la tabla a los JTextFields
-      * correspondientes para ser editados, retorna el id de la unidad de la tabla
-      * @param seleccion
-      * @param tableUnidades
-      * @param txtDescripcion
-      * @param cmbEstado
-      * @return Integer
-      */
-      public static Integer setDatosEditarFromTable(int seleccion, JTable tableUnidades, 
+    /**
+    * @param seleccion
+    * @param tableUnidades
+    * @param txtDescripcion
+    * @param cmbEstado
+    * Metodo encargado de pasar los datos de la tabla a los JTextFields
+    * correspondientes para ser editados, retorna el id de la unidad de la tabla
+    * @return Integer
+    */
+    public static Integer setDatosEditarFromTable(int seleccion, JTable tableUnidades, 
             JTextField txtDescripcion, JComboBox cmbEstado)
     {
         Integer UndId = null;
@@ -142,13 +103,14 @@ public class UnidadesController {
 
         
         return UndId;
-    }  
+    } 
+      
     /**
-     * Metodo para el llenado de JTable table Unidades con datos obtenidos 
-     * del metodo ListadoUnidades() de la clase UnidadesConexion
-     * @param tableUnidades 
-     */
-      public static void LlenarTableUnidades(JTable tableUnidades) 
+    * @param tableUnidades 
+    * Metodo para el llenado de JTable table Unidades con datos obtenidos 
+    * del metodo ListadoUnidades() de la clase UnidadesConexion
+    */
+    public static void LlenarTableUnidades(JTable tableUnidades) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
@@ -168,12 +130,13 @@ public class UnidadesController {
         }
         FormatoTabla(tableUnidades, modelo.getColumnCount());
     }
-      /**
-       * Metodo encargado del filtrado de la tabla tableUnidades a partir de la 
-       * busqueda del usuario
-       * @param tableUnidades
-       * @param fieldBusqueda 
-       */
+      
+    /**
+    * @param tableUnidades JTable
+    * @param fieldBusqueda JTextField
+    * Metodo encargado del filtrado de la tabla tableUnidades a partir de la 
+    * busqueda del usuario
+    */
     public static void FiltroTableUnidades(JTable tableUnidades, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUnidades.getModel());
@@ -213,6 +176,64 @@ public class UnidadesController {
             }
         }
         );  
-    }    
+    } 
+    
+    /**
+    * 
+    * @param msj String
+    * @param resultado String
+    * Dependiendo del parametro resultado muestra un mensaje en pantalla por
+    * medio de un JOptionPane
+    * @return boolean
+    */
+    private static boolean mensajesRetroalimentacion(String msj, String resultado)
+    {
+        boolean error = false;
+        
+        switch (resultado) 
+        {
+            case "OK":
+                JOptionPane.showMessageDialog(null, msj);                   
+            break;
+
+            case "errDescripcion":
+                JOptionPane.showMessageDialog(null, "La descripción ya se encuentra registrada.");
+                error = true;
+            break;
+        }
+        
+        return error;
+    }  
+    
+    /**
+    * 
+    * @param trimmedDescripcion String
+    * @param errDescripcion JLabel
+    * Si los datos ingresados son incorrectos de acorde a las validaciones
+    * establece los errores en los JLabels correspondientes y retorna true, 
+    * de lo contrario retorna false. 
+    * @return boolean
+    */
+    private static boolean validacionesGenerales(String trimmedDescripcion,
+        JLabel errDescripcion)
+    {
+        boolean error = false;
+        
+        errDescripcion.setText(null);
+       
+        if(Validaciones.validarCampoVacio(trimmedDescripcion))
+        {
+           errDescripcion.setText("La descripción es un campo obligatorio");
+           error = true;
+        }
+               
+        if(!Validaciones.ValidarNumerosyLetras(trimmedDescripcion))
+        {
+            errDescripcion.setText("La descripción ingresada es incorrecta");
+            error = true;
+        }
+        
+        return error;
+    }   
 }
 

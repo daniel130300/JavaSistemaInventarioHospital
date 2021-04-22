@@ -20,8 +20,12 @@ import javax.swing.JOptionPane;
  */
 public class LoginConexion 
 {
+    
+    //****************************
+    // Metodos públicos
+    //***************************
+    
     /**
-    * 
     * @param usrUsuario String
     * Método que se encarga de obtener los datos del usuario que se está
     * intentando loguear en el sistema
@@ -67,7 +71,6 @@ public class LoginConexion
     }
     
     /**
-    * 
     * @param usrId Integer
     * Método que se encarga de obtener los privilegios del usuario que se 
     * ha logueado

@@ -18,10 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author Héctor López
  */
+
 public class InformacionPersonalConexion 
 {
+    //****************************
+    // Metodos públicos
+    //***************************
+    
     /**
-    * 
     * @param id Integer
     * @param nombre String
     * @param apellido String

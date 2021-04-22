@@ -13,24 +13,36 @@ import Models.Models.ProveedorModel;
 * Clase que permite pasar los datos seleccionados en la pantalla 
 * TablaGrandeProveedoresView a MantenimientoProveedoresView
 */
-public class ProveedorCache {
+public class ProveedorCache 
+{
+    // **************************************************
+    // Variables
+    // **************************************************
+    
     private static boolean DatosCompartidos = false;
     private static ProveedorModel id;
 
-    public boolean isDatosCompartidos() {
+    // **************************************************
+    // Getters y Setters
+    // **************************************************
+    
+    public boolean isDatosCompartidos() 
+    {
         return DatosCompartidos;
     }
 
-    public void setDatosCompartidos(boolean DatosCompartidos) {
+    public void setDatosCompartidos(boolean DatosCompartidos) 
+    {
         ProveedorCache.DatosCompartidos = DatosCompartidos;
     }
     
-    public ProveedorModel getid() {
+    public ProveedorModel getid() 
+    {
         return id;
     }
 
-    public void setid(ProveedorModel id) {
-
+    public void setid(ProveedorModel id) 
+    {
         ProveedorCache.id = id;
     }    
 }

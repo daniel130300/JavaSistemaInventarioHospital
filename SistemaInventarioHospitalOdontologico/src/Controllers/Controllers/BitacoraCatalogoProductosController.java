@@ -6,8 +6,8 @@
 package Controllers.Controllers;
 
 import static Controllers.Controllers.GeneralController.FormatoTabla;
-import Models.Conexion.BitacoraLoteConexion;
-import Models.Models.BitacoraLoteModel;
+import Models.Conexion.BitacoraCatalogoProductosConexion;
+import Models.Models.BitacoraCatalogoProductosModel;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -22,21 +22,26 @@ import javax.swing.table.TableRowSorter;
 *
 * @author Héctor López
 */
-public class BitacoraLoteController 
+
+// **************************************************
+// Métodos Públicos
+// **************************************************
+
+public class BitacoraCatalogoProductosController 
 {
     /**
     * 
-    * @param tableBitacoraLoteProductos JTable 
-    * Método que se encarga de llenar el JTable tableBitacoraLoteProductos
-    * con los datos que se obtienen del método ListadoBitacoraLote() 
-    * de la clase BitacoraLoteConexion.
+    * @param tableBitacoraCatalogoProducto JTable 
+    * Método que se encarga de llenar el JTable tableBitacoraCatalogoProducto
+    * con los datos que se obtienen del método ListadoBitacoraCatalogo() 
+    * de la clase BitacoraCatalogoConexion.
     */
-    public static void LlenarTableBitacoraLote(JTable tableBitacoraLoteProductos) 
+    public static void LlenarTableBitacoraCatalogo(JTable tableBitacoraCatalogoProducto) 
     {  
-        DefaultTableModel modelo = (DefaultTableModel) tableBitacoraLoteProductos.getModel(); 
+        DefaultTableModel modelo = (DefaultTableModel) tableBitacoraCatalogoProducto.getModel(); 
         modelo.setRowCount(0);
-        ArrayList<BitacoraLoteModel> registros = new ArrayList<>();
-        registros = BitacoraLoteConexion.ListadoBitacoraLote();
+        ArrayList<BitacoraCatalogoProductosModel> registros = new ArrayList<>();
+        registros = BitacoraCatalogoProductosConexion.ListadoBitacoraCatalogo();
         
         for (int i = 0; i <registros.size(); i++) 
         {
@@ -45,9 +50,7 @@ public class BitacoraLoteController
                 {
                     registros.get(i).getBcpId(),
                     registros.get(i).getUsrUsuario(),
-                    registros.get(i).getLprId(),
                     registros.get(i).getPrdId(),
-                    registros.get(i).getPrdNombre(),
                     registros.get(i).getBcpAccion(),
                     registros.get(i).getBcpDescripcionCambios(),
                     registros.get(i).getBcpFecha()
@@ -55,20 +58,21 @@ public class BitacoraLoteController
             );
         }
         
-        FormatoTabla(tableBitacoraLoteProductos, modelo.getColumnCount());
-        tableBitacoraLoteProductos.setRowHeight(170);
+        FormatoTabla(tableBitacoraCatalogoProducto, modelo.getColumnCount());
+        tableBitacoraCatalogoProducto.setRowHeight(170);
     }
     
     /**
-    * @param tableBitacoraLoteProductos JTable 
-    * @param fieldBusqueda JTextField
-    * Método que se encarga de filtrar la tabla tableBitacoraLoteProductos
+    * 
+    * @param tableBitacoraCatalogoProducto JTable 
+    * @param fieldBusqueda JTextField 
+    * Método que se encarga de filtrar la tabla tableBitacoraCatalogoProducto
     * a partir de la busqueda del usuario.
     */
-    public static void FiltroTableBitacoraLote(JTable tableBitacoraLoteProductos, JTextField fieldBusqueda)
+    public static void FiltroTableBitacoraCatalogo(JTable tableBitacoraCatalogoProducto, JTextField fieldBusqueda)
     {
-        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableBitacoraLoteProductos.getModel());
-        tableBitacoraLoteProductos.setRowSorter(rowSorter);
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableBitacoraCatalogoProducto.getModel());
+        tableBitacoraCatalogoProducto.setRowSorter(rowSorter);
         fieldBusqueda.getDocument().addDocumentListener(new DocumentListener()
         {
             @Override

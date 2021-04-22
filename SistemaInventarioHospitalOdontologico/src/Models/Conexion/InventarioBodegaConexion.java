@@ -203,9 +203,7 @@ public class InventarioBodegaConexion
         try
         {
             String query;
-            con = Conexion.getConexion(con);
-            
-            //CrearTablaTemporal();
+            con = Conexion.getConexion(con); 
             
             query = "{CALL MantenimientoInventarioBodega(?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);

@@ -139,9 +139,9 @@ public class InventarioBodegaController {
         return LprId;
     }
     
-     public static void FiltroTableInventarioBodega(JTable tableBodega, JTextField fieldBusqueda)
+    public static void FiltroTableInventarioBodega(JTable tableBodega, JTextField fieldBusqueda)
     {
-       TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableBodega.getModel());
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableBodega.getModel());
         tableBodega.setRowSorter(rowSorter);
         fieldBusqueda.getDocument().addDocumentListener(new DocumentListener()
         {
@@ -185,83 +185,83 @@ public class InventarioBodegaController {
         DefaultTableModel modelo = (DefaultTableModel) tableInventarioBodega.getModel(); 
         modelo.setRowCount(0);
         ArrayList<InventarioBodegaModel> inventario = new ArrayList<>();
-         switch (accion){
-            
+        
+        switch (accion){
             case "Activos":
-                            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Activos");
-        
-                            for (int i = 0; i <inventario.size(); i++) 
-                            {
-                                modelo.addRow
-                                (new Object[]
-                                    {
-                                        inventario.get(i).getLprId(), 
-                                        inventario.get(i).getPrdId(),
-                                        inventario.get(i).getPrdNombre(),
-                                        inventario.get(i).getPrdDescripcion(),
-                                        inventario.get(i).getLprStock(),
-                                        inventario.get(i).getPrdStockMaximo(),
-                                        inventario.get(i).getPrdStockMinimo(),
-                                        inventario.get(i).getLprFechaCaducidad(),
-                                        inventario.get(i).getCprDescripcion(),
-                                        inventario.get(i).getUndDescripcion(),
-                                        inventario.get(i).getLprEstado()
-                                    }
-                                );
-                            }
+            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Activos");
 
-                            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
-                            break;
+            for (int i = 0; i <inventario.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        inventario.get(i).getLprId(), 
+                        inventario.get(i).getPrdId(),
+                        inventario.get(i).getPrdNombre(),
+                        inventario.get(i).getPrdDescripcion(),
+                        inventario.get(i).getLprStock(),
+                        inventario.get(i).getPrdStockMaximo(),
+                        inventario.get(i).getPrdStockMinimo(),
+                        inventario.get(i).getLprFechaCaducidad(),
+                        inventario.get(i).getCprDescripcion(),
+                        inventario.get(i).getUndDescripcion(),
+                        inventario.get(i).getLprEstado()
+                    }
+                );
+            }
+
+            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
+            break;
         case "Inactivos":
-                            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Inactivos");
-        
-                            for (int i = 0; i <inventario.size(); i++) 
-                            {
-                                modelo.addRow
-                                (new Object[]
-                                    {
-                                        inventario.get(i).getLprId(), 
-                                        inventario.get(i).getPrdId(),
-                                        inventario.get(i).getPrdNombre(),
-                                        inventario.get(i).getPrdDescripcion(),
-                                        inventario.get(i).getLprStock(),
-                                        inventario.get(i).getPrdStockMaximo(),
-                                        inventario.get(i).getPrdStockMinimo(),
-                                        inventario.get(i).getLprFechaCaducidad(),
-                                        inventario.get(i).getCprDescripcion(),
-                                        inventario.get(i).getUndDescripcion(),
-                                        inventario.get(i).getLprEstado()
-                                    }
-                                );
-                            }
+            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Inactivos");
 
-                            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
-                            break;
+            for (int i = 0; i <inventario.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        inventario.get(i).getLprId(), 
+                        inventario.get(i).getPrdId(),
+                        inventario.get(i).getPrdNombre(),
+                        inventario.get(i).getPrdDescripcion(),
+                        inventario.get(i).getLprStock(),
+                        inventario.get(i).getPrdStockMaximo(),
+                        inventario.get(i).getPrdStockMinimo(),
+                        inventario.get(i).getLprFechaCaducidad(),
+                        inventario.get(i).getCprDescripcion(),
+                        inventario.get(i).getUndDescripcion(),
+                        inventario.get(i).getLprEstado()
+                    }
+                );
+            }
+
+            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
+            break;
         case "Todos":
-                            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Todos");
-        
-                            for (int i = 0; i <inventario.size(); i++) 
-                            {
-                                modelo.addRow
-                                (new Object[]
-                                    {
-                                        inventario.get(i).getLprId(), 
-                                        inventario.get(i).getPrdId(),
-                                        inventario.get(i).getPrdNombre(),
-                                        inventario.get(i).getPrdDescripcion(),
-                                        inventario.get(i).getLprStock(),
-                                        inventario.get(i).getPrdStockMaximo(),
-                                        inventario.get(i).getPrdStockMinimo(),
-                                        inventario.get(i).getLprFechaCaducidad(),
-                                        inventario.get(i).getCprDescripcion(),
-                                        inventario.get(i).getUndDescripcion(),
-                                        inventario.get(i).getLprEstado()
-                                    }
-                                );
-                            }
+            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Todos");
 
-                            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
-                            break;
+            for (int i = 0; i <inventario.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        inventario.get(i).getLprId(), 
+                        inventario.get(i).getPrdId(),
+                        inventario.get(i).getPrdNombre(),
+                        inventario.get(i).getPrdDescripcion(),
+                        inventario.get(i).getLprStock(),
+                        inventario.get(i).getPrdStockMaximo(),
+                        inventario.get(i).getPrdStockMinimo(),
+                        inventario.get(i).getLprFechaCaducidad(),
+                        inventario.get(i).getCprDescripcion(),
+                        inventario.get(i).getUndDescripcion(),
+                        inventario.get(i).getLprEstado()
+                    }
+                );
+            }
+
+            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
+            break;
         }
     }
     

@@ -26,6 +26,10 @@ import java.util.ArrayList;
 public class UsuarioConexion
 { 
     
+    //****************************
+    // Metodos públicos
+    //***************************
+    
     /**
     * 
     * Método que retorna los registros de la tabla usuarios y areas desde la bdd.
@@ -73,7 +77,6 @@ public class UsuarioConexion
     }
     
     /**
-    * 
     * Método que retorna los registros de la tabla areas desde la bdd. 
     * @return ArrayList de objetos tipo AreasModel
     */
@@ -148,7 +151,6 @@ public class UsuarioConexion
     }
 
     /**
-    * 
     * @param LstElements ArrayList de tipo String
     * Método que se encarga de obtener los indices para los elementos dentro de
     * la lista
@@ -189,7 +191,6 @@ public class UsuarioConexion
     }
     
     /**
-    * 
     * @param UsrId Integer
     * Método que se encarga de obtener todos los indices de la tabla 
     * detalleusuarios para el id del usuario que se le manda como paramétro
@@ -226,7 +227,6 @@ public class UsuarioConexion
     }
     
     /**
-    * 
     * @param UsrId Integer
     * Método que se encarga de obtener las descripciones para los privilegios 
     * de el usuario 
@@ -267,7 +267,6 @@ public class UsuarioConexion
     }
   
     /**
-    * 
     * @param accion String
     * @param usuario Objeto tipo UsuarioModel
     * Método que se encarga de ejecutar el procedimiento almacenado 
@@ -308,7 +307,6 @@ public class UsuarioConexion
     }
     
     /**
-    * 
     * @param accion String
     * @param detalleUsuario Objeto de tipo DetalleUsuariosModel
     * Método que se encarga de ejecutar el procedimiento almacenado 

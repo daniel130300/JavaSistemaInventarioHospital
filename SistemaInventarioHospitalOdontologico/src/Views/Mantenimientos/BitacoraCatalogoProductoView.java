@@ -5,7 +5,7 @@
  */
 package Views.Mantenimientos;
 
-import Controllers.Controllers.BitacoraCatalogoController;
+import Controllers.Controllers.BitacoraCatalogoProductosController;
 import Controllers.Controllers.LoginController;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -23,8 +23,8 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
     public BitacoraCatalogoProductoView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        BitacoraCatalogoController.LlenarTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto);
-        BitacoraCatalogoController.FiltroTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto, this.txtBuscar);
+        BitacoraCatalogoProductosController.LlenarTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto);
+        BitacoraCatalogoProductosController.FiltroTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto, this.txtBuscar);
     }
 
     /**

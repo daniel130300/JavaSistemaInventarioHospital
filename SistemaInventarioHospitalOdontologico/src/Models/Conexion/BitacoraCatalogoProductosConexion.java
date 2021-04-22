@@ -5,7 +5,7 @@
  */
 package Models.Conexion;
 
-import Models.Models.BitacoraCatalogoModel;
+import Models.Models.BitacoraCatalogoProductosModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,21 +18,25 @@ import javax.swing.JOptionPane;
  * @author Héctor López
  * 
  */
-public class BitacoraCatalogoConexion {
+public class BitacoraCatalogoProductosConexion 
+{
+    
+    //****************************
+    // Metodos públicos
+    //***************************
     
     /**
     * Método que retorna los registros de la tabla bitacoracatalogoproductos
     * desde la bdd.
-    * 
     * @return ArrayList de Objetos Tipo BitacoraCatalogoModel
     */
-    public static ArrayList<BitacoraCatalogoModel> ListadoBitacoraCatalogo() 
+    public static ArrayList<BitacoraCatalogoProductosModel> ListadoBitacoraCatalogo() 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
-        ArrayList<BitacoraCatalogoModel> bitacorascatalogo = new ArrayList<>();
+        ArrayList<BitacoraCatalogoProductosModel> bitacorascatalogo = new ArrayList<>();
         try 
         {
             con = Conexion.getConexion(con);
@@ -43,7 +47,7 @@ public class BitacoraCatalogoConexion {
             
             while (rss.next()) 
             {
-                BitacoraCatalogoModel bitacoracatalogo = new BitacoraCatalogoModel();
+                BitacoraCatalogoProductosModel bitacoracatalogo = new BitacoraCatalogoProductosModel();
                 bitacoracatalogo.setBcpId(rss.getInt("BcpId"));
                 bitacoracatalogo.setUsrUsuario(rss.getString("UsrUsuario"));
                 bitacoracatalogo.setPrdId(rss.getInt("PrdId"));

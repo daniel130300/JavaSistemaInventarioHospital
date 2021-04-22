@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
 *
-* @author danie
+* @author Héctor López
 */
 
 public class MenuInicioController 

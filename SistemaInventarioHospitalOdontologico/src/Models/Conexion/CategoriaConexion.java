@@ -18,8 +18,14 @@ import javax.swing.JOptionPane;
 /**
 * @author Héctor López
 */
+
 public class CategoriaConexion 
-{
+{   
+    
+    //****************************
+    // Metodos públicos
+    //***************************
+    
     /**
     * Método que retorna los registros de la tabla categoriasproductos
     * desde la bdd.
@@ -59,7 +65,6 @@ public class CategoriaConexion
     }
     
     /**
-    * 
     * @param accion String
     * @param categoria Objeto de tipo CategoriasModel
     * Método que se encarga de ejecutar el procedimiento almacenado 

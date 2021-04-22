@@ -320,7 +320,7 @@ public class UsuarioController extends GeneralController
     * Método que se encarga de pasar los campos de la clase usuarioCache a 
     * los JTextFields y JComboxes correspondientes para poder ser editados y
     * retorna el Id del usuario
-    * @return 
+    * @return Integer
     */
     public static Integer setDatosEditarFromCache(JTable tableUsuarios, 
             JTextField txtIdentidad, JTextField txtNombre, 

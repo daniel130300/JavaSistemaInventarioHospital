@@ -22,7 +22,8 @@ import javax.swing.JOptionPane;
  *
  * @author fgodo
  */
-public class CatalogoProductoConexion {
+public class CatalogoProductoConexion 
+{
     
     public static ArrayList<CatalogoProductoModel> ListadoProducto() 
     {
@@ -66,12 +67,7 @@ public class CatalogoProductoConexion {
         
         return productos;
     }
-
-
-
-
-
-    
+   
     public static ArrayList<CategoriasModel> ListadoCategorias() 
     {
         Connection con = null;
@@ -225,9 +221,7 @@ public class CatalogoProductoConexion {
         }      
         
     }       
-    
-    
-    
+
     public static String MantenimientoCatalogoProducto(String accion, CatalogoProductoModel producto )
     {
         String estado = "";

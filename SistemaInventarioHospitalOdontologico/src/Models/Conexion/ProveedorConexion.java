@@ -16,12 +16,19 @@ import java.sql.CallableStatement;
 import java.sql.Types;
 
 /**
- *
- * @author danie
- */
+*
+* @author Franciso Godoy
+*/
 public class ProveedorConexion 
 {
+    //****************************
+    // Metodos públicos
+    //***************************
     
+    /**
+    * Método que retorna los registros de la tabla proveedores
+    * @return ArrayList de objetos tipo ProveedorModel
+    */
     public static ArrayList<ProveedorModel> ListadoProveedores() 
     {
         Connection con = null;
@@ -61,6 +68,13 @@ public class ProveedorConexion
         return proveedores;
     }
     
+    /**
+    * @param accion String
+    * @param proveedor ProveedorModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoProveedores
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoProveedores(String accion, ProveedorModel proveedor)
     {
         String estado = "";

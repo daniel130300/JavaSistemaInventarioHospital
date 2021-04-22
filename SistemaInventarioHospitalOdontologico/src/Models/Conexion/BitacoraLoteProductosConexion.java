@@ -5,7 +5,7 @@
  */
 package Models.Conexion;
 
-import Models.Models.BitacoraLoteModel;
+import Models.Models.BitacoraLoteProductosModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,21 +18,24 @@ import javax.swing.JOptionPane;
 * @author Héctor López
 */
 
-public class BitacoraLoteConexion 
+public class BitacoraLoteProductosConexion 
 {
+    //****************************
+    // Metodos públicos
+    //***************************
+    
     /**
     * Método que retorna los registros de la tabla bitacoraloteproductos 
     * desde la bdd.
-    * 
     * @return ArrayList de Objetos Tipo BitacoraLoteModel
     */
-    public static ArrayList<BitacoraLoteModel> ListadoBitacoraLote() 
+    public static ArrayList<BitacoraLoteProductosModel> ListadoBitacoraLote() 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
-        ArrayList<BitacoraLoteModel> bitacoraslote = new ArrayList<>();
+        ArrayList<BitacoraLoteProductosModel> bitacoraslote = new ArrayList<>();
         try 
         {
             con = Conexion.getConexion(con);
@@ -43,7 +46,7 @@ public class BitacoraLoteConexion
             
             while (rss.next()) 
             {
-                BitacoraLoteModel bitacoralote = new BitacoraLoteModel();
+                BitacoraLoteProductosModel bitacoralote = new BitacoraLoteProductosModel();
                 bitacoralote.setBcpId(rss.getInt("BcpId"));
                 bitacoralote.setUsrUsuario(rss.getString("UsrUsuario"));
                 bitacoralote.setLprId(rss.getInt("LprId"));

@@ -17,10 +17,18 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author may_g
+ * @author Maryury Zuniga
  */
 public class UnidadesConexion {
+    //****************************
+    // Metodos publicos
+    //***************************
     
+    /**
+     * Metodo que retorna los registros de la table tableUnidades
+     * desde la bdd.
+     * @return ArrayList de objeto tipo UnidadesModel
+     */
      public static ArrayList<UnidadesModel> ListadoUnidades() 
     {
         Connection con = null;
@@ -53,7 +61,12 @@ public class UnidadesConexion {
         
         return unidades;
     }
-     
+     /**
+      * Metodo que ejecuta el procedimiento almacenado MantenimientoUnidades
+      * @param accion String
+      * @param unidad Objeto de tipo UnidadesModel
+      * @return String que contiene el parametro de salida del procedimiento
+      */
      public static String MantenimientoUnidades(String accion, UnidadesModel unidad)
     {
         String estado = "";

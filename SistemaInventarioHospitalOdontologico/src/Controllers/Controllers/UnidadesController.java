@@ -24,10 +24,23 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author may_g
+ * @author Maryury Zuniga
  */
 public class UnidadesController {
+    //**************************
+    // Metodos publicos
+    //**************************
     
+    /*
+    *@ param accion String
+    * @param id Integer
+    * @param descripcion String
+    * @param estado Srting
+    * @param errDescripcion JLabel
+    *   Dependiendo si los datos ingresados son incorrectos segun las validaciones 
+    *   se retornara true de no ser asi false.
+    *   @return Boolean
+    */
     public static Boolean MantenimientoUnidades(String accion, Integer id, 
             String descripcion, String estado, JLabel errDescripcion)
     { 
@@ -110,7 +123,15 @@ public class UnidadesController {
         
         return error;
     }
-     
+     /**
+      * Metodo encargado de pasar los datos de la tabla a los JTextFields
+      * correspondientes para ser editados, retorna el id de la unidad de la tabla
+      * @param seleccion
+      * @param tableUnidades
+      * @param txtDescripcion
+      * @param cmbEstado
+      * @return Integer
+      */
       public static Integer setDatosEditarFromTable(int seleccion, JTable tableUnidades, 
             JTextField txtDescripcion, JComboBox cmbEstado)
     {
@@ -122,7 +143,11 @@ public class UnidadesController {
         
         return UndId;
     }  
-      
+    /**
+     * Metodo para el llenado de JTable table Unidades con datos obtenidos 
+     * del metodo ListadoUnidades() de la clase UnidadesConexion
+     * @param tableUnidades 
+     */
       public static void LlenarTableUnidades(JTable tableUnidades) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
@@ -143,6 +168,12 @@ public class UnidadesController {
         }
         FormatoTabla(tableUnidades, modelo.getColumnCount());
     }
+      /**
+       * Metodo encargado del filtrado de la tabla tableUnidades a partir de la 
+       * busqueda del usuario
+       * @param tableUnidades
+       * @param fieldBusqueda 
+       */
     public static void FiltroTableUnidades(JTable tableUnidades, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUnidades.getModel());

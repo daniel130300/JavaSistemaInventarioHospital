@@ -7,7 +7,9 @@ package Models.Models;
 
 /**
  *
- * @author may_g
+ * @author Maryury Zuniga
+ * Clase que se encarga de definir el modelo de los datos 
+ * en UnidadesController
  */
 public class UnidadesModel {
     

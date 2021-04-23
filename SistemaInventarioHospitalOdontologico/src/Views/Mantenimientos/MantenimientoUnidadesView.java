@@ -106,7 +106,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 txtDescripcionActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 220, 30));
+        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 220, 20));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -151,7 +151,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableUnidades);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 750, 270));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 770, 270));
 
         lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));

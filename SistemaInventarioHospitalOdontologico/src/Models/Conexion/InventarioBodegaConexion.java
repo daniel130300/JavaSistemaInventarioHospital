@@ -187,7 +187,7 @@ public class InventarioBodegaConexion
             String query;
             con = Conexion.getConexion(con); 
             
-            CrearTablaTemporal();
+            CrearTablaTemporal(con);
             
             query = "{CALL MantenimientoInventarioBodega(?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
@@ -219,19 +219,18 @@ public class InventarioBodegaConexion
      * loggedusuario para guardar el id usuario que esta
      * loggueado en el momento. 
      */
-    private static void CrearTablaTemporal(){
+    private static void CrearTablaTemporal(Connection conexion){
         Connection con = null;
         PreparedStatement stm;     
-         try 
+        try 
         {
-            con = Conexion.getConexion(con);
+            con = conexion;
             String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
                     + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
             UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
             stm = con.prepareStatement(query);
             stm.setInt(1, usuario.getUsrId());
             stm.executeUpdate();
-            con.close();
         } 
         catch (SQLException e) 
         {

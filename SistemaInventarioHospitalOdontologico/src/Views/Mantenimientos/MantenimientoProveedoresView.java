@@ -23,7 +23,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     public MantenimientoProveedoresView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        ProveedorController.LlenarTableProveedores(tableProveedores);
+        ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
         ProveedorController.FiltroTableProveedores(tableProveedores, txtBuscar);
         this.LlenarDatos();
     }
@@ -335,7 +335,6 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        cmbEstado.setEnabled(false);
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEstadoActionPerformed(evt);
@@ -468,7 +467,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
             this.lblErrorTelefono, this.lblErrorContacto , this.lblErrorDireccion) )
         {
             this.LimpiarInputs();
-            ProveedorController.LlenarTableProveedores(tableProveedores);
+            ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -484,14 +483,14 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
             this.btnEditar.setEnabled(false);
             this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
-            ProveedorController.LlenarTableProveedores(tableProveedores);
+            ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.btnAgregar.setEnabled(true);
         this.btnEditar.setEnabled(false);
-        this.cmbEstado.setEnabled(false);
+        this.cmbEstado.setEnabled(true);
         this.tableProveedores.clearSelection();
         this.btnVisualizar.setEnabled(true); 
         this.LimpiarInputs();

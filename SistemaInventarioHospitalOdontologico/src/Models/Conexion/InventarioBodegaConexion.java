@@ -24,6 +24,18 @@ import javax.swing.JOptionPane;
 public class InventarioBodegaConexion 
 {
     
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
+    
+    
+    /**
+    * @param accion String
+    * Método que retorna los registros de la tabla Lote producto y Catalogos de productos desde la bdd,
+    * dependiendo de la acción que el usuario realice, ya sea mostrar los registros inactivos, activos o 
+    * todos.
+    * @return ArrayList de objetos tipo InventarioBodegaModel
+    */
     public static ArrayList<InventarioBodegaModel> ListadoInventarioBodega(String accion) 
     {
         Connection con = null;
@@ -158,44 +170,14 @@ public class InventarioBodegaConexion
         return bodega;
     }
     
-    /* private static void CrearTablaTemporal(){
-        Connection con = null;
-        PreparedStatement stm;     
-         try 
-        {
-            con = Conexion.getConexion(con);
-            String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
-                    + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
-            UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
-            stm = con.prepareStatement(query);
-            stm.setInt(1, usuario.getUsrId());
-            stm.executeQuery();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }      
-        
-    }
-    
-    private static void EliminarTablaTemporal(){
-        Connection con = null;
-        Statement stm;     
-         try 
-        {
-            con = Conexion.getConexion(con);
-            String query = "Drop table loggedusuario ";
-            stm = con.createStatement();
-            stm.executeQuery(query);
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }      
-        
-    }*/
-    
+    /**
+     * 
+     * @param accion String
+     * @param inventario InventarioBodegaModel
+     * Método que se encarga de ejecutar el procedimiento almacenado 
+     * MantenimientoInventarioBodega.
+     * @return String el cual contiene el parametro de salida del procedimiento. 
+     */
     public static String MantenimientoInventarioBodega(String accion, InventarioBodegaModel inventario)
     {
         String estado = "";
@@ -204,6 +186,8 @@ public class InventarioBodegaConexion
         {
             String query;
             con = Conexion.getConexion(con); 
+            
+            CrearTablaTemporal();
             
             query = "{CALL MantenimientoInventarioBodega(?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
@@ -216,8 +200,6 @@ public class InventarioBodegaConexion
             cs.executeUpdate();
             estado = cs.getString(6);
             
-            //EliminarTablaTemporal();
-            
             con.close();
  
         }
@@ -226,5 +208,35 @@ public class InventarioBodegaConexion
             estado = e.toString();
         } 
         return estado;
+    }
+    
+    // **************************************************
+    // Método Privado
+    // **************************************************
+    
+    /**
+     * Método que se encarga de crear la tabla temporal
+     * loggedusuario para guardar el id usuario que esta
+     * loggueado en el momento. 
+     */
+    private static void CrearTablaTemporal(){
+        Connection con = null;
+        PreparedStatement stm;     
+         try 
+        {
+            con = Conexion.getConexion(con);
+            String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
+                    + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
+            UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
+            stm = con.prepareStatement(query);
+            stm.setInt(1, usuario.getUsrId());
+            stm.executeUpdate();
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }      
+        
     }
 }

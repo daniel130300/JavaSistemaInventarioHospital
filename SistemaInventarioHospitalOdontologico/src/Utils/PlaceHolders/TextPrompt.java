@@ -13,6 +13,15 @@ import javax.swing.text.*;
  * @author Katering Osorto
  */
 
+/**
+ * La clase TextPrompt mostrará un mensaje sobre un componente 
+ * de texto cuando el documento del campo de texto esté vacío. 
+ * La propiedad Mostrar se utiliza para determinar la visibilidad de la solicitud.
+ * 
+ * La fuente y el color de primer plano de la solicitud se establecerán de forma 
+ * predeterminada en esas propiedades del componente de texto principal. 
+ * Eres libre de cambiar las propiedades después de la construcción de la clase.
+ */
 public class TextPrompt extends JLabel implements FocusListener, DocumentListener {
 
 	private static final long serialVersionUID = 1L;
@@ -54,22 +63,22 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 	}
 
 	/**
-	 * Convenience method to change the alpha value of the current foreground
-	 * Color to the specifice value.
+	 * Método de conveniencia para cambiar el valor alfa 
+         * del color de primer plano actual al valor específico.
 	 *
-	 * @param alpha
-	 *            value in the range of 0 - 1.0.
+	 * @param alpha float
+	 * valor en el rango de 0 - 1.0.
 	 */
 	public void changeAlpha(float alpha) {
 		changeAlpha((int) (alpha * 255));
 	}
 
 	/**
-	 * Convenience method to change the alpha value of the current foreground
-	 * Color to the specifice value.
+	 * Método de conveniencia para cambiar el valor alfa 
+         * del color de primer plano actual al valor específico.
 	 *
-	 * @param alpha
-	 * value in the range of 0 - 255.
+	 * @param alpha in
+	 * valor en el rango de 0 - 255.
 	 */
 	public void changeAlpha(int alpha) {
 		alpha = alpha > 255 ? 255 : alpha < 0 ? 0 : alpha;
@@ -84,84 +93,89 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 	}
 
 	/**
-	 * Convenience method to change the style of the current Font. The style
-	 * values are found in the Font class. Common values might be: Font.BOLD,
-	 * Font.ITALIC and Font.BOLD + Font.ITALIC.
+	 * Método de conveniencia para cambiar el estilo de la fuente actual. 
+         * Los valores de estilo se encuentran en la clase Font. 
+         * Los valores comunes pueden ser: Font.BOLD, Font.ITALIC 
+         * y Font.BOLD + Font.ITALIC.
 	 *
-	 * @param style
-	 *  value representing the the new style of the Font.
+	 * @param style int
+	 *  valor que representa el nuevo estilo de la fuente.
 	 */
 	public void changeStyle(int style) {
 		setFont(getFont().deriveFont(style));
 	}
 
 	/**
-	 * Get the Show property
+	 * Obtener la propiedad Show
 	 *
-	 * @return the Show property.
+	 * @return la propiedad Show
 	 */
 	public Show getShow() {
 		return show;
 	}
 
 	/**
-	 * Set the prompt Show property to control when the promt is shown. Valid
-	 * values are:
+	 * Establezca la propiedad Mostrar mensaje para controlar 
+         * cuándo se muestra el mensaje. Los valores válidos son: 
+         * 
+         * Show.AWLAYS (predeterminado): muestra siempre el mensaje 
+         * Show.Focus_GAINED: muestra el mensaje cuando el componente 
+         * gana foco (y oculta el mensaje cuando se pierde el foco). 
+         * Show.Focus_LOST: muestra el mensaje cuando el componente pierde el foco 
+         * (y oculta el mensaje cuando se gana el enfoque).
 	 *
-	 * Show.AWLAYS (default) - always show the prompt Show.Focus_GAINED - show
-	 * the prompt when the component gains focus (and hide the prompt when focus
-	 * is lost) Show.Focus_LOST - show the prompt when the component loses focus
-	 * (and hide the prompt when focus is gained)
-	 *
-	 * @param show
-	 * a valid Show enum
+	 * @param show Show
+	 * una enumeración de Show válida.
 	 */
 	public void setShow(Show show) {
 		this.show = show;
 	}
-
-	/**
-	 * Get the showPromptOnce property
+        
+        /**
+	 * Obtener la propiedad showPromptOnce
 	 *
-	 * @return the showPromptOnce property.
+	 * @return la propiedad showPromptOnce
 	 */
 	public boolean getShowPromptOnce() {
 		return showPromptOnce;
 	}
 
 	/**
-	 * Show the prompt once. Once the component has gained/lost focus once, the
-	 * prompt will not be shown again.
+	 * Muestre el mensaje una vez. Una vez que el componente haya 
+         * ganado / perdido el foco una vez, el mensaje no se volverá a mostrar.
 	 *
-	 * @param showPromptOnce
-	 * when true the prompt will only be shown once, otherwise it
-	 * will be shown repeatedly.
+	 * @param showPromptOnce boolean
+	 * Cuando es verdadero, el mensaje solo se mostrará una vez; 
+         * de lo contrario, se mostrará repetidamente.
 	 */
 	public void setShowPromptOnce(boolean showPromptOnce) {
 		this.showPromptOnce = showPromptOnce;
 	}
 
 	/**
-	 * Check whether the prompt should be visible or not. The visibility will
-	 * change on updates to the Document and on focus changes.
+	 * Compruebe si el mensaje debe estar visible o no. 
+         * La visibilidad cambiará con las actualizaciones 
+         * del Documento y con los cambios de enfoque.
 	 */
 	private void checkForPrompt() {
-		// Text has been entered, remove the prompt
+		// Se ha introducido texto, elimine el mensaje
 
 		if (document.getLength() > 0) {
 			setVisible(false);
 			return;
 		}
 
-		// Prompt has already been shown once, remove it
+		// El mensaje ya se ha mostrado una vez, elimínelo
 
 		if (showPromptOnce && focusLost > 0) {
 			setVisible(false);
 			return;
 		}
 
-		// Check the Show property and component focus to determine if the
-		// prompt should be displayed.
+		/**
+                 * Compruebe la propiedad Mostrar y el foco del componente
+                 * para determinar si se debe mostrar el mensaje.
+                 */
 
 		if (component.hasFocus()) {
 			if (show == Show.ALWAYS || show == Show.FOCUS_GAINED)
@@ -176,7 +190,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 		}
 	}
 
-	// Implement FocusListener
+	// Implementar FocusListener
 
 	public void focusGained(FocusEvent e) {
 		checkForPrompt();
@@ -187,7 +201,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
 		checkForPrompt();
 	}
 
-	// Implement DocumentListener
+	// Implementar DocumentListener
 
 	public void insertUpdate(DocumentEvent e) {
 		checkForPrompt();

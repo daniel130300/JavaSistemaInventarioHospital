@@ -10,6 +10,10 @@ import Models.Models.InventarioBodegaModel;
 /**
  *
  * @author Katering Osorto
+ * 
+ * Clase que permite pasar los datos seleccionados en la pantalla 
+ * TablaGrandeMantenimientoInventarioBodegaView a MantenimientoInventarioBodegaView e 
+ * InventarioBodegaView
  */
 public class InventarioBodegaCache {
     private static boolean DatosCompartidos = false;

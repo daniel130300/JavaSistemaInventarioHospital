@@ -25,7 +25,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     
     public MantenimientoInventarioBodegaView() {
         initComponents();
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Activos");
+        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
         this.tableBodega.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
@@ -324,7 +324,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 this.numStock.setEnabled(false);
                 this.btnCancelar1.setEnabled(false);
                 this.LimpiarInputs();
-                InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Activos");
+                InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
             }
     }//GEN-LAST:event_btnEditarActionPerformed
 

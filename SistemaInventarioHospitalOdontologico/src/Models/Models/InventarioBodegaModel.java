@@ -8,6 +8,10 @@ package Models.Models;
 /**
  *
  * @author Katering Osorto
+ * 
+ * Clase que se encarga de definir el modelo para los datos a mandar al 
+ * procedimiento MantenimientoInventarioBodega
+ * en InventarioBodegaController
  */
 public class InventarioBodegaModel 
 {

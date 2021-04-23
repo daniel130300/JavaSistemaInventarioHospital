@@ -22,7 +22,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableUnidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        UnidadesController.LlenarTableUnidades(this.tableUnidades); 
+        UnidadesController.LlenarTableUnidades(this.tableUnidades,"Todos"); 
         UnidadesController.FiltroTableUnidades(this.tableUnidades, this.txtBuscar);
     }
     
@@ -68,6 +68,10 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
+        lblBuscar1 = new javax.swing.JLabel();
+        rbnTodos = new javax.swing.JRadioButton();
+        rbnActivos = new javax.swing.JRadioButton();
+        rbnInactivos = new javax.swing.JRadioButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -106,7 +110,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 txtDescripcionActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 220, 20));
+        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 220, 20));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -155,7 +159,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
 
         lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 220, 20));
+        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 220, 20));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -166,7 +170,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 90, 30));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 90, 30));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -177,7 +181,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, 30));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 100, 30));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -189,7 +193,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 80, 30));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 80, 30));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
@@ -239,6 +243,45 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         );
 
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
+        lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
+        lblBuscar1.setText("Visualizar:");
+        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+
+        rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
+        rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rbnTodos.setForeground(new java.awt.Color(242, 242, 242));
+        rbnTodos.setSelected(true);
+        rbnTodos.setText("Todos");
+        rbnTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnTodosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+
+        rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
+        rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rbnActivos.setForeground(new java.awt.Color(242, 242, 242));
+        rbnActivos.setText("Activos");
+        rbnActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnActivosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
+
+        rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
+        rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rbnInactivos.setForeground(new java.awt.Color(242, 242, 242));
+        rbnInactivos.setText("Inactivos");
+        rbnInactivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbnInactivosActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 810, 540));
 
@@ -317,7 +360,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         this.btnEditar.setEnabled(false);
         this.cmbEstado.setEnabled(false);
         this.LimpiarInputs();
-        UnidadesController.LlenarTableUnidades(tableUnidades);
+        UnidadesController.LlenarTableUnidades(tableUnidades,"Todos");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -327,7 +370,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
             this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
     {
         this.LimpiarInputs();
-        UnidadesController.LlenarTableUnidades(tableUnidades);
+        UnidadesController.LlenarTableUnidades(tableUnidades,"Todos");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -361,6 +404,24 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void rbnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnTodosActionPerformed
+        UnidadesController.LlenarTableUnidades(tableUnidades, "Todos");
+        rbnActivos.setSelected(false);
+        rbnInactivos.setSelected(false);
+    }//GEN-LAST:event_rbnTodosActionPerformed
+
+    private void rbnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnActivosActionPerformed
+        UnidadesController.LlenarTableUnidades(tableUnidades, "Activos");
+        rbnTodos.setSelected(false);
+        rbnInactivos.setSelected(false);
+    }//GEN-LAST:event_rbnActivosActionPerformed
+
+    private void rbnInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInactivosActionPerformed
+        UnidadesController.LlenarTableUnidades(tableUnidades, "Inactivos");
+        rbnActivos.setSelected(false);
+        rbnTodos.setSelected(false);
+    }//GEN-LAST:event_rbnInactivosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1430,6 +1491,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBuscar;
+    private javax.swing.JLabel lblBuscar1;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblErrorDescripcion;
     private javax.swing.JLabel lblEstado;
@@ -1444,6 +1506,9 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
+    private javax.swing.JRadioButton rbnActivos;
+    private javax.swing.JRadioButton rbnInactivos;
+    private javax.swing.JRadioButton rbnTodos;
     private javax.swing.JTable tableUnidades;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;

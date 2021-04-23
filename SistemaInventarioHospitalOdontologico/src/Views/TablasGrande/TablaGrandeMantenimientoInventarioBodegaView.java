@@ -24,7 +24,7 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
     public TablaGrandeMantenimientoInventarioBodegaView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Activos");
+        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
         InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
         TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }

@@ -193,34 +193,87 @@ public class UsuarioController extends GeneralController
     * @param tableUsuarios JTable
     * Método que se encarga de llenar el JTable tableUsuarios
     * con los datos que se obtienen del método ListadoUsuarios() 
-    * de la clase UsuarioConexion
+    * de la clase UsuarioConexion dependiendo de la acción
+     * que el usuario realice.
     */
-    public static void LlenarTableUsuarios(JTable tableUsuarios) 
+    public static void LlenarTableUsuarios(JTable tableUsuarios,String accion) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUsuarios.getModel(); 
         modelo.setRowCount(0);
         ArrayList<UsuarioModel> usuarios = new ArrayList<>();
-        usuarios = UsuarioConexion.ListadoUsuarios();
         
-        for (int i = 0; i <usuarios.size(); i++) 
-        {
-            modelo.addRow
-            (new Object[]
-                {
-                    usuarios.get(i).getUsrId(), 
-                    usuarios.get(i).getUsrIdentidad(),
-                    usuarios.get(i).getUsrNombre(),
-                    usuarios.get(i).getUsrApellido(),
-                    usuarios.get(i).getUsrCorreo(),
-                    usuarios.get(i).getUsrUsuario(),
-                    usuarios.get(i).getUsrEstado(),
-                    usuarios.get(i).getAreId(),
-                    usuarios.get(i).getAreDescripcion()
-                }
-            );
+        switch(accion){
+            
+            case "Activos":
+                            usuarios = UsuarioConexion.ListadoUsuarios("Activos");
+        
+                            for (int i = 0; i <usuarios.size(); i++) 
+                            {
+                                modelo.addRow
+                                (new Object[]
+                                    {
+                                        usuarios.get(i).getUsrId(), 
+                                        usuarios.get(i).getUsrIdentidad(),
+                                        usuarios.get(i).getUsrNombre(),
+                                        usuarios.get(i).getUsrApellido(),
+                                        usuarios.get(i).getUsrCorreo(),
+                                        usuarios.get(i).getUsrUsuario(),
+                                        usuarios.get(i).getUsrEstado(),
+                                        usuarios.get(i).getAreId(),
+                                        usuarios.get(i).getAreDescripcion()
+                                    }
+                                );
+                            }
+
+                            FormatoTabla(tableUsuarios, modelo.getColumnCount());
+                            break;
+            case "Inactivos":
+                            usuarios = UsuarioConexion.ListadoUsuarios("Inactivos");
+        
+                            for (int i = 0; i <usuarios.size(); i++) 
+                            {
+                                modelo.addRow
+                                (new Object[]
+                                    {
+                                        usuarios.get(i).getUsrId(), 
+                                        usuarios.get(i).getUsrIdentidad(),
+                                        usuarios.get(i).getUsrNombre(),
+                                        usuarios.get(i).getUsrApellido(),
+                                        usuarios.get(i).getUsrCorreo(),
+                                        usuarios.get(i).getUsrUsuario(),
+                                        usuarios.get(i).getUsrEstado(),
+                                        usuarios.get(i).getAreId(),
+                                        usuarios.get(i).getAreDescripcion()
+                                    }
+                                );
+                            }
+
+                            FormatoTabla(tableUsuarios, modelo.getColumnCount());
+                            break;
+            case "Todos":
+                            usuarios = UsuarioConexion.ListadoUsuarios("Todos");
+        
+                            for (int i = 0; i <usuarios.size(); i++) 
+                            {
+                                modelo.addRow
+                                (new Object[]
+                                    {
+                                        usuarios.get(i).getUsrId(), 
+                                        usuarios.get(i).getUsrIdentidad(),
+                                        usuarios.get(i).getUsrNombre(),
+                                        usuarios.get(i).getUsrApellido(),
+                                        usuarios.get(i).getUsrCorreo(),
+                                        usuarios.get(i).getUsrUsuario(),
+                                        usuarios.get(i).getUsrEstado(),
+                                        usuarios.get(i).getAreId(),
+                                        usuarios.get(i).getAreDescripcion()
+                                    }
+                                );
+                            }
+
+                            FormatoTabla(tableUsuarios, modelo.getColumnCount());
+                            break;
         }
-        
-        FormatoTabla(tableUsuarios, modelo.getColumnCount());
     }
     
     /**

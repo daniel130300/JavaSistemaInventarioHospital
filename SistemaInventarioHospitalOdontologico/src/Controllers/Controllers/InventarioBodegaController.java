@@ -28,7 +28,26 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Katering Osorto
  */
+
 public class InventarioBodegaController {
+
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
+    
+    /**
+     * 
+     * @param accion String
+     * @param Id Integer
+     * @param Stock Integer
+     * @param FechaCaducidad String
+     * @param Estado String
+     * @param errFechaCaducidad JLabel
+     * @param errStock JLabel
+     * Si los datos ingresados son incorrectos de acorde a las validaciones
+     * retorna true, de lo contrario retorna false.
+     * @return Boolean
+     */
     
     public static Boolean MantenimientoInventarioBodega(String accion, 
             Integer Id, Integer Stock, String FechaCaducidad, 
@@ -69,46 +88,17 @@ public class InventarioBodegaController {
         return !(mntError == false && generalValidacionError == false); 
     }    
     
-    private static boolean mensajesRetroalimentacion(String msj, String resultado)
-    {
-        boolean error = false;
-        
-        switch (resultado) 
-        {
-            case "OK":
-                JOptionPane.showMessageDialog(null, msj);                   
-            break;
-        }
-        
-        return error;
-    }
-    
-    private static boolean validacionesGenerales(String trimmedFechaCaducidad,
-        JLabel errFechaCaducidad)
-    {
-        boolean error = false;
-       
-        if(!Validaciones.ValidarFormatoFecha(trimmedFechaCaducidad))
-        {
-           errFechaCaducidad.setText("Formato de Fecha Incorrecto");
-           error = true;
-        }
-
-        if(Validaciones.ValidarFecha(trimmedFechaCaducidad))
-        {
-           errFechaCaducidad.setText("La Fecha de Caducidad no debe ser anterior a la actual");
-           error = true;
-        }
-               
-        if(Validaciones.validarCampoVacio(trimmedFechaCaducidad))
-        {
-            errFechaCaducidad.setText("Es un campo obligatorio");
-            error = true;
-        }
-        
-        return error;
-    }
-    
+    /**
+     * 
+     * @param seleccion int
+     * @param tableBodega JTable
+     * @param numStock JSpinner
+     * @param txtFechaCaducidad JTextField
+     * @param cmbEstado JComboBox
+     * Método que se encarga de pasar los campos de la tabla a los JTextFields, JSpinner 
+     * y JComboxes correspondientes para poder ser editados y retorna el Id de Lote del Producto.
+     * @return Integer
+     */
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableBodega, 
              JSpinner numStock, JTextField txtFechaCaducidad, JComboBox cmbEstado)
             
@@ -121,7 +111,17 @@ public class InventarioBodegaController {
 
             return LprId;
         }
-    
+    /**
+     * 
+     * @param tableBodega JTable
+     * @param numStock JSpinner
+     * @param txtFechaCaducidad JTextField
+     * @param cmbEstado JComboBox
+     * Método que se encarga de pasar los campos de la clase InventarioBodegaCache a 
+     * los JTextFields, JSpinner y JComboxes correspondientes para poder ser editados y
+     * retorna el Id de Lote Producto.
+     * @return Integer
+     */
     public static Integer setDatosEditarFromCache(JTable tableBodega, JSpinner numStock,
              JTextField txtFechaCaducidad, JComboBox cmbEstado)
     {
@@ -139,6 +139,13 @@ public class InventarioBodegaController {
         return LprId;
     }
     
+    /**
+     * 
+     * @param tableBodega JTable
+     * @param fieldBusqueda JTextField
+     * Método que se encarga de filtrar la tabla tableBodega
+     * a partir de la busqueda del Lote Producto.
+     */
     public static void FiltroTableInventarioBodega(JTable tableBodega, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableBodega.getModel());
@@ -180,6 +187,15 @@ public class InventarioBodegaController {
         );  
     }
     
+     /**
+     * 
+     * @param tableInventarioBodega JTable
+     * @param accion String
+     * Método que se encarga de llenar el JTable tableBodega 
+     * con los datos que se obtienen del método ListadoInventarioBodega() 
+     * de la clase InventarioBodegaConexion dependiendo de la acción
+     * que el usuario realice.
+     */
     public static void LlenarTableInventarioBodega(JTable tableInventarioBodega, String accion) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableInventarioBodega.getModel(); 
@@ -265,4 +281,64 @@ public class InventarioBodegaController {
         }
     }
     
+    // **************************************************
+    // Métodos Privados
+    // **************************************************
+    
+    /**
+     * 
+     * @param msj String 
+     * @param resultado String
+     * Método que se encarga de mostrar en pantalla si la realización ha 
+     * sido realizada con éxito.
+     * @return Boolean
+     */
+    private static boolean mensajesRetroalimentacion(String msj, String resultado)
+    {
+        boolean error = false;
+        
+        switch (resultado) 
+        {
+            case "OK":
+                JOptionPane.showMessageDialog(null, msj);                   
+            break;
+        }
+        
+        return error;
+    }
+    
+    /**
+     * 
+     * @param trimmedFechaCaducidad String
+     * @param errFechaCaducidad JLabel
+     * Si los datos ingresados son incorrectos de acorde a las validaciones
+     * establece los errores en los JLabels correspondientes y retorna true, 
+     * de lo contrario retorna false.
+     * @return Boolean
+     */
+    private static boolean validacionesGenerales(String trimmedFechaCaducidad,
+        JLabel errFechaCaducidad)
+    {
+        boolean error = false;
+       
+        if(!Validaciones.ValidarFormatoFecha(trimmedFechaCaducidad))
+        {
+           errFechaCaducidad.setText("Formato de Fecha Incorrecto");
+           error = true;
+        }
+
+        if(Validaciones.ValidarFecha(trimmedFechaCaducidad))
+        {
+           errFechaCaducidad.setText("La Fecha de Caducidad no debe ser anterior a la actual");
+           error = true;
+        }
+               
+        if(Validaciones.validarCampoVacio(trimmedFechaCaducidad))
+        {
+            errFechaCaducidad.setText("Es un campo obligatorio");
+            error = true;
+        }
+        
+        return error;
+    }
 }

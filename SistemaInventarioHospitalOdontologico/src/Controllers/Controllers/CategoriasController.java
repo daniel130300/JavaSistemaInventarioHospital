@@ -111,28 +111,65 @@ public class CategoriasController
     * @param tableCategorias JTable
     * Método que se encarga de llenar el JTable tableCategorias
     * con los datos que se obtienen del método ListadoCategorias() 
-    * de la clase CategoriaConexion
+    * de la clase CategoriaConexion dependiendo de la accion que el usuario
+    * realice.
+     * @param accion
     * 
     */
-    public static void LlenarTableCategorias(JTable tableCategorias) 
+    public static void LlenarTableCategorias(JTable tableCategorias,String accion) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableCategorias.getModel(); 
         modelo.setRowCount(0);
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
-        categorias = CategoriaConexion.ListadoCategorias();
-        
-        for (int i = 0; i <categorias.size(); i++) 
-        {
-            modelo.addRow
-            (new Object[]
-                {
-                    categorias.get(i).getCprId(),
-                    categorias.get(i).getCprDescripcion(),
-                    categorias.get(i).getCprEstado()
-                }
-            );
+        switch(accion){
+            case "Activos":
+            categorias = CategoriaConexion.ListadoCategorias("Activos");
+
+            for (int i = 0; i <categorias.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        categorias.get(i).getCprId(),
+                        categorias.get(i).getCprDescripcion(),
+                        categorias.get(i).getCprEstado()
+                    }
+                );
+            }
+            FormatoTabla(tableCategorias, modelo.getColumnCount());
+            break;
+         case "Inactivos":
+            categorias = CategoriaConexion.ListadoCategorias("Inactivos");
+
+            for (int i = 0; i <categorias.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        categorias.get(i).getCprId(),
+                        categorias.get(i).getCprDescripcion(),
+                        categorias.get(i).getCprEstado()
+                    }
+                );
+            }
+            FormatoTabla(tableCategorias, modelo.getColumnCount());
+            break;  
+        case "Todos":
+            categorias = CategoriaConexion.ListadoCategorias("Todos");
+
+            for (int i = 0; i <categorias.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        categorias.get(i).getCprId(),
+                        categorias.get(i).getCprDescripcion(),
+                        categorias.get(i).getCprEstado()
+                    }
+                );
+            }
+            FormatoTabla(tableCategorias, modelo.getColumnCount());
         }
-        FormatoTabla(tableCategorias, modelo.getColumnCount());
     }
     
     /**

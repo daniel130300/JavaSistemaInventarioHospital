@@ -104,19 +104,54 @@ public class UnidadesController
         
         return UndId;
     } 
-      
+    
     /**
     * @param tableUnidades 
     * Metodo para el llenado de JTable table Unidades con datos obtenidos 
-    * del metodo ListadoUnidades() de la clase UnidadesConexion
+    * del metodo ListadoUnidades() de la clase UnidadesConexion dependiendo de
+    * la accion que realice el usuario.
+     * @param accion
     */
-    public static void LlenarTableUnidades(JTable tableUnidades) 
+    public static void LlenarTableUnidades(JTable tableUnidades,String accion) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        unidades = UnidadesConexion.ListadoUnidades();
-        
+        switch(accion){
+            case "Activos":
+            unidades = UnidadesConexion.ListadoUnidades("Activos");
+
+            for (int i = 0; i <unidades.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        unidades.get(i).getUndId(),
+                        unidades.get(i).getUndDescripcion(),
+                        unidades.get(i).getUndEstado()
+                    }
+                );
+            }
+            FormatoTabla(tableUnidades, modelo.getColumnCount());
+            break;
+         case "Inactivos":
+            unidades = UnidadesConexion.ListadoUnidades("Inactivos");
+
+            for (int i = 0; i <unidades.size(); i++) 
+            {
+                modelo.addRow
+                (new Object[]
+                    {
+                        unidades.get(i).getUndId(),
+                        unidades.get(i).getUndDescripcion(),
+                        unidades.get(i).getUndEstado()
+                    }
+                );
+            }
+            FormatoTabla(tableUnidades, modelo.getColumnCount());
+            break;  
+        case "Todos":
+            unidades = UnidadesConexion.ListadoUnidades("Todos");    
         for (int i = 0; i <unidades.size(); i++) 
         {
             modelo.addRow
@@ -130,14 +165,14 @@ public class UnidadesController
         }
         FormatoTabla(tableUnidades, modelo.getColumnCount());
     }
-      
-    /**
-    * @param tableUnidades JTable
-    * @param fieldBusqueda JTextField
-    * Metodo encargado del filtrado de la tabla tableUnidades a partir de la 
-    * busqueda del usuario
+    } 
+    /*
+    * @param tableCategorias JTable
+    * @param fieldBusqueda JTextField 
+    * Método que se encarga de filtrar la tabla tableUnidades
+    * a partir de la busqueda del usuario
     */
-    public static void FiltroTableUnidades(JTable tableUnidades, JTextField fieldBusqueda)
+     public static void FiltroTableUnidades(JTable tableUnidades, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUnidades.getModel());
         tableUnidades.setRowSorter(rowSorter);
@@ -176,8 +211,11 @@ public class UnidadesController
             }
         }
         );  
-    } 
-    
+    }   
+    // **************************************************
+    // Métodos Privados
+    // **************************************************
+  
     /**
     * 
     * @param msj String

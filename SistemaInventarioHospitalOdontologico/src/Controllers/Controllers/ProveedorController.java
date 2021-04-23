@@ -343,31 +343,82 @@ public class ProveedorController
     * @param tableProveedores JTable
     * Método que se encarga de llenar el JTable tableProveedores
     * con los datos que se obtienen del método ListadoProveedores() 
-    * de la clase ProveedorConexion
+    * de la clase ProveedorConexion dependiendo de la acción
+     * que el usuario realice.
     */
-    public static void LlenarTableProveedores(JTable tableProveedores) 
+    public static void LlenarTableProveedores(JTable tableProveedores, String accion) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableProveedores.getModel(); 
         modelo.setRowCount(0);
         ArrayList<ProveedorModel> proveedores = new ArrayList<>();
-        proveedores = ProveedorConexion.ListadoProveedores();
         
-        for (int i = 0; i <proveedores.size(); i++) 
-        {
-            modelo.addRow
-            (new Object[]
-                {
-                    proveedores.get(i).getProId(), 
-                    proveedores.get(i).getProRTN(),
-                    proveedores.get(i).getProNombre(),
-                    proveedores.get(i).getProCorreo(),
-                    proveedores.get(i).getProTelefono(),
-                    proveedores.get(i).getProContacto(),
-                    proveedores.get(i).getProDireccion(),
-                    proveedores.get(i).getProEstado()
-                }
-            );
+        switch(accion){
+            
+            case "Activos":
+                            proveedores = ProveedorConexion.ListadoProveedores("Activos");
+        
+                            for (int i = 0; i <proveedores.size(); i++) 
+                            {
+                                modelo.addRow
+                                (new Object[]
+                                    {
+                                        proveedores.get(i).getProId(), 
+                                        proveedores.get(i).getProRTN(),
+                                        proveedores.get(i).getProNombre(),
+                                        proveedores.get(i).getProCorreo(),
+                                        proveedores.get(i).getProTelefono(),
+                                        proveedores.get(i).getProContacto(),
+                                        proveedores.get(i).getProDireccion(),
+                                        proveedores.get(i).getProEstado()
+                                    }
+                                );
+                            }
+                            FormatoTabla(tableProveedores, modelo.getColumnCount());
+                            break;
+                            
+            case "Inactivos":
+                            proveedores = ProveedorConexion.ListadoProveedores("Inactivos");
+        
+                            for (int i = 0; i <proveedores.size(); i++) 
+                            {
+                                modelo.addRow
+                                (new Object[]
+                                    {
+                                        proveedores.get(i).getProId(), 
+                                        proveedores.get(i).getProRTN(),
+                                        proveedores.get(i).getProNombre(),
+                                        proveedores.get(i).getProCorreo(),
+                                        proveedores.get(i).getProTelefono(),
+                                        proveedores.get(i).getProContacto(),
+                                        proveedores.get(i).getProDireccion(),
+                                        proveedores.get(i).getProEstado()
+                                    }
+                                );
+                            }
+                            FormatoTabla(tableProveedores, modelo.getColumnCount());
+                            break;
+                            
+             case "Todos":
+                            proveedores = ProveedorConexion.ListadoProveedores("Todos");
+        
+                            for (int i = 0; i <proveedores.size(); i++) 
+                            {
+                                modelo.addRow
+                                (new Object[]
+                                    {
+                                        proveedores.get(i).getProId(), 
+                                        proveedores.get(i).getProRTN(),
+                                        proveedores.get(i).getProNombre(),
+                                        proveedores.get(i).getProCorreo(),
+                                        proveedores.get(i).getProTelefono(),
+                                        proveedores.get(i).getProContacto(),
+                                        proveedores.get(i).getProDireccion(),
+                                        proveedores.get(i).getProEstado()
+                                    }
+                                );
+                            }
+                            FormatoTabla(tableProveedores, modelo.getColumnCount());
+                            break;
         }
-        FormatoTabla(tableProveedores, modelo.getColumnCount());
     }
 }

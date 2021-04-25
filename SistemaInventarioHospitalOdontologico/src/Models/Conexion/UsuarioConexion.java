@@ -19,52 +19,141 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+*/
+
 public class UsuarioConexion
 { 
-    public static ArrayList<UsuarioModel> ListadoUsuarios() 
+    
+    //****************************
+    // Metodos públicos
+    //***************************
+    
+    /**
+    * 
+    * Método que retorna los registros de la tabla usuarios y areas desde la bdd,
+    * dependiendo de la acción que el usuario realice, ya sea mostrar los registros inactivos, activos o 
+    * todos.
+    * @return ArrayList de objetos tipo UsuarioModel
+    */
+    public static ArrayList<UsuarioModel> ListadoUsuarios(String accion) 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
         ArrayList<UsuarioModel> usuarios = new ArrayList<>();
-        try 
-        {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT u.*, a.AreDescripcion "
-                    + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                    + "WHERE UsrId!=1 AND UsrId!=2 ORDER BY u.UsrId ASC";
+        
+        switch(accion){
             
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                UsuarioModel usuario = new UsuarioModel();
-                usuario.setUsrId(rss.getInt("UsrId"));
-                usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
-                usuario.setUsrNombre(rss.getString("UsrNombre"));;
-                usuario.setUsrApellido(rss.getString("UsrApellido"));
-                usuario.setUsrCorreo(rss.getString("UsrCorreo"));
-                usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                usuario.setUsrEstado(rss.getString("UsrEstado"));
-                usuario.setAreId(rss.getInt("AreId"));
-                usuario.setAreDescripcion(rss.getString("AreDescripcion"));
-                usuarios.add(usuario);
-            } 
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
+            case "Activos":
+                            try 
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT u.*, a.AreDescripcion "
+                                        + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
+                                        + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Activo' "
+                                        + "ORDER BY u.UsrId ASC";
+
+                                rss = stm.executeQuery(query);
+
+                                while (rss.next()) 
+                                {
+                                    UsuarioModel usuario = new UsuarioModel();
+                                    usuario.setUsrId(rss.getInt("UsrId"));
+                                    usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
+                                    usuario.setUsrNombre(rss.getString("UsrNombre"));;
+                                    usuario.setUsrApellido(rss.getString("UsrApellido"));
+                                    usuario.setUsrCorreo(rss.getString("UsrCorreo"));
+                                    usuario.setUsrUsuario(rss.getString("UsrUsuario"));
+                                    usuario.setUsrEstado(rss.getString("UsrEstado"));
+                                    usuario.setAreId(rss.getInt("AreId"));
+                                    usuario.setAreDescripcion(rss.getString("AreDescripcion"));
+                                    usuarios.add(usuario);
+                                } 
+                                con.close();
+                            } 
+                            catch (SQLException e) 
+                            {
+                                JOptionPane.showMessageDialog(null,e);
+                            }
+                            break;
+            case "Inactivos":
+                            try 
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT u.*, a.AreDescripcion "
+                                        + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
+                                        + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Inactivo' "
+                                        + "ORDER BY u.UsrId ASC";
+
+                                rss = stm.executeQuery(query);
+
+                                while (rss.next()) 
+                                {
+                                    UsuarioModel usuario = new UsuarioModel();
+                                    usuario.setUsrId(rss.getInt("UsrId"));
+                                    usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
+                                    usuario.setUsrNombre(rss.getString("UsrNombre"));;
+                                    usuario.setUsrApellido(rss.getString("UsrApellido"));
+                                    usuario.setUsrCorreo(rss.getString("UsrCorreo"));
+                                    usuario.setUsrUsuario(rss.getString("UsrUsuario"));
+                                    usuario.setUsrEstado(rss.getString("UsrEstado"));
+                                    usuario.setAreId(rss.getInt("AreId"));
+                                    usuario.setAreDescripcion(rss.getString("AreDescripcion"));
+                                    usuarios.add(usuario);
+                                } 
+                                con.close();
+                            } 
+                            catch (SQLException e) 
+                            {
+                                JOptionPane.showMessageDialog(null,e);
+                            }
+                            break;
+            case "Todos":
+                            try 
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT u.*, a.AreDescripcion "
+                                        + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
+                                        + "WHERE UsrId!=1 AND UsrId!=2 ORDER BY u.UsrId ASC";
+
+                                rss = stm.executeQuery(query);
+
+                                while (rss.next()) 
+                                {
+                                    UsuarioModel usuario = new UsuarioModel();
+                                    usuario.setUsrId(rss.getInt("UsrId"));
+                                    usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
+                                    usuario.setUsrNombre(rss.getString("UsrNombre"));;
+                                    usuario.setUsrApellido(rss.getString("UsrApellido"));
+                                    usuario.setUsrCorreo(rss.getString("UsrCorreo"));
+                                    usuario.setUsrUsuario(rss.getString("UsrUsuario"));
+                                    usuario.setUsrEstado(rss.getString("UsrEstado"));
+                                    usuario.setAreId(rss.getInt("AreId"));
+                                    usuario.setAreDescripcion(rss.getString("AreDescripcion"));
+                                    usuarios.add(usuario);
+                                } 
+                                con.close();
+                            } 
+                            catch (SQLException e) 
+                            {
+                                JOptionPane.showMessageDialog(null,e);
+                            }
+                            break;
         }
         
         return usuarios;
     }
     
+    /**
+    * Método que retorna los registros de la tabla areas desde la bdd. 
+    * @return ArrayList de objetos tipo AreasModel
+    */
     public static ArrayList<AreasModel> ListadoAreas() 
     {
         Connection con = null;
@@ -98,6 +187,10 @@ public class UsuarioConexion
         return areas;
     }
     
+    /**
+    * Método que retorna los registros de la tabla privilegios desde la bdd.
+    * @return ArrayList de objetos tipo PrivilegiosModel
+    */
     public static ArrayList<PrivilegiosModel> ListadoPrivilegios() 
     {
         Connection con = null;
@@ -131,6 +224,12 @@ public class UsuarioConexion
         return privilegios;
     }
 
+    /**
+    * @param LstElements ArrayList de tipo String
+    * Método que se encarga de obtener los indices para los elementos dentro de
+    * la lista
+    * @return ArrayList de tipo Integer
+    */
     public static ArrayList<Integer> getIndexesofLstElements(ArrayList<String> LstElements)
     {
         Connection con = null;
@@ -165,6 +264,12 @@ public class UsuarioConexion
         return Indexes;
     }
     
+    /**
+    * @param UsrId Integer
+    * Método que se encarga de obtener todos los indices de la tabla 
+    * detalleusuarios para el id del usuario que se le manda como paramétro
+    * @return ArrayList de tipo Integer
+    */
     public static ArrayList<Integer> getDtuIndexesofUsr(Integer UsrId)
     {
         Connection con = null;
@@ -195,6 +300,12 @@ public class UsuarioConexion
         return Indexes;
     }
     
+    /**
+    * @param UsrId Integer
+    * Método que se encarga de obtener las descripciones para los privilegios 
+    * de el usuario 
+    * @return ArrayList de objetos tipo PrivilegiosModel
+    */
     public static ArrayList<PrivilegiosModel> getUsrPrivilegiosDescripcion(Integer UsrId)
     {
         Connection con = null;
@@ -229,6 +340,13 @@ public class UsuarioConexion
         return privilegios;
     }
   
+    /**
+    * @param accion String
+    * @param usuario Objeto tipo UsuarioModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoUsuario
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoUsuarios(String accion, UsuarioModel usuario)
     {
         String estado = "";
@@ -262,6 +380,13 @@ public class UsuarioConexion
         return estado;
     }
     
+    /**
+    * @param accion String
+    * @param detalleUsuario Objeto de tipo DetalleUsuariosModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoDetalleUsuarios
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoDetalleUsuarios(String accion, DetalleUsuariosModel detalleUsuario)
     {
         String estado = "";

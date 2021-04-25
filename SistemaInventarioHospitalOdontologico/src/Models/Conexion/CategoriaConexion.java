@@ -16,46 +16,121 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author danie
- */
+* @author Héctor López
+*/
+
 public class CategoriaConexion 
-{
+{   
     
-    public static ArrayList<CategoriasModel> ListadoCategorias() 
+    //****************************
+    // Metodos públicos
+    //***************************
+    
+    /**
+    * Método que retorna los registros de la tabla categoriasproductos
+    * desde la bdd, dependiendo de la accion que realice el usuario; mostrar todos 
+    * los registros, solo los activos o solo los inactivos.
+     * @param accion
+    * @return ArrayList de objeto tipo CategoriasModel
+    */
+    public static ArrayList<CategoriasModel> ListadoCategorias(String accion) 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
-        try 
-        {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT * FROM categoriasproductos;";
+         switch(accion){
             
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                CategoriasModel categoria = new CategoriasModel();
-                categoria.setCprId(rss.getInt("CprId"));
-                categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                categoria.setCprEstado(rss.getString("CprEstado"));;
-                categorias.add(categoria);
-            } 
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
+            case "Activos":
+                            try
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT *FROM categoriasproductos"
+                                        + " WHERE CprEstado = 'Activo'";
+                                
+                                 rss = stm.executeQuery(query); 
+                                 
+                                 while(rss.next())
+                                 {
+                                     CategoriasModel categoria = new CategoriasModel();
+                                     categoria.setCprId(rss.getInt("CprId"));
+                                     categoria.setCprDescripcion(rss.getString("CprDescripcion"));
+                                     categoria.setCprEstado(rss.getString("CprEstado"));
+                                     categorias.add(categoria);
+                                 }  
+                                    con.close();
+                            } 
+                            catch (SQLException e)
+                            {
+                                 JOptionPane.showMessageDialog(null,e);
+                            } 
+                            break;
+            case "Inactivos":
+                            try
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT *FROM categoriasproductos "
+                                        + "WHERE CprEstado = 'Inactivo'";
+                                       
+                                
+                                 rss = stm.executeQuery(query); 
+                                 
+                                 while(rss.next())
+                                 {
+                                     CategoriasModel categoria = new CategoriasModel();
+                                     categoria.setCprId(rss.getInt("CprId"));
+                                     categoria.setCprDescripcion(rss.getString("CprDescripcion"));
+                                     categoria.setCprEstado(rss.getString("CprEstado"));
+                                     categorias.add(categoria);
+                                 }  
+                                    con.close();
+                            } 
+                            catch (SQLException e)
+                            {
+                                 JOptionPane.showMessageDialog(null,e);
+                            } 
+                            break; 
+            case "Todos":
+                            try
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT *FROM categoriasproductos ";
+                                      
+                                       
+                                
+                                 rss = stm.executeQuery(query); 
+                                 
+                                 while(rss.next())
+                                 {
+                                     CategoriasModel categoria = new CategoriasModel();
+                                     categoria.setCprId(rss.getInt("CprId"));
+                                     categoria.setCprDescripcion(rss.getString("CprDescripcion"));
+                                     categoria.setCprEstado(rss.getString("CprEstado"));
+                                     categorias.add(categoria);
+                                 }  
+                                    con.close();
+                            } 
+                            catch (SQLException e)
+                            {
+                                 JOptionPane.showMessageDialog(null,e);
+                            } 
+                            break;                
         }
         
         return categorias;
-    }
+    }    
     
-    
+    /**
+    * @param accion String
+    * @param categoria Objeto de tipo CategoriasModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoCategorias
+    * @return String el cual contiene el parametro de salida del procedimiento.
+    */
     public static String MantenimientoCategorias(String accion, CategoriasModel categoria)
     {
         String estado = "";

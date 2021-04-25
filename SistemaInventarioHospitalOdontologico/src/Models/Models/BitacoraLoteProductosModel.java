@@ -7,10 +7,16 @@ package Models.Models;
 
 /**
  *
- * @author may_g
+ * @author Maryury Zuniga
+ *  Clase que se encarga de establecer el modelo de datos para la Bitacora del 
+ *  Lote de Productos
  */
-public class BitacoraLoteModel 
+public class BitacoraLoteProductosModel 
 {
+    // **************************************************
+    // Variables
+    // **************************************************
+    
     private Integer BcpId;
     private String UsrUsuario;
     private Integer LprId;
@@ -20,19 +26,27 @@ public class BitacoraLoteModel
     private String BcpDescripcionCambios;
     private String BcpFecha;
 
-    public Integer getBcpId() {
+    // **************************************************
+    // Getters y Setters
+    // **************************************************
+    
+    public Integer getBcpId() 
+    {
         return BcpId;
     }
 
-    public void setBcpId(Integer BcpId) {
+    public void setBcpId(Integer BcpId) 
+    {
         this.BcpId = BcpId;
     }
 
-    public String getUsrUsuario() {
+    public String getUsrUsuario() 
+    {
         return UsrUsuario;
     }
 
-    public void setUsrUsuario(String UsrUsuario) {
+    public void setUsrUsuario(String UsrUsuario) 
+    {
         this.UsrUsuario = UsrUsuario;
     }
 
@@ -40,23 +54,28 @@ public class BitacoraLoteModel
         return BcpAccion;
     }
 
-    public void setBcpAccion(String BcpAccion) {
+    public void setBcpAccion(String BcpAccion) 
+    {
         this.BcpAccion = BcpAccion;
     }
 
-    public String getBcpDescripcionCambios() {
+    public String getBcpDescripcionCambios() 
+    {
         return BcpDescripcionCambios;
     }
 
-    public void setBcpDescripcionCambios(String BcpDescripcionCambios) {
+    public void setBcpDescripcionCambios(String BcpDescripcionCambios) 
+    {
         this.BcpDescripcionCambios = BcpDescripcionCambios;
     }
 
-    public String getBcpFecha() {
+    public String getBcpFecha() 
+    {
         return BcpFecha;
     }
 
-    public void setBcpFecha(String BcpFecha) {
+    public void setBcpFecha(String BcpFecha) 
+    {
         this.BcpFecha = BcpFecha;
     }
 
@@ -64,7 +83,8 @@ public class BitacoraLoteModel
         return PrdId;
     }
 
-    public void setPrdId(Integer PrdId) {
+    public void setPrdId(Integer PrdId) 
+    {
         this.PrdId = PrdId;
     }
 
@@ -72,7 +92,8 @@ public class BitacoraLoteModel
         return PrdNombre;
     }
 
-    public void setPrdNombre(String PrdNombre) {
+    public void setPrdNombre(String PrdNombre) 
+    {
         this.PrdNombre = PrdNombre;
     } 
 
@@ -80,7 +101,8 @@ public class BitacoraLoteModel
         return LprId;
     }
 
-    public void setLprId(Integer LprId) {
+    public void setLprId(Integer LprId) 
+    {
         this.LprId = LprId;
     }
 }

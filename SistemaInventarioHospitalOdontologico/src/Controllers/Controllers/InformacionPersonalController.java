@@ -14,11 +14,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+*/
 public class InformacionPersonalController 
 {
+    // **************************************************
+    // Métodos Públicos
+    // **************************************************
+    
+    /**
+    * 
+    * @param nombre String
+    * @param apellido String
+    * @param correo String
+    * @param errNombre JLabel
+    * @param errApellido JLabel
+    * @param errCorreo JLabel
+    * Si los datos ingresados son incorrectos de acorde a las validaciones
+    * retorna true, de lo contrario retorna false.
+    * @return boolean
+    */
     public static boolean EditarInformacionPersonal(String nombre, 
             String apellido, String correo, JLabel errNombre, 
             JLabel errApellido, JLabel errCorreo)
@@ -63,6 +79,34 @@ public class InformacionPersonalController
        return !(mntError==false && generalValidacionError==false);
     }
     
+    /**
+     * 
+     * @param txtNombre JTextField
+     * @param txtApellido JTextField
+     * @param txtCorreo JTextField
+     * Método que se encarga de llenar los JTextFields que recibe 
+     * como parámetros con los datos del usuario logueado.
+     */
+    public static void setCamposEditar(JTextField txtNombre, 
+            JTextField txtApellido, JTextField txtCorreo)
+    {
+        txtNombre.setText(UsuarioLogueadoCache.getUsrNombre());
+        txtApellido.setText(UsuarioLogueadoCache.getUsrApellido());
+        txtCorreo.setText(UsuarioLogueadoCache.getUsrCorreo());
+    }
+    
+    // **************************************************
+    // Métodos Privados
+    // **************************************************
+    
+    /**
+    * 
+    * @param errNombre JLabel
+    * @param errApellido JLabel
+    * @param errCorreo JLabel
+    * Método que se encarga de borrar los errores desplegados en los JLabels
+    * que recibe como parámetros.
+    */
     private static void setErroresToNull(JLabel errNombre, JLabel errApellido,
             JLabel errCorreo)
     {
@@ -71,6 +115,19 @@ public class InformacionPersonalController
         errCorreo.setText(null);
     }
     
+    /**
+    * 
+    * @param trimmedNombre String
+    * @param trimmedApellido String
+    * @param trimmedCorreo String
+    * @param errNombre JLabel
+    * @param errApellido JLabel
+    * @param errCorreo JLabel
+    * Si los datos ingresados son incorrectos de acorde a las validaciones
+    * establece los errores en los JLabels correspondientes y retorna true, 
+    * de lo contrario retorna false. 
+    * @return boolean
+    */    
     private static boolean validacionesGenerales(String trimmedNombre, 
             String trimmedApellido, String trimmedCorreo, JLabel errNombre, 
             JLabel errApellido, JLabel errCorreo)
@@ -114,13 +171,5 @@ public class InformacionPersonalController
         }
 
         return error;
-    }
-    
-    public static void setCamposEditar(JTextField txtNombre, 
-            JTextField txtApellido, JTextField txtCorreo)
-    {
-        txtNombre.setText(UsuarioLogueadoCache.getUsrNombre());
-        txtApellido.setText(UsuarioLogueadoCache.getUsrApellido());
-        txtCorreo.setText(UsuarioLogueadoCache.getUsrCorreo());
     }
 }

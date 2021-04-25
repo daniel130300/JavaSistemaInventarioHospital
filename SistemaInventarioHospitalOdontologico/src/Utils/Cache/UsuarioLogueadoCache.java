@@ -10,66 +10,95 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+* Clase que se encarga de guardar los datos del usuario logueado en el sistema.
+*/
+
 public class UsuarioLogueadoCache 
 {  
+    // **************************************************
+    // Variables
+    // **************************************************
+    
     private static Integer UsrId;
     private static String UsrUsuario;
     private static String UsrNombre;
     private static String UsrApellido;
     private static String UsrCorreo;
     private static ArrayList<PrivilegiosModel> privilegios;
+    
+    // **************************************************
+    // Getters y Setters
+    // **************************************************
 
-    public static Integer getUsrId() {
+    public static Integer getUsrId() 
+    {
         return UsrId;
     }
 
-    public static void setUsrId(Integer UsrId) {
+    public static void setUsrId(Integer UsrId) 
+    {
         UsuarioLogueadoCache.UsrId = UsrId;
     }
 
-    public static String getUsrUsuario() {
+    public static String getUsrUsuario() 
+    {
         return UsrUsuario;
     }
 
-    public static void setUsrUsuario(String UsrUsuario) {
+    public static void setUsrUsuario(String UsrUsuario) 
+    {
         UsuarioLogueadoCache.UsrUsuario = UsrUsuario;
     }
 
-    public static String getUsrNombre() {
+    public static String getUsrNombre() 
+    {
         return UsrNombre;
     }
 
-    public static void setUsrNombre(String UsrNombre) {
+    public static void setUsrNombre(String UsrNombre) 
+    {
         UsuarioLogueadoCache.UsrNombre = UsrNombre;
     }
 
-    public static String getUsrApellido() {
+    public static String getUsrApellido() 
+    {
         return UsrApellido;
     }
 
-    public static void setUsrApellido(String UsrApellido) {
+    public static void setUsrApellido(String UsrApellido) 
+    {
         UsuarioLogueadoCache.UsrApellido = UsrApellido;
     }
 
-    public static String getUsrCorreo() {
+    public static String getUsrCorreo() 
+    {
         return UsrCorreo;
     }
 
-    public static void setUsrCorreo(String UsrCorreo) {
+    public static void setUsrCorreo(String UsrCorreo) 
+    {
         UsuarioLogueadoCache.UsrCorreo = UsrCorreo;
     }
 
-    public static ArrayList<PrivilegiosModel> getPrivilegios() {
+    public static ArrayList<PrivilegiosModel> getPrivilegios() 
+    {
         return privilegios;
     }
 
-    public static void setPrivilegios(ArrayList<PrivilegiosModel> privilegios) {
+    public static void setPrivilegios(ArrayList<PrivilegiosModel> privilegios) 
+    {
         UsuarioLogueadoCache.privilegios = privilegios;
     }    
-          
+    
+    /**
+    * Método que se encarga de darle el formato correcto a los privilegios del 
+    * usuario logueado por medio de un HashMap dentro de un HashMap,
+    * en el cual la llave es el modulo principal y el hashmap dentro son 
+    * todos los submodulos dentro del submodulo.
+    * @return Hashmap de Hashmaps
+    */
     public static  HashMap<String, HashMap<Integer, String>> getHashUsrPrivilegios()
     {
         //Modulos generales
@@ -98,33 +127,32 @@ public class UsuarioLogueadoCache
                     privilegiosModulos.put("suministros", privilegiosSuministros); 
                 break;
                 
-                 case 3:
+                case 3:
                     privilegiosProveedores.put(privilegio.getPriId(), privilegio.getPriDescripcion());
                     privilegiosModulos.put("proveedores", privilegiosProveedores);
-               break;
+                break;
                
-               case 4:
+                case 4:
                     privilegiosCompras.put(privilegio.getPriId(), privilegio.getPriDescripcion());
                     privilegiosModulos.put("compras", privilegiosCompras);
-               break;
+                break;
 
-               case 5:
+                case 5:
                     privilegiosBodega.put(privilegio.getPriId(), privilegio.getPriDescripcion());
                     privilegiosModulos.put("bodega", privilegiosBodega);
-               break;
+                break;
                
-               case 6:
+                case 6:
                     privilegiosUsuarios.put(privilegio.getPriId(), privilegio.getPriDescripcion());
                     privilegiosModulos.put("usuarios", privilegiosUsuarios);
-               break;
+                break;
                
-               case 7:
+                case 7:
                     privilegiosAlertas.put(privilegio.getPriId(), privilegio.getPriDescripcion());
                     privilegiosModulos.put("alertas", privilegiosAlertas);
-               break;
+                break;
             }
         }
-       
        return privilegiosModulos;
     }
 }

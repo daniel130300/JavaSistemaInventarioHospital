@@ -303,4 +303,29 @@ public class ProveedorController
         }
         FormatoTabla(tableProveedores, modelo.getColumnCount());
     }
+        public static void LlenarTableDetalleProductoProveedores(JTable tableProveedores) 
+    {  
+        DefaultTableModel modelo = (DefaultTableModel) tableProveedores.getModel(); 
+        modelo.setRowCount(0);
+        ArrayList<ProveedorModel> proveedores = new ArrayList<>();
+        proveedores = ProveedorConexion.ListadoDetalleProductoProveedores();
+        
+        for (int i = 0; i <proveedores.size(); i++) 
+        {
+            modelo.addRow
+            (new Object[]
+                {
+                    proveedores.get(i).getProId(), 
+                    proveedores.get(i).getProRTN(),
+                    proveedores.get(i).getProNombre(),
+                    proveedores.get(i).getProCorreo(),
+                    proveedores.get(i).getProTelefono(),
+                    proveedores.get(i).getProContacto(),
+                    proveedores.get(i).getProDireccion(),
+                    proveedores.get(i).getProEstado()
+                }
+            );
+        }
+        FormatoTabla(tableProveedores, modelo.getColumnCount());
+    }
 }

@@ -8,11 +8,17 @@ package Controllers.Controllers;
 
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.CatalogoProductoConexion;
+import Models.Conexion.ProveedorConexion;
 import Models.Models.CatalogoProductoModel;
 import Models.Models.CategoriasModel;
+import Models.Models.DetalleCatalogoProductosModel;
+import Models.Models.ProveedorModel;
 import Models.Models.UnidadesModel;
 import Utils.Cache.CatalogoProductoCache;
+import Utils.Cache.ProveedorCache;
 import Utils.Validators.Validaciones;
+import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
+import static Views.Mantenimientos.MantenimientoCatalogoBodegaView.tableProveedores;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -34,7 +40,9 @@ import javax.swing.table.TableRowSorter;
  * @author fgodo
  */
 public class CatalogoProductoController 
-{
+{   
+    static DefaultTableModel modelotableProoveedores = new DefaultTableModel(); 
+    static JTable TableDetalle;
     public static Boolean MantenimientoProducto(String accion, Integer id,
             String nombre, String descripcion, String stockmaximo , String stockminimo, 
             String estado,Integer id_categoria , Integer id_unidad,
@@ -56,14 +64,14 @@ public class CatalogoProductoController
             {
                 case "insertar":
 
-                        mntError = CatalogoProductoController.insertarProveedor(
+                        mntError = CatalogoProductoController.insertarProducto(
                                 trimmedNombre, trimmedDescripcion, trimmedStockMaximo, 
                                 trimmedStockMinimo, id_categoria, id_unidad);
                     
                 break;
                 
                 case "editar":
-                        mntError = CatalogoProductoController.editarProveedor(id, 
+                        mntError = CatalogoProductoController.editarProducto(id, 
                                 trimmedNombre, trimmedDescripcion, trimmedStockMaximo, 
                                 trimmedStockMinimo, id_categoria, id_unidad, estado);              
                 break;
@@ -71,53 +79,141 @@ public class CatalogoProductoController
         }
         
         return !(mntError == false && generalValidacionError == false);
-    } 
-    private static boolean insertarProveedor(String trimmedNombre,String trimmedDescripcion,
+    }
+    private static Boolean MantenimientoProveedor(String accion, Integer id, 
+            Integer PrdId, DefaultTableModel modelosTproveedores)
+    {
+  
+        boolean error = false;
+        DetalleCatalogoProductosModel detalleproductomodel = new DetalleCatalogoProductosModel();        
+        switch(accion)
+        {
+            case "insertar":
+                error = false;
+                for(int i=0; i<modelosTproveedores.getRowCount(); i++)
+                {
+                    detalleproductomodel.setDcpId(0);
+                    detalleproductomodel.setPrdId(PrdId);
+                    detalleproductomodel.setProId(Integer.parseInt(String.valueOf( modelosTproveedores.getValueAt(i, 0))));
+                    String estado = CatalogoProductoConexion.MantenimientoDetalleCatalogoProductos(accion, detalleproductomodel);       
+                    if(!estado.equals("OK"))
+                    {
+                        error = true;
+                    }
+                }
+            break;
+            
+            case "editar":   
+                DetalleCatalogoProductosModel detalleproducto = new DetalleCatalogoProductosModel(); 
+                error = false;
+                for(int i=0; i<detalleproducto.getAllDcpId().size(); i++)
+                {
+                    detalleproductomodel.setDcpId(detalleproducto.getAllDcpId().get(i));
+                    detalleproductomodel.setPrdId(0);
+                    detalleproductomodel.setProId(0);
+                    String estado = CatalogoProductoConexion.MantenimientoDetalleCatalogoProductos("eliminar", detalleproductomodel);       
+                    if(!estado.equals("OK"))
+                    {
+                        error = true;
+                    }
+                }
+                if(!error)
+                {
+                    for(int i=0; i<modelosTproveedores.getRowCount(); i++)
+                    {
+                        detalleproductomodel.setDcpId(0);
+                        detalleproductomodel.setPrdId(PrdId);
+                        detalleproductomodel.setProId(Integer.parseInt(String.valueOf( modelosTproveedores.getValueAt(i, 0)))); 
+                        String estado = CatalogoProductoConexion.MantenimientoDetalleCatalogoProductos(accion, detalleproductomodel);
+                        if(!estado.equals("OK"))
+                        {
+                            error = true;
+                        }
+                    }
+                    
+                }                
+            break;
+        }
+        
+        return error;
+    }     
+    public static void QuitarTablePSeleccionados(Integer ProId)
+    {
+        DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
+        for(int i = 0; i < model.getRowCount(); i++  )
+        {
+            if(ProId == model.getValueAt(i, 0)){
+                model.removeRow(i);
+            }  
+        }
+    }
+    
+    private static boolean insertarProducto(String trimmedNombre,String trimmedDescripcion,
             String trimmedStockMaximo, String trimmedStockMinimo, 
             Integer id_categoria, Integer id_unidad)
     {
         boolean error = false;
         Integer id = 0; 
         String estado = "Activo";
-        JOptionPane.showMessageDialog(null, "Cate: "+id_categoria+" Uni: "+id_unidad);
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
+        DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
+        CatalogoProductoCache cache = new CatalogoProductoCache();
+        DetalleCatalogoProductosModel detalleproducto = new DetalleCatalogoProductosModel();
+        
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
                 trimmedStockMinimo, id_categoria,id_unidad, estado);
-        String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("insertar", productoModel);
+        String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("insertar", productoModel);      
        switch (resultado) 
         {
             case "OK":
+                JOptionPane.showMessageDialog(null, "Producto ingresado con éxito.");    
+                cache.setPrdId(CatalogoProductoConexion.UltimoPrdId());
+                if(MantenimientoProveedor("insertar",0,cache.getPrdId(),model ) == false)
+                {
                     JOptionPane.showMessageDialog(null, "Producto ingresado con éxito.");    
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error ingresando los Proveedores.");
+                }       
             break;
-
             case "errNombre":
                 JOptionPane.showMessageDialog(null, "El Producto ya se encuentra registrado.");
                 error = true;
             break;
-
             default:
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
                 error = true;
             break;
         }
-        
         return error;
     }
-    private static boolean editarProveedor(Integer id,String trimmedNombre,
+    
+    
+    private static boolean editarProducto(Integer id,String trimmedNombre,
             String trimmedDescripcion, String trimmedStockMaximo,String trimmedStockMinimo,
             Integer id_categoria, Integer id_unidad, String estado)
     {
         boolean error = false; 
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
+        DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
+
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
                 trimmedStockMinimo, id_categoria,id_unidad, estado);
         String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("editar", productoModel);
         switch (resultado) 
         {
-            case "OK":
-                    JOptionPane.showMessageDialog(null, "Usuario actualizado con éxito.");      
+            case "OK":   
+                if(MantenimientoProveedor("editar",0,id,model ) == false)
+                {
+                    JOptionPane.showMessageDialog(null, "Producto editar con éxito.");    
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error ingresando los Proveedores.");
+                }      
             break;
             case "errNombre":
                 JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
@@ -148,6 +244,7 @@ public class CatalogoProductoController
             cmbCategoria.setSelectedItem(productoCache.getProducto().getCprDescripcion());
             cmbUnidad.setSelectedItem(productoCache.getProducto().getUndDescripcion());
             cmbEstado.setSelectedItem(productoCache.getProducto().getProdEstado());
+            CatalogoProductoController.ProductosProveedores(MantenimientoCatalogoBodegaView.tableProveedores, PrdId);
         }
         return PrdId;
     }
@@ -168,6 +265,7 @@ public class CatalogoProductoController
         
         return productoModel;
     }   
+    
     public static void FiltroTableProducto(JTable tableUsuarios, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUsuarios.getModel());
@@ -207,12 +305,14 @@ public class CatalogoProductoController
             }
         }
         );  
-    }  
+    } 
     private static boolean validacionesGenerales(String trimmedNombre,String trimmedDescripcion,
         String trimmedStockMaximo, String trimmedStockMinimo, JLabel errNombre, JLabel errDescripcion,
         JLabel errStockMaximo, JLabel errStockMinimo)
     {
         boolean error = false;
+        
+       
         if(!Validaciones.validarLetras(trimmedNombre))
         {
            errNombre.setText("La nombre ingresada es incorrecta");
@@ -258,7 +358,11 @@ public class CatalogoProductoController
            errStockMinimo.setText("El stock mínimo es un campo obligatorio");
            error = true;
         }
-        
+        if(Validaciones.validarTabla(MantenimientoCatalogoBodegaView.tableProveedores)==true)
+        {
+            JOptionPane.showMessageDialog(null,"Error Tabla Proveedores vacía");
+            error = true;
+        } 
         return error;
     }    
     private static void setErroresToNull(JLabel errnombre, JLabel errdescripcion, 
@@ -269,6 +373,45 @@ public class CatalogoProductoController
         errstockmaximo.setText(null);
         errstockminimos.setText(null);
     }     
+
+    public static void AddRowToJTable(Object[] dataRow){
+          DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
+
+          boolean rp= false;
+          System.out.println(dataRow[0]);     
+          for(int i =0 ; i<model.getRowCount();i++){
+               System.out.println(model.getValueAt(i, 0));
+              if(model.getValueAt(i, 0) == dataRow[0] ){
+                  rp=true;
+              }
+          }
+          if(rp==false)
+          {
+            model.addRow(dataRow); 
+          }else{
+              JOptionPane.showMessageDialog(null,"Proveedor ya seleccionado");
+          }     
+    }    
+    public static void ProductosProveedores(JTable tableDetalleProducto,Integer PrdId)
+    {
+        DefaultTableModel modelo = (DefaultTableModel) tableDetalleProducto.getModel(); 
+        modelo.setRowCount(0);
+        ArrayList<DetalleCatalogoProductosModel> detalleproductos = new ArrayList<>();
+        detalleproductos = CatalogoProductoConexion.getDetalleProducto(PrdId);
+        for (int i = 0; i<detalleproductos.size(); i++)
+        {
+              
+             modelo.addRow
+            (new Object[]
+                {
+                    detalleproductos.get(i).getProId(), 
+                    detalleproductos.get(i).getProRTN(),
+                    detalleproductos.get(i).getProNombre()
+                }
+            );
+        }
+        FormatoTabla(tableDetalleProducto, modelo.getColumnCount());
+    }
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableProductos, 
             JTextField txtNombre,JTextArea txtDescripcion, JTextField txtStockMaximo,
             JTextField  txtStockMinimo,JComboBox cmbCategoria,JComboBox cmbUnidad,JComboBox cmbEstado )

@@ -5,7 +5,9 @@
  */
 package Utils.Validators;
 
+import static Views.Mantenimientos.MantenimientoCatalogoBodegaView.tableProveedores;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -62,4 +64,11 @@ public class Validaciones
         N2= Integer.parseInt(n2);
         if(N1>=N2){return  true;}else{return  false;}
     }
+    public static boolean validarTabla(JTable proveedor){
+        if( 0<proveedor.getRowCount()){
+            return false;
+        }else{
+            return true;
+        }
+    }    
 }

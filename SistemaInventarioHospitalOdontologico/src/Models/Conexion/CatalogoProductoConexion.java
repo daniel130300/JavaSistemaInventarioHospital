@@ -6,6 +6,7 @@
 package Models.Conexion;
 import Models.Models.CategoriasModel;
 import Models.Models.CatalogoProductoModel;
+import Models.Models.DetalleCatalogoProductosModel;
 import Models.Models.UnidadesModel;
 import Utils.Cache.UsuarioLogueadoCache;
 import java.sql.CallableStatement;
@@ -66,12 +67,42 @@ public class CatalogoProductoConexion {
         
         return productos;
     }
-
-
-
-
-
-    
+    public static ArrayList<DetalleCatalogoProductosModel> getDetalleProducto(Integer PrdId) 
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        ArrayList<DetalleCatalogoProductosModel> detalleproductos = new ArrayList<>();
+        
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+            String query = "SELECT DcpId, a.ProId, PrdId, ProNombre,ProRTN from detallecatalogoproductos a "
+                    + "INNER JOIN proveedores b ON a.ProId=b.ProId " 
+                    + "WHERE PrdId="+PrdId+" "   
+                    + "ORDER BY DcpId ASC";
+            rss = stm.executeQuery(query); 
+            while (rss.next())  
+            {
+                DetalleCatalogoProductosModel detalleproducto = new DetalleCatalogoProductosModel();
+                detalleproducto.setDcpId(rss.getInt("DcpId"));  
+                detalleproducto.setPrdId(rss.getInt("PrdId"));
+                detalleproducto.setProId(rss.getInt("ProId"));
+                detalleproducto.setProRTN(rss.getString("ProRTN"));
+                detalleproducto.setProNombre(rss.getString("ProNombre"));
+                detalleproductos.add(detalleproducto);
+                detalleproducto.setAllDcpId(detalleproducto.getDcpId());
+            } 
+           
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }        
+        return detalleproductos;
+    }
     public static ArrayList<CategoriasModel> ListadoCategorias() 
     {
         Connection con = null;
@@ -119,7 +150,7 @@ public class CatalogoProductoConexion {
             
             while (rss.next()) 
             {
-                id_categoria=(rss.getInt("CprId"));
+                id_categoria=rss.getInt("CprId");
             }
             con.close();
         } 
@@ -134,7 +165,7 @@ public class CatalogoProductoConexion {
         Connection con = null;
         Statement stm;
         ResultSet rss;        
-         try 
+        try 
         {
             con = Conexion.getConexion(con);
             stm = con.createStatement();
@@ -145,7 +176,7 @@ public class CatalogoProductoConexion {
             
             while (rss.next()) 
             {
-                id_unidades=(rss.getInt("UndId"));
+                id_unidades=rss.getInt("UndId");
             }
             con.close();
         } 
@@ -154,7 +185,34 @@ public class CatalogoProductoConexion {
             JOptionPane.showMessageDialog(null,e);
         }        
         return id_unidades;
-    }        
+    }
+    public static Integer UltimoPrdId ()
+    {   
+        Integer Id=0;
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        try
+        {
+            con=Conexion.getConexion(con);
+            stm = con.createStatement();
+            String query = "SELECT PrdId FROM catalogoproductos "
+                    + "ORDER BY PrdId DESC LIMIT 1;";
+            
+            rss = stm.executeQuery(query);
+            
+            while(rss.next())
+            {
+                Id = rss.getInt("PrdId");
+            }    
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return Id;
+    }     
     public static ArrayList<UnidadesModel> ListadoUnidades() 
     {
         Connection con = null;
@@ -186,8 +244,6 @@ public class CatalogoProductoConexion {
 
         return unidades;
     }
-      
-    
     private static void CrearTablaTemporal(){
         Connection con = null;
         PreparedStatement stm;     
@@ -224,9 +280,27 @@ public class CatalogoProductoConexion {
             JOptionPane.showMessageDialog(null,e);
         }      
         
-    }       
+    }          
     
-    
+    private static void CrearTablaTemporal(Connection conexion){
+                Connection con = null;
+                PreparedStatement stm;     
+                try 
+                {
+                    con = conexion;
+                    String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
+                            + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
+                    UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
+                    stm = con.prepareStatement(query);
+                    stm.setInt(1, usuario.getUsrId());
+                    stm.executeUpdate();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }      
+
+        }    
     
     public static String MantenimientoCatalogoProducto(String accion, CatalogoProductoModel producto )
     {
@@ -234,9 +308,9 @@ public class CatalogoProductoConexion {
         Connection con = null;
         try
         {
-            //CatalogoProductoConexion.CrearTablaTemporal();
             String query;
             con = Conexion.getConexion(con);
+            CrearTablaTemporal(con);
             query = "{CALL MantenimientoCatalogoProductos(?,?,?,?,?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
@@ -251,9 +325,7 @@ public class CatalogoProductoConexion {
             cs.registerOutParameter (10, Types.VARCHAR);         
             cs.executeUpdate();                     
             estado = cs.getString(10);
-            JOptionPane.showMessageDialog(null,estado);
             con.close();
-            //CatalogoProductoConexion.EliminarTablaTemporal();
         }
         catch (SQLException e)
         {
@@ -261,5 +333,30 @@ public class CatalogoProductoConexion {
         }
         return estado;
     }
-    
+    public static String MantenimientoDetalleCatalogoProductos(String accion, DetalleCatalogoProductosModel detalleproductomodel)
+    {
+        String estado = "";
+        Connection con = null;
+        try
+        {
+            String query;
+            con = Conexion.getConexion(con);
+            query = "{CALL MantenimientoDetalleCatalogoProductos(?,?,?,?,?,?)}";
+            CallableStatement cs = con.prepareCall(query);
+            cs.setString            (1, accion);
+            cs.setInt               (2, detalleproductomodel.getDcpId());
+            cs.setInt               (3, detalleproductomodel.getProId());
+            cs.setInt               (4, detalleproductomodel.getPrdId());
+            cs.setInt               (5, 0);
+            cs.registerOutParameter (6, Types.VARCHAR);
+            cs.executeUpdate();
+            estado = cs.getString(6);
+            con.close();
+        }
+        catch (SQLException e)
+        {
+            estado = e.toString();
+        } 
+        return estado;
+    }
 }

@@ -140,7 +140,7 @@
                   </Border>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor de Mano"/>
+                  <Color id="Default Cursor"/>
                 </Property>
               </Properties>
               <Events>
@@ -235,16 +235,19 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="7" rowCount="4">
-                        <Column editable="false" title="Id proveedor" type="java.lang.Object"/>
-                        <Column editable="false" title="Registro Sanitario" type="java.lang.Object"/>
+                        <Column editable="false" title="Id Proveedor" type="java.lang.Object"/>
                         <Column editable="false" title="RTN" type="java.lang.Object"/>
                         <Column editable="false" title="Nombre" type="java.lang.Object"/>
-                        <Column editable="false" title="Correo" type="java.lang.Object"/>
+                        <Column editable="true" title="Correo" type="java.lang.Object"/>
                         <Column editable="false" title="Telefono" type="java.lang.Object"/>
-                        <Column editable="false" title="Direccion" type="java.lang.Object"/>
+                        <Column editable="false" title="Contacto" type="java.lang.Object"/>
+                        <Column editable="false" title="Direcci&#xf3;n" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableProveedoresMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

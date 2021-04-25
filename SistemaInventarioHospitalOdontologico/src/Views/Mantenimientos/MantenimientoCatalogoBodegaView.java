@@ -8,32 +8,44 @@ package Views.Mantenimientos;
 import Controllers.Controllers.CatalogoProductoController;
 import Controllers.Controllers.LoginController;
 import Models.Conexion.CatalogoProductoConexion;
+import Models.Models.CatalogoProductoModel;
+import Models.Models.DetalleCatalogoProductosModel;
+import Utils.Cache.CatalogoProductoCache;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
 import Views.Listados.ListadoProveedoresView;
 import Views.Menus.MenuBodegaView;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author danie
  */
 public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
-
+    DefaultTableModel tp = new DefaultTableModel();
     /**
      * Creates new form LoginView
      */
-    Integer Id_producto;
-    public MantenimientoCatalogoBodegaView() {
+
+    static Integer Id_producto;
+    static Integer Id_proveedor=0;
+    public MantenimientoCatalogoBodegaView() 
+    {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         CatalogoProductoController.LlenarCmbCategoria(this.cmbCategoria);
         CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos); 
-        CatalogoProductoController.FiltroTableProducto(tableProductos, txtBuscar);
+
+        //CatalogoProductoController.getAgregarTableProveedorSeleccionados(tableProveedores);          
+        //CatalogoProductoController.AgregarListProveedorSeleccionados(tableProveedores);
         this.LlenarDatos();
     }
+
+    
     private void LimpiarInputs()
     {
         this.txtNombre.setText(null);
@@ -43,6 +55,14 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         this.cmbEstado.setSelectedIndex(0);
         this.cmbCategoria.setSelectedIndex(0);
         this.cmbUnidad.setSelectedIndex(0);     
+    }
+    private void LimpiarTable(){
+        DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
+        int fila= model.getRowCount();
+        for(int i = 0; i < fila; i++  )
+        {       
+                model.removeRow(0);  
+        }
     }
     private void LimpiarErrLabels()
     {
@@ -56,9 +76,10 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         this.Id_producto = CatalogoProductoController.setDatosEditarFromCache(this.tableProductos, 
                 this.txtNombre, this.txtDescripcion, this.txtStockMaximo, this.txtStockMinimo,
                 this.cmbCategoria, this.cmbUnidad, this.cmbEstado);
-        
+                CatalogoProductoController.ProductosProveedores(tableProveedores,Id_producto);
         if(Id_producto != null)
         {
+            
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
             this.cmbEstado.setEnabled(true);
@@ -110,12 +131,10 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnVisualizarTabla = new javax.swing.JButton();
         pnlMenu1 = new javax.swing.JPanel();
-        btnEliminarProveedor = new javax.swing.JPanel();
-        lblEliminarProveedor = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProveedores = new javax.swing.JTable();
-        btnAgregarProveedor = new javax.swing.JPanel();
-        lblAgregarProveedor = new javax.swing.JLabel();
+        btnEliminarProveedor = new javax.swing.JButton();
+        btnAgregarProveedor = new javax.swing.JButton();
         pnlUsuario = new javax.swing.JPanel();
         lblIconoUsuarioActual = new javax.swing.JLabel();
         lblUsuarioActual = new javax.swing.JLabel();
@@ -378,84 +397,50 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         pnlMenu1.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEliminarProveedor.setBackground(new java.awt.Color(59, 103, 181));
-        btnEliminarProveedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnEliminarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnEliminarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarProveedorMouseClicked(evt);
-            }
-        });
-
-        lblEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEliminarProveedor.setForeground(new java.awt.Color(242, 242, 242));
-        lblEliminarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEliminarProveedor.setText("Eliminar Proveedor");
-
-        javax.swing.GroupLayout btnEliminarProveedorLayout = new javax.swing.GroupLayout(btnEliminarProveedor);
-        btnEliminarProveedor.setLayout(btnEliminarProveedorLayout);
-        btnEliminarProveedorLayout.setHorizontalGroup(
-            btnEliminarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarProveedorLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(lblEliminarProveedor)
-                .addGap(21, 21, 21))
-        );
-        btnEliminarProveedorLayout.setVerticalGroup(
-            btnEliminarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarProveedorLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu1.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 180, -1));
-
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id proveedor", "RTN proveedor", "Nombre proveedor"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProveedoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableProveedores);
 
         pnlMenu1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 680, 450));
 
-        btnAgregarProveedor.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregarProveedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnAgregarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnAgregarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAgregarProveedorMouseClicked(evt);
+        btnEliminarProveedor.setBackground(new java.awt.Color(59, 103, 181));
+        btnEliminarProveedor.setForeground(new java.awt.Color(242, 242, 242));
+        btnEliminarProveedor.setText("Eliminar Proveedor");
+        btnEliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProveedorActionPerformed(evt);
             }
         });
+        pnlMenu1.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 180, 30));
 
-        lblAgregarProveedor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblAgregarProveedor.setForeground(new java.awt.Color(242, 242, 242));
-        lblAgregarProveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAgregarProveedor.setText("Agregar Proveedor");
-
-        javax.swing.GroupLayout btnAgregarProveedorLayout = new javax.swing.GroupLayout(btnAgregarProveedor);
-        btnAgregarProveedor.setLayout(btnAgregarProveedorLayout);
-        btnAgregarProveedorLayout.setHorizontalGroup(
-            btnAgregarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnAgregarProveedorLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblAgregarProveedor)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        btnAgregarProveedorLayout.setVerticalGroup(
-            btnAgregarProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAgregarProveedorLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblAgregarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu1.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 180, -1));
+        btnAgregarProveedor.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregarProveedor.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregarProveedor.setText("Agregar Proveedor");
+        btnAgregarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProveedorActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 180, 30));
 
         pnlGeneral.addTab("Proveedores", pnlMenu1);
 
@@ -516,6 +501,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        CatalogoProductoCache proveedor = new CatalogoProductoCache();
         MenuBodegaView menuBodegaView = new MenuBodegaView();
         menuBodegaView.setVisible(true);
         this.dispose();
@@ -549,16 +535,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbUnidadActionPerformed
 
-    private void btnEliminarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProveedorMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarProveedorMouseClicked
-
-    private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
-        ListadoProveedoresView listadoProveedoresView = new ListadoProveedoresView();
-        listadoProveedoresView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnAgregarProveedorMouseClicked
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.btnAgregar.setEnabled(true);
         this.btnEditar.setEnabled(false);
@@ -568,39 +544,43 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         this.btnVisualizarTabla.setEnabled(true); 
         this.LimpiarInputs();
         this.LimpiarErrLabels();
+        this.LimpiarTable();
         
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-     if(!CatalogoProductoController.MantenimientoProducto("insertar", 0, 
+       if(!CatalogoProductoController.MantenimientoProducto("insertar", 0, 
             this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(), 
             this.txtStockMinimo.getText(),"Activo",CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
             CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion, 
             this.lblErrorStockMaximo, this.lblErrorStockMinimo))
         {
-            this.LimpiarInputs();
+            CatalogoProductoModel productoModel = new CatalogoProductoModel();
+            Id_producto= productoModel.getPrdId();
             CatalogoProductoController.LlenarTableProductos(tableProductos);
-           
-        }  
+           this.LimpiarTable();
+        }           
+
+ 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
         TablaGrandeCatalogoBodegaView consultaProductoView = new TablaGrandeCatalogoBodegaView();
         consultaProductoView.setVisible(true);
-        this.dispose();       
-        
-        
+        this.dispose();              
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed
 
     private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
         int seleccion = this.tableProductos.rowAtPoint(evt.getPoint()); 
-        
+        CatalogoProductoCache proveedor = new CatalogoProductoCache();
         this.Id_producto = CatalogoProductoController.setDatosEditarFromTable(seleccion, 
                 this.tableProductos, this.txtNombre, this.txtDescripcion, 
                 this.txtStockMaximo, this.txtStockMinimo, this.cmbCategoria, 
                 this.cmbUnidad,this.cmbEstado);
         if(this.Id_producto != null)
         {
+            proveedor.setPrdId(Id_producto);
+            CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
             this.LimpiarErrLabels();
             this.cmbEstado.setEnabled(true);
             this.btnAgregar.setEnabled(false);
@@ -611,6 +591,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_tableProductosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
         if(!CatalogoProductoController.MantenimientoProducto("editar", this.Id_producto,
             this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(), 
             this.txtStockMinimo.getText(),cmbEstado.getSelectedItem().toString(),CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
@@ -621,9 +602,25 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
             this.btnEditar.setEnabled(false);
             this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
+            CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
             CatalogoProductoController.LlenarTableProductos(tableProductos);
+            this.LimpiarTable();
         }       
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
+        CatalogoProductoController.QuitarTablePSeleccionados(Id_proveedor );  
+    }//GEN-LAST:event_btnEliminarProveedorActionPerformed
+
+    private void btnAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProveedorActionPerformed
+    ListadoProveedoresView listadoproveedor = new ListadoProveedoresView();
+    listadoproveedor.setVisible(true);
+    }//GEN-LAST:event_btnAgregarProveedorActionPerformed
+
+    private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
+        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint());    
+        Id_proveedor=Integer.parseInt(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 0)));  
+    }//GEN-LAST:event_tableProveedoresMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2719,10 +2716,10 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JPanel btnAgregarProveedor;
+    private javax.swing.JButton btnAgregarProveedor;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JPanel btnEliminarProveedor;
+    private javax.swing.JButton btnEliminarProveedor;
     private javax.swing.JPanel btnRegresar;
     private javax.swing.JButton btnVisualizarTabla;
     private javax.swing.JComboBox<String> cmbCategoria;
@@ -2732,11 +2729,9 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblAgregarProveedor;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblDescripcion;
-    private javax.swing.JLabel lblEliminarProveedor;
     private javax.swing.JLabel lblErrorCategoria;
     private javax.swing.JLabel lblErrorDescripcion;
     private javax.swing.JLabel lblErrorEstado;
@@ -2763,7 +2758,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
     private javax.swing.JTable tableProductos;
-    private javax.swing.JTable tableProveedores;
+    public static javax.swing.JTable tableProveedores;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtNombre;

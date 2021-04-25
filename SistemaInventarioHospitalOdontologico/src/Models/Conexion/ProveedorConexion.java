@@ -60,6 +60,44 @@ public class ProveedorConexion
         
         return proveedores;
     }
+    public static ArrayList<ProveedorModel>  ListadoDetalleProductoProveedores() 
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        
+        ArrayList<ProveedorModel> proveedores = new ArrayList<>();
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+            String query = "SELECT * FROM proveedores WHERE ProEstado='Activo' ORDER BY ProId ASC";
+             
+            rss = stm.executeQuery(query);
+            
+            while (rss.next()) 
+            {
+                ProveedorModel proveedor = new ProveedorModel();
+                proveedor.setProId(rss.getInt("ProId"));
+                proveedor.setProRTN(rss.getString("ProRTN"));
+                proveedor.setProNombre(rss.getString("ProNombre"));;
+                proveedor.setProCorreo(rss.getString("ProCorreo"));
+                proveedor.setProTelefono(rss.getString("ProTelefono"));
+                proveedor.setProContacto(rss.getString("ProContacto"));
+                proveedor.setProDireccion(rss.getString("ProDireccion"));
+                proveedor.setProEstado(rss.getString("ProEstado"));
+                
+                proveedores.add(proveedor);
+            } 
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        return proveedores;
+    }
     
     public static String MantenimientoProveedores(String accion, ProveedorModel proveedor)
     {

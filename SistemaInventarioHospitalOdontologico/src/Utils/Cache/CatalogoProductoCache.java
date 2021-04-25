@@ -14,7 +14,7 @@ import Models.Models.CatalogoProductoModel;
 public class CatalogoProductoCache {
     private static boolean DatosCompartidos = false;
     private static CatalogoProductoModel producto;
-
+    public static Integer Idproducto;
     public boolean isDatosCompartidos() {
         return DatosCompartidos;
     }
@@ -29,5 +29,16 @@ public class CatalogoProductoCache {
 
     public void setProducto(CatalogoProductoModel prd) {
         CatalogoProductoCache.producto = prd;
-    }      
+    }
+    
+    public Integer getPrdId() {
+        return Idproducto;
+    }
+    public void setPrdId(Integer PrdId) {
+        this.Idproducto = PrdId;
+    }
+    
+    
+
+    
 }

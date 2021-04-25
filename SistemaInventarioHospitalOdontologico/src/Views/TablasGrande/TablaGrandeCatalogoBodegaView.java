@@ -211,7 +211,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
-         int seleccion = this.tableProductos.rowAtPoint(evt.getPoint()); 
+        int seleccion = this.tableProductos.rowAtPoint(evt.getPoint()); 
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
         productoModel.setPrdId(Integer.parseInt(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 0)))); 
         productoModel.setPrdNombre(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 1)));
@@ -226,7 +226,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         productoCache.setProducto(productoModel);
         dispose();
         MantenimientoCatalogoBodegaView mantenimientoproductoView = new MantenimientoCatalogoBodegaView();
-        mantenimientoproductoView.setVisible(true);         
+        mantenimientoproductoView.setVisible(true);
     }//GEN-LAST:event_tableProductosMouseClicked
 
     /**

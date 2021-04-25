@@ -5,12 +5,10 @@
  */
 package Views.TablasGrande;
 
-import Controllers.Controllers.InventarioBodegaController;
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Models.Models.ProveedorModel;
 import Utils.Cache.ProveedorCache;
-import Utils.PlaceHolders.TextPrompt;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.MantenimientoProveedoresView;
@@ -27,9 +25,8 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     public TablaGrandeProveedoresView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
-        ProveedorController.FiltroTableProveedores(this.tableProveedores, this.txtBuscar);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
+        ProveedorController.LlenarTableProveedores(tableProveedores);
+        ProveedorController.FiltroTableProveedores(tableProveedores, txtBuscar);
     }
 
     /**
@@ -58,10 +55,6 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProveedores = new javax.swing.JTable();
-        lblBuscar1 = new javax.swing.JLabel();
-        rbnTodos = new javax.swing.JRadioButton();
-        rbnActivos = new javax.swing.JRadioButton();
-        rbnInactivos = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -149,14 +142,14 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 520, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 520, -1));
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,46 +177,7 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableProveedores);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 810, 360));
-
-        lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
-        lblBuscar1.setText("Visualizar:");
-        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnTodos.setForeground(new java.awt.Color(255, 255, 255));
-        rbnTodos.setSelected(true);
-        rbnTodos.setText("Todos");
-        rbnTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnTodosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
-
-        rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnActivos.setForeground(new java.awt.Color(255, 255, 255));
-        rbnActivos.setText("Activos");
-        rbnActivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnActivosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
-
-        rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnInactivos.setForeground(new java.awt.Color(255, 255, 255));
-        rbnInactivos.setText("Inactivos");
-        rbnInactivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnInactivosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 810, 390));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
@@ -272,24 +226,6 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
         MantenimientoProveedoresView mantenimientoUsuariosView = new MantenimientoProveedoresView();
         mantenimientoUsuariosView.setVisible(true);      
     }//GEN-LAST:event_tableProveedoresMouseClicked
-
-    private void rbnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnActivosActionPerformed
-       ProveedorController.LlenarTableProveedores(tableProveedores, "Activos");
-       rbnTodos.setSelected(false);
-       rbnInactivos.setSelected(false);
-    }//GEN-LAST:event_rbnActivosActionPerformed
-
-    private void rbnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnTodosActionPerformed
-       ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
-       rbnActivos.setSelected(false);
-       rbnInactivos.setSelected(false);
-    }//GEN-LAST:event_rbnTodosActionPerformed
-
-    private void rbnInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInactivosActionPerformed
-        ProveedorController.LlenarTableProveedores(tableProveedores, "Inactivos");
-        rbnActivos.setSelected(false);
-        rbnTodos.setSelected(false);
-    }//GEN-LAST:event_rbnInactivosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2388,7 +2324,6 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblBuscar1;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
@@ -2400,9 +2335,6 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
-    private javax.swing.JRadioButton rbnActivos;
-    private javax.swing.JRadioButton rbnInactivos;
-    private javax.swing.JRadioButton rbnTodos;
     private javax.swing.JTable tableProveedores;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

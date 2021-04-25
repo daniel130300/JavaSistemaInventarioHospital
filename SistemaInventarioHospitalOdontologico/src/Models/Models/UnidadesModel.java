@@ -7,50 +7,37 @@ package Models.Models;
 
 /**
  *
- * @author Maryury Zuniga
- * Clase que se encarga de definir el modelo de datos para las Unidades
+ * @author may_g
  */
 public class UnidadesModel {
-    
-    // **************************************************
-    // Variables
-    // **************************************************
     
     private Integer UndId;
     private String UndDescripcion;
     private String UndEstado;
 
-    // **************************************************
-    // Getters y Setters
-    // **************************************************
-    
-    public Integer getUndId() 
-    {
+    public Integer getUndId() {
         return UndId;
     }
 
-    public void setUndId(Integer UndId) 
-    {
+    public void setUndId(Integer UndId) {
         this.UndId = UndId;
     }
     
-    public String getUndDescripcion() 
-    {
+    public String getUndDescripcion() {
         return UndDescripcion;
     }
 
-    public void setUndDescripcion(String UndDescripcion) 
-    {
+    public void setUndDescripcion(String UndDescripcion) {
         this.UndDescripcion = UndDescripcion;
     }
 
-    public String getUndEstado() 
-    {
+    public String getUndEstado() {
         return UndEstado;
     }
 
-    public void setUndEstado(String UndEstado) 
-    {
+    public void setUndEstado(String UndEstado) {
         this.UndEstado = UndEstado;
-    } 
+    }
+    
+    
 }

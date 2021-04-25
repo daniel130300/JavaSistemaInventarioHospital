@@ -5,7 +5,7 @@
  */
 package Models.Conexion;
 
-import Models.Models.BitacoraLoteProductosModel;
+import Models.Models.BitacoraLoteModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,28 +14,17 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
-* 
-* @author Héctor López
-*/
-
-public class BitacoraLoteProductosConexion 
-{
-    //****************************
-    // Metodos públicos
-    //***************************
-    
-    /**
-    * Método que retorna los registros de la tabla bitacoraloteproductos 
-    * desde la bdd.
-    * @return ArrayList de Objetos Tipo BitacoraLoteModel
-    */
-    public static ArrayList<BitacoraLoteProductosModel> ListadoBitacoraLote() 
+ *
+ * @author may_g
+ */
+public class BitacoraLoteConexion {
+    public static ArrayList<BitacoraLoteModel> ListadoBitacoraLote() 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
-        ArrayList<BitacoraLoteProductosModel> bitacoraslote = new ArrayList<>();
+        ArrayList<BitacoraLoteModel> bitacoraslote = new ArrayList<>();
         try 
         {
             con = Conexion.getConexion(con);
@@ -46,12 +35,11 @@ public class BitacoraLoteProductosConexion
             
             while (rss.next()) 
             {
-                BitacoraLoteProductosModel bitacoralote = new BitacoraLoteProductosModel();
+                BitacoraLoteModel bitacoralote = new BitacoraLoteModel();
                 bitacoralote.setBcpId(rss.getInt("BcpId"));
                 bitacoralote.setUsrUsuario(rss.getString("UsrUsuario"));
                 bitacoralote.setLprId(rss.getInt("LprId"));
                 bitacoralote.setPrdId(rss.getInt("PrdId"));
-                bitacoralote.setPrdNombre(rss.getString("PrdNombre"));
                 bitacoralote.setBcpAccion(rss.getString("BcpAccion"));
                 bitacoralote.setBcpDescripcionCambios(rss.getString("BcpDescripcionCambios"));
                 bitacoralote.setBcpFecha(rss.getString("BcpFecha"));

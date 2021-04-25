@@ -35,7 +35,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.lstPrivilegiosSeleccionados.setModel(modeloLstPrivilegiosSeleccionados);
         this.lstPrivilegiosDisponibles.setModel(modeloLstPrivilegiosDisponibles);
-        UsuarioController.LlenarTableUsuarios(this.tableUsuarios, "Todos");
+        UsuarioController.LlenarTableUsuarios(this.tableUsuarios);
         UsuarioController.LlenarCmbAreas(this.cmbArea);
         UsuarioController.LlenarListPrivilegios(this.modeloLstPrivilegiosDisponibles);
         UsuarioController.FiltroTableUsuarios(tableUsuarios, txtBuscar);
@@ -307,6 +307,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         pnlMenu.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmbEstado.setEnabled(false);
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEstadoActionPerformed(evt);
@@ -628,7 +629,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
             this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
             this.ResetJlists();
-            UsuarioController.LlenarTableUsuarios(tableUsuarios, "Todos");
+            UsuarioController.LlenarTableUsuarios(tableUsuarios);
         }    
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -652,7 +653,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         {
             this.LimpiarInputs();
             this.ResetJlists();
-            UsuarioController.LlenarTableUsuarios(tableUsuarios, "Todos");
+            UsuarioController.LlenarTableUsuarios(tableUsuarios);
         }    
     }//GEN-LAST:event_btnAgregarActionPerformed
 

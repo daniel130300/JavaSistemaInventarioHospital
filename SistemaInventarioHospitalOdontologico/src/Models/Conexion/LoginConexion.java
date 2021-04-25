@@ -20,17 +20,6 @@ import javax.swing.JOptionPane;
  */
 public class LoginConexion 
 {
-    
-    //****************************
-    // Metodos públicos
-    //***************************
-    
-    /**
-    * @param usrUsuario String
-    * Método que se encarga de obtener los datos del usuario que se está
-    * intentando loguear en el sistema
-    * @return Objeto de tipo UsuarioModel
-    */
     public static UsuarioModel getUsuariobyUsr(String usrUsuario)
     {
         Connection con = null;
@@ -70,12 +59,6 @@ public class LoginConexion
         return usuarioModel;
     }
     
-    /**
-    * @param usrId Integer
-    * Método que se encarga de obtener los privilegios del usuario que se 
-    * ha logueado
-    * @return ArrayList de objetos tipo PrivilegiosModel
-    */
     public static ArrayList<PrivilegiosModel> getPrivilegiosUsrLogueado(Integer usrId)
     {
         Connection con = null;

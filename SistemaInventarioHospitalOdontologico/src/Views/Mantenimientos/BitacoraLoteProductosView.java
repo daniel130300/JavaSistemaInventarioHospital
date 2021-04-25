@@ -5,7 +5,7 @@
  */
 package Views.Mantenimientos;
 
-import Controllers.Controllers.BitacoraLoteProductosController;
+import Controllers.Controllers.BitacoraLoteController;
 import Controllers.Controllers.LoginController;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -23,8 +23,7 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
     public BitacoraLoteProductosView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        BitacoraLoteProductosController.LlenarTableBitacoraLote(this.tableBitacoraLoteProductos);
-        BitacoraLoteProductosController.FiltroTableBitacoraLote(this.tableBitacoraLoteProductos, this.txtBuscar);
+        BitacoraLoteController.LlenarTableBitacoraLote(this.tableBitacoraLoteProductos);
     }
 
     /**
@@ -106,7 +105,7 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblIconoRegresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addContainerGap())
         );
         btnRegresarLayout.setVerticalGroup(
@@ -136,7 +135,7 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -150,14 +149,14 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBitacoraLoteProductos);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1170, 420));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 810, 430));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
         pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1210, 550));
+        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -166,24 +165,26 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
         lblTitulo.setForeground(new java.awt.Color(242, 242, 242));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Sistema de Inventario Hospital Odontológico");
-        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
 
         lblModulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblModulo.setForeground(new java.awt.Color(242, 242, 242));
         lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblModulo.setText("Bitácora Lote Productos");
-        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 260, 30));
+        lblModulo.setText("Bitacora Lote Productos");
+        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 260, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
-        pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 80, 90));
+        pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 80, 90));
 
-        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1000, 130));
+        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackbround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

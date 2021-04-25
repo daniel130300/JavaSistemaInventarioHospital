@@ -20,6 +20,7 @@ import Utils.Validators.Validaciones;
 import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
 import static Views.Mantenimientos.MantenimientoCatalogoBodegaView.tableProveedores;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

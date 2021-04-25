@@ -7,32 +7,20 @@ package Models.Models;
  */
 
 /**
-*
-* @author Héctor López 
-* Clase que se encarga de establecer el modelo de datos para los privilegios 
-* del usuario a editar o registrarse 
-*/
+ *
+ * @author danie
+ */
 public class DetalleUsuariosModel 
 {
-    // **************************************************
-    // Variables
-    // **************************************************
-    
     private Integer DtuId;
     private Integer UsrId;
     private Integer PriId;
-    
-    // **************************************************
-    // Getters y Setters
-    // **************************************************
 
-    public Integer getDtuId() 
-    {
+    public Integer getDtuId() {
         return DtuId;
     }
 
-    public void setDtuId(Integer DtuId) 
-    {
+    public void setDtuId(Integer DtuId) {
         this.DtuId = DtuId;
     }
 
@@ -40,18 +28,15 @@ public class DetalleUsuariosModel
         return UsrId;
     }
 
-    public void setUsrId(Integer UsrId) 
-    {
+    public void setUsrId(Integer UsrId) {
         this.UsrId = UsrId;
     }
 
-    public Integer getPriId() 
-    {
+    public Integer getPriId() {
         return PriId;
     }
 
-    public void setPriId(Integer PriId) 
-    {
+    public void setPriId(Integer PriId) {
         this.PriId = PriId;
     }
 }

@@ -9,8 +9,7 @@ package Models.Models;
  *
  * @author fgodo
  */
-public class CatalogoProductoModel 
-{
+public class CatalogoProductoModel {
         
     private Integer PrdId;
     private String PrdNombre;

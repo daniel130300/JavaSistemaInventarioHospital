@@ -16,24 +16,10 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Héctor López
+ * @author danie
  */
-
 public class InformacionPersonalConexion 
 {
-    //****************************
-    // Metodos públicos
-    //***************************
-    
-    /**
-    * @param id Integer
-    * @param nombre String
-    * @param apellido String
-    * @param correo String
-    * Método que se encarga de ejecutar el procedimiento almacenado 
-    * EditarInformacionPersonal 
-    * @return String el cual contiene el parametro de salida del procedimiento.
-    */
     public static String EditarInformacionPersonal(Integer id, String nombre, 
             String apellido, String correo)
     {
@@ -62,11 +48,6 @@ public class InformacionPersonalConexion
         return estado;
     }
     
-    /**
-    * @param id Integer
-    * Método que se encarga de recargar los datos modificados para el usuario
-    * @return Objeto de tipo UsuarioModel
-    */
     public static UsuarioModel recuperarInformacionActualizada(Integer id)
     {
         Connection con = null;

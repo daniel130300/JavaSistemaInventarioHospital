@@ -6,51 +6,37 @@
 package Models.Models;
 
 /**
-*
-* @author Héctor López
-* Clase que se encarga de establecer el modelo de datos para las Categorías
-*/
+ *
+ * @author danie
+ */
 public class CategoriasModel 
 {
-    // **************************************************
-    // Variables
-    // **************************************************
     
     private Integer CprId;
     private String CprDescripcion;
     private String CprEstado;
-    
-    // **************************************************
-    // Getters y Setters
-    // **************************************************
 
-    public Integer getCprId() 
-    {
+    public Integer getCprId() {
         return CprId;
     }
 
-    public void setCprId(Integer CprId) 
-    {
+    public void setCprId(Integer CprId) {
         this.CprId = CprId;
     }
 
-    public String getCprDescripcion() 
-    {
+    public String getCprDescripcion() {
         return CprDescripcion;
     }
 
-    public void setCprDescripcion(String CprDescripcion) 
-    {
+    public void setCprDescripcion(String CprDescripcion) {
         this.CprDescripcion = CprDescripcion;
     }
 
-    public String getCprEstado() 
-    {
+    public String getCprEstado() {
         return CprEstado;
     }
 
-    public void setCprEstado(String CprEstado) 
-    {
+    public void setCprEstado(String CprEstado) {
         this.CprEstado = CprEstado;
     }
 }

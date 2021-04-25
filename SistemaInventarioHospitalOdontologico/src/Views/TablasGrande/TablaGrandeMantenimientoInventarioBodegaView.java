@@ -5,9 +5,7 @@
  */
 package Views.TablasGrande;
 
-import Controllers.Controllers.InventarioBodegaController;
 import Controllers.Controllers.LoginController;
-import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -24,9 +22,6 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
     public TablaGrandeMantenimientoInventarioBodegaView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }
 
     /**

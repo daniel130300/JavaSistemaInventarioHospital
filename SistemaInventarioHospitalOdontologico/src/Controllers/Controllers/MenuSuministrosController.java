@@ -11,27 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
-* @author Héctor López
-*/
-
+ *
+ * @author danie
+ */
 public class MenuSuministrosController 
 {
-    //Hashmap de Hashmaps que contiene los privilegios del usuario.
     HashMap<String, HashMap<Integer, String>> privilegios = UsuarioLogueadoCache.getHashUsrPrivilegios();
     
-    // **************************************************
-    // Métodos Públicos
-    // **************************************************
-    
-    /**
-    * @param btnMantenimientoInventarioSuministros JButton
-    * @param btnInventarioSuministros JButton
-    * @param btnGenerarSuministro JButton
-    * @param btnMantenimientoProductosCompuestos JButton 
-    * Método que se encarga de establecer el acceso o no al usuario a los
-    * módulos que recibe como parámetros a partir de los privilegios 
-    * que el usuario logueado dispone.
-    */
     public void AccesoModulos(JButton btnMantenimientoInventarioSuministros, 
             JButton btnInventarioSuministros, JButton btnGenerarSuministro,
             JButton btnMantenimientoProductosCompuestos)
@@ -42,14 +28,6 @@ public class MenuSuministrosController
         this.AccessoModuloMantenimientoProductosCompuestos(btnMantenimientoProductosCompuestos);
     }
     
-    // **************************************************
-    // Métodos Privados
-    // **************************************************
-    
-    /**
-    * @param btnMantenimientoInventarioSuministros JButton
-    * Método que se encarga de proporcionar o no acceso al módulo Mantenimiento Inventario Suministros
-    */
     private void AccessoModuloMantenimientoInventarioSuministros(JButton btnMantenimientoInventarioSuministros)
     {  
         if(privilegios.get("suministros")
@@ -64,10 +42,6 @@ public class MenuSuministrosController
         }
     }
     
-    /**
-    * @param btnInventarioSuministros JButton
-    * Método que se encarga de proporcionar o no acceso al módulo Inventario Suministros
-    */
     private void AccessoModuloInventarioSuministros(JButton btnInventarioSuministros)
     {  
         if(privilegios.get("suministros")
@@ -81,10 +55,6 @@ public class MenuSuministrosController
         }
     }
     
-    /**
-    * @param btnGenerarSuministro JButton
-    * Método que se encarga de proporcionar o no acceso al módulo Generar Suministros
-    */
     private void AccessoModuloGenerarSuministro(JButton btnGenerarSuministro)
     {  
        if(privilegios.get("suministros")
@@ -98,10 +68,6 @@ public class MenuSuministrosController
         }
     }
     
-    /**
-    * @param btnMantenimientoProductosCompuestos JButton
-    * Método que se encarga de proporcionar o no acceso al módulo Mantenimiento Productos Compuestos
-    */
     private void AccessoModuloMantenimientoProductosCompuestos(JButton btnMantenimientoProductosCompuestos)
     {  
        if(privilegios.get("suministros")
@@ -116,10 +82,6 @@ public class MenuSuministrosController
         }
     }
     
-    /**
-    * @param boton JButton
-    * Método que se encarga de establecer un icono de candado al botón
-    */
     private void setIconoCandado(JButton boton)
     {
         try 
@@ -132,10 +94,6 @@ public class MenuSuministrosController
         }
     }
     
-    /**
-    * @param boton JButton
-    * Método que se encarga de bloquear un módulo.
-    */
     private void setModuloBloqueado(JButton boton)
     {
         boton.setEnabled(false);

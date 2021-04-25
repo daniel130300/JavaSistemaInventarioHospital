@@ -5,14 +5,11 @@
  */
 package Views.Mantenimientos;
 
-import Controllers.Controllers.InventarioBodegaController;
 import Controllers.Controllers.LoginController;
-import Utils.PlaceHolders.TextPrompt;
 import Views.Menus.MenuBodegaView;
 import Views.TablasGrande.TablaGrandeMantenimientoInventarioBodegaView;
 import java.awt.Color;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
 
 
 /**
@@ -21,32 +18,14 @@ import javax.swing.ListSelectionModel;
  */
 public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
-    Integer Id_Lote = null;
-    
+    /**
+     * Creates new form LoginView
+     */
     public MantenimientoInventarioBodegaView() {
         initComponents();
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        this.tableBodega.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
-        TextPrompt placeholderFecha = new TextPrompt(" Año-Mes-Día ", txtFechaCaducidad);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }
-    
-    private void LimpiarInputs()
-    {
-        this.txtFechaCaducidad.setText(null);
-        this.numStock.setValue(0);
-        this.cmbEstado.setSelectedIndex(0);
-    }
-    
-    private void LimpiarErrLabels()
-    {
-        this.lblErrorFechaCaducidad.setText(null);
-        this.lblErrorStock.setText(null);
-        this.lblErrorDescripcion1.setText(null);
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,7 +116,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtFechaCaducidad.setEnabled(false);
         txtFechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaCaducidadActionPerformed(evt);
@@ -164,6 +142,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
         lblErrorStock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorStock.setForeground(new java.awt.Color(231, 0, 2));
+        lblErrorStock.setText("Este campo es obligatorio");
         pnlMenu.add(lblErrorStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 150, 20));
 
         btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
@@ -207,17 +186,17 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblFechaCaducidad.setForeground(new java.awt.Color(242, 242, 242));
         lblFechaCaducidad.setText("Fecha de caducidad: ");
         pnlMenu.add(lblFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
-
-        numStock.setEnabled(false);
         pnlMenu.add(numStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 90, -1));
 
         lblErrorDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDescripcion1.setForeground(new java.awt.Color(231, 0, 2));
+        lblErrorDescripcion1.setText("Este campo es obligatorio");
         pnlMenu.add(lblErrorDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 200, 20));
 
         lblErrorFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorFechaCaducidad.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 310, 20));
+        lblErrorFechaCaducidad.setText("Este campo es obligatorio");
+        pnlMenu.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 220, 20));
 
         tableBodega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -238,11 +217,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableBodega.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableBodegaMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tableBodega);
 
         pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 970, 280));
@@ -251,7 +225,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         btnCancelar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancelar1.setForeground(new java.awt.Color(242, 242, 242));
         btnCancelar1.setText("Cancelar");
-        btnCancelar1.setEnabled(false);
         btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelar1ActionPerformed(evt);
@@ -311,21 +284,18 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-    
-        if(!InventarioBodegaController.MantenimientoInventarioBodega("editar", this.Id_Lote, 
-            (Integer) this.numStock.getValue(),this.txtFechaCaducidad.getText(), 
-            this.cmbEstado.getSelectedItem().toString(), this.lblErrorFechaCaducidad, 
-            this.lblErrorStock))
-            
-            {
-                this.btnEditar.setEnabled(false);
-                this.cmbEstado.setEnabled(false);
-                this.txtFechaCaducidad.setEnabled(false);
-                this.numStock.setEnabled(false);
-                this.btnCancelar1.setEnabled(false);
-                this.LimpiarInputs();
-                InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-            }
+    /*
+        if(!CategoriasController.MantenimientoCategorias("editar", this.CprId,
+            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),
+            this.lblErrorDescripcion))
+        {
+            this.btnAgregar.setEnabled(true);
+            this.btnEditar.setEnabled(false);
+            this.cmbEstado.setEnabled(false);
+            this.LimpiarInputs();
+            CategoriasController.LlenarTableCategorias(tableCategorias);
+        }
+    */
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
@@ -337,17 +307,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFechaCaducidadActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
-        
-        this.btnEditar.setEnabled(false);
-        this.cmbEstado.setEnabled(false);
-        this.txtFechaCaducidad.setEnabled(false);
-        this.numStock.setEnabled(false);
-        this.btnCancelar1.setEnabled(false);
-        this.tableBodega.clearSelection();
-        this.btnVisualizarTabla.setEnabled(true); 
-        this.LimpiarInputs();
-        this.LimpiarErrLabels();
-        
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -355,24 +315,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         menuBodegaView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void tableBodegaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBodegaMouseClicked
-        
-        int seleccion = this.tableBodega.rowAtPoint(evt.getPoint()); 
-        
-        this.Id_Lote = InventarioBodegaController.setDatosEditarFromTable(seleccion, this.tableBodega, 
-                 this.numStock, this.txtFechaCaducidad, this.cmbEstado);
-        
-        if( this.Id_Lote != null)
-        {
-            this.LimpiarErrLabels();
-            this.cmbEstado.setEnabled(true);
-            this.btnEditar.setEnabled(true);
-            this.txtFechaCaducidad.setEnabled(true);
-            this.numStock.setEnabled(true);
-            this.btnCancelar1.setEnabled(true);
-        }
-    }//GEN-LAST:event_tableBodegaMouseClicked
 
     /**
      * @param args the command line arguments

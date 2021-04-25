@@ -8,41 +8,27 @@ package Utils.Cache;
 import Models.Models.ProveedorModel;
 
 /**
-*
-* @author Francisco Godoy
-* Clase que permite pasar los datos seleccionados en la pantalla 
-* TablaGrandeProveedoresView a MantenimientoProveedoresView
-*/
-public class ProveedorCache 
-{
-    // **************************************************
-    // Variables
-    // **************************************************
-    
+ *
+ * @author fgodo
+ */
+public class ProveedorCache {
     private static boolean DatosCompartidos = false;
     private static ProveedorModel id;
 
-    // **************************************************
-    // Getters y Setters
-    // **************************************************
-    
-    public boolean isDatosCompartidos() 
-    {
+    public boolean isDatosCompartidos() {
         return DatosCompartidos;
     }
 
-    public void setDatosCompartidos(boolean DatosCompartidos) 
-    {
+    public void setDatosCompartidos(boolean DatosCompartidos) {
         ProveedorCache.DatosCompartidos = DatosCompartidos;
     }
     
-    public ProveedorModel getid() 
-    {
+    public ProveedorModel getid() {
         return id;
     }
 
-    public void setid(ProveedorModel id) 
-    {
+    public void setid(ProveedorModel id) {
+
         ProveedorCache.id = id;
     }    
 }

@@ -7,43 +7,25 @@ package Utils.Cache;
 
 import Models.Models.UsuarioModel;
 
-/**
-* 
-* @author Héctor López
-* Clase que permite pasar los datos seleccionados de la pantalla 
-* TablaGrandeUsuariosView a MantenimientoUsuariosView
-*/
 
 public class UsuariosCache 
 {
-    // **************************************************
-    // Variables
-    // **************************************************
-    
     private static boolean DatosCompartidos = false;
     private static UsuarioModel usuario;
-    
-    // **************************************************
-    // Getters y Setters
-    // **************************************************
-    
-    public boolean isDatosCompartidos() 
-    {
+
+    public boolean isDatosCompartidos() {
         return DatosCompartidos;
     }
 
-    public void setDatosCompartidos(boolean DatosCompartidos) 
-    {
+    public void setDatosCompartidos(boolean DatosCompartidos) {
         UsuariosCache.DatosCompartidos = DatosCompartidos;
     }
     
-    public UsuarioModel getUsuario() 
-    {
+    public UsuarioModel getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioModel usr) 
-    {
+    public void setUsuario(UsuarioModel usr) {
         UsuariosCache.usuario = usr;
     }  
 }

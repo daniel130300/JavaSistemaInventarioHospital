@@ -6,7 +6,9 @@
 package Controllers.Controllers;
 
 import static Controllers.Controllers.GeneralController.FormatoTabla;
+import Models.Conexion.CategoriaConexion;
 import Models.Conexion.UnidadesConexion;
+import Models.Models.CategoriasModel;
 import Models.Models.UnidadesModel;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
@@ -24,24 +26,10 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author Maryury Zuniga
+ * @author may_g
  */
-public class UnidadesController 
-{
-    //**************************
-    // Metodos Públicos
-    //**************************
+public class UnidadesController {
     
-    /*
-    * @param accion String
-    * @param id Integer
-    * @param descripcion String
-    * @param estado Srting
-    * @param errDescripcion JLabel
-    * Dependiendo si los datos ingresados son incorrectos segun las validaciones 
-    * se retornara true de no ser asi false.
-    * @return Boolean
-    */
     public static Boolean MantenimientoUnidades(String accion, Integer id, 
             String descripcion, String estado, JLabel errDescripcion)
     { 
@@ -84,16 +72,48 @@ public class UnidadesController
         return !(mntError == false && generalValidacionError == false); 
     }   
     
-    /**
-    * @param seleccion
-    * @param tableUnidades
-    * @param txtDescripcion
-    * @param cmbEstado
-    * Metodo encargado de pasar los datos de la tabla a los JTextFields
-    * correspondientes para ser editados, retorna el id de la unidad de la tabla
-    * @return Integer
-    */
-    public static Integer setDatosEditarFromTable(int seleccion, JTable tableUnidades, 
+    private static boolean mensajesRetroalimentacion(String msj, String resultado)
+    {
+        boolean error = false;
+        
+        switch (resultado) 
+        {
+            case "OK":
+                JOptionPane.showMessageDialog(null, msj);                   
+            break;
+
+            case "errDescripcion":
+                JOptionPane.showMessageDialog(null, "La descripción ya se encuentra registrada.");
+                error = true;
+            break;
+        }
+        
+        return error;
+    }  
+    
+     private static boolean validacionesGenerales(String trimmedDescripcion,
+        JLabel errDescripcion)
+    {
+        boolean error = false;
+        
+        errDescripcion.setText(null);
+       
+        if(Validaciones.validarCampoVacio(trimmedDescripcion))
+        {
+           errDescripcion.setText("La descripción es un campo obligatorio");
+           error = true;
+        }
+               
+        if(!Validaciones.ValidarNumerosyLetras(trimmedDescripcion))
+        {
+            errDescripcion.setText("La descripción ingresada es incorrecta");
+            error = true;
+        }
+        
+        return error;
+    }
+     
+      public static Integer setDatosEditarFromTable(int seleccion, JTable tableUnidades, 
             JTextField txtDescripcion, JComboBox cmbEstado)
     {
         Integer UndId = null;
@@ -103,55 +123,15 @@ public class UnidadesController
 
         
         return UndId;
-    } 
-    
-    /**
-    * @param tableUnidades 
-    * Metodo para el llenado de JTable table Unidades con datos obtenidos 
-    * del metodo ListadoUnidades() de la clase UnidadesConexion dependiendo de
-    * la accion que realice el usuario.
-     * @param accion
-    */
-    public static void LlenarTableUnidades(JTable tableUnidades,String accion) 
+    }  
+      
+      public static void LlenarTableUnidades(JTable tableUnidades) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        switch(accion){
-            case "Activos":
-            unidades = UnidadesConexion.ListadoUnidades("Activos");
-
-            for (int i = 0; i <unidades.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        unidades.get(i).getUndId(),
-                        unidades.get(i).getUndDescripcion(),
-                        unidades.get(i).getUndEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;
-         case "Inactivos":
-            unidades = UnidadesConexion.ListadoUnidades("Inactivos");
-
-            for (int i = 0; i <unidades.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        unidades.get(i).getUndId(),
-                        unidades.get(i).getUndDescripcion(),
-                        unidades.get(i).getUndEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;  
-        case "Todos":
-            unidades = UnidadesConexion.ListadoUnidades("Todos");    
+        unidades = UnidadesConexion.ListadoUnidades();
+        
         for (int i = 0; i <unidades.size(); i++) 
         {
             modelo.addRow
@@ -165,14 +145,7 @@ public class UnidadesController
         }
         FormatoTabla(tableUnidades, modelo.getColumnCount());
     }
-    } 
-    /*
-    * @param tableCategorias JTable
-    * @param fieldBusqueda JTextField 
-    * Método que se encarga de filtrar la tabla tableUnidades
-    * a partir de la busqueda del usuario
-    */
-     public static void FiltroTableUnidades(JTable tableUnidades, JTextField fieldBusqueda)
+    public static void FiltroTableUnidades(JTable tableUnidades, JTextField fieldBusqueda)
     {
         TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableUnidades.getModel());
         tableUnidades.setRowSorter(rowSorter);
@@ -211,67 +184,6 @@ public class UnidadesController
             }
         }
         );  
-    }   
-    // **************************************************
-    // Métodos Privados
-    // **************************************************
-  
-    /**
-    * 
-    * @param msj String
-    * @param resultado String
-    * Dependiendo del parametro resultado muestra un mensaje en pantalla por
-    * medio de un JOptionPane
-    * @return boolean
-    */
-    private static boolean mensajesRetroalimentacion(String msj, String resultado)
-    {
-        boolean error = false;
-        
-        switch (resultado) 
-        {
-            case "OK":
-                JOptionPane.showMessageDialog(null, msj);                   
-            break;
-
-            case "errDescripcion":
-                JOptionPane.showMessageDialog(null, "La descripción ya se encuentra registrada.");
-                error = true;
-            break;
-        }
-        
-        return error;
-    }  
-    
-    /**
-    * 
-    * @param trimmedDescripcion String
-    * @param errDescripcion JLabel
-    * Si los datos ingresados son incorrectos de acorde a las validaciones
-    * establece los errores en los JLabels correspondientes y retorna true, 
-    * de lo contrario retorna false. 
-    * @return boolean
-    */
-    private static boolean validacionesGenerales(String trimmedDescripcion,
-        JLabel errDescripcion)
-    {
-        boolean error = false;
-        
-        errDescripcion.setText(null);
-       
-        if(Validaciones.validarCampoVacio(trimmedDescripcion))
-        {
-           errDescripcion.setText("La descripción es un campo obligatorio");
-           error = true;
-        }
-               
-        if(!Validaciones.ValidarNumerosyLetras(trimmedDescripcion))
-        {
-            errDescripcion.setText("La descripción ingresada es incorrecta");
-            error = true;
-        }
-        
-        return error;
-    }   
+    }    
 }
 

@@ -5,8 +5,8 @@
  */
 package Utils.Validators;
 
-import static Views.Mantenimientos.MantenimientoCatalogoBodegaView.tableProveedores;
-import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JTable;
 
 /**
@@ -64,11 +64,63 @@ public class Validaciones
         N2= Integer.parseInt(n2);
         if(N1>=N2){return  true;}else{return  false;}
     }
-    public static boolean validarTabla(JTable proveedor){
-        if( 0<proveedor.getRowCount()){
+    
+    public static boolean validarTabla(JTable proveedor)
+    {
+        if(0<proveedor.getRowCount())
+        {
             return false;
-        }else{
+        }
+        else
+        {
             return true;
         }
-    }    
+    }
+    
+    /**
+    * 
+    * @param fecha String
+    * Si el campo coincide con la expresión regular retorna true,
+    * de lo contrario retorna false.
+    * @return Boolean
+    */
+    public static Boolean ValidarFormatoFecha(String fecha)
+    {
+        String regex= "^\\d{4}([\\-])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$";
+        return fecha.matches(regex);
+        
+    }
+    
+    /**
+    * 
+    * @param fecha String
+    * Si la fecha de Caducidad es mayor a la fecha actual retorna true,
+    * de lo contrario retorna false.
+    * @return Boolean
+    */
+    public static Boolean ValidarFecha(String fecha)
+    {        
+        Date ahora = new Date();
+        SimpleDateFormat convertidor = new SimpleDateFormat("yyyy-MM-dd");
+        String actual = convertidor.format(ahora);
+        
+            try 
+            {
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                formatoFecha.setLenient(false);
+                formatoFecha.parse(fecha);
+
+                if(fecha.compareTo(actual)<0)
+                {
+                    return true;
+                }
+
+                } 
+            catch (Exception e) 
+            {
+                return false;
+            }
+        
+        return false;
+    }
 }

@@ -39,6 +39,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         CatalogoProductoController.LlenarCmbCategoria(this.cmbCategoria);
         CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos); 
+        CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
 
         //CatalogoProductoController.getAgregarTableProveedorSeleccionados(tableProveedores);          
         //CatalogoProductoController.AgregarListProveedorSeleccionados(tableProveedores);

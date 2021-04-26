@@ -8,14 +8,11 @@ package Controllers.Controllers;
 
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.CatalogoProductoConexion;
-import Models.Conexion.ProveedorConexion;
 import Models.Models.CatalogoProductoModel;
 import Models.Models.CategoriasModel;
 import Models.Models.DetalleCatalogoProductosModel;
-import Models.Models.ProveedorModel;
 import Models.Models.UnidadesModel;
 import Utils.Cache.CatalogoProductoCache;
-import Utils.Cache.ProveedorCache;
 import Utils.Validators.Validaciones;
 import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
 import static Views.Mantenimientos.MantenimientoCatalogoBodegaView.tableProveedores;
@@ -42,6 +39,7 @@ public class CatalogoProductoController
 {   
     static DefaultTableModel modelotableProoveedores = new DefaultTableModel(); 
     static JTable TableDetalle;
+    
     public static Boolean MantenimientoProducto(String accion, Integer id,
             String nombre, String descripcion, String stockmaximo , String stockminimo, 
             String estado,Integer id_categoria , Integer id_unidad,
@@ -79,6 +77,7 @@ public class CatalogoProductoController
         
         return !(mntError == false && generalValidacionError == false);
     }
+    
     private static Boolean MantenimientoProveedor(String accion, Integer id, 
             Integer PrdId, DefaultTableModel modelosTproveedores)
     {
@@ -136,6 +135,7 @@ public class CatalogoProductoController
         
         return error;
     }     
+    
     public static void QuitarTablePSeleccionados(Integer ProId)
     {
         DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
@@ -189,7 +189,6 @@ public class CatalogoProductoController
         return error;
     }
     
-    
     private static boolean editarProducto(Integer id,String trimmedNombre,
             String trimmedDescripcion, String trimmedStockMaximo,String trimmedStockMinimo,
             Integer id_categoria, Integer id_unidad, String estado)
@@ -226,6 +225,7 @@ public class CatalogoProductoController
         }
         return error;
     }
+    
     public static Integer setDatosEditarFromCache(JTable tableProveedores, 
             JTextField txtNombre, JTextArea txtDescripcion, 
             JTextField txtStockMaximo, JTextField txtStockMinimo,JComboBox cmbCategoria,
@@ -305,6 +305,7 @@ public class CatalogoProductoController
         }
         );  
     } 
+    
     private static boolean validacionesGenerales(String trimmedNombre,String trimmedDescripcion,
         String trimmedStockMaximo, String trimmedStockMinimo, JLabel errNombre, JLabel errDescripcion,
         JLabel errStockMaximo, JLabel errStockMinimo)
@@ -364,6 +365,7 @@ public class CatalogoProductoController
         } 
         return error;
     }    
+    
     private static void setErroresToNull(JLabel errnombre, JLabel errdescripcion, 
         JLabel errstockmaximo, JLabel errstockminimos)
     {
@@ -411,6 +413,7 @@ public class CatalogoProductoController
         }
         FormatoTabla(tableDetalleProducto, modelo.getColumnCount());
     }
+    
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableProductos, 
             JTextField txtNombre,JTextArea txtDescripcion, JTextField txtStockMaximo,
             JTextField  txtStockMinimo,JComboBox cmbCategoria,JComboBox cmbUnidad,JComboBox cmbEstado )
@@ -427,6 +430,7 @@ public class CatalogoProductoController
         
         return PrdId;
     }     
+    
     public static void LlenarCmbCategoria(JComboBox cmbCategorias)
     {
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
@@ -437,6 +441,7 @@ public class CatalogoProductoController
             cmbCategorias.addItem(categorias.get(i).getCprDescripcion());
         }
     } 
+    
     public static void LlenarCmbUnidades(JComboBox cmbUnidades)
     {
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
@@ -447,6 +452,7 @@ public class CatalogoProductoController
             cmbUnidades.addItem(unidades.get(i).getUndDescripcion());
         }
     }
+    
     public static void LlenarTableProductos(JTable tableProductos) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel(); 

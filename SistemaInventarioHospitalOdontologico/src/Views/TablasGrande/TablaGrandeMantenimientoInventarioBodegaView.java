@@ -7,6 +7,8 @@ package Views.TablasGrande;
 
 import Controllers.Controllers.InventarioBodegaController;
 import Controllers.Controllers.LoginController;
+import Models.Models.InventarioBodegaModel;
+import Utils.Cache.InventarioBodegaCache;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import java.awt.Color;
@@ -110,7 +112,7 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -172,6 +174,11 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableBodega.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBodegaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableBodega);
@@ -263,6 +270,20 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         rbnActivos.setSelected(false);
         rbnTodos.setSelected(false);
     }//GEN-LAST:event_rbnInactivosActionPerformed
+
+    private void tableBodegaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBodegaMouseClicked
+        int seleccion = this.tableBodega.rowAtPoint(evt.getPoint());
+        InventarioBodegaModel inventario = new  InventarioBodegaModel();
+        inventario.setLprStock(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 4))));
+        inventario.setLprFechaCaducidad(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 7)));
+        inventario.setLprEstado(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion,10)));
+        InventarioBodegaCache inventarioCache = new InventarioBodegaCache();
+        inventarioCache.setDatosCompartidos(true);
+        inventarioCache.setId(inventario);
+        MantenimientoInventarioBodegaView mantenimientoInventarioBodegaView = new MantenimientoInventarioBodegaView();
+        mantenimientoInventarioBodegaView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_tableBodegaMouseClicked
 
     /**
      * @param args the command line arguments

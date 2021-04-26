@@ -31,6 +31,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
         TextPrompt placeholderFecha = new TextPrompt(" Año-Mes-Día ", txtFechaCaducidad);
         TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
+        LlenarDatos();
     }
     
     private void LimpiarInputs()
@@ -46,6 +47,21 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         this.lblErrorStock.setText(null);
         this.lblErrorDescripcion1.setText(null);
     }
+    private void LlenarDatos()
+    {
+        this.Id_Lote = InventarioBodegaController.setDatosEditarFromCache(this.tableBodega, 
+                this.numStock ,this.txtFechaCaducidad,this.cmbEstado);
+        
+        if(Id_Lote != null)
+        {
+            this.cmbEstado.setEnabled(true);
+            this.btnEditar.setEnabled(true);
+            this.txtFechaCaducidad.setEnabled(true);
+            this.numStock.setEnabled(true);
+            this.btnCancelar1.setEnabled(true);
+        }
+    }   
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,15 +72,15 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlTitulo = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblModulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         pnlBackbround = new javax.swing.JPanel();
         pnlUsuario = new javax.swing.JPanel();
         lblIconoUsuarioActual = new javax.swing.JLabel();
         lblUsuarioActual = new javax.swing.JLabel();
         lblMensajeBienvenida = new javax.swing.JLabel();
-        pnlTitulo = new javax.swing.JPanel();
-        lblTitulo = new javax.swing.JLabel();
-        lblModulo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
         txtFechaCaducidad = new javax.swing.JTextField();
         lblBuscar = new javax.swing.JLabel();
@@ -85,6 +101,28 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
+        pnlTitulo1 = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblModulo1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
+        pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(242, 242, 242));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Sistema de Inventario Hospital Odontológico");
+        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
+
+        lblModulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblModulo.setForeground(new java.awt.Color(242, 242, 242));
+        lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModulo.setText("Mantenimiento Inventario Bodega");
+        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 300, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
+        pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 80, 90));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -111,26 +149,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         pnlUsuario.add(lblMensajeBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, 28));
 
         pnlBackbround.add(pnlUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 130));
-
-        pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
-        pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(242, 242, 242));
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Sistema de Inventario Hospital Odontológico");
-        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
-
-        lblModulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblModulo.setForeground(new java.awt.Color(242, 242, 242));
-        lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblModulo.setText("Mantenimiento Inventario Bodega");
-        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 300, 30));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
-        pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 80, 90));
-
-        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 800, 130));
 
         getContentPane().add(pnlBackbround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -261,7 +279,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -295,6 +313,26 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
 
         getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1000, 570));
+
+        pnlTitulo1.setBackground(new java.awt.Color(0, 49, 110));
+        pnlTitulo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(242, 242, 242));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Sistema de Inventario Hospital Odontológico");
+        pnlTitulo1.add(lblTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
+
+        lblModulo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblModulo1.setForeground(new java.awt.Color(242, 242, 242));
+        lblModulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModulo1.setText("Mantenimiento Usuarios");
+        pnlTitulo1.add(lblModulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 300, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
+        pnlTitulo1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 80, 90));
+
+        getContentPane().add(pnlTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 800, 130));
 
         pack();
         setLocationRelativeTo(null);
@@ -4521,6 +4559,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     private javax.swing.JButton btnVisualizarTabla;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblErrorDescripcion1;
@@ -4532,14 +4571,17 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
+    private javax.swing.JLabel lblModulo1;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblStock;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblUsuarioActual;
     private javax.swing.JSpinner numStock;
     private javax.swing.JPanel pnlBackbround;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
+    private javax.swing.JPanel pnlTitulo1;
     private javax.swing.JPanel pnlUsuario;
     private javax.swing.JTable tableBodega;
     private javax.swing.JTextField txtBuscar;

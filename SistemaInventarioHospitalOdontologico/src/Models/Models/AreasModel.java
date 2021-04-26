@@ -7,14 +7,23 @@ package Models.Models;
  */
 
 /**
- *
- * @author danie
- */
+* @author Héctor López
+* Clase que se encarga de establecer el modelo de datos para las áreas
+*/
+
 public class AreasModel 
 {
+    // **************************************************
+    // Variables
+    // **************************************************
+    
     private Integer AreId;
     private String AreDescripcion;
 
+    // **************************************************
+    // Getters y Setters
+    // **************************************************
+    
     public Integer getAreId() 
     {
         return AreId;

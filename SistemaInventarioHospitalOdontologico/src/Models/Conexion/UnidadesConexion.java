@@ -17,44 +17,119 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author may_g
+ * @author Maryury Zuniga
  */
-public class UnidadesConexion {
+public class UnidadesConexion 
+{
+    //****************************
+    // Metodos públicos
+    //***************************
     
-     public static ArrayList<UnidadesModel> ListadoUnidades() 
+    /**
+    * Metodo que retorna los registros de la table tableUnidades
+    * desde la bdd,dependiendo de la accion que realice el usuario; mostrar todos 
+    * los registros, solo los activos o solo los inactivos.
+     * @param accion
+    * @return ArrayList de objeto tipo UnidadesModel
+    */
+    public static ArrayList<UnidadesModel> ListadoUnidades(String accion) 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        try 
-        {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT * FROM unidades;";
+        switch(accion){
             
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                UnidadesModel unidad = new UnidadesModel();
-                unidad.setUndId(rss.getInt("UndId"));
-                unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                unidad.setUndEstado(rss.getString("UndEstado"));;
-                unidades.add(unidad);
-            } 
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
+            case "Activos":
+                            try
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT *FROM unidades"
+                                        + " WHERE UndEstado = 'Activo'";
+                                
+                                 rss = stm.executeQuery(query); 
+                                 
+                                 while(rss.next())
+                                 {
+                                     UnidadesModel unidad = new UnidadesModel();
+                                     unidad.setUndId(rss.getInt("UndId"));
+                                     unidad.setUndDescripcion(rss.getString("UndDescripcion"));
+                                     unidad.setUndEstado(rss.getString("UndEstado"));
+                                     unidades.add(unidad);
+                                 }  
+                                    con.close();
+                            } 
+                            catch (SQLException e)
+                            {
+                                 JOptionPane.showMessageDialog(null,e);
+                            } 
+                            break;
+            case "Inactivos":
+                            try
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT *FROM unidades "
+                                        + "WHERE UndEstado = 'Inactivo'";
+                                       
+                                
+                                 rss = stm.executeQuery(query); 
+                                 
+                                 while(rss.next())
+                                 {
+                                     UnidadesModel unidad = new UnidadesModel();
+                                     unidad.setUndId(rss.getInt("UndId"));
+                                     unidad.setUndDescripcion(rss.getString("UndDescripcion"));
+                                     unidad.setUndEstado(rss.getString("UndEstado"));
+                                     unidades.add(unidad);
+                                 }  
+                                    con.close();
+                            } 
+                            catch (SQLException e)
+                            {
+                                 JOptionPane.showMessageDialog(null,e);
+                            } 
+                            break; 
+            case "Todos":
+                            try
+                            {
+                                con = Conexion.getConexion(con);
+                                stm = con.createStatement();
+                                String query = "SELECT *FROM unidades ";
+                                      
+                                       
+                                
+                                 rss = stm.executeQuery(query); 
+                                 
+                                 while(rss.next())
+                                 {
+                                     UnidadesModel unidad = new UnidadesModel();
+                                     unidad.setUndId(rss.getInt("UndId"));
+                                     unidad.setUndDescripcion(rss.getString("UndDescripcion"));
+                                     unidad.setUndEstado(rss.getString("UndEstado"));
+                                     unidades.add(unidad);
+                                 }  
+                                    con.close();
+                            } 
+                            catch (SQLException e)
+                            {
+                                 JOptionPane.showMessageDialog(null,e);
+                            } 
+                            break;                
         }
         
         return unidades;
-    }
+    }    
      
-     public static String MantenimientoUnidades(String accion, UnidadesModel unidad)
+    /**
+    * Metodo que ejecuta el procedimiento almacenado MantenimientoUnidades
+    * @param accion String
+    * @param unidad Objeto de tipo UnidadesModel
+    * @return String que contiene el parametro de salida del procedimiento
+    */
+   public static String MantenimientoUnidades(String accion, UnidadesModel unidad)
     {
         String estado = "";
         Connection con = null;
@@ -80,6 +155,5 @@ public class UnidadesConexion {
         } 
         return estado;
     }   
-     
 }
 

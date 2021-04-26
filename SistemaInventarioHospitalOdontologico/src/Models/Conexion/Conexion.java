@@ -13,17 +13,34 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+* 
+* Clase que se encarga de establecer la conexión a MySQL de acorde 
+* a las credenciales proporcionadas
+*/
+
 public abstract class Conexion 
 {
+    //****************************
+    // Constantes
+    //***************************
+    
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String pass = "password";
     private static final String url = "jdbc:mysql://localhost:3306/inventariohospital?characterEncoding=utf8";
     
+    //****************************
+    // Metodos públicos
+    //***************************
     
+    /**
+    * 
+    * @param con Connection
+    * Método que se encarga de establecer la conexion con MySQL
+    * @return Connection
+    */
     public static Connection getConexion(Connection con)
     {
         if (con == null)

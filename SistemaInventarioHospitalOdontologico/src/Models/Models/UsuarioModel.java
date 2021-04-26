@@ -6,11 +6,16 @@
 package Models.Models;
 
 /**
- *
- * @author danie
- */
+*
+* @author Héctor López
+* Clase que se encarga de definir el modelo de datos para los usuarios
+*/
 public class UsuarioModel 
 {
+    // **************************************************
+    // Variables
+    // **************************************************
+    
     private Integer UsrId;
     private String UsrIdentidad;
     private String UsrNombre;
@@ -21,6 +26,10 @@ public class UsuarioModel
     private String UsrEstado;
     private Integer AreId;
     private String AreDescripcion;
+    
+    // **************************************************
+    // Getters y Setters
+    // **************************************************
     
     public Integer getUsrId() 
     {

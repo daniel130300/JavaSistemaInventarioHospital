@@ -320,7 +320,7 @@ public class InventarioBodegaController {
         JLabel errFechaCaducidad)
     {
         boolean error = false;
-       
+       /*
         if(!Validaciones.ValidarFormatoFecha(trimmedFechaCaducidad))
         {
            errFechaCaducidad.setText("Formato de Fecha Incorrecto");
@@ -332,7 +332,7 @@ public class InventarioBodegaController {
            errFechaCaducidad.setText("La Fecha de Caducidad no debe ser anterior a la actual");
            error = true;
         }
-               
+        */
         if(Validaciones.validarCampoVacio(trimmedFechaCaducidad))
         {
             errFechaCaducidad.setText("Es un campo obligatorio");

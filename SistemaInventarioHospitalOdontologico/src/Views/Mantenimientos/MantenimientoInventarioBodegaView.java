@@ -52,6 +52,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         this.Id_Lote = InventarioBodegaController.setDatosEditarFromCache(this.tableBodega, 
                 this.numStock ,this.txtFechaCaducidad,this.cmbEstado);
         
+        System.out.println(this.Id_Lote);
+        
         if(Id_Lote != null)
         {
             this.cmbEstado.setEnabled(true);
@@ -61,7 +63,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
             this.btnCancelar1.setEnabled(true);
         }
     }   
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,14 +167,14 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 490, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 490, -1));
 
         lblStock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblStock.setForeground(new java.awt.Color(242, 242, 242));
@@ -193,7 +194,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 btnVisualizarTablaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, 140, 30));
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 230, 140, 30));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -205,7 +206,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 80, 30));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 80, 30));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
@@ -263,7 +264,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBodega);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 970, 280));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 960, 270));
 
         btnCancelar1.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -275,7 +276,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 btnCancelar1ActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, 90, 30));
+        pnlMenu.add(btnCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 90, 30));
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));

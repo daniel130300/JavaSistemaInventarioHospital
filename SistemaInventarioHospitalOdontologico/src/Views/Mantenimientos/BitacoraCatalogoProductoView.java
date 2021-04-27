@@ -153,7 +153,7 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBitacoraCatalogoProducto);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1160, 410));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1160, 420));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));

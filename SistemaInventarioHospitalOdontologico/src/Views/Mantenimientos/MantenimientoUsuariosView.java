@@ -304,7 +304,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableUsuarios);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 1260, 130));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 1260, 140));
 
         lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblContrasenia.setForeground(new java.awt.Color(242, 242, 242));

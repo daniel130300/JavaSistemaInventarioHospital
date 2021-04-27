@@ -159,7 +159,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableCategorias);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 750, 270));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 750, 280));
 
         lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));

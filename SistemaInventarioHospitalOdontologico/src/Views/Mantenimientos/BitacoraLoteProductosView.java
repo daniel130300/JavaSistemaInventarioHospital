@@ -153,7 +153,7 @@ public class BitacoraLoteProductosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBitacoraLoteProductos);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1170, 420));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1170, 430));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));

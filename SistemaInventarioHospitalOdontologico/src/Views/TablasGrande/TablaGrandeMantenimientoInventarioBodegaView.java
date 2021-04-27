@@ -275,6 +275,7 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
     private void tableBodegaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBodegaMouseClicked
         int seleccion = this.tableBodega.rowAtPoint(evt.getPoint());
         InventarioBodegaModel inventario = new  InventarioBodegaModel();
+        inventario.setLprId(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 0))));
         inventario.setLprStock(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 4))));
         inventario.setLprFechaCaducidad(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 7)));
         inventario.setLprEstado(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion,10)));

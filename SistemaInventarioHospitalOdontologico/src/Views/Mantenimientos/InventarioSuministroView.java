@@ -151,7 +151,7 @@ public class InventarioSuministroView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableSuministros);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 810, 350));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 810, 370));
 
         lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));

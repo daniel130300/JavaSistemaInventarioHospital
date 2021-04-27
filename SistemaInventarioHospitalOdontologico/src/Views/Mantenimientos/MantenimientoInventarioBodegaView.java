@@ -7,6 +7,7 @@ package Views.Mantenimientos;
 
 import Controllers.Controllers.InventarioBodegaController;
 import Controllers.Controllers.LoginController;
+import Utils.Cache.InventarioBodegaCache;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Menus.MenuBodegaView;
 import Views.TablasGrande.TablaGrandeMantenimientoInventarioBodegaView;
@@ -388,6 +389,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        InventarioBodegaCache inventarioCache = new InventarioBodegaCache();
+        inventarioCache.setDatosCompartidos(false);
         MenuBodegaView menuBodegaView = new MenuBodegaView();
         menuBodegaView.setVisible(true);
         this.dispose();

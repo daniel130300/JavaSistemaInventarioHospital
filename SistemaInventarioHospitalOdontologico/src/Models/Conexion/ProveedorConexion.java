@@ -60,6 +60,9 @@ public class ProveedorConexion
                         proveedor.setProNombre(rss.getString("ProNombre"));;
                         proveedor.setProCorreo(rss.getString("ProCorreo"));
                         proveedor.setProTelefono(rss.getString("ProTelefono"));
+                        proveedor.setProTelefono2(rss.getString("ProTelefono2"));
+                        proveedor.setProTelefono3(rss.getString("ProTelefono3"));
+                        proveedor.setRubId(rss.getString("RubId"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
                         proveedor.setProEstado(rss.getString("ProEstado"));
@@ -93,6 +96,9 @@ public class ProveedorConexion
                         proveedor.setProNombre(rss.getString("ProNombre"));;
                         proveedor.setProCorreo(rss.getString("ProCorreo"));
                         proveedor.setProTelefono(rss.getString("ProTelefono"));
+                        proveedor.setProTelefono2(rss.getString("ProTelefono2"));
+                        proveedor.setProTelefono3(rss.getString("ProTelefono3"));
+                        proveedor.setRubId(rss.getString("RubId"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
                         proveedor.setProEstado(rss.getString("ProEstado"));
@@ -124,6 +130,9 @@ public class ProveedorConexion
                         proveedor.setProNombre(rss.getString("ProNombre"));;
                         proveedor.setProCorreo(rss.getString("ProCorreo"));
                         proveedor.setProTelefono(rss.getString("ProTelefono"));
+                        proveedor.setProTelefono2(rss.getString("ProTelefono2"));
+                        proveedor.setProTelefono3(rss.getString("ProTelefono3"));
+                        proveedor.setRubId(rss.getString("RubId"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
                         proveedor.setProEstado(rss.getString("ProEstado"));
@@ -165,6 +174,9 @@ public class ProveedorConexion
                 proveedor.setProNombre(rss.getString("ProNombre"));;
                 proveedor.setProCorreo(rss.getString("ProCorreo"));
                 proveedor.setProTelefono(rss.getString("ProTelefono"));
+                proveedor.setProTelefono2(rss.getString("ProTelefono2"));
+                proveedor.setProTelefono3(rss.getString("ProTelefono3"));
+                proveedor.setRubId(rss.getString("RubId"));
                 proveedor.setProContacto(rss.getString("ProContacto"));
                 proveedor.setProDireccion(rss.getString("ProDireccion"));
                 proveedor.setProEstado(rss.getString("ProEstado"));
@@ -197,7 +209,7 @@ public class ProveedorConexion
             String query;
             con = Conexion.getConexion(con);
                         
-            query = "{CALL MantenimientoProveedores(?,?,?,?,?,?,?,?,?,?)}";
+            query = "{CALL MantenimientoProveedores(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
             cs.setInt               (2, proveedor.getProId());
@@ -205,12 +217,15 @@ public class ProveedorConexion
             cs.setString            (4, proveedor.getProNombre());
             cs.setString            (5, proveedor.getProCorreo());
             cs.setString            (6, proveedor.getProTelefono());
-            cs.setString            (7, proveedor.getProContacto());
-            cs.setString            (8, proveedor.getProDireccion());
-            cs.setString            (9, proveedor.getProEstado());
-            cs.registerOutParameter (10, Types.VARCHAR);
+            cs.setString            (7, proveedor.getProTelefono2());
+            cs.setString            (8, proveedor.getProTelefono3());
+            cs.setString            (9, proveedor.getRubId());
+            cs.setString            (10, proveedor.getProContacto());
+            cs.setString            (11, proveedor.getProDireccion());
+            cs.setString            (12, proveedor.getProEstado());
+            cs.registerOutParameter (13, Types.VARCHAR);
             cs.executeUpdate();
-            estado = cs.getString(10);
+            estado = cs.getString(13);
             con.close();
         }
         catch (SQLException e)

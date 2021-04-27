@@ -17,9 +17,36 @@ public class ProveedorModel
     private String ProNombre;
     private String ProCorreo;
     private String ProTelefono;
+    private String ProTelefono2;
+    private String ProTelefono3;
+    private String RubId;
     private String ProContacto;
     private String ProDireccion;
     private String ProEstado;
+
+    public String getProTelefono2() {
+        return ProTelefono2;
+    }
+
+    public void setProTelefono2(String ProTelefono2) {
+        this.ProTelefono2 = ProTelefono2;
+    }
+
+    public String getProTelefono3() {
+        return ProTelefono3;
+    }
+
+    public void setProTelefono3(String ProTelefono3) {
+        this.ProTelefono3 = ProTelefono3;
+    }
+
+    public String getRubId() {
+        return RubId;
+    }
+
+    public void setRubId(String RubId) {
+        this.RubId = RubId;
+    }
 
     // **************************************************
     // Getters y Setters

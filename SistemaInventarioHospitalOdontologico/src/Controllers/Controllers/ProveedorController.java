@@ -68,9 +68,10 @@ public class ProveedorController
     * @return Boolean
     */
     public static Boolean MantenimientoProveedores(String accion, Integer id, 
-            String rtn, String nombre, String correo, String telefono, 
-            String contacto, String direccion, String estado ,JLabel errRTN, JLabel errNombre,
-            JLabel errCorreo,JLabel errTelefono, JLabel errContacto, JLabel errDireccion)
+            String rtn, String nombre, String correo, String telefono, String telefono2, String telefono3, 
+            String rubro ,String contacto, String direccion, String estado ,JLabel errRTN, JLabel errNombre,
+            JLabel errCorreo,JLabel errTelefono,JLabel errTelefono2,JLabel errTelefono3,
+            JLabel errContacto, JLabel errDireccion)
     {
         
         Boolean generalValidacionError = false;
@@ -81,6 +82,8 @@ public class ProveedorController
         errCorreo.setText(null);
         errCorreo.setText(null);
         errTelefono.setText(null);
+        errTelefono2.setText(null);
+        errTelefono3.setText(null);
         errContacto.setText(null);
         errDireccion.setText(null);
         
@@ -88,9 +91,28 @@ public class ProveedorController
         String trimmedNombre = nombre.trim();
         String trimmedCorreo = correo.trim();
         String trimmedTelefono = telefono.trim();
+        String trimmedTelefono2 = telefono2.trim();
+        String trimmedTelefono3 = telefono3.trim();
+        String trimmedRubro= rubro.trim();
         String trimmedContacto = contacto.trim();
         String trimmedDireccion = direccion.trim();
         String trimmedEstado= estado.trim();
+        
+        if(trimmedTelefono2=="")
+        {
+            trimmedTelefono2="0";
+        }    
+
+        if(trimmedTelefono3=="")
+        {
+            trimmedTelefono2="0";
+        }
+        
+        if(!Validaciones.validarNumeros(trimmedRTN))
+        {
+           errRTN.setText("El RTN ingresado es incorrecta");
+           generalValidacionError = true;
+        }        
         
         if(!Validaciones.validarNumeros(trimmedRTN))
         {
@@ -139,13 +161,21 @@ public class ProveedorController
            errTelefono.setText("El teléfono es un campo obligatorio");
            generalValidacionError = true;
         }
-        
+        if(!Validaciones.validarNumeros(trimmedTelefono2))
+        {
+           errTelefono2.setText("El teléfono ingresado es incorrecto");
+           generalValidacionError = true;
+        }
+        if(!Validaciones.validarNumeros(trimmedTelefono3))
+        {
+           errTelefono3.setText("El teléfono ingresado es incorrecto");
+           generalValidacionError = true;
+        } 
         if(!Validaciones.validarLetras(trimmedContacto))
         {
             errContacto.setText("El contacto ingresado es incorrecto");
             generalValidacionError = true;
         }
-        
         if(Validaciones.validarCampoVacio(trimmedContacto))
         {
            errContacto.setText("El contacto es un campo obligatorio");
@@ -169,6 +199,9 @@ public class ProveedorController
                     proveedorModel.setProNombre(trimmedNombre);
                     proveedorModel.setProCorreo(trimmedCorreo);
                     proveedorModel.setProTelefono(trimmedTelefono);
+                    proveedorModel.setProTelefono2(trimmedTelefono2);
+                    proveedorModel.setProTelefono3(trimmedTelefono3);
+                    proveedorModel.setRubId(trimmedRubro);
                     proveedorModel.setProContacto(trimmedContacto);
                     proveedorModel.setProDireccion(trimmedDireccion);            
 
@@ -199,6 +232,9 @@ public class ProveedorController
                     proveedoModel.setProNombre(trimmedNombre);
                     proveedoModel.setProCorreo(trimmedCorreo);
                     proveedoModel.setProTelefono(trimmedTelefono);
+                    proveedoModel.setProTelefono2(trimmedTelefono2);
+                    proveedoModel.setProTelefono3(trimmedTelefono3);
+                    proveedoModel.setRubId(trimmedRubro);
                     proveedoModel.setProContacto(trimmedContacto);
                     proveedoModel.setProDireccion(trimmedDireccion);
                     proveedoModel.setProEstado(trimmedEstado);
@@ -251,8 +287,9 @@ public class ProveedorController
     * @return Integer
     */
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableProveedores, 
-            JTextField txtRTN,JTextField txtNombre, JTextField txtCorreo,
-            JTextField txtTelefono, JTextField txtContacto,JTextArea txtDescripcion,JComboBox cmbEstado )
+            JTextField txtRTN,JTextField txtNombre, JTextField txtCorreo,JTextField txtTelefono,
+            JTextField txtTelefono2,JTextField txtTelefono3,JComboBox cmbRubro, JTextField txtContacto,
+            JTextArea txtDescripcion,JComboBox cmbEstado)
     {
         Integer ProId = null;
         ProId = Integer.parseInt((String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 0)))); 
@@ -260,9 +297,12 @@ public class ProveedorController
         txtNombre.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 2)));
         txtCorreo.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 3)));
         txtTelefono.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 4)));
-        txtContacto.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 5)));
-        txtDescripcion.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 6)));
-        cmbEstado.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,7)));
+        txtTelefono2.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 5)));
+        txtTelefono3.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 6)));
+        cmbRubro.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,7)));
+        txtContacto.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 8)));
+        txtDescripcion.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 9)));
+        cmbEstado.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,10)));
 
         return ProId;
     }  
@@ -283,8 +323,9 @@ public class ProveedorController
     * @return Integer
     */
     public static Integer setDatosEditarFromCache(JTable tableProveeodres,JTextField txtRTN, 
-             JTextField txtNombre, JTextField txtCorreo, JTextField txtTelefono, 
-             JTextField txtContacto, JTextArea txtDireccion,JComboBox cmbEstado)
+             JTextField txtNombre, JTextField txtCorreo, JTextField txtTelefono,JTextField txtTelefono2, 
+             JTextField txtTelefono3,JComboBox cmbRubro,JTextField txtContacto, JTextArea txtDireccion,
+             JComboBox cmbEstado)
     {
         ProveedorCache proveedorCache = new ProveedorCache();
         Integer ProId = null;
@@ -296,6 +337,9 @@ public class ProveedorController
             txtNombre.setText(proveedorCache.getid().getProNombre());
             txtCorreo.setText(proveedorCache.getid().getProCorreo());
             txtTelefono.setText(proveedorCache.getid().getProTelefono());
+            txtTelefono2.setText(proveedorCache.getid().getProTelefono2());
+            txtTelefono3.setText(proveedorCache.getid().getProTelefono3());
+            cmbRubro.setSelectedItem(proveedorCache.getid().getRubId());
             txtContacto.setText(proveedorCache.getid().getProContacto());
             txtDireccion.setText(proveedorCache.getid().getProDireccion());
             cmbEstado.setSelectedItem(proveedorCache.getid().getProEstado());
@@ -380,6 +424,9 @@ public class ProveedorController
                             proveedores.get(i).getProNombre(),
                             proveedores.get(i).getProCorreo(),
                             proveedores.get(i).getProTelefono(),
+                            proveedores.get(i).getProTelefono2(),
+                            proveedores.get(i).getProTelefono3(),
+                            proveedores.get(i).getRubId(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
                             proveedores.get(i).getProEstado()
@@ -402,6 +449,9 @@ public class ProveedorController
                             proveedores.get(i).getProNombre(),
                             proveedores.get(i).getProCorreo(),
                             proveedores.get(i).getProTelefono(),
+                            proveedores.get(i).getProTelefono2(),
+                            proveedores.get(i).getProTelefono3(),
+                            proveedores.get(i).getRubId(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
                             proveedores.get(i).getProEstado()
@@ -424,6 +474,9 @@ public class ProveedorController
                             proveedores.get(i).getProNombre(),
                             proveedores.get(i).getProCorreo(),
                             proveedores.get(i).getProTelefono(),
+                            proveedores.get(i).getProTelefono2(),
+                            proveedores.get(i).getProTelefono3(),
+                            proveedores.get(i).getRubId(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
                             proveedores.get(i).getProEstado()
@@ -452,6 +505,9 @@ public class ProveedorController
                     proveedores.get(i).getProNombre(),
                     proveedores.get(i).getProCorreo(),
                     proveedores.get(i).getProTelefono(),
+                    proveedores.get(i).getProTelefono2(),
+                    proveedores.get(i).getProTelefono3(),
+                    proveedores.get(i).getRubId(),
                     proveedores.get(i).getProContacto(),
                     proveedores.get(i).getProDireccion(),
                     proveedores.get(i).getProEstado()

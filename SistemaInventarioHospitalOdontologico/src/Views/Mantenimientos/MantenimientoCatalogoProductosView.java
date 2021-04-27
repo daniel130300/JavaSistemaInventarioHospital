@@ -616,6 +616,8 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtStockMinimoActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        CatalogoProductoCache productoCache = new CatalogoProductoCache();
+        productoCache.setDatosCompartidos(false);
         MenuBodegaView menuBodegaView = new MenuBodegaView();
         menuBodegaView.setVisible(true);
         this.dispose();

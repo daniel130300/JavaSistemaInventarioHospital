@@ -23,11 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class InventarioBodegaConexion 
 {
-    
     // **************************************************
     // Métodos Públicos
     // **************************************************
-    
     
     /**
     * @param accion String
@@ -171,13 +169,13 @@ public class InventarioBodegaConexion
     }
     
     /**
-     * 
-     * @param accion String
-     * @param inventario InventarioBodegaModel
-     * Método que se encarga de ejecutar el procedimiento almacenado 
-     * MantenimientoInventarioBodega.
-     * @return String el cual contiene el parametro de salida del procedimiento. 
-     */
+    * 
+    * @param accion String
+    * @param inventario InventarioBodegaModel
+    * Método que se encarga de ejecutar el procedimiento almacenado 
+    * MantenimientoInventarioBodega.
+    * @return String el cual contiene el parametro de salida del procedimiento. 
+    */
     public static String MantenimientoInventarioBodega(String accion, InventarioBodegaModel inventario)
     {
         String estado = "";
@@ -215,10 +213,10 @@ public class InventarioBodegaConexion
     // **************************************************
     
     /**
-     * Método que se encarga de crear la tabla temporal
-     * loggedusuario para guardar el id usuario que esta
-     * loggueado en el momento. 
-     */
+    * Método que se encarga de crear la tabla temporal
+    * loggedusuario para guardar el id usuario que esta
+    * loggueado en el momento. 
+    */
     private static void CrearTablaTemporal(Connection conexion)
     {
         Connection con = null;

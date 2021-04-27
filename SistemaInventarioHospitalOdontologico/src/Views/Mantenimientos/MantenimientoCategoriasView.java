@@ -251,7 +251,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         lblVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblVisualizar.setForeground(new java.awt.Color(242, 242, 242));
         lblVisualizar.setText("Visualizar:");
-        pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
         rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -263,7 +263,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 rbnTodosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -274,7 +274,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 rbnActivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
 
         rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -285,7 +285,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 rbnInactivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, -1));
+        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 790, 550));
 

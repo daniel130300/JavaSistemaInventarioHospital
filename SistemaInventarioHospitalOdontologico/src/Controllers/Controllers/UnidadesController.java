@@ -247,6 +247,11 @@ public class UnidadesController
                 JOptionPane.showMessageDialog(null, "La descripción ya se encuentra registrada.");
                 error = true;
             break;
+            
+            default:
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                error = true;
+            break;
         }
         
         return error;

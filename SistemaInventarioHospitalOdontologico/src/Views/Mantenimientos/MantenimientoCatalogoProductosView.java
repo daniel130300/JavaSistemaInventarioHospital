@@ -38,7 +38,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos"); 
         CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
-        CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion);
+        CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion, this.txtBuscar);
         this.LlenarDatos();
     }
     
@@ -213,7 +213,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
 
         pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 910, 110));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

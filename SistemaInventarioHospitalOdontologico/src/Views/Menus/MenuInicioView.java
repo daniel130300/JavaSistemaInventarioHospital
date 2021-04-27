@@ -15,7 +15,6 @@ import Views.Mantenimientos.InformacionPersonalView;
 import Views.Mantenimientos.MantenimientoProveedoresView;
 import Views.Mantenimientos.MantenimientoUsuariosView;
 import Views.Mantenimientos.MantenimientoComprasView;
-import Views.Menus.MenuSuministrosView;
 
 /**
  *
@@ -314,8 +313,8 @@ public class MenuInicioView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprasActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        MantenimientoProveedoresView mantenimientoProveedoresView = new MantenimientoProveedoresView();
-        mantenimientoProveedoresView.setVisible(true);
+        MenuProveedoresView menuProveedoresView = new MenuProveedoresView();
+        menuProveedoresView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnProveedoresActionPerformed
 

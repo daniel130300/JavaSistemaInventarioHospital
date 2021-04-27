@@ -5,7 +5,7 @@
  */
 package Models.Conexion;
 
-import Models.Models.UnidadesModel;
+import Models.Models.RubrosModel;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,26 +19,19 @@ import javax.swing.JOptionPane;
  *
  * @author Maryury Zuniga
  */
-public class UnidadesConexion 
+public class RubrosConexion 
 {
     //****************************
     // Metodos públicos
     //***************************
     
-    /**
-    * Metodo que retorna los registros de la table tableUnidades
-    * desde la bdd,dependiendo de la accion que realice el usuario; mostrar todos 
-    * los registros, solo los activos o solo los inactivos.
-     * @param accion
-    * @return ArrayList de objeto tipo UnidadesModel
-    */
-    public static ArrayList<UnidadesModel> ListadoUnidades(String accion) 
+    public static ArrayList<RubrosModel> ListadoRubros(String accion) 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
-        ArrayList<UnidadesModel> unidades = new ArrayList<>();
+        ArrayList<RubrosModel> rubros = new ArrayList<>();
         switch(accion)
         {
             case "Activos":
@@ -46,25 +39,25 @@ public class UnidadesConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT *FROM unidades"
-                            + " WHERE UndEstado = 'Activo'";
+                    String query = "SELECT *FROM rubros"
+                            + " WHERE RubEstado = 'Activo'";
 
-                    rss = stm.executeQuery(query); 
+                     rss = stm.executeQuery(query); 
 
                     while(rss.next())
                     {
-                        UnidadesModel unidad = new UnidadesModel();
-                        unidad.setUndId(rss.getInt("UndId"));
-                        unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                        unidad.setUndEstado(rss.getString("UndEstado"));
-                        unidades.add(unidad);
+                       RubrosModel rubro = new RubrosModel();
+                       rubro.setRubId(rss.getInt("RubId"));
+                       rubro.setRubDescripcion(rss.getString("RubDescripcion"));
+                       rubro.setRubEstado(rss.getString("RubEstado"));
+                       rubros.add(rubro);
                     }  
                     
                     con.close();
                 } 
                 catch (SQLException e)
                 {
-                     JOptionPane.showMessageDialog(null,e);
+                    JOptionPane.showMessageDialog(null,e);
                 } 
             break;
             
@@ -73,19 +66,18 @@ public class UnidadesConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT *FROM unidades "
-                            + "WHERE UndEstado = 'Inactivo'";
-
+                    String query = "SELECT *FROM rubros "
+                            + "WHERE RubEstado = 'Inactivo'";
 
                     rss = stm.executeQuery(query); 
 
                     while(rss.next())
                     {
-                        UnidadesModel unidad = new UnidadesModel();
-                        unidad.setUndId(rss.getInt("UndId"));
-                        unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                        unidad.setUndEstado(rss.getString("UndEstado"));
-                        unidades.add(unidad);
+                        RubrosModel rubro = new RubrosModel();
+                        rubro.setRubId(rss.getInt("RubId"));
+                        rubro.setRubDescripcion(rss.getString("RubDescripcion"));
+                        rubro.setRubEstado(rss.getString("RubEstado"));
+                        rubros.add(rubro);
                     }  
                     
                     con.close();
@@ -101,19 +93,17 @@ public class UnidadesConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT *FROM unidades ";
-
-
+                    String query = "SELECT *FROM rubros ";
 
                     rss = stm.executeQuery(query); 
 
                     while(rss.next())
                     {
-                        UnidadesModel unidad = new UnidadesModel();
-                        unidad.setUndId(rss.getInt("UndId"));
-                        unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                        unidad.setUndEstado(rss.getString("UndEstado"));
-                        unidades.add(unidad);
+                        RubrosModel rubro = new RubrosModel();
+                        rubro.setRubId(rss.getInt("RubId"));
+                        rubro.setRubDescripcion(rss.getString("RubDescripcion"));
+                        rubro.setRubEstado(rss.getString("RubEstado"));
+                        rubros.add(rubro);
                     }  
                     
                     con.close();
@@ -122,20 +112,13 @@ public class UnidadesConexion
                 {
                     JOptionPane.showMessageDialog(null,e);
                 } 
-                
             break;                
         }
         
-        return unidades;
+        return rubros;
     }    
      
-    /**
-    * Metodo que ejecuta el procedimiento almacenado MantenimientoUnidades
-    * @param accion String
-    * @param unidad Objeto de tipo UnidadesModel
-    * @return String que contiene el parametro de salida del procedimiento
-    */
-   public static String MantenimientoUnidades(String accion, UnidadesModel unidad)
+    public static String MantenimientoRubros(String accion, RubrosModel rubro)
     {
         String estado = "";
         Connection con = null;
@@ -144,12 +127,12 @@ public class UnidadesConexion
             String query;
             con = Conexion.getConexion(con);
                         
-            query = "{CALL MantenimientoUnidades(?,?,?,?,?)}";
+            query = "{CALL MantenimientoRubros(?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
-            cs.setInt               (2, unidad.getUndId());
-            cs.setString            (3, unidad.getUndDescripcion());
-            cs.setString            (4, unidad.getUndEstado());
+            cs.setInt               (2, rubro.getRubId());
+            cs.setString            (3, rubro.getRubDescripcion());
+            cs.setString            (4, rubro.getRubEstado());
             cs.registerOutParameter (5, Types.VARCHAR);
             cs.executeUpdate();
             estado = cs.getString(5);

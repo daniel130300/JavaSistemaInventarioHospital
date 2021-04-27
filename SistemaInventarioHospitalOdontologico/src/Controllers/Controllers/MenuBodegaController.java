@@ -70,7 +70,7 @@ public class MenuBodegaController
                 .get(4) != null)
         {
             btnMantenimientoCatalogoBodega.setEnabled(true);
-            btnMantenimientoCatalogoBodega.setText("<html><center>Mantenimiento<br/>Catálogo<br/>Bodega</center></html>");
+            btnMantenimientoCatalogoBodega.setText("<html><center>Mantenimiento<br/>Catálogo<br/>Productos</center></html>");
         }
         else
         {
@@ -125,7 +125,7 @@ public class MenuBodegaController
                 .get(14) != null)
         {
             btnBitacoraCatalogoBodega.setEnabled(true);
-            btnBitacoraCatalogoBodega.setText("<html><center>Bitácora<br/>Catálogo<br/>Bodega</center></html>");
+            btnBitacoraCatalogoBodega.setText("<html><center>Bitácora<br/>Catálogo<br/>Productos</center></html>");
         }
         else
         {

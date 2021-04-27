@@ -41,7 +41,7 @@ public class BitacoraCatalogoProductosConexion
         {
             con = Conexion.getConexion(con);
             stm = con.createStatement();
-            String query = "SELECT BcpId, UsrUsuario, PrdId, BcpAccion, BcpDescripcionCambios, BcpFecha FROM bitacoracatalogoproductos;";
+            String query = "SELECT BcpId, UsrUsuario, PrdId, BcpAccion, BcpDescripcionCambios, BcpFecha FROM bitacoracatalogoproductos ORDER BY BcpFecha Desc;";
             
             rss = stm.executeQuery(query);
             

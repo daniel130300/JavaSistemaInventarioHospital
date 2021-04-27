@@ -42,9 +42,6 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
         lblUsuarioActual = new javax.swing.JLabel();
         lblMensajeBienvenida = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JPanel();
-        lblIconoRegresar = new javax.swing.JLabel();
-        lblRegresar = new javax.swing.JLabel();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -54,7 +51,7 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
         lblModulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         pnlBackbround.setBackground(new java.awt.Color(0, 49, 110));
@@ -82,52 +79,17 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
-        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
-
-        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
-
-        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
-        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRegresar.setText("Regresar");
-
-        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
-        btnRegresar.setLayout(btnRegresarLayout);
-        btnRegresarLayout.setHorizontalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRegresarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconoRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnRegresarLayout.setVerticalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
-
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 520, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 520, -1));
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,7 +117,7 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableProveedores);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 810, 390));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 810, 450));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
@@ -195,10 +157,6 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
 
@@ -1283,15 +1241,12 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
-    private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuarioActual;
     private javax.swing.JPanel pnlBackbround;

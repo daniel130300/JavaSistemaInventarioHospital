@@ -15,8 +15,8 @@ import Models.Models.UnidadesModel;
 import Utils.Cache.CatalogoProductoCache;
 import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
-import static Views.Mantenimientos.MantenimientoCatalogoBodegaView.tableProveedores;
+import Views.Mantenimientos.MantenimientoCatalogoProductosView;
+import static Views.Mantenimientos.MantenimientoCatalogoProductosView.tableProveedores;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -268,7 +268,7 @@ public class CatalogoProductoController
             cmbCategoria.setSelectedItem(productoCache.getProducto().getCprDescripcion());
             cmbUnidad.setSelectedItem(productoCache.getProducto().getUndDescripcion());
             cmbEstado.setSelectedItem(productoCache.getProducto().getProdEstado());
-            CatalogoProductoController.ProductosProveedores(MantenimientoCatalogoBodegaView.tableProveedores, PrdId);
+            CatalogoProductoController.ProductosProveedores(MantenimientoCatalogoProductosView.tableProveedores, PrdId);
         }
         return PrdId;
     }
@@ -425,7 +425,7 @@ public class CatalogoProductoController
            errStockMinimo.setText("El stock mínimo es un campo obligatorio");
            error = true;
         }
-        if(Validaciones.validarTabla(MantenimientoCatalogoBodegaView.tableProveedores)==true)
+        if(Validaciones.validarTabla(MantenimientoCatalogoProductosView.tableProveedores)==true)
         {
             JOptionPane.showMessageDialog(null,"Error la tabla proveedores está vacía");
             error = true;

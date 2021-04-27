@@ -188,15 +188,15 @@ public class ListadoProductospProductosCompuestosView extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         MantenimientoProductosCompuestosView mantenimientoProductosCompuestosView = new MantenimientoProductosCompuestosView();
         mantenimientoProductosCompuestosView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
 
     /**
      * @param args the command line arguments

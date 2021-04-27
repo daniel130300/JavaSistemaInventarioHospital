@@ -6,8 +6,10 @@
 package Views.Mantenimientos;
 
 import Controllers.Controllers.LoginController;
+import Controllers.Controllers.RubrosController;
 import Controllers.Controllers.UnidadesController;
 import Views.Menus.MenuBodegaView;
+import Views.Menus.MenuProveedoresView;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -16,15 +18,15 @@ import javax.swing.ListSelectionModel;
  */
 public class MantenimientoRubrosView extends javax.swing.JFrame {
 
-    Integer UndId = null;
+    Integer RubId = null;
     
     public MantenimientoRubrosView() {
         initComponents();
-        UnidadesController.setPlaceHolders(this.txtDescripcion, this.txtBuscar);
+        RubrosController.setPlaceHolders(this.txtDescripcion, this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableRubros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       // UnidadesController.LlenarTableUnidades(this.tableRubros,"Todos"); 
-      //  UnidadesController.FiltroTableUnidades(this.tableRubros, this.txtBuscar);
+        RubrosController.LlenarTableRubros(this.tableRubros,"Todos"); 
+        RubrosController.FiltroTableRubros(this.tableRubros, this.txtBuscar);
     }
     
     private void LimpiarInputs()
@@ -105,13 +107,7 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
 
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 220, 20));
+        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 220, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -203,11 +199,6 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
-        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEstadoActionPerformed(evt);
-            }
-        });
         pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 130, -1));
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
@@ -248,7 +239,7 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
         lblVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblVisualizar.setForeground(new java.awt.Color(242, 242, 242));
         lblVisualizar.setText("Visualizar:");
-        pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+        pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
         rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -260,7 +251,7 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
                 rbnTodosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
+        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -271,7 +262,7 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
                 rbnActivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
 
         rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -282,7 +273,7 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
                 rbnInactivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
+        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 810, 540));
 
@@ -342,37 +333,33 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdentidad5ActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MenuBodegaView menuBodegaView = new MenuBodegaView();
-        menuBodegaView.setVisible(true);
+        MenuProveedoresView menuProveedoresView = new MenuProveedoresView();
+        menuProveedoresView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoActionPerformed
-
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-       /*if(!UnidadesController.MantenimientoUnidades("editar", this.UndId,
-            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),
-            this.lblErrorDescripcion))
-    {
-        this.btnAgregar.setEnabled(true);
-        this.btnEditar.setEnabled(false);
-        this.cmbEstado.setEnabled(false);
-        this.LimpiarInputs();
-        UnidadesController.LlenarTableUnidades(tableRubros,"Todos");
-        }*/
+        if(!RubrosController.MantenimientoRubros("editar", this.RubId,
+                this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),
+                this.lblErrorDescripcion))
+        {
+            this.btnAgregar.setEnabled(true);
+            this.btnEditar.setEnabled(false);
+            this.cmbEstado.setEnabled(false);
+            this.LimpiarInputs();
+            RubrosController.LlenarTableRubros(this.tableRubros,"Todos");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
     
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        /*if(!UnidadesController.MantenimientoUnidades("insertar", 0,
-            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
-    {
-        this.LimpiarInputs();
-        UnidadesController.LlenarTableUnidades(tableRubros,"Todos");
-        }*/
+        if(!RubrosController.MantenimientoRubros("insertar", 0,
+                this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
+        {
+            this.LimpiarInputs();
+            RubrosController.LlenarTableRubros(this.tableRubros,"Todos");
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -385,43 +372,40 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tableRubrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableRubrosMouseClicked
-        //int seleccion = this.tableRubros.rowAtPoint(evt.getPoint());
+        int seleccion = this.tableRubros.rowAtPoint(evt.getPoint());
 
-        //this.UndId = UnidadesController.setDatosEditarFromTable(seleccion,
-          //  this.tableRubros, this.txtDescripcion, this.cmbEstado);
-        //if(this.UndId != null)
-        //{
-          //  this.LimpiarErrLabels();
-            //this.cmbEstado.setEnabled(true);
-            //this.btnAgregar.setEnabled(false);
-            //this.btnEditar.setEnabled(true);
-        //}
+        this.RubId = RubrosController.setDatosEditarFromTable(seleccion,
+                this.tableRubros, this.txtDescripcion, this.cmbEstado);
+        
+        if(this.RubId != null)
+        {
+          this.LimpiarErrLabels();
+          this.cmbEstado.setEnabled(true);
+          this.btnAgregar.setEnabled(false);
+          this.btnEditar.setEnabled(true);
+        }
     }//GEN-LAST:event_tableRubrosMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
-
     private void rbnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnTodosActionPerformed
-        //UnidadesController.LlenarTableUnidades(tableRubros, "Todos");
-        //rbnActivos.setSelected(false);
-        //rbnInactivos.setSelected(false);
+        RubrosController.LlenarTableRubros(this.tableRubros, "Todos");
+        rbnActivos.setSelected(false);
+        rbnInactivos.setSelected(false);
     }//GEN-LAST:event_rbnTodosActionPerformed
 
     private void rbnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnActivosActionPerformed
-    //    UnidadesController.LlenarTableUnidades(tableRubros, "Activos");
-      //  rbnTodos.setSelected(false);
-        //rbnInactivos.setSelected(false);
+        RubrosController.LlenarTableRubros(this.tableRubros, "Activos");
+        rbnTodos.setSelected(false);
+        rbnInactivos.setSelected(false);
     }//GEN-LAST:event_rbnActivosActionPerformed
 
     private void rbnInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInactivosActionPerformed
-        //UnidadesController.LlenarTableUnidades(tableRubros, "Inactivos");
-        //rbnActivos.setSelected(false);
-        //rbnTodos.setSelected(false);
+        RubrosController.LlenarTableRubros(this.tableRubros, "Inactivos");
+        rbnActivos.setSelected(false);
+        rbnTodos.setSelected(false);
     }//GEN-LAST:event_rbnInactivosActionPerformed
 
     /**

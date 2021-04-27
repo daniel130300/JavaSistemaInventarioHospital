@@ -78,7 +78,7 @@ public class InventarioBodegaController {
             {   
                 case "editar":
                     resultado = InventarioBodegaConexion.MantenimientoInventarioBodega(accion, inventario);
-                    msj =  "Registro actualizado con éxito"; 
+                    msj =  "Registro actualizado con éxito."; 
                     mntError = InventarioBodegaController.mensajesRetroalimentacion(msj, resultado);
                 break;
             }
@@ -303,6 +303,10 @@ public class InventarioBodegaController {
         {
             case "OK":
                 JOptionPane.showMessageDialog(null, msj);                   
+            break;
+            
+            default:
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
             break;
         }
         

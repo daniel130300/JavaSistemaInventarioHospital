@@ -118,7 +118,7 @@ public class CatalogoProductoController
         }
         else
         {
-            JOptionPane.showMessageDialog(null,"Proveedor ya seleccionado");
+            JOptionPane.showMessageDialog(null,"Proveedor ya seleccionado.");
         }     
     }   
      
@@ -308,7 +308,7 @@ public class CatalogoProductoController
             break;
             
             case "errNombre":
-                JOptionPane.showMessageDialog(null, "El Producto ya se encuentra registrado.");
+                JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
                 error = true;
             break;
             

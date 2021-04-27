@@ -73,6 +73,11 @@ public class InformacionPersonalController
                     JOptionPane.showMessageDialog(null, "El correo ya se encuentra registrado.");
                     mntError = true;
                 break;
+                
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    mntError = true;
+                break;
             }  
         }
         

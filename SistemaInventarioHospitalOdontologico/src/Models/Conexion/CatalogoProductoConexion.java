@@ -223,7 +223,8 @@ public class CatalogoProductoConexion
         return categorias;
     }
     
-    public static Integer IdCategoria(String Categoria){
+    public static Integer IdCategoria(String Categoria)
+    {
         Integer id_categoria=0;
         Connection con = null;
         Statement stm;
@@ -250,7 +251,8 @@ public class CatalogoProductoConexion
         return id_categoria;
     } 
     
-    public static Integer IdUnidad(String Unidades){
+    public static Integer IdUnidad(String Unidades)
+    {
         Integer id_unidades=0;
         Connection con = null;
         Statement stm;

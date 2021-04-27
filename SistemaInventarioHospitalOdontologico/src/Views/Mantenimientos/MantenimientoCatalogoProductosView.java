@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
 import Views.Listados.ListadoProveedoresView;
 import Views.Menus.MenuBodegaView;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -6,8 +6,8 @@
 package Controllers.Controllers;
 
 import static Controllers.Controllers.GeneralController.FormatoTabla;
-import Models.Conexion.CategoriaConexion;
-import Models.Models.CategoriasModel;
+import Models.Conexion.RubrosConexion;
+import Models.Models.RubrosModel;
 import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
@@ -24,32 +24,23 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
-*
-* @author Héctor López
-*/
-public class CategoriasController 
+ *
+ * @author Maryury Zuniga
+ */
+public class RubrosController 
 {
-    // **************************************************
-    // Métodos Públicos
-    // **************************************************
-    
-     public static void setPlaceHolders(JTextField txtDescripcion, JTextField txtBuscar)
+    //**************************
+    // Metodos Públicos
+    //**************************
+
+    public static void setPlaceHolders(JTextField txtDescripcion, JTextField txtBuscar)
     {
-        TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la descripción de la categoría ", txtDescripcion);
+        TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la descripción del rubro ", txtDescripcion);
         TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
     }
     
-    /**
-    * @param accion String
-    * @param id Integer
-    * @param descripcion String
-    * @param estado Srting
-    * @param errDescripcion JLabel
-    * Si los datos ingresados son incorrectos de acorde a las validaciones
-    * retorna true, de lo contrario retorna false 
-    * @return Boolean
-    */
-    public static Boolean MantenimientoCategorias(String accion, Integer id, 
+    
+    public static Boolean MantenimientoRubros(String accion, Integer id, 
             String descripcion, String estado, JLabel errDescripcion)
     { 
         Boolean generalValidacionError = false;
@@ -59,140 +50,131 @@ public class CategoriasController
 
         String trimmedDescripcion = descripcion.trim();
 
-        generalValidacionError = CategoriasController.validacionesGenerales(trimmedDescripcion,errDescripcion);
+        generalValidacionError = RubrosController.validacionesGenerales(trimmedDescripcion,errDescripcion);
         
         if(generalValidacionError == false)
         { 
-            CategoriasModel categoria = new CategoriasModel();
-            categoria.setCprId(id);
-            categoria.setCprDescripcion(descripcion);
+            RubrosModel rubro = new RubrosModel();
+            rubro.setRubId(id);
+            rubro.setRubDescripcion(descripcion);
             String msj = "";
             String resultado = "";
             
             switch(accion)
             {
                 case "insertar":
-                    categoria.setCprEstado("Activo");
-                    resultado = CategoriaConexion.MantenimientoCategorias(accion, categoria);
-                    msj =  "Categoría insertada con éxito.";
-                    mntError = CategoriasController.mensajesRetroalimentacion(msj, resultado);
+                    rubro.setRubEstado("Activo");
+                    resultado = RubrosConexion.MantenimientoRubros(accion, rubro);
+                    msj =  "Rubro insertado con éxito.";
+                    mntError = RubrosController.mensajesRetroalimentacion(msj, resultado);
+                    
                 break;
                 
                 case "editar":
-                     categoria.setCprEstado(estado);
-                    resultado = CategoriaConexion.MantenimientoCategorias(accion, categoria);
-                    msj =  "Caetgoría actualizada con éxito.";
-                    mntError = CategoriasController.mensajesRetroalimentacion(msj, resultado);                   
-                break;
+                    rubro.setRubEstado(estado);
+                    resultado = RubrosConexion.MantenimientoRubros(accion, rubro);
+                    msj =  "Rubro actualizado con éxito.";
+                    mntError = RubrosController.mensajesRetroalimentacion(msj, resultado);                   
+                break; 
             }
         }
         
         return !(mntError == false && generalValidacionError == false); 
-    }    
+    }   
     
     /**
-    * 
-    * @param seleccion int
-    * @param tableCategorias JTable
-    * @param txtDescripcion JTextField
-    * @param cmbEstado JComboBox
-    * Método que se encarga de pasar los campos de la tabla a los JTextFields 
-    * correspondientes para poder ser editados y retorna el Id de la categoría de la tabla
+    * @param seleccion
+    * @param tableUnidades
+    * @param txtDescripcion
+    * @param cmbEstado
+    * Metodo encargado de pasar los datos de la tabla a los JTextFields
+    * correspondientes para ser editados, retorna el id de la unidad de la tabla
     * @return Integer
     */
-    public static Integer setDatosEditarFromTable(int seleccion, JTable tableCategorias, 
+    public static Integer setDatosEditarFromTable(int seleccion, JTable tableRubros, 
             JTextField txtDescripcion, JComboBox cmbEstado)
     {
-        Integer CprId = null;
-        CprId = Integer.parseInt((String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 0)))); 
-        txtDescripcion.setText(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 1)));
-        cmbEstado.setSelectedItem(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 2)));
+        Integer UndId = null;
+        UndId = Integer.parseInt((String.valueOf(tableRubros.getModel().getValueAt(seleccion, 0)))); 
+        txtDescripcion.setText(String.valueOf(tableRubros.getModel().getValueAt(seleccion, 1)));
+        cmbEstado.setSelectedItem(String.valueOf(tableRubros.getModel().getValueAt(seleccion, 2)));
 
-        
-        return CprId;
-    }  
+        return UndId;
+    } 
     
     /**
-    * 
-    * @param tableCategorias JTable
-    * Método que se encarga de llenar el JTable tableCategorias
-    * con los datos que se obtienen del método ListadoCategorias() 
-    * de la clase CategoriaConexion dependiendo de la accion que el usuario
-    * realice.
+    * @param tableUnidades 
+    * Metodo para el llenado de JTable table Unidades con datos obtenidos 
+    * del metodo ListadoUnidades() de la clase UnidadesConexion dependiendo de
+    * la accion que realice el usuario.
      * @param accion
-    * 
     */
-    public static void LlenarTableCategorias(JTable tableCategorias,String accion) 
+    public static void LlenarTableRubros(JTable tableUnidades, String accion) 
     {  
-        DefaultTableModel modelo = (DefaultTableModel) tableCategorias.getModel(); 
+        DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
-        ArrayList<CategoriasModel> categorias = new ArrayList<>();
+        ArrayList<RubrosModel> rubros = new ArrayList<>();
         switch(accion)
         {
             case "Activos":
-                categorias = CategoriaConexion.ListadoCategorias("Activos");
-
-                for (int i = 0; i <categorias.size(); i++) 
+                rubros = RubrosConexion.ListadoRubros("Activos");
+                for (int i = 0; i <rubros.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
                         {
-                            categorias.get(i).getCprId(),
-                            categorias.get(i).getCprDescripcion(),
-                            categorias.get(i).getCprEstado()
+                            rubros.get(i).getRubId(),
+                            rubros.get(i).getRubDescripcion(),
+                            rubros.get(i).getRubEstado()
                         }
                     );
                 }
-                FormatoTabla(tableCategorias, modelo.getColumnCount());
+                FormatoTabla(tableUnidades, modelo.getColumnCount());
             break;
-            
+        
             case "Inactivos":
-                categorias = CategoriaConexion.ListadoCategorias("Inactivos");
-
-                for (int i = 0; i <categorias.size(); i++) 
+                rubros = RubrosConexion.ListadoRubros("Inactivos");
+                for (int i = 0; i <rubros.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
                         {
-                            categorias.get(i).getCprId(),
-                            categorias.get(i).getCprDescripcion(),
-                            categorias.get(i).getCprEstado()
+                            rubros.get(i).getRubId(),
+                            rubros.get(i).getRubDescripcion(),
+                            rubros.get(i).getRubEstado()
                         }
                     );
                 }
-                FormatoTabla(tableCategorias, modelo.getColumnCount());
+                FormatoTabla(tableUnidades, modelo.getColumnCount());
             break;  
-            
+        
             case "Todos":
-                categorias = CategoriaConexion.ListadoCategorias("Todos");
-
-                for (int i = 0; i <categorias.size(); i++) 
+                rubros = RubrosConexion.ListadoRubros("Todos");    
+                for (int i = 0; i <rubros.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
                         {
-                            categorias.get(i).getCprId(),
-                            categorias.get(i).getCprDescripcion(),
-                            categorias.get(i).getCprEstado()
+                            rubros.get(i).getRubId(),
+                            rubros.get(i).getRubDescripcion(),
+                            rubros.get(i).getRubEstado()
                         }
                     );
                 }
-                FormatoTabla(tableCategorias, modelo.getColumnCount());
+                FormatoTabla(tableUnidades, modelo.getColumnCount());
             break;
         }
-    }
-    
-    /**
-    * 
+    } 
+    /*
     * @param tableCategorias JTable
     * @param fieldBusqueda JTextField 
-    * Método que se encarga de filtrar la tabla tableCategorias
+    * Método que se encarga de filtrar la tabla tableUnidades
     * a partir de la busqueda del usuario
     */
-    public static void FiltroTableCategorias(JTable tableCategorias, JTextField fieldBusqueda)
+     public static void FiltroTableRubros(JTable tableRubros, JTextField fieldBusqueda)
     {
-        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableCategorias.getModel());
-        tableCategorias.setRowSorter(rowSorter);
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableRubros.getModel());
+        tableRubros.setRowSorter(rowSorter);
         fieldBusqueda.getDocument().addDocumentListener(new DocumentListener()
         {
             @Override
@@ -228,19 +210,17 @@ public class CategoriasController
             }
         }
         );  
-    }  
-    
+    }   
     // **************************************************
     // Métodos Privados
     // **************************************************
-    
+  
     /**
     * 
     * @param msj String
-    * @param resultado Stting
-    * Método que se encarga de mostrar en pantalla si la realización ha 
-    * sido realizada con éxito o si ha habdido un error debido a el parametro de 
-    * salida del procedimiento almacenado MantenimientoCategorias
+    * @param resultado String
+    * Dependiendo del parametro resultado muestra un mensaje en pantalla por
+    * medio de un JOptionPane
     * @return boolean
     */
     private static boolean mensajesRetroalimentacion(String msj, String resultado)
@@ -265,7 +245,7 @@ public class CategoriasController
         }
         
         return error;
-    }     
+    }  
     
     /**
     * 
@@ -280,6 +260,8 @@ public class CategoriasController
         JLabel errDescripcion)
     {
         boolean error = false;
+        
+        errDescripcion.setText(null);
        
         if(Validaciones.validarCampoVacio(trimmedDescripcion))
         {
@@ -294,5 +276,6 @@ public class CategoriasController
         }
         
         return error;
-    }
+    }   
 }
+

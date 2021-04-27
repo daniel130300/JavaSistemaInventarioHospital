@@ -8,6 +8,7 @@ package Views.Mantenimientos;
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Views.Menus.MenuInicioView;
+import Views.Menus.MenuProveedoresView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeProveedoresView;
@@ -498,8 +499,8 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEstadoActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MenuInicioView homeView = new MenuInicioView();
-        homeView.setVisible(true);
+        MenuProveedoresView menuProveedoresView = new MenuProveedoresView();
+        menuProveedoresView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 

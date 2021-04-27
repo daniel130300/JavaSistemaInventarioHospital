@@ -51,9 +51,6 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         lblModulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JPanel();
-        lblIconoRegresar = new javax.swing.JLabel();
-        lblRegresar = new javax.swing.JLabel();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -62,6 +59,9 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         rbnActivos = new javax.swing.JRadioButton();
         rbnInactivos = new javax.swing.JRadioButton();
         lblBuscar1 = new javax.swing.JLabel();
+        btnRegresar1 = new javax.swing.JPanel();
+        lblIconoRegresar1 = new javax.swing.JLabel();
+        lblRegresar1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -110,41 +110,6 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
-        btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
-
-        lblIconoRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
-
-        lblRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRegresar.setForeground(new java.awt.Color(242, 242, 242));
-        lblRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRegresar.setText("Regresar");
-
-        javax.swing.GroupLayout btnRegresarLayout = new javax.swing.GroupLayout(btnRegresar);
-        btnRegresar.setLayout(btnRegresarLayout);
-        btnRegresarLayout.setHorizontalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnRegresarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconoRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnRegresarLayout.setVerticalGroup(
-            btnRegresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblIconoRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -225,6 +190,43 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         lblBuscar1.setText("Visualizar:");
         pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
+        btnRegresar1.setBackground(new java.awt.Color(45, 83, 150));
+        btnRegresar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
+        btnRegresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRegresar1.setInheritsPopupMenu(true);
+        btnRegresar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresar1MouseClicked(evt);
+            }
+        });
+
+        lblIconoRegresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_go_back_32px.png"))); // NOI18N
+
+        lblRegresar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRegresar1.setForeground(new java.awt.Color(242, 242, 242));
+        lblRegresar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRegresar1.setText("Regresar");
+
+        javax.swing.GroupLayout btnRegresar1Layout = new javax.swing.GroupLayout(btnRegresar1);
+        btnRegresar1.setLayout(btnRegresar1Layout);
+        btnRegresar1Layout.setHorizontalGroup(
+            btnRegresar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnRegresar1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIconoRegresar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRegresar1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnRegresar1Layout.setVerticalGroup(
+            btnRegresar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblIconoRegresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(lblRegresar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlMenu.add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,12 +245,6 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MantenimientoCatalogoBodegaView mantenimientoCatalogoProductosView = new MantenimientoCatalogoBodegaView();
-        mantenimientoCatalogoProductosView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
@@ -290,6 +286,12 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         rbnActivos.setSelected(false);
         rbnInactivos.setSelected(false);
     }//GEN-LAST:event_rbnTodosActionPerformed
+
+    private void btnRegresar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresar1MouseClicked
+        MantenimientoCatalogoBodegaView mantenimientoCatalogoProductosView = new MantenimientoCatalogoBodegaView();
+        mantenimientoCatalogoProductosView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresar1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -4432,16 +4434,16 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnRegresar;
+    private javax.swing.JPanel btnRegresar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblBuscar1;
-    private javax.swing.JLabel lblIconoRegresar;
+    private javax.swing.JLabel lblIconoRegresar1;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
-    private javax.swing.JLabel lblRegresar;
+    private javax.swing.JLabel lblRegresar1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuarioActual;
     private javax.swing.JPanel pnlBackbround;

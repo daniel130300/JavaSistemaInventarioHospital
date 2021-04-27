@@ -278,7 +278,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -325,7 +325,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblModulo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblModulo1.setForeground(new java.awt.Color(242, 242, 242));
         lblModulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblModulo1.setText("Mantenimiento Usuarios");
+        lblModulo1.setText("Mantenimiento Inventario");
         pnlTitulo1.add(lblModulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 300, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N

@@ -12,7 +12,7 @@ import Views.Mantenimientos.BitacoraLoteProductosView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.InventarioBodegaView;
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
+import Views.Mantenimientos.MantenimientoCatalogoProductosView;
 import Views.Mantenimientos.MantenimientoCategoriasView;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import Views.Mantenimientos.MantenimientoUnidadesView;
@@ -192,7 +192,7 @@ public class MenuBodegaView extends javax.swing.JFrame {
         btnBitacoraCatalogoBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBitacoraCatalogoBodega.setForeground(new java.awt.Color(242, 242, 242));
         btnBitacoraCatalogoBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_log_32px.png"))); // NOI18N
-        btnBitacoraCatalogoBodega.setText("Bitácora Catálogo Bodega");
+        btnBitacoraCatalogoBodega.setText("Bitácora Catálogo Productos");
         btnBitacoraCatalogoBodega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBitacoraCatalogoBodega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnBitacoraCatalogoBodega.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +220,7 @@ public class MenuBodegaView extends javax.swing.JFrame {
         btnMantenimientoCatalogoBodega.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMantenimientoCatalogoBodega.setForeground(new java.awt.Color(242, 242, 242));
         btnMantenimientoCatalogoBodega.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
-        btnMantenimientoCatalogoBodega.setText("Mantenimiento Catálogo Bodega");
+        btnMantenimientoCatalogoBodega.setText("Mantenimiento Catálogo Productos");
         btnMantenimientoCatalogoBodega.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMantenimientoCatalogoBodega.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnMantenimientoCatalogoBodega.addActionListener(new java.awt.event.ActionListener() {
@@ -320,7 +320,7 @@ public class MenuBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientoCategoriasActionPerformed
 
     private void btnMantenimientoCatalogoBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoCatalogoBodegaActionPerformed
-        MantenimientoCatalogoBodegaView mantenimientoCatalogoBodegaView = new MantenimientoCatalogoBodegaView();
+        MantenimientoCatalogoProductosView mantenimientoCatalogoBodegaView = new MantenimientoCatalogoProductosView();
         mantenimientoCatalogoBodegaView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMantenimientoCatalogoBodegaActionPerformed

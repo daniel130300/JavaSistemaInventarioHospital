@@ -11,7 +11,7 @@ import Controllers.Controllers.ProveedorController;
 import Models.Models.CatalogoProductoModel;
 import Utils.Cache.CatalogoProductoCache;
 import Utils.PlaceHolders.TextPrompt;
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
+import Views.Mantenimientos.MantenimientoCatalogoProductosView;
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -245,7 +245,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MantenimientoCatalogoBodegaView mantenimientoCatalogoProductosView = new MantenimientoCatalogoBodegaView();
+        MantenimientoCatalogoProductosView mantenimientoCatalogoProductosView = new MantenimientoCatalogoProductosView();
         mantenimientoCatalogoProductosView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
@@ -269,7 +269,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         productoCache.setDatosCompartidos(true);
         productoCache.setProducto(productoModel);
         dispose();
-        MantenimientoCatalogoBodegaView mantenimientoproductoView = new MantenimientoCatalogoBodegaView();
+        MantenimientoCatalogoProductosView mantenimientoproductoView = new MantenimientoCatalogoProductosView();
         mantenimientoproductoView.setVisible(true);
     }//GEN-LAST:event_tableProductosMouseClicked
 

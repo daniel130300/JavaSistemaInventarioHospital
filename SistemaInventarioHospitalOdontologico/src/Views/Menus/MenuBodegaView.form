@@ -288,7 +288,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Views/Images/icons8_log_32px.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Bit&#xe1;cora Cat&#xe1;logo Bodega"/>
+                <Property name="text" type="java.lang.String" value="Bit&#xe1;cora Cat&#xe1;logo Productos"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -342,7 +342,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Views/Images/icons8_warehouse_32px.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Mantenimiento Cat&#xe1;logo Bodega"/>
+                <Property name="text" type="java.lang.String" value="Mantenimiento Cat&#xe1;logo Productos"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>

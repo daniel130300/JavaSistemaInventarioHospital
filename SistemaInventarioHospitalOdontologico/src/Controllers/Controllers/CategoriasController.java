@@ -8,6 +8,7 @@ package Controllers.Controllers;
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.CategoriaConexion;
 import Models.Models.CategoriasModel;
+import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -31,6 +32,12 @@ public class CategoriasController
     // **************************************************
     // Métodos Públicos
     // **************************************************
+    
+     public static void setPlaceHolders(JTextField txtDescripcion, JTextField txtBuscar)
+    {
+        TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la descripción de la categoría ", txtDescripcion);
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
+    }
     
     /**
     * @param accion String

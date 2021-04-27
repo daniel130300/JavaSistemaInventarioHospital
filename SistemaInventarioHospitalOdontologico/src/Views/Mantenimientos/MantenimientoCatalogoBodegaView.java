@@ -9,15 +9,12 @@ import Controllers.Controllers.CatalogoProductoController;
 import Controllers.Controllers.LoginController;
 import Models.Conexion.CatalogoProductoConexion;
 import Models.Models.CatalogoProductoModel;
-import Models.Models.DetalleCatalogoProductosModel;
 import Utils.Cache.CatalogoProductoCache;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
 import Views.Listados.ListadoProveedoresView;
 import Views.Menus.MenuBodegaView;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,7 +28,8 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
      */
 
     static Integer Id_producto;
-    static Integer Id_proveedor=0;
+    static Integer Id_proveedor = 0;
+    
     public MantenimientoCatalogoBodegaView() 
     {
         initComponents();
@@ -40,12 +38,9 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos); 
         CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
-
-        //CatalogoProductoController.getAgregarTableProveedorSeleccionados(tableProveedores);          
-        //CatalogoProductoController.AgregarListProveedorSeleccionados(tableProveedores);
+        CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion);
         this.LlenarDatos();
     }
-
     
     private void LimpiarInputs()
     {
@@ -57,6 +52,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         this.cmbCategoria.setSelectedIndex(0);
         this.cmbUnidad.setSelectedIndex(0);     
     }
+    
     private void LimpiarTable(){
         DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
         int fila= model.getRowCount();
@@ -65,6 +61,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
                 model.removeRow(0);  
         }
     }
+    
     private void LimpiarErrLabels()
     {
         this.lblErrorNombre.setText(null);
@@ -72,7 +69,8 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         this.lblErrorStockMaximo.setText(null);
         this.lblErrorStockMinimo.setText(null);
     }
-        private void LlenarDatos()
+    
+    private void LlenarDatos()
     {
         this.Id_producto = CatalogoProductoController.setDatosEditarFromCache(this.tableProductos, 
                 this.txtNombre, this.txtDescripcion, this.txtStockMaximo, this.txtStockMinimo,
@@ -98,9 +96,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         pnlBackbround = new javax.swing.JPanel();
         pnlGeneral = new javax.swing.JTabbedPane();
         pnlMenu = new javax.swing.JPanel();
-        btnRegresar = new javax.swing.JPanel();
-        lblIconoRegresar = new javax.swing.JLabel();
-        lblRegresar = new javax.swing.JLabel();
         lblStockMinimo = new javax.swing.JLabel();
         txtStockMinimo = new javax.swing.JTextField();
         lblErrorStockMinimo = new javax.swing.JLabel();
@@ -131,6 +126,9 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnVisualizarTabla = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JPanel();
+        lblIconoRegresar = new javax.swing.JLabel();
+        lblRegresar = new javax.swing.JLabel();
         pnlMenu1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProveedores = new javax.swing.JTable();
@@ -156,9 +154,211 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblStockMinimo.setForeground(new java.awt.Color(242, 242, 242));
+        lblStockMinimo.setText("Stock Mínimo:");
+        pnlMenu.add(lblStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+
+        txtStockMinimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockMinimoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 70, -1));
+
+        lblErrorStockMinimo.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorStockMinimo.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 290, 20));
+
+        lblStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblStockMaximo.setForeground(new java.awt.Color(242, 242, 242));
+        lblStockMaximo.setText("Stock Máximo:");
+        pnlMenu.add(lblStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+
+        txtStockMaximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockMaximoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 70, -1));
+
+        lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
+        lblDescripcion.setText("Descripción:");
+        pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Id Unidad", "Unidad", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableProductos);
+
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 910, 110));
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
+        cmbEstado.setEnabled(false);
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 210, -1));
+
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 260, -1));
+
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(242, 242, 242));
+        lblEstado.setText("Estado: ");
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, -1, -1));
+
+        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
+        lblBuscar.setText("Buscar: ");
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 590, -1));
+
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre.setText("Nombre:");
+        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+
+        lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 140, -1));
+
+        lblErrorDescripcion.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 220, 20));
+
+        lblErrorNombre.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorNombre.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 210, 20));
+
+        lblErrorStockMaximo.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorStockMaximo.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 280, 20));
+
+        lblCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCategoria.setForeground(new java.awt.Color(242, 242, 242));
+        lblCategoria.setText("Categoría:");
+        pnlMenu.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
+
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, 210, -1));
+
+        lblErrorCategoria.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCategoria.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCategoria.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 140, -1));
+
+        lblErrorUnidad.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorUnidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorUnidad.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
+
+        cmbUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUnidadActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(cmbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 210, -1));
+
+        lblUnidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblUnidad.setForeground(new java.awt.Color(242, 242, 242));
+        lblUnidad.setText("Unidad:");
+        pnlMenu.add(lblUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, -1));
+
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(4);
+        jScrollPane3.setViewportView(txtDescripcion);
+
+        pnlMenu.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 260, 70));
+
+        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(242, 242, 242));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, 30));
+
+        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, -1, 30));
+
+        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(242, 242, 242));
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 270, 80, 30));
+
+        btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
+        btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVisualizarTabla.setForeground(new java.awt.Color(242, 242, 242));
+        btnVisualizarTabla.setText("Visualizar Tabla");
+        btnVisualizarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarTablaActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, -1, 30));
+
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -180,7 +380,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblIconoRegresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addContainerGap())
         );
         btnRegresarLayout.setVerticalGroup(
@@ -190,208 +390,6 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         );
 
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
-
-        lblStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblStockMinimo.setForeground(new java.awt.Color(242, 242, 242));
-        lblStockMinimo.setText("Stock Mínimo:");
-        pnlMenu.add(lblStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
-
-        txtStockMinimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockMinimoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 70, -1));
-
-        lblErrorStockMinimo.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorStockMinimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorStockMinimo.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorStockMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 290, 20));
-
-        lblStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblStockMaximo.setForeground(new java.awt.Color(242, 242, 242));
-        lblStockMaximo.setText("Stock Máximo:");
-        pnlMenu.add(lblStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
-
-        txtStockMaximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockMaximoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 70, -1));
-
-        lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
-        lblDescripcion.setText("Descripción:");
-        pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
-
-        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Id Unidad", "Unidad", "Estado"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false, true, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProductosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableProductos);
-
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 900, 120));
-
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo ", "Inactivo" }));
-        cmbEstado.setEnabled(false);
-        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEstadoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 110, -1));
-
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 260, -1));
-
-        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEstado.setForeground(new java.awt.Color(242, 242, 242));
-        lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
-
-        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
-        lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
-
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 590, -1));
-
-        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(242, 242, 242));
-        lblNombre.setText("Nombre:");
-        pnlMenu.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
-
-        lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 140, -1));
-
-        lblErrorDescripcion.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 220, 20));
-
-        lblErrorNombre.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorNombre.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 210, 20));
-
-        lblErrorStockMaximo.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorStockMaximo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorStockMaximo.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorStockMaximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 280, 30));
-
-        lblCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCategoria.setForeground(new java.awt.Color(242, 242, 242));
-        lblCategoria.setText("Categoría:");
-        pnlMenu.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
-
-        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCategoriaActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 110, -1));
-
-        lblErrorCategoria.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorCategoria.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorCategoria.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 140, -1));
-
-        lblErrorUnidad.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorUnidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorUnidad.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
-
-        cmbUnidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbUnidadActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 110, -1));
-
-        lblUnidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblUnidad.setForeground(new java.awt.Color(242, 242, 242));
-        lblUnidad.setText("Unidad:");
-        pnlMenu.add(lblUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, -1, -1));
-
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        txtDescripcion.setRows(4);
-        jScrollPane3.setViewportView(txtDescripcion);
-
-        pnlMenu.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 260, 70));
-
-        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
-        btnCancelar.setForeground(new java.awt.Color(242, 242, 242));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, -1, 30));
-
-        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, 30));
-
-        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
-        btnEditar.setForeground(new java.awt.Color(242, 242, 242));
-        btnEditar.setText("Editar");
-        btnEditar.setEnabled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 80, 30));
-
-        btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
-        btnVisualizarTabla.setForeground(new java.awt.Color(242, 242, 242));
-        btnVisualizarTabla.setText("Visualizar Tabla");
-        btnVisualizarTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarTablaActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, -1, 30));
 
         pnlGeneral.addTab("General", pnlMenu);
 
@@ -424,6 +422,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         pnlMenu1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 680, 450));
 
         btnEliminarProveedor.setBackground(new java.awt.Color(59, 103, 181));
+        btnEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminarProveedor.setForeground(new java.awt.Color(242, 242, 242));
         btnEliminarProveedor.setText("Eliminar Proveedor");
         btnEliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -434,6 +433,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         pnlMenu1.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 180, 30));
 
         btnAgregarProveedor.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAgregarProveedor.setForeground(new java.awt.Color(242, 242, 242));
         btnAgregarProveedor.setText("Agregar Proveedor");
         btnAgregarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -445,7 +445,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
 
         pnlGeneral.addTab("Proveedores", pnlMenu1);
 
-        pnlBackbround.add(pnlGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 126, 950, 610));
+        pnlBackbround.add(pnlGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 126, 950, 570));
 
         pnlUsuario.setBackground(new java.awt.Color(0, 49, 110));
         pnlUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -494,109 +494,39 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackbround, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        CatalogoProductoCache proveedor = new CatalogoProductoCache();
-        MenuBodegaView menuBodegaView = new MenuBodegaView();
-        menuBodegaView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarMouseClicked
+    private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
+        CatalogoProductoController.QuitarTablePSeleccionados(Id_proveedor );  
+    }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
-    private void txtStockMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMinimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStockMinimoActionPerformed
+    private void btnAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProveedorActionPerformed
+        ListadoProveedoresView listadoproveedor = new ListadoProveedoresView();
+        listadoproveedor.setVisible(true);
+    }//GEN-LAST:event_btnAgregarProveedorActionPerformed
 
-    private void txtStockMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMaximoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStockMaximoActionPerformed
-
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
-
-    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCategoriaActionPerformed
-
-    private void cmbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUnidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbUnidadActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.btnAgregar.setEnabled(true);
-        this.btnEditar.setEnabled(false);
-        this.cmbEstado.setEnabled(false);
-        this.tableProductos.clearSelection();
-        this.btnVisualizarTabla.setEnabled(true); 
-        this.btnVisualizarTabla.setEnabled(true); 
-        this.LimpiarInputs();
-        this.LimpiarErrLabels();
-        this.LimpiarTable();
-        
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       if(!CatalogoProductoController.MantenimientoProducto("insertar", 0, 
-            this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(), 
-            this.txtStockMinimo.getText(),"Activo",CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
-            CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion, 
-            this.lblErrorStockMaximo, this.lblErrorStockMinimo))
-        {
-            CatalogoProductoModel productoModel = new CatalogoProductoModel();
-            Id_producto= productoModel.getPrdId();
-            CatalogoProductoController.LlenarTableProductos(tableProductos);
-           this.LimpiarTable();
-        }           
-
- 
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
+        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint());    
+        Id_proveedor=Integer.parseInt(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 0)));  
+    }//GEN-LAST:event_tableProveedoresMouseClicked
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
         TablaGrandeCatalogoBodegaView consultaProductoView = new TablaGrandeCatalogoBodegaView();
         consultaProductoView.setVisible(true);
-        this.dispose();              
+        this.dispose();
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed
-
-    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
-        int seleccion = this.tableProductos.rowAtPoint(evt.getPoint()); 
-        CatalogoProductoCache proveedor = new CatalogoProductoCache();
-        this.Id_producto = CatalogoProductoController.setDatosEditarFromTable(seleccion, 
-                this.tableProductos, this.txtNombre, this.txtDescripcion, 
-                this.txtStockMaximo, this.txtStockMinimo, this.cmbCategoria, 
-                this.cmbUnidad,this.cmbEstado);
-        if(this.Id_producto != null)
-        {
-            proveedor.setPrdId(Id_producto);
-            CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
-            this.LimpiarErrLabels();
-            this.cmbEstado.setEnabled(true);
-            this.btnAgregar.setEnabled(false);
-            this.btnEditar.setEnabled(true);
-        }      
-        
-        
-    }//GEN-LAST:event_tableProductosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         if(!CatalogoProductoController.MantenimientoProducto("editar", this.Id_producto,
-            this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(), 
+            this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(),
             this.txtStockMinimo.getText(),cmbEstado.getSelectedItem().toString(),CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
-            CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion, 
+            CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion,
             this.lblErrorStockMaximo, this.lblErrorStockMinimo))
         {
             this.btnAgregar.setEnabled(true);
@@ -606,22 +536,89 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
             CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
             CatalogoProductoController.LlenarTableProductos(tableProductos);
             this.LimpiarTable();
-        }       
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
-        CatalogoProductoController.QuitarTablePSeleccionados(Id_proveedor );  
-    }//GEN-LAST:event_btnEliminarProveedorActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if(!CatalogoProductoController.MantenimientoProducto("insertar", 0,
+            this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(),
+            this.txtStockMinimo.getText(),"Activo",CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
+            CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion,
+            this.lblErrorStockMaximo, this.lblErrorStockMinimo))
+        {
+            CatalogoProductoModel productoModel = new CatalogoProductoModel();
+            Id_producto= productoModel.getPrdId();
+            CatalogoProductoController.LlenarTableProductos(tableProductos);
+            this.LimpiarTable();
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProveedorActionPerformed
-    ListadoProveedoresView listadoproveedor = new ListadoProveedoresView();
-    listadoproveedor.setVisible(true);
-    }//GEN-LAST:event_btnAgregarProveedorActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.btnAgregar.setEnabled(true);
+        this.btnEditar.setEnabled(false);
+        this.cmbEstado.setEnabled(false);
+        this.tableProductos.clearSelection();
+        this.btnVisualizarTabla.setEnabled(true);
+        this.btnVisualizarTabla.setEnabled(true);
+        this.LimpiarInputs();
+        this.LimpiarErrLabels();
+        this.LimpiarTable();
 
-    private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
-        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint());    
-        Id_proveedor=Integer.parseInt(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 0)));  
-    }//GEN-LAST:event_tableProveedoresMouseClicked
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUnidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUnidadActionPerformed
+
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
+
+    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
+        int seleccion = this.tableProductos.rowAtPoint(evt.getPoint());
+        CatalogoProductoCache proveedor = new CatalogoProductoCache();
+        this.Id_producto = CatalogoProductoController.setDatosEditarFromTable(seleccion,
+            this.tableProductos, this.txtNombre, this.txtDescripcion,
+            this.txtStockMaximo, this.txtStockMinimo, this.cmbCategoria,
+            this.cmbUnidad,this.cmbEstado);
+        
+        if(this.Id_producto != null)
+        {
+            proveedor.setPrdId(Id_producto);
+            CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
+            this.LimpiarErrLabels();
+            this.cmbEstado.setEnabled(true);
+            this.btnAgregar.setEnabled(false);
+            this.btnEditar.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_tableProductosMouseClicked
+
+    private void txtStockMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMaximoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockMaximoActionPerformed
+
+    private void txtStockMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockMinimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockMinimoActionPerformed
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        MenuBodegaView menuBodegaView = new MenuBodegaView();
+        menuBodegaView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
      * @param args the command line arguments

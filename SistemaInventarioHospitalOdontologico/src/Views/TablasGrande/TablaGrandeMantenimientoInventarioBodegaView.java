@@ -21,12 +21,13 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
     /**
      * Creates new form LoginView
      */
-    public TablaGrandeMantenimientoInventarioBodegaView() {
+    public TablaGrandeMantenimientoInventarioBodegaView() 
+    {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
         InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }
 
     /**

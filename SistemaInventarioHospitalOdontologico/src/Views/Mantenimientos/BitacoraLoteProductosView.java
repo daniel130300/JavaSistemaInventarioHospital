@@ -7,21 +7,24 @@ package Views.Mantenimientos;
 
 import Controllers.Controllers.BitacoraLoteProductosController;
 import Controllers.Controllers.LoginController;
+import Utils.PlaceHolders.TextPrompt;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Menus.MenuBodegaView;
 
 /**
  *
- * @author danie
+ * @author Héctor López
  */
 public class BitacoraLoteProductosView extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginView
      */
-    public BitacoraLoteProductosView() {
+    public BitacoraLoteProductosView() 
+    {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         BitacoraLoteProductosController.LlenarTableBitacoraLote(this.tableBitacoraLoteProductos);
         BitacoraLoteProductosController.FiltroTableBitacoraLote(this.tableBitacoraLoteProductos, this.txtBuscar);

@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import Utils.Cache.ProveedorCache;
+import Utils.PlaceHolders.TextPrompt;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -32,6 +33,18 @@ public class ProveedorController
     // **************************************************
     // Métodos Públicos
     // **************************************************
+    
+    public static void setPlaceHolders(JTextField txtRTN, JTextField txtNombre, JTextField txtCorreo,
+            JTextField txtTelefono, JTextField txtContacto, JTextArea txtDireccion, JTextField txtBuscar)
+    {
+        TextPrompt placeholderRTN = new TextPrompt(" Ej: 08011986012824 ", txtRTN);
+        TextPrompt placeholderNombre = new TextPrompt(" Ingrese el nombre del proveedor ", txtNombre);
+        TextPrompt placeholderCorreo = new TextPrompt(" Ingrese el correo del proveedor ", txtCorreo);
+        TextPrompt placeholderTelefono = new TextPrompt(" Ej: 97977966 ", txtTelefono);
+        TextPrompt placeholderContacto = new TextPrompt(" Ingrese el contacto del proveedor ", txtContacto);
+        TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la dirección del proveedor ", txtDireccion);
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
+    }
     
     /**
     * 
@@ -81,17 +94,17 @@ public class ProveedorController
         
         if(!Validaciones.validarNumeros(trimmedRTN))
         {
-           errRTN.setText("La RTN ingresada es incorrecta");
+           errRTN.setText("El RTN ingresado es incorrecta");
            generalValidacionError = true;
         }
         
         if(Validaciones.validarCampoVacio(trimmedRTN))
         {
-           errRTN.setText("La RTN es un campo obligatorio");
+           errRTN.setText("El RTN es un campo obligatorio");
            generalValidacionError = true;
         }
         
-        if(!Validaciones.validarLetras(trimmedNombre))
+        if(!Validaciones.ValidarNumerosyLetras(trimmedNombre))
         {
             errNombre.setText("El nombre ingresado es incorrecto");
             generalValidacionError = true;
@@ -117,13 +130,13 @@ public class ProveedorController
         
         if(!Validaciones.validarNumeros(trimmedTelefono))
         {
-           errTelefono.setText("La Teléfono ingresada es incorrecta");
+           errTelefono.setText("El teléfono ingresado es incorrecto");
            generalValidacionError = true;
         }
         
         if(Validaciones.validarCampoVacio(trimmedTelefono))
         {
-           errTelefono.setText("La teléfono es un campo obligatorio");
+           errTelefono.setText("El teléfono es un campo obligatorio");
            generalValidacionError = true;
         }
         
@@ -149,65 +162,65 @@ public class ProveedorController
             switch(accion)
             {
                 case "insertar":
-                        id = 0;                    
-                        ProveedorModel proveedorModel = new ProveedorModel();
-                        proveedorModel.setProId(id);
-                        proveedorModel.setProRTN(trimmedRTN);
-                        proveedorModel.setProNombre(trimmedNombre);
-                        proveedorModel.setProCorreo(trimmedCorreo);
-                        proveedorModel.setProTelefono(trimmedTelefono);
-                        proveedorModel.setProContacto(trimmedContacto);
-                        proveedorModel.setProDireccion(trimmedDireccion);            
-                        
-                        String resultado = ProveedorConexion.MantenimientoProveedores(accion, proveedorModel);
-                        
-                        switch (resultado) 
-                        {
-                            case "Ok":
-                                   JOptionPane.showMessageDialog(null, "Proveedor ingresado con éxito.");    
-                            break;
-                            
-                            case "errRTN":
-                                JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
-                                mntError = true;
-                            break;
-       
-                            case "errCorreo":
-                                JOptionPane.showMessageDialog(null, "EL Correo ya se encuentra registrada.");
-                                mntError = true;
-                            break;
-                        }
-                    
-                break;
-                case "editar":
-                        ProveedorModel proveedoModel = new ProveedorModel();
-                        proveedoModel.setProId(id);
-                        proveedoModel.setProRTN(trimmedRTN);
-                        proveedoModel.setProNombre(trimmedNombre);
-                        proveedoModel.setProCorreo(trimmedCorreo);
-                        proveedoModel.setProTelefono(trimmedTelefono);
-                        proveedoModel.setProContacto(trimmedContacto);
-                        proveedoModel.setProDireccion(trimmedDireccion);
-                        proveedoModel.setProEstado(trimmedEstado);
+                    id = 0;                    
+                    ProveedorModel proveedorModel = new ProveedorModel();
+                    proveedorModel.setProId(id);
+                    proveedorModel.setProRTN(trimmedRTN);
+                    proveedorModel.setProNombre(trimmedNombre);
+                    proveedorModel.setProCorreo(trimmedCorreo);
+                    proveedorModel.setProTelefono(trimmedTelefono);
+                    proveedorModel.setProContacto(trimmedContacto);
+                    proveedorModel.setProDireccion(trimmedDireccion);            
 
-                        String resultados = ProveedorConexion.MantenimientoProveedores(accion, proveedoModel);
-                        
-                        switch (resultados) 
-                        {
-                            case "Ok":
-                                    JOptionPane.showMessageDialog(null, "Proveedor actualizado con éxito.");    
-                            break;
-                            
-                            case "errRTN":
-                                JOptionPane.showMessageDialog(null, "El RTN ya se encuentra registrada.");
-                                mntError = true;
-                            break;
-                            
-                            default:
-                                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación entr.");
-                                mntError = true;
-                            break;
-                        } 
+                    String resultado = ProveedorConexion.MantenimientoProveedores(accion, proveedorModel);
+
+                    switch (resultado) 
+                    {
+                        case "Ok":
+                               JOptionPane.showMessageDialog(null, "Proveedor ingresado con éxito.");    
+                        break;
+
+                        case "errRTN":
+                            JOptionPane.showMessageDialog(null, "La identidad ya se encuentra registrada.");
+                            mntError = true;
+                        break;
+
+                        case "errCorreo":
+                            JOptionPane.showMessageDialog(null, "EL correo ya se encuentra registrado.");
+                            mntError = true;
+                        break;
+                    }
+                break;
+                
+                case "editar":
+                    ProveedorModel proveedoModel = new ProveedorModel();
+                    proveedoModel.setProId(id);
+                    proveedoModel.setProRTN(trimmedRTN);
+                    proveedoModel.setProNombre(trimmedNombre);
+                    proveedoModel.setProCorreo(trimmedCorreo);
+                    proveedoModel.setProTelefono(trimmedTelefono);
+                    proveedoModel.setProContacto(trimmedContacto);
+                    proveedoModel.setProDireccion(trimmedDireccion);
+                    proveedoModel.setProEstado(trimmedEstado);
+
+                    String resultados = ProveedorConexion.MantenimientoProveedores(accion, proveedoModel);
+
+                    switch (resultados) 
+                    {
+                        case "Ok":
+                                JOptionPane.showMessageDialog(null, "Proveedor actualizado con éxito.");    
+                        break;
+
+                        case "errRTN":
+                            JOptionPane.showMessageDialog(null, "El RTN ya se encuentra registrado.");
+                            mntError = true;
+                        break;
+
+                        default:
+                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                            mntError = true;
+                        break;
+                    } 
                 break;                
             }
         }
@@ -352,76 +365,77 @@ public class ProveedorController
         modelo.setRowCount(0);
         ArrayList<ProveedorModel> proveedores = new ArrayList<>();
         
-        switch(accion){
-            
+        switch(accion)
+        {    
             case "Activos":
-                            proveedores = ProveedorConexion.ListadoProveedores("Activos");
-        
-                            for (int i = 0; i <proveedores.size(); i++) 
-                            {
-                                modelo.addRow
-                                (new Object[]
-                                    {
-                                        proveedores.get(i).getProId(), 
-                                        proveedores.get(i).getProRTN(),
-                                        proveedores.get(i).getProNombre(),
-                                        proveedores.get(i).getProCorreo(),
-                                        proveedores.get(i).getProTelefono(),
-                                        proveedores.get(i).getProContacto(),
-                                        proveedores.get(i).getProDireccion(),
-                                        proveedores.get(i).getProEstado()
-                                    }
-                                );
-                            }
-                            FormatoTabla(tableProveedores, modelo.getColumnCount());
-                            break;
+                proveedores = ProveedorConexion.ListadoProveedores("Activos");
+
+                for (int i = 0; i <proveedores.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            proveedores.get(i).getProId(), 
+                            proveedores.get(i).getProRTN(),
+                            proveedores.get(i).getProNombre(),
+                            proveedores.get(i).getProCorreo(),
+                            proveedores.get(i).getProTelefono(),
+                            proveedores.get(i).getProContacto(),
+                            proveedores.get(i).getProDireccion(),
+                            proveedores.get(i).getProEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableProveedores, modelo.getColumnCount());
+            break;
                             
             case "Inactivos":
-                            proveedores = ProveedorConexion.ListadoProveedores("Inactivos");
-        
-                            for (int i = 0; i <proveedores.size(); i++) 
-                            {
-                                modelo.addRow
-                                (new Object[]
-                                    {
-                                        proveedores.get(i).getProId(), 
-                                        proveedores.get(i).getProRTN(),
-                                        proveedores.get(i).getProNombre(),
-                                        proveedores.get(i).getProCorreo(),
-                                        proveedores.get(i).getProTelefono(),
-                                        proveedores.get(i).getProContacto(),
-                                        proveedores.get(i).getProDireccion(),
-                                        proveedores.get(i).getProEstado()
-                                    }
-                                );
-                            }
-                            FormatoTabla(tableProveedores, modelo.getColumnCount());
-                            break;
+                proveedores = ProveedorConexion.ListadoProveedores("Inactivos");
+
+                for (int i = 0; i <proveedores.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            proveedores.get(i).getProId(), 
+                            proveedores.get(i).getProRTN(),
+                            proveedores.get(i).getProNombre(),
+                            proveedores.get(i).getProCorreo(),
+                            proveedores.get(i).getProTelefono(),
+                            proveedores.get(i).getProContacto(),
+                            proveedores.get(i).getProDireccion(),
+                            proveedores.get(i).getProEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableProveedores, modelo.getColumnCount());
+            break;
                             
-             case "Todos":
-                            proveedores = ProveedorConexion.ListadoProveedores("Todos");
-        
-                            for (int i = 0; i <proveedores.size(); i++) 
-                            {
-                                modelo.addRow
-                                (new Object[]
-                                    {
-                                        proveedores.get(i).getProId(), 
-                                        proveedores.get(i).getProRTN(),
-                                        proveedores.get(i).getProNombre(),
-                                        proveedores.get(i).getProCorreo(),
-                                        proveedores.get(i).getProTelefono(),
-                                        proveedores.get(i).getProContacto(),
-                                        proveedores.get(i).getProDireccion(),
-                                        proveedores.get(i).getProEstado()
-                                    }
-                                );
-                            }
-                            FormatoTabla(tableProveedores, modelo.getColumnCount());
-                            break;
+            case "Todos":
+                proveedores = ProveedorConexion.ListadoProveedores("Todos");
+
+                for (int i = 0; i <proveedores.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            proveedores.get(i).getProId(), 
+                            proveedores.get(i).getProRTN(),
+                            proveedores.get(i).getProNombre(),
+                            proveedores.get(i).getProCorreo(),
+                            proveedores.get(i).getProTelefono(),
+                            proveedores.get(i).getProContacto(),
+                            proveedores.get(i).getProDireccion(),
+                            proveedores.get(i).getProEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableProveedores, modelo.getColumnCount());
+            break;
         }
     }
-        public static void LlenarTableDetalleProductoProveedores(JTable tableProveedores) 
+    
+    public static void LlenarTableDetalleProductoProveedores(JTable tableProveedores) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableProveedores.getModel(); 
         modelo.setRowCount(0);

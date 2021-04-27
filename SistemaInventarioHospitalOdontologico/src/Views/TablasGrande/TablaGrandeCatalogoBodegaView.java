@@ -10,6 +10,7 @@ import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Models.Models.CatalogoProductoModel;
 import Utils.Cache.CatalogoProductoCache;
+import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -23,8 +24,10 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    public TablaGrandeCatalogoBodegaView() {
+    public TablaGrandeCatalogoBodegaView() 
+    {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         CatalogoProductoController.LlenarTableProductos(tableProductos);
         ProveedorController.FiltroTableProveedores(tableProductos, txtBuscar);

@@ -23,7 +23,11 @@ import javax.swing.JOptionPane;
  *
  * @author fgodo
  */
-public class CatalogoProductoConexion {
+public class CatalogoProductoConexion 
+{
+    //****************************
+    // Metodos públicos
+    //***************************
     
     public static ArrayList<CatalogoProductoModel> ListadoProducto() 
     {
@@ -67,6 +71,7 @@ public class CatalogoProductoConexion {
         
         return productos;
     }
+    
     public static ArrayList<DetalleCatalogoProductosModel> getDetalleProducto(Integer PrdId) 
     {
         Connection con = null;
@@ -103,6 +108,7 @@ public class CatalogoProductoConexion {
         }        
         return detalleproductos;
     }
+    
     public static ArrayList<CategoriasModel> ListadoCategorias() 
     {
         Connection con = null;
@@ -134,6 +140,7 @@ public class CatalogoProductoConexion {
 
         return categorias;
     }
+    
     public static Integer IdCategoria(String Categoria){
         Integer id_categoria=0;
         Connection con = null;
@@ -160,6 +167,7 @@ public class CatalogoProductoConexion {
         }  
         return id_categoria;
     } 
+    
     public static Integer IdUnidad(String Unidades){
         Integer id_unidades=0;
         Connection con = null;
@@ -186,6 +194,7 @@ public class CatalogoProductoConexion {
         }        
         return id_unidades;
     }
+    
     public static Integer UltimoPrdId ()
     {   
         Integer Id=0;
@@ -213,6 +222,7 @@ public class CatalogoProductoConexion {
         }
         return Id;
     }     
+    
     public static ArrayList<UnidadesModel> ListadoUnidades() 
     {
         Connection con = null;
@@ -244,63 +254,6 @@ public class CatalogoProductoConexion {
 
         return unidades;
     }
-    private static void CrearTablaTemporal(){
-        Connection con = null;
-        PreparedStatement stm;     
-         try 
-        {
-            con = Conexion.getConexion(con);
-            String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
-                    + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
-            UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
-            stm = con.prepareStatement(query);
-            stm.setInt(1, usuario.getUsrId());
-            stm.executeQuery();
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }      
-        
-    }     
-    private static void EliminarTablaTemporal(){
-        Connection con = null;
-        Statement stm;     
-         try 
-        {
-            con = Conexion.getConexion(con);
-            String query = "Drop table loggedusuario ";
-            stm = con.createStatement();
-            stm.executeQuery(query);
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }      
-        
-    }          
-    
-    private static void CrearTablaTemporal(Connection conexion){
-                Connection con = null;
-                PreparedStatement stm;     
-                try 
-                {
-                    con = conexion;
-                    String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
-                            + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
-                    UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
-                    stm = con.prepareStatement(query);
-                    stm.setInt(1, usuario.getUsrId());
-                    stm.executeUpdate();
-                } 
-                catch (SQLException e) 
-                {
-                    JOptionPane.showMessageDialog(null,e);
-                }      
-
-        }    
     
     public static String MantenimientoCatalogoProducto(String accion, CatalogoProductoModel producto )
     {
@@ -333,6 +286,7 @@ public class CatalogoProductoConexion {
         }
         return estado;
     }
+    
     public static String MantenimientoDetalleCatalogoProductos(String accion, DetalleCatalogoProductosModel detalleproductomodel)
     {
         String estado = "";
@@ -358,5 +312,29 @@ public class CatalogoProductoConexion {
             estado = e.toString();
         } 
         return estado;
+    }
+    
+    //****************************
+    // Metodos privados
+    //***************************
+    
+    private static void CrearTablaTemporal(Connection conexion)
+    {
+        Connection con = null;
+        PreparedStatement stm;     
+        try 
+        {
+            con = conexion;
+            String query = "CREATE TEMPORARY TABLE IF NOT EXISTS loggedusuario "
+                    + "AS (SELECT * FROM usuarios WHERE UsrId = ?) ";
+            UsuarioLogueadoCache usuario = new UsuarioLogueadoCache();
+            stm = con.prepareStatement(query);
+            stm.setInt(1, usuario.getUsrId());
+            stm.executeUpdate();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }      
     }
 }

@@ -8,7 +8,6 @@ package Views.Mantenimientos;
 import Controllers.Controllers.CategoriasController;
 import Controllers.Controllers.LoginController;
 import Views.Menus.MenuBodegaView;
-import Views.Menus.MenuInicioView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
@@ -21,8 +20,10 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
 
     Integer CprId = null;
     
-    public MantenimientoCategoriasView() {
+    public MantenimientoCategoriasView() 
+    {
         initComponents();
+        CategoriasController.setPlaceHolders(this.txtDescripcion, this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableCategorias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         CategoriasController.LlenarTableCategorias(this.tableCategorias,"Todos"); 

@@ -8,12 +8,14 @@ package Controllers.Controllers;
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.UnidadesConexion;
 import Models.Models.UnidadesModel;
+import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -31,6 +33,12 @@ public class UnidadesController
     //**************************
     // Metodos Públicos
     //**************************
+
+    public static void setPlaceHolders(JTextField txtDescripcion, JTextField txtBuscar)
+    {
+        TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la descripción de la unidad ", txtDescripcion);
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
+    }
     
     /*
     * @param accion String

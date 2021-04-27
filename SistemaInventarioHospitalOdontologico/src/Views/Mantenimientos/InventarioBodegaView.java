@@ -23,10 +23,10 @@ public class InventarioBodegaView extends javax.swing.JFrame {
      */
     public InventarioBodegaView() {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
         InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }
 
     /**

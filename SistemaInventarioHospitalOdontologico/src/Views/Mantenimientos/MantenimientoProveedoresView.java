@@ -20,8 +20,11 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
     Integer Id_proveedor = null;
     
-    public MantenimientoProveedoresView() {
+    public MantenimientoProveedoresView() 
+    {
         initComponents();
+        ProveedorController.setPlaceHolders(this.txtRTN, this.txtNombre, this.txtCorreo,
+            this.txtTelefono, this.txtContacto, this.txtDireccion, this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
         ProveedorController.FiltroTableProveedores(tableProveedores, txtBuscar);
@@ -48,7 +51,8 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         this.lblErrorContacto.setText(null);
         this.lblErrorDireccion.setText(null);
     }
-        private void LlenarDatos()
+    
+    private void LlenarDatos()
     {
         this.Id_proveedor = ProveedorController.setDatosEditarFromCache(this.tableProveedores, 
                 this.txtRTN, this.txtNombre, this.txtCorreo, this.txtTelefono,
@@ -94,8 +98,6 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         tableProveedores = new javax.swing.JTable();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        btnVisualizar = new javax.swing.JPanel();
-        lblVisualizar = new javax.swing.JLabel();
         lblContacto = new javax.swing.JLabel();
         lblErrorDireccion = new javax.swing.JLabel();
         lblErrorRTN = new javax.swing.JLabel();
@@ -110,6 +112,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
+        btnVisualizarTabla = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -241,35 +244,6 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         });
         pnlMenu.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, -1));
 
-        btnVisualizar.setBackground(new java.awt.Color(59, 103, 181));
-        btnVisualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVisualizarMouseClicked(evt);
-            }
-        });
-
-        lblVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVisualizar.setForeground(new java.awt.Color(242, 242, 242));
-        lblVisualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVisualizar.setText("Visualizar Tabla");
-
-        javax.swing.GroupLayout btnVisualizarLayout = new javax.swing.GroupLayout(btnVisualizar);
-        btnVisualizar.setLayout(btnVisualizarLayout);
-        btnVisualizarLayout.setHorizontalGroup(
-            btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblVisualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        btnVisualizarLayout.setVerticalGroup(
-            btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVisualizarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pnlMenu.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, 130, -1));
-
         lblContacto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblContacto.setForeground(new java.awt.Color(242, 242, 242));
         lblContacto.setText("Contacto:");
@@ -304,7 +278,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 90, 30));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, 90, 30));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -327,7 +301,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, 80, 30));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 80, 30));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
@@ -335,6 +309,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmbEstado.setEnabled(false);
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEstadoActionPerformed(evt);
@@ -376,6 +351,17 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         );
 
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
+        btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
+        btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVisualizarTabla.setForeground(new java.awt.Color(242, 242, 242));
+        btnVisualizarTabla.setText("Visualizar Tabla");
+        btnVisualizarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarTablaActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, 130, 30));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
@@ -419,12 +405,6 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarMouseClicked
-
-    private void btnVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarMouseClicked
-        TablaGrandeProveedoresView consultaProveedoresView = new TablaGrandeProveedoresView();
-        consultaProveedoresView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVisualizarMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
@@ -490,9 +470,9 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.btnAgregar.setEnabled(true);
         this.btnEditar.setEnabled(false);
-        this.cmbEstado.setEnabled(true);
+        this.cmbEstado.setEnabled(false);
         this.tableProveedores.clearSelection();
-        this.btnVisualizar.setEnabled(true); 
+        this.btnVisualizarTabla.setEnabled(true); 
         this.LimpiarInputs();
         this.LimpiarErrLabels();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -522,6 +502,12 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         homeView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
+        TablaGrandeProveedoresView tablaGrandeProveedoresView = new TablaGrandeProveedoresView();
+        tablaGrandeProveedoresView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVisualizarTablaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -828,7 +814,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JPanel btnRegresar;
-    private javax.swing.JPanel btnVisualizar;
+    private javax.swing.JButton btnVisualizarTabla;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -854,7 +840,6 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuarioActual;
-    private javax.swing.JLabel lblVisualizar;
     private javax.swing.JPanel pnlBackbround;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;

@@ -6,6 +6,7 @@
 package Views.TablasGrande;
 
 import Controllers.Controllers.LoginController;
+import Utils.PlaceHolders.TextPrompt;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.MantenimientoSuministrosView;
@@ -21,6 +22,7 @@ public class TablaGrandeInventarioSuministrosView extends javax.swing.JFrame {
      */
     public TablaGrandeInventarioSuministrosView() {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
     }
 

@@ -43,130 +43,131 @@ public class InventarioBodegaConexion
         ResultSet rss;
         
         ArrayList<InventarioBodegaModel> bodega = new ArrayList<>();
-        switch (accion){
+        switch (accion)
+        {
             
             case "Activos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT l.LprId, p.PrdId, p.PrdNombre, p.PrdDescripcion, "
-                                               + "l.LprStock, p.PrdStockMaximo, p.PrdStockMinimo, " 
-                                               + "l.LprFechaCaducidad, c.CprDescripcion, u.UndDescripcion, l.LprEstado "
-                                               + "FROM loteproductos l INNER JOIN catalogoproductos p ON l.PrdId = p.PrdId "
-                                               + "INNER JOIN categoriasproductos c ON p.CprId = c.CprId "
-                                               + "INNER JOIN unidades u ON p.UndId = u.UndId "
-                                               + "WHERE l.LprEstado = 'Activo' "
-                                               + "ORDER BY l.LprFechaCaducidad ASC";
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT l.LprId, p.PrdId, p.PrdNombre, p.PrdDescripcion, "
+                                   + "l.LprStock, p.PrdStockMaximo, p.PrdStockMinimo, " 
+                                   + "l.LprFechaCaducidad, c.CprDescripcion, u.UndDescripcion, l.LprEstado "
+                                   + "FROM loteproductos l INNER JOIN catalogoproductos p ON l.PrdId = p.PrdId "
+                                   + "INNER JOIN categoriasproductos c ON p.CprId = c.CprId "
+                                   + "INNER JOIN unidades u ON p.UndId = u.UndId "
+                                   + "WHERE l.LprEstado = 'Activo' "
+                                   + "ORDER BY l.LprFechaCaducidad ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    InventarioBodegaModel inventario = new InventarioBodegaModel();
-                                    inventario.setLprId(rss.getInt("LprId"));
-                                    inventario.setPrdId(rss.getInt("PrdId"));
-                                    inventario.setPrdNombre(rss.getString("PrdNombre"));;
-                                    inventario.setPrdDescripcion(rss.getString("PrdDescripcion"));
-                                    inventario.setLprStock(rss.getInt("LprStock"));
-                                    inventario.setPrdStockMaximo(rss.getInt("PrdStockMaximo"));
-                                    inventario.setPrdStockMinimo(rss.getInt("PrdStockMinimo"));
-                                    inventario.setLprFechaCaducidad(rss.getString("LprFechaCaducidad"));
-                                    inventario.setCprDescripcion(rss.getString("CprDescripcion"));
-                                    inventario.setUndDescripcion(rss.getString("UndDescripcion"));
-                                    inventario.setLprEstado(rss.getString("LprEstado"));
-                                    bodega.add(inventario);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
+                    while (rss.next()) 
+                    {
+                        InventarioBodegaModel inventario = new InventarioBodegaModel();
+                        inventario.setLprId(rss.getInt("LprId"));
+                        inventario.setPrdId(rss.getInt("PrdId"));
+                        inventario.setPrdNombre(rss.getString("PrdNombre"));;
+                        inventario.setPrdDescripcion(rss.getString("PrdDescripcion"));
+                        inventario.setLprStock(rss.getInt("LprStock"));
+                        inventario.setPrdStockMaximo(rss.getInt("PrdStockMaximo"));
+                        inventario.setPrdStockMinimo(rss.getInt("PrdStockMinimo"));
+                        inventario.setLprFechaCaducidad(rss.getString("LprFechaCaducidad"));
+                        inventario.setCprDescripcion(rss.getString("CprDescripcion"));
+                        inventario.setUndDescripcion(rss.getString("UndDescripcion"));
+                        inventario.setLprEstado(rss.getString("LprEstado"));
+                        bodega.add(inventario);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
 
-                            }
-                            break;
-            case "Inactivos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT l.LprId, p.PrdId, p.PrdNombre, p.PrdDescripcion, "
-                                               + "l.LprStock, p.PrdStockMaximo, p.PrdStockMinimo, " 
-                                               + "l.LprFechaCaducidad, c.CprDescripcion, u.UndDescripcion, l.LprEstado "
-                                               + "FROM loteproductos l INNER JOIN catalogoproductos p ON l.PrdId = p.PrdId "
-                                               + "INNER JOIN categoriasproductos c ON p.CprId = c.CprId "
-                                               + "INNER JOIN unidades u ON p.UndId = u.UndId "
-                                               + "WHERE l.LprEstado = 'Inactivo' "
-                                               + "ORDER BY l.LprFechaCaducidad ASC";
-
-                                rss = stm.executeQuery(query);
-
-                                while (rss.next()) 
-                                {
-                                    InventarioBodegaModel inventario = new InventarioBodegaModel();
-                                    inventario.setLprId(rss.getInt("LprId"));
-                                    inventario.setPrdId(rss.getInt("PrdId"));
-                                    inventario.setPrdNombre(rss.getString("PrdNombre"));;
-                                    inventario.setPrdDescripcion(rss.getString("PrdDescripcion"));
-                                    inventario.setLprStock(rss.getInt("LprStock"));
-                                    inventario.setPrdStockMaximo(rss.getInt("PrdStockMaximo"));
-                                    inventario.setPrdStockMinimo(rss.getInt("PrdStockMinimo"));
-                                    inventario.setLprFechaCaducidad(rss.getString("LprFechaCaducidad"));
-                                    inventario.setCprDescripcion(rss.getString("CprDescripcion"));
-                                    inventario.setUndDescripcion(rss.getString("UndDescripcion"));
-                                    inventario.setLprEstado(rss.getString("LprEstado"));
-                                    bodega.add(inventario);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-
-                            }
-                            break;
-            case "Todos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT l.LprId, p.PrdId, p.PrdNombre, p.PrdDescripcion, "
-                                               + "l.LprStock, p.PrdStockMaximo, p.PrdStockMinimo, " 
-                                               + "l.LprFechaCaducidad, c.CprDescripcion, u.UndDescripcion, l.LprEstado "
-                                               + "FROM loteproductos l INNER JOIN catalogoproductos p ON l.PrdId = p.PrdId "
-                                               + "INNER JOIN categoriasproductos c ON p.CprId = c.CprId "
-                                               + "INNER JOIN unidades u ON p.UndId = u.UndId "
-                                               + "ORDER BY l.LprFechaCaducidad ASC";
-
-                                rss = stm.executeQuery(query);
-
-                                while (rss.next()) 
-                                {
-                                    InventarioBodegaModel inventario = new InventarioBodegaModel();
-                                    inventario.setLprId(rss.getInt("LprId"));
-                                    inventario.setPrdId(rss.getInt("PrdId"));
-                                    inventario.setPrdNombre(rss.getString("PrdNombre"));;
-                                    inventario.setPrdDescripcion(rss.getString("PrdDescripcion"));
-                                    inventario.setLprStock(rss.getInt("LprStock"));
-                                    inventario.setPrdStockMaximo(rss.getInt("PrdStockMaximo"));
-                                    inventario.setPrdStockMinimo(rss.getInt("PrdStockMinimo"));
-                                    inventario.setLprFechaCaducidad(rss.getString("LprFechaCaducidad"));
-                                    inventario.setCprDescripcion(rss.getString("CprDescripcion"));
-                                    inventario.setUndDescripcion(rss.getString("UndDescripcion"));
-                                    inventario.setLprEstado(rss.getString("LprEstado"));
-                                    bodega.add(inventario);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-
-                            }
-                            break;
+                }
+            break;
             
+            case "Inactivos":
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT l.LprId, p.PrdId, p.PrdNombre, p.PrdDescripcion, "
+                                   + "l.LprStock, p.PrdStockMaximo, p.PrdStockMinimo, " 
+                                   + "l.LprFechaCaducidad, c.CprDescripcion, u.UndDescripcion, l.LprEstado "
+                                   + "FROM loteproductos l INNER JOIN catalogoproductos p ON l.PrdId = p.PrdId "
+                                   + "INNER JOIN categoriasproductos c ON p.CprId = c.CprId "
+                                   + "INNER JOIN unidades u ON p.UndId = u.UndId "
+                                   + "WHERE l.LprEstado = 'Inactivo' "
+                                   + "ORDER BY l.LprFechaCaducidad ASC";
+
+                    rss = stm.executeQuery(query);
+
+                    while (rss.next()) 
+                    {
+                        InventarioBodegaModel inventario = new InventarioBodegaModel();
+                        inventario.setLprId(rss.getInt("LprId"));
+                        inventario.setPrdId(rss.getInt("PrdId"));
+                        inventario.setPrdNombre(rss.getString("PrdNombre"));;
+                        inventario.setPrdDescripcion(rss.getString("PrdDescripcion"));
+                        inventario.setLprStock(rss.getInt("LprStock"));
+                        inventario.setPrdStockMaximo(rss.getInt("PrdStockMaximo"));
+                        inventario.setPrdStockMinimo(rss.getInt("PrdStockMinimo"));
+                        inventario.setLprFechaCaducidad(rss.getString("LprFechaCaducidad"));
+                        inventario.setCprDescripcion(rss.getString("CprDescripcion"));
+                        inventario.setUndDescripcion(rss.getString("UndDescripcion"));
+                        inventario.setLprEstado(rss.getString("LprEstado"));
+                        bodega.add(inventario);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+
+                }
+            break;
+            
+            case "Todos":
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT l.LprId, p.PrdId, p.PrdNombre, p.PrdDescripcion, "
+                                   + "l.LprStock, p.PrdStockMaximo, p.PrdStockMinimo, " 
+                                   + "l.LprFechaCaducidad, c.CprDescripcion, u.UndDescripcion, l.LprEstado "
+                                   + "FROM loteproductos l INNER JOIN catalogoproductos p ON l.PrdId = p.PrdId "
+                                   + "INNER JOIN categoriasproductos c ON p.CprId = c.CprId "
+                                   + "INNER JOIN unidades u ON p.UndId = u.UndId "
+                                   + "ORDER BY l.LprFechaCaducidad ASC";
+
+                    rss = stm.executeQuery(query);
+
+                    while (rss.next()) 
+                    {
+                        InventarioBodegaModel inventario = new InventarioBodegaModel();
+                        inventario.setLprId(rss.getInt("LprId"));
+                        inventario.setPrdId(rss.getInt("PrdId"));
+                        inventario.setPrdNombre(rss.getString("PrdNombre"));;
+                        inventario.setPrdDescripcion(rss.getString("PrdDescripcion"));
+                        inventario.setLprStock(rss.getInt("LprStock"));
+                        inventario.setPrdStockMaximo(rss.getInt("PrdStockMaximo"));
+                        inventario.setPrdStockMinimo(rss.getInt("PrdStockMinimo"));
+                        inventario.setLprFechaCaducidad(rss.getString("LprFechaCaducidad"));
+                        inventario.setCprDescripcion(rss.getString("CprDescripcion"));
+                        inventario.setUndDescripcion(rss.getString("UndDescripcion"));
+                        inventario.setLprEstado(rss.getString("LprEstado"));
+                        bodega.add(inventario);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+
+                }
+            break;
         }
-        
         return bodega;
     }
     
@@ -219,7 +220,8 @@ public class InventarioBodegaConexion
      * loggedusuario para guardar el id usuario que esta
      * loggueado en el momento. 
      */
-    private static void CrearTablaTemporal(Connection conexion){
+    private static void CrearTablaTemporal(Connection conexion)
+    {
         Connection con = null;
         PreparedStatement stm;     
         try 
@@ -236,6 +238,5 @@ public class InventarioBodegaConexion
         {
             JOptionPane.showMessageDialog(null,e);
         }      
-        
     }
 }

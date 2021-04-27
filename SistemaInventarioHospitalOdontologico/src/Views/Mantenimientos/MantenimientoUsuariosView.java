@@ -31,6 +31,11 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     public MantenimientoUsuariosView() 
     {
         initComponents();
+        
+        UsuarioController.setPlaceHolders(this.txtIdentidad, this.txtNombre, 
+            this.txtApellido, this.txtCorreo, this.txtUsuario, this.txtContrasenia, 
+            this.txtBuscar);
+        
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.lstPrivilegiosSeleccionados.setModel(modeloLstPrivilegiosSeleccionados);
@@ -307,6 +312,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         pnlMenu.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cmbEstado.setEnabled(false);
         cmbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEstadoActionPerformed(evt);

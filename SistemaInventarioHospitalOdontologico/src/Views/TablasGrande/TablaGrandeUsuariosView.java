@@ -12,7 +12,6 @@ import Utils.Cache.UsuariosCache;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoUsuariosView;
 import java.awt.Color;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
@@ -25,13 +24,13 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    public TablaGrandeUsuariosView() {
+    public TablaGrandeUsuariosView() 
+    {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         UsuarioController.LlenarTableUsuarios(this.tableUsuarios, "Todos");
-        UsuarioController.FiltroTableUsuarios(tableUsuarios, txtBuscar);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }
 
     /**

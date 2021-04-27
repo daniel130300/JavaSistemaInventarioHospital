@@ -20,6 +20,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
     
     public MantenimientoUnidadesView() {
         initComponents();
+        UnidadesController.setPlaceHolders(this.txtDescripcion, this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableUnidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         UnidadesController.LlenarTableUnidades(this.tableUnidades,"Todos"); 

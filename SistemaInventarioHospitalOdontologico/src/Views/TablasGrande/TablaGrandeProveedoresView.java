@@ -5,7 +5,6 @@
  */
 package Views.TablasGrande;
 
-import Controllers.Controllers.InventarioBodegaController;
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Models.Models.ProveedorModel;
@@ -24,12 +23,13 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    public TablaGrandeProveedoresView() {
+    public TablaGrandeProveedoresView() 
+    {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
         ProveedorController.FiltroTableProveedores(this.tableProveedores, this.txtBuscar);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
     }
 
     /**

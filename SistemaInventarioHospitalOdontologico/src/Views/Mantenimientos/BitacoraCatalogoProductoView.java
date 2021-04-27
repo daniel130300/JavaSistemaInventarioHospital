@@ -7,6 +7,7 @@ package Views.Mantenimientos;
 
 import Controllers.Controllers.BitacoraCatalogoProductosController;
 import Controllers.Controllers.LoginController;
+import Utils.PlaceHolders.TextPrompt;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Menus.MenuBodegaView;
@@ -20,8 +21,10 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    public BitacoraCatalogoProductoView() {
+    public BitacoraCatalogoProductoView() 
+    {
         initComponents();
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         BitacoraCatalogoProductosController.LlenarTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto);
         BitacoraCatalogoProductosController.FiltroTableBitacoraCatalogo(this.tableBitacoraCatalogoProducto, this.txtBuscar);

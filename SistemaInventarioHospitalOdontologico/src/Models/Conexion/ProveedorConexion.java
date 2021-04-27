@@ -39,108 +39,109 @@ public class ProveedorConexion
         
         ArrayList<ProveedorModel> proveedores = new ArrayList<>();
         
-        switch(accion){
-            
+        switch(accion)
+        {
             case "Activos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT * FROM proveedores "
-                                        + "WHERE ProEstado = 'Activo'"
-                                        + " ORDER BY ProId ASC";
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT * FROM proveedores "
+                            + "WHERE ProEstado = 'Activo'"
+                            + " ORDER BY ProId ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    ProveedorModel proveedor = new ProveedorModel();
-                                    proveedor.setProId(rss.getInt("ProId"));
-                                    proveedor.setProRTN(rss.getString("ProRTN"));
-                                    proveedor.setProNombre(rss.getString("ProNombre"));;
-                                    proveedor.setProCorreo(rss.getString("ProCorreo"));
-                                    proveedor.setProTelefono(rss.getString("ProTelefono"));
-                                    proveedor.setProContacto(rss.getString("ProContacto"));
-                                    proveedor.setProDireccion(rss.getString("ProDireccion"));
-                                    proveedor.setProEstado(rss.getString("ProEstado"));
+                    while (rss.next()) 
+                    {
+                        ProveedorModel proveedor = new ProveedorModel();
+                        proveedor.setProId(rss.getInt("ProId"));
+                        proveedor.setProRTN(rss.getString("ProRTN"));
+                        proveedor.setProNombre(rss.getString("ProNombre"));;
+                        proveedor.setProCorreo(rss.getString("ProCorreo"));
+                        proveedor.setProTelefono(rss.getString("ProTelefono"));
+                        proveedor.setProContacto(rss.getString("ProContacto"));
+                        proveedor.setProDireccion(rss.getString("ProDireccion"));
+                        proveedor.setProEstado(rss.getString("ProEstado"));
 
-                                    proveedores.add(proveedor);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-                            }
-                            break;
+                        proveedores.add(proveedor);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            break;
             
              case "Inactivos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT * FROM proveedores "
-                                        + "WHERE ProEstado = 'Inactivo'"
-                                        + " ORDER BY ProId ASC";
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT * FROM proveedores "
+                            + "WHERE ProEstado = 'Inactivo'"
+                            + " ORDER BY ProId ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    ProveedorModel proveedor = new ProveedorModel();
-                                    proveedor.setProId(rss.getInt("ProId"));
-                                    proveedor.setProRTN(rss.getString("ProRTN"));
-                                    proveedor.setProNombre(rss.getString("ProNombre"));;
-                                    proveedor.setProCorreo(rss.getString("ProCorreo"));
-                                    proveedor.setProTelefono(rss.getString("ProTelefono"));
-                                    proveedor.setProContacto(rss.getString("ProContacto"));
-                                    proveedor.setProDireccion(rss.getString("ProDireccion"));
-                                    proveedor.setProEstado(rss.getString("ProEstado"));
+                    while (rss.next()) 
+                    {
+                        ProveedorModel proveedor = new ProveedorModel();
+                        proveedor.setProId(rss.getInt("ProId"));
+                        proveedor.setProRTN(rss.getString("ProRTN"));
+                        proveedor.setProNombre(rss.getString("ProNombre"));;
+                        proveedor.setProCorreo(rss.getString("ProCorreo"));
+                        proveedor.setProTelefono(rss.getString("ProTelefono"));
+                        proveedor.setProContacto(rss.getString("ProContacto"));
+                        proveedor.setProDireccion(rss.getString("ProDireccion"));
+                        proveedor.setProEstado(rss.getString("ProEstado"));
 
-                                    proveedores.add(proveedor);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-                            }
-                            break;
+                        proveedores.add(proveedor);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            break;
             
-             case "Todos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT * FROM proveedores ORDER BY ProId ASC";
+            case "Todos":
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT * FROM proveedores ORDER BY ProId ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    ProveedorModel proveedor = new ProveedorModel();
-                                    proveedor.setProId(rss.getInt("ProId"));
-                                    proveedor.setProRTN(rss.getString("ProRTN"));
-                                    proveedor.setProNombre(rss.getString("ProNombre"));;
-                                    proveedor.setProCorreo(rss.getString("ProCorreo"));
-                                    proveedor.setProTelefono(rss.getString("ProTelefono"));
-                                    proveedor.setProContacto(rss.getString("ProContacto"));
-                                    proveedor.setProDireccion(rss.getString("ProDireccion"));
-                                    proveedor.setProEstado(rss.getString("ProEstado"));
+                    while (rss.next()) 
+                    {
+                        ProveedorModel proveedor = new ProveedorModel();
+                        proveedor.setProId(rss.getInt("ProId"));
+                        proveedor.setProRTN(rss.getString("ProRTN"));
+                        proveedor.setProNombre(rss.getString("ProNombre"));;
+                        proveedor.setProCorreo(rss.getString("ProCorreo"));
+                        proveedor.setProTelefono(rss.getString("ProTelefono"));
+                        proveedor.setProContacto(rss.getString("ProContacto"));
+                        proveedor.setProDireccion(rss.getString("ProDireccion"));
+                        proveedor.setProEstado(rss.getString("ProEstado"));
 
-                                    proveedores.add(proveedor);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-                            }
-                            break;
+                        proveedores.add(proveedor);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            break;
         }
         
         return proveedores;
     }
+    
     public static ArrayList<ProveedorModel>  ListadoDetalleProductoProveedores() 
     {
         Connection con = null;

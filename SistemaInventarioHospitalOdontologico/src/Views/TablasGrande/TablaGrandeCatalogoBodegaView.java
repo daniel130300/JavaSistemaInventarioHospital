@@ -29,7 +29,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         initComponents();
         TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        CatalogoProductoController.LlenarTableProductos(tableProductos);
+        CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos");
         ProveedorController.FiltroTableProveedores(tableProductos, txtBuscar);
     }
     /**
@@ -274,19 +274,19 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_tableProductosMouseClicked
 
     private void rbnInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInactivosActionPerformed
-        //UsuarioController.LlenarTableUsuarios(tableUsuarios, "Inactivos");
+        CatalogoProductoController.LlenarTableProductos(this.tableProductos, "Inactivos");
         rbnActivos.setSelected(false);
         rbnTodos.setSelected(false);
     }//GEN-LAST:event_rbnInactivosActionPerformed
 
     private void rbnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnActivosActionPerformed
-        //UsuarioController.LlenarTableUsuarios(tableUsuarios, "Activos");
+        CatalogoProductoController.LlenarTableProductos(this.tableProductos, "Activos");
         rbnTodos.setSelected(false);
         rbnInactivos.setSelected(false);
     }//GEN-LAST:event_rbnActivosActionPerformed
 
     private void rbnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnTodosActionPerformed
-        //UsuarioController.LlenarTableUsuarios(tableUsuarios, "Todos");
+        CatalogoProductoController.LlenarTableProductos(this.tableProductos, "Todos");
         rbnActivos.setSelected(false);
         rbnInactivos.setSelected(false);
     }//GEN-LAST:event_rbnTodosActionPerformed

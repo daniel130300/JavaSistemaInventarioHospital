@@ -116,14 +116,14 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 490, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 490, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
@@ -156,7 +156,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableUnidades);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 770, 270));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 770, 250));
 
         lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
@@ -248,7 +248,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
         lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar1.setText("Visualizar:");
-        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
         rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -260,7 +260,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 rbnTodosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -271,7 +271,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 rbnActivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
+        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
 
         rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -282,7 +282,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
                 rbnInactivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
+        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 810, 540));
 

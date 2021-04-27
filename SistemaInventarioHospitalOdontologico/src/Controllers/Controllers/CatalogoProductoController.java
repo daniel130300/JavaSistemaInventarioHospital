@@ -182,12 +182,12 @@ public class CatalogoProductoController
         }
     }
     
-    public static void LlenarTableProductos(JTable tableProductos) 
+    public static void LlenarTableProductos(JTable tableProductos, String accion) 
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel(); 
         modelo.setRowCount(0);
         ArrayList<CatalogoProductoModel> productos = new ArrayList<>();
-        productos = CatalogoProductoConexion.ListadoProducto();
+        productos = CatalogoProductoConexion.ListadoProducto(accion);
         
         for (int i = 0; i <productos.size(); i++) 
         {
@@ -306,10 +306,12 @@ public class CatalogoProductoController
                     JOptionPane.showMessageDialog(null, "Error ingresando los proveedores.");
                 }       
             break;
+            
             case "errNombre":
                 JOptionPane.showMessageDialog(null, "El Producto ya se encuentra registrado.");
                 error = true;
             break;
+            
             default:
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
                 error = true;

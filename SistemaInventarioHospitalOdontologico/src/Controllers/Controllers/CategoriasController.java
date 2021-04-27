@@ -128,54 +128,58 @@ public class CategoriasController
         DefaultTableModel modelo = (DefaultTableModel) tableCategorias.getModel(); 
         modelo.setRowCount(0);
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
-        switch(accion){
+        switch(accion)
+        {
             case "Activos":
-            categorias = CategoriaConexion.ListadoCategorias("Activos");
+                categorias = CategoriaConexion.ListadoCategorias("Activos");
 
-            for (int i = 0; i <categorias.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        categorias.get(i).getCprId(),
-                        categorias.get(i).getCprDescripcion(),
-                        categorias.get(i).getCprEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableCategorias, modelo.getColumnCount());
+                for (int i = 0; i <categorias.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            categorias.get(i).getCprId(),
+                            categorias.get(i).getCprDescripcion(),
+                            categorias.get(i).getCprEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableCategorias, modelo.getColumnCount());
             break;
-         case "Inactivos":
-            categorias = CategoriaConexion.ListadoCategorias("Inactivos");
+            
+            case "Inactivos":
+                categorias = CategoriaConexion.ListadoCategorias("Inactivos");
 
-            for (int i = 0; i <categorias.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        categorias.get(i).getCprId(),
-                        categorias.get(i).getCprDescripcion(),
-                        categorias.get(i).getCprEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableCategorias, modelo.getColumnCount());
+                for (int i = 0; i <categorias.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            categorias.get(i).getCprId(),
+                            categorias.get(i).getCprDescripcion(),
+                            categorias.get(i).getCprEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableCategorias, modelo.getColumnCount());
             break;  
-        case "Todos":
-            categorias = CategoriaConexion.ListadoCategorias("Todos");
+            
+            case "Todos":
+                categorias = CategoriaConexion.ListadoCategorias("Todos");
 
-            for (int i = 0; i <categorias.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        categorias.get(i).getCprId(),
-                        categorias.get(i).getCprDescripcion(),
-                        categorias.get(i).getCprEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableCategorias, modelo.getColumnCount());
+                for (int i = 0; i <categorias.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            categorias.get(i).getCprId(),
+                            categorias.get(i).getCprDescripcion(),
+                            categorias.get(i).getCprEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableCategorias, modelo.getColumnCount());
+            break;
         }
     }
     

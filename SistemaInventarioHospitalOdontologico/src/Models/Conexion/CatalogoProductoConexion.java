@@ -29,46 +29,128 @@ public class CatalogoProductoConexion
     // Metodos públicos
     //***************************
     
-    public static ArrayList<CatalogoProductoModel> ListadoProducto() 
+    public static ArrayList<CatalogoProductoModel> ListadoProducto(String accion) 
     {
         Connection con = null;
         Statement stm;
         ResultSet rss;
         
         ArrayList<CatalogoProductoModel> productos = new ArrayList<>();
-        try 
+        
+        switch(accion)
         {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
+            case "Activos":
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    
+                    String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
+                     + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
+                     + "INNER JOIN unidades c ON c.UndId = a.UndId "
+                     + "WHERE PrdEstado = 'Activo' " 
+                     + "ORDER BY a.PrdId ASC";
+
+                    rss = stm.executeQuery(query);
+
+                    while (rss.next()) 
+                    {
+                        CatalogoProductoModel producto = new CatalogoProductoModel();
+                        producto.setPrdId(rss.getInt("PrdId"));
+                        producto.setPrdNombre(rss.getString("PrdNombre"));
+                        producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
+                        producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
+                        producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
+                        producto.setProdEstado(rss.getString("PrdEstado"));
+                        producto.setCprId(rss.getInt("CprId"));
+                        producto.setCprDescripcion(rss.getString("CprDescripcion"));                
+                        producto.setUndId(rss.getInt("UndId"));
+                        producto.setUndDescripcion(rss.getString("UndDescripcion"));
+                        productos.add(producto);
+                    } 
+                    
+                    con.close();
+                } 
+                catch (SQLException e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                } 
+            break;
+                
+            case "Inactivos":
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
+                     + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
+                     + "INNER JOIN unidades c ON c.UndId = a.UndId "
+                     + "WHERE PrdEstado = 'Inactivo' " 
+                     + "ORDER BY a.PrdId ASC";
+
+
+                    rss = stm.executeQuery(query);
+
+                    while (rss.next()) 
+                    {
+                        CatalogoProductoModel producto = new CatalogoProductoModel();
+                        producto.setPrdId(rss.getInt("PrdId"));
+                        producto.setPrdNombre(rss.getString("PrdNombre"));
+                        producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
+                        producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
+                        producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
+                        producto.setProdEstado(rss.getString("PrdEstado"));
+                        producto.setCprId(rss.getInt("CprId"));
+                        producto.setCprDescripcion(rss.getString("CprDescripcion"));                
+                        producto.setUndId(rss.getInt("UndId"));
+                        producto.setUndDescripcion(rss.getString("UndDescripcion"));
+                        productos.add(producto);
+                    } 
+                    
+                    con.close();
+                } 
+                catch (SQLException e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                } 
+            break; 
+                
+            case "Todos":
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
                     + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
                     + "INNER JOIN unidades c ON c.UndId = a.UndId "
                     + "ORDER BY a.PrdId ASC";
-            
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                CatalogoProductoModel producto = new CatalogoProductoModel();
-                producto.setPrdId(rss.getInt("PrdId"));
-                producto.setPrdNombre(rss.getString("PrdNombre"));
-                producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
-                producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
-                producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
-                producto.setProdEstado(rss.getString("PrdEstado"));
-                producto.setCprId(rss.getInt("CprId"));
-                producto.setCprDescripcion(rss.getString("CprDescripcion"));                
-                producto.setUndId(rss.getInt("UndId"));
-                producto.setUndDescripcion(rss.getString("UndDescripcion"));
-                productos.add(producto);
-            } 
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
+
+                    rss = stm.executeQuery(query);
+
+                    while (rss.next()) 
+                    {
+                        CatalogoProductoModel producto = new CatalogoProductoModel();
+                        producto.setPrdId(rss.getInt("PrdId"));
+                        producto.setPrdNombre(rss.getString("PrdNombre"));
+                        producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
+                        producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
+                        producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
+                        producto.setProdEstado(rss.getString("PrdEstado"));
+                        producto.setCprId(rss.getInt("CprId"));
+                        producto.setCprDescripcion(rss.getString("CprDescripcion"));                
+                        producto.setUndId(rss.getInt("UndId"));
+                        producto.setUndDescripcion(rss.getString("UndDescripcion"));
+                        productos.add(producto);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                } 
+            break;                
         }
-        
+
         return productos;
     }
     

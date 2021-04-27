@@ -39,85 +39,87 @@ public class UnidadesConexion
         ResultSet rss;
         
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        switch(accion){
-            
+        switch(accion)
+        {
             case "Activos":
-                            try
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT *FROM unidades"
-                                        + " WHERE UndEstado = 'Activo'";
-                                
-                                 rss = stm.executeQuery(query); 
-                                 
-                                 while(rss.next())
-                                 {
-                                     UnidadesModel unidad = new UnidadesModel();
-                                     unidad.setUndId(rss.getInt("UndId"));
-                                     unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                                     unidad.setUndEstado(rss.getString("UndEstado"));
-                                     unidades.add(unidad);
-                                 }  
-                                    con.close();
-                            } 
-                            catch (SQLException e)
-                            {
-                                 JOptionPane.showMessageDialog(null,e);
-                            } 
-                            break;
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT *FROM unidades"
+                            + " WHERE UndEstado = 'Activo'";
+
+                     rss = stm.executeQuery(query); 
+
+                     while(rss.next())
+                     {
+                         UnidadesModel unidad = new UnidadesModel();
+                         unidad.setUndId(rss.getInt("UndId"));
+                         unidad.setUndDescripcion(rss.getString("UndDescripcion"));
+                         unidad.setUndEstado(rss.getString("UndEstado"));
+                         unidades.add(unidad);
+                     }  
+                        con.close();
+                } 
+                catch (SQLException e)
+                {
+                     JOptionPane.showMessageDialog(null,e);
+                } 
+            break;
+            
             case "Inactivos":
-                            try
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT *FROM unidades "
-                                        + "WHERE UndEstado = 'Inactivo'";
-                                       
-                                
-                                 rss = stm.executeQuery(query); 
-                                 
-                                 while(rss.next())
-                                 {
-                                     UnidadesModel unidad = new UnidadesModel();
-                                     unidad.setUndId(rss.getInt("UndId"));
-                                     unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                                     unidad.setUndEstado(rss.getString("UndEstado"));
-                                     unidades.add(unidad);
-                                 }  
-                                    con.close();
-                            } 
-                            catch (SQLException e)
-                            {
-                                 JOptionPane.showMessageDialog(null,e);
-                            } 
-                            break; 
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT *FROM unidades "
+                            + "WHERE UndEstado = 'Inactivo'";
+
+
+                     rss = stm.executeQuery(query); 
+
+                     while(rss.next())
+                     {
+                         UnidadesModel unidad = new UnidadesModel();
+                         unidad.setUndId(rss.getInt("UndId"));
+                         unidad.setUndDescripcion(rss.getString("UndDescripcion"));
+                         unidad.setUndEstado(rss.getString("UndEstado"));
+                         unidades.add(unidad);
+                     }  
+                        con.close();
+                } 
+                catch (SQLException e)
+                {
+                     JOptionPane.showMessageDialog(null,e);
+                } 
+            break; 
+            
             case "Todos":
-                            try
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT *FROM unidades ";
-                                      
-                                       
-                                
-                                 rss = stm.executeQuery(query); 
-                                 
-                                 while(rss.next())
-                                 {
-                                     UnidadesModel unidad = new UnidadesModel();
-                                     unidad.setUndId(rss.getInt("UndId"));
-                                     unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                                     unidad.setUndEstado(rss.getString("UndEstado"));
-                                     unidades.add(unidad);
-                                 }  
-                                    con.close();
-                            } 
-                            catch (SQLException e)
-                            {
-                                 JOptionPane.showMessageDialog(null,e);
-                            } 
-                            break;                
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT *FROM unidades ";
+
+
+
+                     rss = stm.executeQuery(query); 
+
+                     while(rss.next())
+                     {
+                         UnidadesModel unidad = new UnidadesModel();
+                         unidad.setUndId(rss.getInt("UndId"));
+                         unidad.setUndDescripcion(rss.getString("UndDescripcion"));
+                         unidad.setUndEstado(rss.getString("UndEstado"));
+                         unidades.add(unidad);
+                     }  
+                        con.close();
+                } 
+                catch (SQLException e)
+                {
+                     JOptionPane.showMessageDialog(null,e);
+                } 
+            break;                
         }
         
         return unidades;

@@ -8,12 +8,7 @@ package Views.Listados;
 import Controllers.Controllers.CatalogoProductoController;
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
-import Models.Models.ProveedorModel;
-import Utils.Cache.ProveedorCache;
-import Views.Mantenimientos.MantenimientoCatalogoBodegaView;
-import Views.Mantenimientos.MantenimientoProveedoresView;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**

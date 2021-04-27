@@ -36,7 +36,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         CatalogoProductoController.LlenarCmbCategoria(this.cmbCategoria);
         CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
-        CatalogoProductoController.LlenarTableProductos(tableProductos); 
+        CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos"); 
         CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
         CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion);
         this.LlenarDatos();
@@ -534,7 +534,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
             this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
             CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
-            CatalogoProductoController.LlenarTableProductos(tableProductos);
+            CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos");
             this.LimpiarTable();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -548,7 +548,7 @@ public class MantenimientoCatalogoBodegaView extends javax.swing.JFrame {
         {
             CatalogoProductoModel productoModel = new CatalogoProductoModel();
             Id_producto= productoModel.getPrdId();
-            CatalogoProductoController.LlenarTableProductos(tableProductos);
+            CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos");
             this.LimpiarTable();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed

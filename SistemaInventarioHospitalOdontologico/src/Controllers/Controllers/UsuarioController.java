@@ -216,8 +216,8 @@ public class UsuarioController extends GeneralController
         modelo.setRowCount(0);
         ArrayList<UsuarioModel> usuarios = new ArrayList<>();
         
-        switch(accion){
-            
+        switch(accion)
+        {
             case "Activos":
                 usuarios = UsuarioConexion.ListadoUsuarios("Activos");
 

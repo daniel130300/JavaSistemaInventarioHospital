@@ -73,11 +73,10 @@ public class InventarioBodegaController {
             inventario.setLprFechaCaducidad(FechaCaducidad); 
             String msj = "";
             String resultado = "";
-            
+            inventario.setLprEstado(Estado);
             switch(accion)
             {   
                 case "editar":
-                    inventario.setLprEstado(Estado);
                     resultado = InventarioBodegaConexion.MantenimientoInventarioBodega(accion, inventario);
                     msj =  "Registro actualizado con éxito"; 
                     mntError = InventarioBodegaController.mensajesRetroalimentacion(msj, resultado);
@@ -107,7 +106,7 @@ public class InventarioBodegaController {
             LprId = Integer.parseInt((String.valueOf(tableBodega.getModel().getValueAt(seleccion, 0))));
             numStock.setValue(tableBodega.getModel().getValueAt(seleccion, 4));
             txtFechaCaducidad.setText(String.valueOf(tableBodega.getModel().getValueAt(seleccion, 7)));
-            cmbEstado.setSelectedItem(String.valueOf(tableBodega.getModel().getValueAt(seleccion, 3)));
+            cmbEstado.setSelectedItem(String.valueOf(tableBodega.getModel().getValueAt(seleccion, 10)));
 
             return LprId;
         }
@@ -202,81 +201,84 @@ public class InventarioBodegaController {
         modelo.setRowCount(0);
         ArrayList<InventarioBodegaModel> inventario = new ArrayList<>();
         
-        switch (accion){
+        switch (accion)
+        {
             case "Activos":
-            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Activos");
+                inventario = InventarioBodegaConexion.ListadoInventarioBodega("Activos");
 
-            for (int i = 0; i <inventario.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        inventario.get(i).getLprId(), 
-                        inventario.get(i).getPrdId(),
-                        inventario.get(i).getPrdNombre(),
-                        inventario.get(i).getPrdDescripcion(),
-                        inventario.get(i).getLprStock(),
-                        inventario.get(i).getPrdStockMaximo(),
-                        inventario.get(i).getPrdStockMinimo(),
-                        inventario.get(i).getLprFechaCaducidad(),
-                        inventario.get(i).getCprDescripcion(),
-                        inventario.get(i).getUndDescripcion(),
-                        inventario.get(i).getLprEstado()
-                    }
-                );
-            }
+                for (int i = 0; i <inventario.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            inventario.get(i).getLprId(), 
+                            inventario.get(i).getPrdId(),
+                            inventario.get(i).getPrdNombre(),
+                            inventario.get(i).getPrdDescripcion(),
+                            inventario.get(i).getLprStock(),
+                            inventario.get(i).getPrdStockMaximo(),
+                            inventario.get(i).getPrdStockMinimo(),
+                            inventario.get(i).getLprFechaCaducidad(),
+                            inventario.get(i).getCprDescripcion(),
+                            inventario.get(i).getUndDescripcion(),
+                            inventario.get(i).getLprEstado()
+                        }
+                    );
+                }
 
-            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
+                FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
             break;
-        case "Inactivos":
-            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Inactivos");
+            
+            case "Inactivos":
+                inventario = InventarioBodegaConexion.ListadoInventarioBodega("Inactivos");
 
-            for (int i = 0; i <inventario.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        inventario.get(i).getLprId(), 
-                        inventario.get(i).getPrdId(),
-                        inventario.get(i).getPrdNombre(),
-                        inventario.get(i).getPrdDescripcion(),
-                        inventario.get(i).getLprStock(),
-                        inventario.get(i).getPrdStockMaximo(),
-                        inventario.get(i).getPrdStockMinimo(),
-                        inventario.get(i).getLprFechaCaducidad(),
-                        inventario.get(i).getCprDescripcion(),
-                        inventario.get(i).getUndDescripcion(),
-                        inventario.get(i).getLprEstado()
-                    }
-                );
-            }
+                for (int i = 0; i <inventario.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            inventario.get(i).getLprId(), 
+                            inventario.get(i).getPrdId(),
+                            inventario.get(i).getPrdNombre(),
+                            inventario.get(i).getPrdDescripcion(),
+                            inventario.get(i).getLprStock(),
+                            inventario.get(i).getPrdStockMaximo(),
+                            inventario.get(i).getPrdStockMinimo(),
+                            inventario.get(i).getLprFechaCaducidad(),
+                            inventario.get(i).getCprDescripcion(),
+                            inventario.get(i).getUndDescripcion(),
+                            inventario.get(i).getLprEstado()
+                        }
+                    );
+                }
 
-            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
+                FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
             break;
-        case "Todos":
-            inventario = InventarioBodegaConexion.ListadoInventarioBodega("Todos");
+            
+            case "Todos":
+                inventario = InventarioBodegaConexion.ListadoInventarioBodega("Todos");
 
-            for (int i = 0; i <inventario.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        inventario.get(i).getLprId(), 
-                        inventario.get(i).getPrdId(),
-                        inventario.get(i).getPrdNombre(),
-                        inventario.get(i).getPrdDescripcion(),
-                        inventario.get(i).getLprStock(),
-                        inventario.get(i).getPrdStockMaximo(),
-                        inventario.get(i).getPrdStockMinimo(),
-                        inventario.get(i).getLprFechaCaducidad(),
-                        inventario.get(i).getCprDescripcion(),
-                        inventario.get(i).getUndDescripcion(),
-                        inventario.get(i).getLprEstado()
-                    }
-                );
-            }
+                for (int i = 0; i <inventario.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            inventario.get(i).getLprId(), 
+                            inventario.get(i).getPrdId(),
+                            inventario.get(i).getPrdNombre(),
+                            inventario.get(i).getPrdDescripcion(),
+                            inventario.get(i).getLprStock(),
+                            inventario.get(i).getPrdStockMaximo(),
+                            inventario.get(i).getPrdStockMinimo(),
+                            inventario.get(i).getLprFechaCaducidad(),
+                            inventario.get(i).getCprDescripcion(),
+                            inventario.get(i).getUndDescripcion(),
+                            inventario.get(i).getLprEstado()
+                        }
+                    );
+                }
 
-            FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
+                FormatoTabla(tableInventarioBodega, modelo.getColumnCount());
             break;
         }
     }

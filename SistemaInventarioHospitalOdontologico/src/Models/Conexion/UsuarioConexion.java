@@ -45,106 +45,109 @@ public class UsuarioConexion
         
         ArrayList<UsuarioModel> usuarios = new ArrayList<>();
         
-        switch(accion){
-            
+        switch(accion)
+        {
             case "Activos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT u.*, a.AreDescripcion "
-                                        + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                                        + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Activo' "
-                                        + "ORDER BY u.UsrId ASC";
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT u.*, a.AreDescripcion "
+                            + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
+                            + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Activo' "
+                            + "ORDER BY u.UsrId ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    UsuarioModel usuario = new UsuarioModel();
-                                    usuario.setUsrId(rss.getInt("UsrId"));
-                                    usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
-                                    usuario.setUsrNombre(rss.getString("UsrNombre"));;
-                                    usuario.setUsrApellido(rss.getString("UsrApellido"));
-                                    usuario.setUsrCorreo(rss.getString("UsrCorreo"));
-                                    usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                                    usuario.setUsrEstado(rss.getString("UsrEstado"));
-                                    usuario.setAreId(rss.getInt("AreId"));
-                                    usuario.setAreDescripcion(rss.getString("AreDescripcion"));
-                                    usuarios.add(usuario);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-                            }
-                            break;
+                    while (rss.next()) 
+                    {
+                        UsuarioModel usuario = new UsuarioModel();
+                        usuario.setUsrId(rss.getInt("UsrId"));
+                        usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
+                        usuario.setUsrNombre(rss.getString("UsrNombre"));;
+                        usuario.setUsrApellido(rss.getString("UsrApellido"));
+                        usuario.setUsrCorreo(rss.getString("UsrCorreo"));
+                        usuario.setUsrUsuario(rss.getString("UsrUsuario"));
+                        usuario.setUsrEstado(rss.getString("UsrEstado"));
+                        usuario.setAreId(rss.getInt("AreId"));
+                        usuario.setAreDescripcion(rss.getString("AreDescripcion"));
+                        usuarios.add(usuario);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            break;
+            
             case "Inactivos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT u.*, a.AreDescripcion "
-                                        + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                                        + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Inactivo' "
-                                        + "ORDER BY u.UsrId ASC";
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT u.*, a.AreDescripcion "
+                            + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
+                            + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Inactivo' "
+                            + "ORDER BY u.UsrId ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    UsuarioModel usuario = new UsuarioModel();
-                                    usuario.setUsrId(rss.getInt("UsrId"));
-                                    usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
-                                    usuario.setUsrNombre(rss.getString("UsrNombre"));;
-                                    usuario.setUsrApellido(rss.getString("UsrApellido"));
-                                    usuario.setUsrCorreo(rss.getString("UsrCorreo"));
-                                    usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                                    usuario.setUsrEstado(rss.getString("UsrEstado"));
-                                    usuario.setAreId(rss.getInt("AreId"));
-                                    usuario.setAreDescripcion(rss.getString("AreDescripcion"));
-                                    usuarios.add(usuario);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-                            }
-                            break;
+                    while (rss.next()) 
+                    {
+                        UsuarioModel usuario = new UsuarioModel();
+                        usuario.setUsrId(rss.getInt("UsrId"));
+                        usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
+                        usuario.setUsrNombre(rss.getString("UsrNombre"));;
+                        usuario.setUsrApellido(rss.getString("UsrApellido"));
+                        usuario.setUsrCorreo(rss.getString("UsrCorreo"));
+                        usuario.setUsrUsuario(rss.getString("UsrUsuario"));
+                        usuario.setUsrEstado(rss.getString("UsrEstado"));
+                        usuario.setAreId(rss.getInt("AreId"));
+                        usuario.setAreDescripcion(rss.getString("AreDescripcion"));
+                        usuarios.add(usuario);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+                
+            break;
+            
             case "Todos":
-                            try 
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT u.*, a.AreDescripcion "
-                                        + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                                        + "WHERE UsrId!=1 AND UsrId!=2 ORDER BY u.UsrId ASC";
+                try 
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT u.*, a.AreDescripcion "
+                            + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
+                            + "WHERE UsrId!=1 AND UsrId!=2 ORDER BY u.UsrId ASC";
 
-                                rss = stm.executeQuery(query);
+                    rss = stm.executeQuery(query);
 
-                                while (rss.next()) 
-                                {
-                                    UsuarioModel usuario = new UsuarioModel();
-                                    usuario.setUsrId(rss.getInt("UsrId"));
-                                    usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
-                                    usuario.setUsrNombre(rss.getString("UsrNombre"));;
-                                    usuario.setUsrApellido(rss.getString("UsrApellido"));
-                                    usuario.setUsrCorreo(rss.getString("UsrCorreo"));
-                                    usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                                    usuario.setUsrEstado(rss.getString("UsrEstado"));
-                                    usuario.setAreId(rss.getInt("AreId"));
-                                    usuario.setAreDescripcion(rss.getString("AreDescripcion"));
-                                    usuarios.add(usuario);
-                                } 
-                                con.close();
-                            } 
-                            catch (SQLException e) 
-                            {
-                                JOptionPane.showMessageDialog(null,e);
-                            }
-                            break;
+                    while (rss.next()) 
+                    {
+                        UsuarioModel usuario = new UsuarioModel();
+                        usuario.setUsrId(rss.getInt("UsrId"));
+                        usuario.setUsrIdentidad(rss.getString("UsrIdentidad"));
+                        usuario.setUsrNombre(rss.getString("UsrNombre"));;
+                        usuario.setUsrApellido(rss.getString("UsrApellido"));
+                        usuario.setUsrCorreo(rss.getString("UsrCorreo"));
+                        usuario.setUsrUsuario(rss.getString("UsrUsuario"));
+                        usuario.setUsrEstado(rss.getString("UsrEstado"));
+                        usuario.setAreId(rss.getInt("AreId"));
+                        usuario.setAreDescripcion(rss.getString("AreDescripcion"));
+                        usuarios.add(usuario);
+                    } 
+                    con.close();
+                } 
+                catch (SQLException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            break;
         }
         
         return usuarios;

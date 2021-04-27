@@ -15,7 +15,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -81,11 +80,11 @@ public class UnidadesController
                 break;
                 
                 case "editar":
-                     unidad.setUndEstado(estado);
+                    unidad.setUndEstado(estado);
                     resultado = UnidadesConexion.MantenimientoUnidades(accion, unidad);
                     msj =  "Unidad actualizada con éxito";
                     mntError = UnidadesController.mensajesRetroalimentacion(msj, resultado);                   
-                break;
+                break; 
             }
         }
         
@@ -125,54 +124,56 @@ public class UnidadesController
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        switch(accion){
-            case "Activos":
-            unidades = UnidadesConexion.ListadoUnidades("Activos");
-
-            for (int i = 0; i <unidades.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        unidades.get(i).getUndId(),
-                        unidades.get(i).getUndDescripcion(),
-                        unidades.get(i).getUndEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;
-         case "Inactivos":
-            unidades = UnidadesConexion.ListadoUnidades("Inactivos");
-
-            for (int i = 0; i <unidades.size(); i++) 
-            {
-                modelo.addRow
-                (new Object[]
-                    {
-                        unidades.get(i).getUndId(),
-                        unidades.get(i).getUndDescripcion(),
-                        unidades.get(i).getUndEstado()
-                    }
-                );
-            }
-            FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;  
-        case "Todos":
-            unidades = UnidadesConexion.ListadoUnidades("Todos");    
-        for (int i = 0; i <unidades.size(); i++) 
+        switch(accion)
         {
-            modelo.addRow
-            (new Object[]
+            case "Activos":
+                unidades = UnidadesConexion.ListadoUnidades("Activos");
+                for (int i = 0; i <unidades.size(); i++) 
                 {
-                    unidades.get(i).getUndId(),
-                    unidades.get(i).getUndDescripcion(),
-                    unidades.get(i).getUndEstado()
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            unidades.get(i).getUndId(),
+                            unidades.get(i).getUndDescripcion(),
+                            unidades.get(i).getUndEstado()
+                        }
+                    );
                 }
-            );
+                FormatoTabla(tableUnidades, modelo.getColumnCount());
+            break;
+        
+            case "Inactivos":
+                unidades = UnidadesConexion.ListadoUnidades("Inactivos");
+                for (int i = 0; i <unidades.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            unidades.get(i).getUndId(),
+                            unidades.get(i).getUndDescripcion(),
+                            unidades.get(i).getUndEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableUnidades, modelo.getColumnCount());
+            break;  
+        
+            case "Todos":
+                unidades = UnidadesConexion.ListadoUnidades("Todos");    
+                for (int i = 0; i <unidades.size(); i++) 
+                {
+                    modelo.addRow
+                    (new Object[]
+                        {
+                            unidades.get(i).getUndId(),
+                            unidades.get(i).getUndDescripcion(),
+                            unidades.get(i).getUndEstado()
+                        }
+                    );
+                }
+                FormatoTabla(tableUnidades, modelo.getColumnCount());
+            break;
         }
-        FormatoTabla(tableUnidades, modelo.getColumnCount());
-    }
     } 
     /*
     * @param tableCategorias JTable

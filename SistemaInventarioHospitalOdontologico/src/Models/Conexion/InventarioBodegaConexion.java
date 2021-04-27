@@ -45,7 +45,6 @@ public class InventarioBodegaConexion
         ArrayList<InventarioBodegaModel> bodega = new ArrayList<>();
         switch (accion)
         {
-            
             case "Activos":
                 try 
                 {

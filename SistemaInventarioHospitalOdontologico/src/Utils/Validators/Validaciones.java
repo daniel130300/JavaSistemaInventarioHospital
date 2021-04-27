@@ -42,7 +42,7 @@ public class Validaciones
     
     public static Boolean ValidarNumerosyLetras(String campo)
     {
-       return campo.matches("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"); 
+       return campo.matches("^[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ _]*[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ][A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ _]*$"); 
     }
 
     public static Boolean validarCorreo(String correo) 

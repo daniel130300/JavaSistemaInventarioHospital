@@ -52,8 +52,6 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         this.Id_Lote = InventarioBodegaController.setDatosEditarFromCache(this.tableBodega, 
                 this.numStock ,this.txtFechaCaducidad,this.cmbEstado);
         
-        System.out.println(this.Id_Lote);
-        
         if(Id_Lote != null)
         {
             this.cmbEstado.setEnabled(true);

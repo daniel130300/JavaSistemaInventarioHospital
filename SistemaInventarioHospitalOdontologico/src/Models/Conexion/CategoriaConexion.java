@@ -40,87 +40,87 @@ public class CategoriaConexion
         ResultSet rss;
         
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
-         switch(accion){
-            
+        switch(accion)
+        {
             case "Activos":
-                            try
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT *FROM categoriasproductos"
-                                        + " WHERE CprEstado = 'Activo'";
-                                
-                                 rss = stm.executeQuery(query); 
-                                 
-                                 while(rss.next())
-                                 {
-                                     CategoriasModel categoria = new CategoriasModel();
-                                     categoria.setCprId(rss.getInt("CprId"));
-                                     categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                                     categoria.setCprEstado(rss.getString("CprEstado"));
-                                     categorias.add(categoria);
-                                 }  
-                                    con.close();
-                            } 
-                            catch (SQLException e)
-                            {
-                                 JOptionPane.showMessageDialog(null,e);
-                            } 
-                            break;
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT *FROM categoriasproductos"
+                            + " WHERE CprEstado = 'Activo'";
+
+                     rss = stm.executeQuery(query); 
+
+                     while(rss.next())
+                     {
+                        CategoriasModel categoria = new CategoriasModel();
+                        categoria.setCprId(rss.getInt("CprId"));
+                        categoria.setCprDescripcion(rss.getString("CprDescripcion"));
+                        categoria.setCprEstado(rss.getString("CprEstado"));
+                        categorias.add(categoria);
+                     }  
+                        con.close();
+                } 
+                catch (SQLException e)
+                {
+                     JOptionPane.showMessageDialog(null,e);
+                } 
+            break;
+                
             case "Inactivos":
-                            try
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT *FROM categoriasproductos "
-                                        + "WHERE CprEstado = 'Inactivo'";
-                                       
-                                
-                                 rss = stm.executeQuery(query); 
-                                 
-                                 while(rss.next())
-                                 {
-                                     CategoriasModel categoria = new CategoriasModel();
-                                     categoria.setCprId(rss.getInt("CprId"));
-                                     categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                                     categoria.setCprEstado(rss.getString("CprEstado"));
-                                     categorias.add(categoria);
-                                 }  
-                                    con.close();
-                            } 
-                            catch (SQLException e)
-                            {
-                                 JOptionPane.showMessageDialog(null,e);
-                            } 
-                            break; 
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT *FROM categoriasproductos "
+                            + "WHERE CprEstado = 'Inactivo'";
+
+
+                    rss = stm.executeQuery(query); 
+
+                    while(rss.next())
+                    {
+                       CategoriasModel categoria = new CategoriasModel();
+                       categoria.setCprId(rss.getInt("CprId"));
+                       categoria.setCprDescripcion(rss.getString("CprDescripcion"));
+                       categoria.setCprEstado(rss.getString("CprEstado"));
+                       categorias.add(categoria);
+                    }  
+                    con.close();
+                } 
+                catch (SQLException e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                } 
+            break; 
+                
             case "Todos":
-                            try
-                            {
-                                con = Conexion.getConexion(con);
-                                stm = con.createStatement();
-                                String query = "SELECT *FROM categoriasproductos ";
-                                      
-                                       
-                                
-                                 rss = stm.executeQuery(query); 
-                                 
-                                 while(rss.next())
-                                 {
-                                     CategoriasModel categoria = new CategoriasModel();
-                                     categoria.setCprId(rss.getInt("CprId"));
-                                     categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                                     categoria.setCprEstado(rss.getString("CprEstado"));
-                                     categorias.add(categoria);
-                                 }  
-                                    con.close();
-                            } 
-                            catch (SQLException e)
-                            {
-                                 JOptionPane.showMessageDialog(null,e);
-                            } 
-                            break;                
+                try
+                {
+                    con = Conexion.getConexion(con);
+                    stm = con.createStatement();
+                    String query = "SELECT *FROM categoriasproductos ";
+
+                    rss = stm.executeQuery(query); 
+
+                    while(rss.next())
+                    {
+                        CategoriasModel categoria = new CategoriasModel();
+                        categoria.setCprId(rss.getInt("CprId"));
+                        categoria.setCprDescripcion(rss.getString("CprDescripcion"));
+                        categoria.setCprEstado(rss.getString("CprEstado"));
+                        categorias.add(categoria);
+                    }  
+                    
+                    con.close();
+                } 
+                catch (SQLException e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                } 
+            break;                
         }
-        
         return categorias;
     }    
     
@@ -135,6 +135,7 @@ public class CategoriaConexion
     {
         String estado = "";
         Connection con = null;
+        
         try
         {
             String query;

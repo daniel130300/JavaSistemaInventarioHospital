@@ -45,13 +45,13 @@ public class CatalogoProductoController
     // Métodos Públicos
     // **************************************************
     
-    public static void setPlaceHolders(JTextField txtNombre, JTextArea txtDescripcion)
+    public static void setPlaceHolders(JTextField txtNombre, JTextArea txtDescripcion, JTextField txtBuscar)
     {
         TextPrompt placeholderNombre = new TextPrompt(" Ingrese el nombre del producto ", txtNombre);
         TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la descripción del producto ", txtDescripcion);
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
     }
-    
-    
+
     public static Boolean MantenimientoProducto(String accion, Integer id,
             String nombre, String descripcion, String stockmaximo , String stockminimo, 
             String estado,Integer id_categoria , Integer id_unidad,
@@ -379,12 +379,6 @@ public class CatalogoProductoController
         JLabel errStockMaximo, JLabel errStockMinimo)
     {
         boolean error = false;
-
-        if(!Validaciones.validarLetras(trimmedNombre))
-        {
-           errNombre.setText("El nombre ingresado es incorrecto");
-           error = true;
-        }
         
         if(Validaciones.validarCampoVacio(trimmedNombre))
         {

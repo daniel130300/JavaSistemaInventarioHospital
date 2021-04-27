@@ -54,7 +54,7 @@ public class UsuarioConexion
                     stm = con.createStatement();
                     String query = "SELECT u.*, a.AreDescripcion "
                             + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                            + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Activo' "
+                            + "WHERE UsrEstado = 'Activo' "
                             + "ORDER BY u.UsrId ASC";
 
                     rss = stm.executeQuery(query);
@@ -88,7 +88,7 @@ public class UsuarioConexion
                     stm = con.createStatement();
                     String query = "SELECT u.*, a.AreDescripcion "
                             + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                            + "WHERE UsrId!=1 AND UsrId!=2 AND UsrEstado = 'Inactivo' "
+                            + "WHERE UsrEstado = 'Inactivo' "
                             + "ORDER BY u.UsrId ASC";
 
                     rss = stm.executeQuery(query);
@@ -123,7 +123,7 @@ public class UsuarioConexion
                     stm = con.createStatement();
                     String query = "SELECT u.*, a.AreDescripcion "
                             + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                            + "WHERE UsrId!=1 AND UsrId!=2 ORDER BY u.UsrId ASC";
+                            + "ORDER BY u.UsrId ASC";
 
                     rss = stm.executeQuery(query);
 

@@ -101,14 +101,17 @@ public class ProveedorController
         String trimmedDireccion = direccion.trim();
         String trimmedEstado= estado.trim();
         
-        if(trimmedTelefono2=="")
-        {
-            trimmedTelefono2="0";
-        }    
 
-        if(trimmedTelefono3=="")
+
+        
+        if(Validaciones.validarCampoVacio(trimmedTelefono2))
         {
-            trimmedTelefono2="0";
+           trimmedTelefono2="0";
+        }
+        
+        if(Validaciones.validarCampoVacio(trimmedTelefono3))
+        {
+           trimmedTelefono3="0";
         }
         
         if(!Validaciones.validarNumeros(trimmedRTN))
@@ -117,11 +120,6 @@ public class ProveedorController
            generalValidacionError = true;
         }        
         
-        if(!Validaciones.validarNumeros(trimmedRTN))
-        {
-           errRTN.setText("El RTN ingresado es incorrecta");
-           generalValidacionError = true;
-        }
         
         if(Validaciones.validarCampoVacio(trimmedRTN))
         {
@@ -186,7 +184,7 @@ public class ProveedorController
         }       
         if(Validaciones.validarCampoVacio(trimmedDireccion))
         {
-           errContacto.setText("El dirección es un campo obligatorio");
+           errDireccion.setText("El dirección es un campo obligatorio");
            generalValidacionError = true;
         }       
          

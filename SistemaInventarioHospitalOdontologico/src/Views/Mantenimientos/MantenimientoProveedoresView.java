@@ -254,7 +254,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableProveedores);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1200, 140));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 1200, 140));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));
@@ -275,7 +275,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         lblErrorDireccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDireccion.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 300, 20));
+        pnlMenu.add(lblErrorDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 310, 20));
 
         lblErrorRTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorRTN.setForeground(new java.awt.Color(231, 0, 2));
@@ -291,7 +291,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         lblErrorContacto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorContacto.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 220, 20));
+        pnlMenu.add(lblErrorContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 220, 20));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -395,12 +395,12 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         lblErrorTelefono2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorTelefono2.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 220, 20));
+        pnlMenu.add(lblErrorTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 220, 20));
         pnlMenu.add(txtTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 220, -1));
 
         lblErrorTelefono3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorTelefono3.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 220, 20));
+        pnlMenu.add(lblErrorTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 220, 20));
 
         lblTelefono4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTelefono4.setForeground(new java.awt.Color(242, 242, 242));

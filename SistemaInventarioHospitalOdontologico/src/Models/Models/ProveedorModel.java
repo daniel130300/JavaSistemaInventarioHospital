@@ -19,10 +19,19 @@ public class ProveedorModel
     private String ProTelefono;
     private String ProTelefono2;
     private String ProTelefono3;
-    private String RubId;
+    private Integer RubId;
+     private String RubDescripcion;
     private String ProContacto;
     private String ProDireccion;
     private String ProEstado;
+
+    public String getRubDescripcion() {
+        return RubDescripcion;
+    }
+
+    public void setRubDescripcion(String RubDescripcion) {
+        this.RubDescripcion = RubDescripcion;
+    }
 
     public String getProTelefono2() {
         return ProTelefono2;
@@ -40,11 +49,11 @@ public class ProveedorModel
         this.ProTelefono3 = ProTelefono3;
     }
 
-    public String getRubId() {
+    public Integer getRubId() {
         return RubId;
     }
 
-    public void setRubId(String RubId) {
+    public void setRubId(Integer RubId) {
         this.RubId = RubId;
     }
 

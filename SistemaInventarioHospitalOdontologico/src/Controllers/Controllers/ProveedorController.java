@@ -8,6 +8,7 @@ package Controllers.Controllers;
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.ProveedorConexion;
 import Models.Models.ProveedorModel;
+import Models.Models.RubrosModel;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -35,12 +36,14 @@ public class ProveedorController
     // **************************************************
     
     public static void setPlaceHolders(JTextField txtRTN, JTextField txtNombre, JTextField txtCorreo,
-            JTextField txtTelefono, JTextField txtContacto, JTextArea txtDireccion, JTextField txtBuscar)
+            JTextField txtTelefono,JTextField txtTelefono2,JTextField txtTelefono3, JTextField txtContacto, JTextArea txtDireccion, JTextField txtBuscar)
     {
         TextPrompt placeholderRTN = new TextPrompt(" Ej: 08011986012824 ", txtRTN);
         TextPrompt placeholderNombre = new TextPrompt(" Ingrese el nombre del proveedor ", txtNombre);
         TextPrompt placeholderCorreo = new TextPrompt(" Ingrese el correo del proveedor ", txtCorreo);
         TextPrompt placeholderTelefono = new TextPrompt(" Ej: 97977966 ", txtTelefono);
+        TextPrompt placeholderTelefono2 = new TextPrompt(" Ej: 97977966 ", txtTelefono2);
+        TextPrompt placeholderTelefono3 = new TextPrompt(" Ej: 97977966 ", txtTelefono3);
         TextPrompt placeholderContacto = new TextPrompt(" Ingrese el contacto del proveedor ", txtContacto);
         TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la dirección del proveedor ", txtDireccion);
         TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
@@ -93,7 +96,7 @@ public class ProveedorController
         String trimmedTelefono = telefono.trim();
         String trimmedTelefono2 = telefono2.trim();
         String trimmedTelefono3 = telefono3.trim();
-        String trimmedRubro= rubro.trim();
+        Integer trimmedRubro=Integer.parseInt( rubro.trim());
         String trimmedContacto = contacto.trim();
         String trimmedDireccion = direccion.trim();
         String trimmedEstado= estado.trim();
@@ -268,7 +271,17 @@ public class ProveedorController
         {
             return true;
         }
-    }    
+    }
+    public static void LlenarCmbRubros(JComboBox cmbCategorias)
+    {
+        ArrayList<RubrosModel> categorias = new ArrayList<>();
+        categorias = ProveedorConexion.ListadoRubros();
+        
+        for (int i = 0; i<categorias.size(); i++)
+        {
+            cmbCategorias.addItem(categorias.get(i).getRubDescripcion());
+        }
+    }     
     
     /**
     * 
@@ -299,10 +312,10 @@ public class ProveedorController
         txtTelefono.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 4)));
         txtTelefono2.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 5)));
         txtTelefono3.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 6)));
-        cmbRubro.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,7)));
-        txtContacto.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 8)));
-        txtDescripcion.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 9)));
-        cmbEstado.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,10)));
+        cmbRubro.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,8)));
+        txtContacto.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 9)));
+        txtDescripcion.setText(String.valueOf(tableProveedores.getModel().getValueAt(seleccion, 10)));
+        cmbEstado.setSelectedItem(String.valueOf(tableProveedores.getModel().getValueAt(seleccion,11)));
 
         return ProId;
     }  
@@ -339,7 +352,7 @@ public class ProveedorController
             txtTelefono.setText(proveedorCache.getid().getProTelefono());
             txtTelefono2.setText(proveedorCache.getid().getProTelefono2());
             txtTelefono3.setText(proveedorCache.getid().getProTelefono3());
-            cmbRubro.setSelectedItem(proveedorCache.getid().getRubId());
+            cmbRubro.setSelectedItem(proveedorCache.getid().getRubDescripcion());
             txtContacto.setText(proveedorCache.getid().getProContacto());
             txtDireccion.setText(proveedorCache.getid().getProDireccion());
             cmbEstado.setSelectedItem(proveedorCache.getid().getProEstado());
@@ -427,6 +440,7 @@ public class ProveedorController
                             proveedores.get(i).getProTelefono2(),
                             proveedores.get(i).getProTelefono3(),
                             proveedores.get(i).getRubId(),
+                            proveedores.get(i).getRubDescripcion(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
                             proveedores.get(i).getProEstado()
@@ -452,6 +466,7 @@ public class ProveedorController
                             proveedores.get(i).getProTelefono2(),
                             proveedores.get(i).getProTelefono3(),
                             proveedores.get(i).getRubId(),
+                            proveedores.get(i).getRubDescripcion(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
                             proveedores.get(i).getProEstado()
@@ -477,6 +492,7 @@ public class ProveedorController
                             proveedores.get(i).getProTelefono2(),
                             proveedores.get(i).getProTelefono3(),
                             proveedores.get(i).getRubId(),
+                            proveedores.get(i).getRubDescripcion(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
                             proveedores.get(i).getProEstado()
@@ -508,6 +524,7 @@ public class ProveedorController
                     proveedores.get(i).getProTelefono2(),
                     proveedores.get(i).getProTelefono3(),
                     proveedores.get(i).getRubId(),
+                    proveedores.get(i).getRubDescripcion(),
                     proveedores.get(i).getProContacto(),
                     proveedores.get(i).getProDireccion(),
                     proveedores.get(i).getProEstado()

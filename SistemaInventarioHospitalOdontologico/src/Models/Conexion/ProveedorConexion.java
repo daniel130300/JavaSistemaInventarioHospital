@@ -6,6 +6,7 @@
 package Models.Conexion;
 
 import Models.Models.ProveedorModel;
+import Models.Models.RubrosModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +47,8 @@ public class ProveedorConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT * FROM proveedores "
+                    String query = "SELECT a.*,RubDescripcion FROM proveedores a " 
+                            + "INNER JOIN rubros b on a.RubId = b.RubId "
                             + "WHERE ProEstado = 'Activo'"
                             + " ORDER BY ProId ASC";
 
@@ -62,7 +64,8 @@ public class ProveedorConexion
                         proveedor.setProTelefono(rss.getString("ProTelefono"));
                         proveedor.setProTelefono2(rss.getString("ProTelefono2"));
                         proveedor.setProTelefono3(rss.getString("ProTelefono3"));
-                        proveedor.setRubId(rss.getString("RubId"));
+                        proveedor.setRubId(rss.getInt("RubId"));
+                        proveedor.setRubDescripcion(rss.getString("RubDescripcion"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
                         proveedor.setProEstado(rss.getString("ProEstado"));
@@ -82,7 +85,8 @@ public class ProveedorConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT * FROM proveedores "
+                    String query = "SELECT a.*,RubDescripcion FROM proveedores a " 
+                            + "INNER JOIN rubros b on a.RubId = b.RubId "
                             + "WHERE ProEstado = 'Inactivo'"
                             + " ORDER BY ProId ASC";
 
@@ -98,7 +102,8 @@ public class ProveedorConexion
                         proveedor.setProTelefono(rss.getString("ProTelefono"));
                         proveedor.setProTelefono2(rss.getString("ProTelefono2"));
                         proveedor.setProTelefono3(rss.getString("ProTelefono3"));
-                        proveedor.setRubId(rss.getString("RubId"));
+                        proveedor.setRubId(rss.getInt("RubId"));
+                        proveedor.setRubDescripcion(rss.getString("RubDescripcion"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
                         proveedor.setProEstado(rss.getString("ProEstado"));
@@ -118,7 +123,8 @@ public class ProveedorConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT * FROM proveedores ORDER BY ProId ASC";
+                    String query = "SELECT a.*,RubDescripcion FROM proveedores a " 
+                                  + "INNER JOIN rubros b on a.RubId = b.RubId";
 
                     rss = stm.executeQuery(query);
 
@@ -132,7 +138,8 @@ public class ProveedorConexion
                         proveedor.setProTelefono(rss.getString("ProTelefono"));
                         proveedor.setProTelefono2(rss.getString("ProTelefono2"));
                         proveedor.setProTelefono3(rss.getString("ProTelefono3"));
-                        proveedor.setRubId(rss.getString("RubId"));
+                        proveedor.setRubId(rss.getInt("RubId"));
+                        proveedor.setRubDescripcion(rss.getString("RubDescripcion"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
                         proveedor.setProEstado(rss.getString("ProEstado"));
@@ -176,7 +183,7 @@ public class ProveedorConexion
                 proveedor.setProTelefono(rss.getString("ProTelefono"));
                 proveedor.setProTelefono2(rss.getString("ProTelefono2"));
                 proveedor.setProTelefono3(rss.getString("ProTelefono3"));
-                proveedor.setRubId(rss.getString("RubId"));
+                proveedor.setRubId(rss.getInt("RubId"));
                 proveedor.setProContacto(rss.getString("ProContacto"));
                 proveedor.setProDireccion(rss.getString("ProDireccion"));
                 proveedor.setProEstado(rss.getString("ProEstado"));
@@ -192,6 +199,66 @@ public class ProveedorConexion
         
         return proveedores;
     }
+     public static ArrayList<RubrosModel> ListadoRubros() 
+    {
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;
+        ArrayList<RubrosModel> rubros = new ArrayList<>();
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+            String query = "SELECT * FROM rubros "
+                    + "WHERE RubEstado='Activo'";
+             
+            rss = stm.executeQuery(query);
+            
+            while (rss.next()) 
+            {
+                RubrosModel rubro = new RubrosModel();
+                rubro.setRubId(rss.getInt("RubId"));
+                rubro.setRubDescripcion(rss.getString("RubDescripcion"));
+                rubros.add(rubro);
+            }
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+
+        return rubros;
+    }
+    
+    public static Integer IdRubro(String Rubro)
+    {
+        Integer id_rubro=0;
+        Connection con = null;
+        Statement stm;
+        ResultSet rss;    
+        try 
+        {
+            con = Conexion.getConexion(con);
+            stm = con.createStatement();
+            String query = "SELECT RubId FROM rubros "
+                    + "WHERE RubDescripcion='"+Rubro+"'";
+             
+            rss = stm.executeQuery(query);
+            
+            while (rss.next()) 
+            {
+                id_rubro=rss.getInt("RubId");
+            }
+            con.close();
+        } 
+        catch (SQLException e) 
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }  
+        return id_rubro;
+    } 
+    
     
     /**
     * @param accion String
@@ -219,7 +286,7 @@ public class ProveedorConexion
             cs.setString            (6, proveedor.getProTelefono());
             cs.setString            (7, proveedor.getProTelefono2());
             cs.setString            (8, proveedor.getProTelefono3());
-            cs.setString            (9, proveedor.getRubId());
+            cs.setInt               (9, proveedor.getRubId());
             cs.setString            (10, proveedor.getProContacto());
             cs.setString            (11, proveedor.getProDireccion());
             cs.setString            (12, proveedor.getProEstado());

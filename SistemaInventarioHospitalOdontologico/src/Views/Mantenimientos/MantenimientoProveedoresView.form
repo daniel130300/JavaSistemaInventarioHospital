@@ -304,7 +304,7 @@
                 <Component class="javax.swing.JTable" name="tableProveedores">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="11" rowCount="4">
+                      <Table columnCount="12" rowCount="4">
                         <Column editable="false" title="Id proveedor" type="java.lang.Object"/>
                         <Column editable="false" title="RTN" type="java.lang.Object"/>
                         <Column editable="false" title="Nombre" type="java.lang.Object"/>
@@ -312,6 +312,7 @@
                         <Column editable="false" title="Telefono" type="java.lang.Object"/>
                         <Column editable="true" title="Telefono(Opcional)" type="java.lang.Object"/>
                         <Column editable="true" title="Telefono(Opcional)" type="java.lang.Object"/>
+                        <Column editable="true" title="Rubro Id" type="java.lang.Object"/>
                         <Column editable="true" title="Rubro" type="java.lang.Object"/>
                         <Column editable="false" title="Contacto" type="java.lang.Object"/>
                         <Column editable="false" title="Direccion" type="java.lang.Object"/>
@@ -730,10 +731,7 @@
             <Component class="javax.swing.JComboBox" name="cmbRubro">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Aseo"/>
-                    <StringItem index="1" value="Medico"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>

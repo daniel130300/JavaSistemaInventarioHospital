@@ -7,6 +7,8 @@ package Views.Mantenimientos;
 
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
+import Models.Conexion.ProveedorConexion;
+import Models.Conexion.RubrosConexion;
 import Utils.Cache.ProveedorCache;
 import Views.Menus.MenuInicioView;
 import java.awt.Color;
@@ -25,10 +27,13 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
     {
         initComponents();
         ProveedorController.setPlaceHolders(this.txtRTN, this.txtNombre, this.txtCorreo,
-            this.txtTelefono, this.txtContacto, this.txtDireccion, this.txtBuscar);
+            this.txtTelefono,this.txtTelefono2,this.txtTelefono3, this.txtContacto, this.txtDireccion, this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         ProveedorController.LlenarTableProveedores(tableProveedores, "Todos");
         ProveedorController.FiltroTableProveedores(tableProveedores, txtBuscar);
+        ProveedorController.LlenarCmbRubros(this.cmbRubro);
+        
+        
         this.LlenarDatos();
     }
     
@@ -225,17 +230,17 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id proveedor", "RTN", "Nombre", "Correo", "Telefono", "Telefono(Opcional)", "Telefono(Opcional)", "Rubro", "Contacto", "Direccion", "Estado"
+                "Id proveedor", "RTN", "Nombre", "Correo", "Telefono", "Telefono(Opcional)", "Telefono(Opcional)", "Rubro Id", "Rubro", "Contacto", "Direccion", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true, false, false, false
+                false, false, false, false, false, true, true, true, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -407,7 +412,6 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblEstado1.setText("Rubro:");
         pnlMenu.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
 
-        cmbRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aseo", "Medico" }));
         cmbRubro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbRubroActionPerformed(evt);
@@ -494,7 +498,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         if(!ProveedorController.MantenimientoProveedores("insertar", 0, 
             this.txtRTN.getText(), this.txtNombre.getText(),this.txtCorreo.getText(),
             this.txtTelefono.getText(), this.txtTelefono2.getText(), this.txtTelefono3.getText(),
-            this.cmbRubro.getSelectedItem().toString(),this.txtContacto.getText(), 
+            ProveedorConexion.IdRubro(this.cmbRubro.getSelectedItem().toString()).toString(),this.txtContacto.getText(), 
             this.txtDireccion.getText(),this.cmbEstado.getSelectedItem().toString(), 
             this.lblErrorRTN, this.lblErrorNombre, this.lblErrorCorreo, 
             this.lblErrorTelefono, this.lblErrorTelefono2, this.lblErrorTelefono3,
@@ -510,7 +514,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         if(!ProveedorController.MantenimientoProveedores("editar", this.Id_proveedor,
             this.txtRTN.getText(), this.txtNombre.getText(),this.txtCorreo.getText(),
             this.txtTelefono.getText(), this.txtTelefono2.getText(), this.txtTelefono3.getText(),
-            this.cmbRubro.getSelectedItem().toString(),this.txtContacto.getText(), 
+            ProveedorConexion.IdRubro(this.cmbRubro.getSelectedItem().toString()).toString(),this.txtContacto.getText(), 
             this.txtDireccion.getText(),this.cmbEstado.getSelectedItem().toString(), 
             this.lblErrorRTN, this.lblErrorNombre, this.lblErrorCorreo, 
             this.lblErrorTelefono, this.lblErrorTelefono2, this.lblErrorTelefono3,

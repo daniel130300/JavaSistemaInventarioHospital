@@ -29,7 +29,7 @@ public abstract class Conexion
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String pass = "password";
-    private static final String url = "jdbc:mysql://localhost:3306/inventariohospital?characterEncoding=utf8";
+    private static final String url = "jdbc:mysql://192.168.0.120:3306/inventariohospital?characterEncoding=utf8";
     
     //****************************
     // Metodos públicos
@@ -47,15 +47,16 @@ public abstract class Conexion
         {
             try 
             {
-                Class.forName(driver);
-                con = (com.mysql.jdbc.Connection) DriverManager.getConnection(url, user, pass);
-            } 
-            catch (ClassNotFoundException | SQLException e) 
+                //con = DriverManager.getConnection("jdbc:mysql://192.168.0.120/inventariohospital?" +"user=root&password=password");
+		con = DriverManager.getConnection(url, user, pass);
+            }
+            catch (SQLException ex) 
             {
-                JOptionPane.showMessageDialog(null,e);
+                JOptionPane.showMessageDialog(null, "SQLException: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "SQLState: " + ex.getSQLState());
+                JOptionPane.showMessageDialog(null, "VendorError: " + ex.getErrorCode());
             }
         }
-        
         return con;
     }
 }

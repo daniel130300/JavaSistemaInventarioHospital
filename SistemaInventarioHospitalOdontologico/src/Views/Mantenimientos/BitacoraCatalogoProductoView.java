@@ -129,17 +129,17 @@ public class BitacoraCatalogoProductoView extends javax.swing.JFrame {
 
         tableBitacoraCatalogoProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id Bitacora", "Usuario", "Id Producto", "Accion", "Descripción Cambios", "Fecha"
+                "Id Bitacora", "Usuario", "Id Producto", "Nombre del Producto", "Accion", "Descripción Cambios", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

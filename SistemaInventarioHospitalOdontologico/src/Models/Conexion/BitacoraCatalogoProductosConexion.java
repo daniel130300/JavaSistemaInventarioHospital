@@ -41,7 +41,8 @@ public class BitacoraCatalogoProductosConexion
         {
             con = Conexion.getConexion(con);
             stm = con.createStatement();
-            String query = "SELECT BcpId, UsrUsuario, PrdId, BcpAccion, BcpDescripcionCambios, BcpFecha FROM bitacoracatalogoproductos ORDER BY BcpFecha Desc;";
+            String query = "SELECT BcpId, UsrUsuario, bcp.PrdId, PrdNombre, BcpAccion, BcpDescripcionCambios, BcpFecha FROM bitacoracatalogoproductos bcp "
+                    + "INNER JOIN catalogoproductos cp ON bcp.PrdId = cp.PrdId  ORDER BY BcpFecha DESC";
             
             rss = stm.executeQuery(query);
             
@@ -51,6 +52,7 @@ public class BitacoraCatalogoProductosConexion
                 bitacoracatalogo.setBcpId(rss.getInt("BcpId"));
                 bitacoracatalogo.setUsrUsuario(rss.getString("UsrUsuario"));
                 bitacoracatalogo.setPrdId(rss.getInt("PrdId"));
+                bitacoracatalogo.setPrdNombre(rss.getString("PrdNombre"));
                 bitacoracatalogo.setBcpAccion(rss.getString("BcpAccion"));
                 bitacoracatalogo.setBcpDescripcionCambios(rss.getString("BcpDescripcionCambios"));
                 bitacoracatalogo.setBcpFecha(rss.getString("BcpFecha"));

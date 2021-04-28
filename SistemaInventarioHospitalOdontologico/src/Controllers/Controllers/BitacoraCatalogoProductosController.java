@@ -51,6 +51,7 @@ public class BitacoraCatalogoProductosController
                     registros.get(i).getBcpId(),
                     registros.get(i).getUsrUsuario(),
                     registros.get(i).getPrdId(),
+                    registros.get(i).getPrdNombre(),
                     registros.get(i).getBcpAccion(),
                     registros.get(i).getBcpDescripcionCambios(),
                     registros.get(i).getBcpFecha()

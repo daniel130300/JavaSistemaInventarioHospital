@@ -24,6 +24,7 @@ public class BitacoraCatalogoProductosModel
     private String BcpDescripcionCambios;
     private String BcpFecha;
     private Integer PrdId;
+    private String PrdNombre;
     
     // **************************************************
     // Getters y Setters
@@ -88,6 +89,12 @@ public class BitacoraCatalogoProductosModel
     {
         this.PrdId = PrdId;
     }
-    
-    
+
+    public String getPrdNombre() {
+        return PrdNombre;
+    }
+
+    public void setPrdNombre(String PrdNombre) {
+        this.PrdNombre = PrdNombre;
+    }   
 }

@@ -183,14 +183,14 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 520, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 520, -1));
 
         lblRTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblRTN.setForeground(new java.awt.Color(242, 242, 242));
@@ -208,7 +208,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblDireccion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDireccion.setForeground(new java.awt.Color(242, 242, 242));
         lblDireccion.setText("Dirección: ");
-        pnlMenu.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, -1));
+        pnlMenu.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, -1, -1));
 
         lblTelefono.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTelefono.setForeground(new java.awt.Color(242, 242, 242));
@@ -219,14 +219,14 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         txtDireccion.setRows(5);
         jScrollPane1.setViewportView(txtDireccion);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 310, 100));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 310, 100));
 
         txtContacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContactoActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 220, -1));
+        pnlMenu.add(txtContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 220, -1));
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -254,7 +254,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableProveedores);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 810, 120));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1200, 140));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));
@@ -271,7 +271,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblContacto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblContacto.setForeground(new java.awt.Color(242, 242, 242));
         lblContacto.setText("Contacto:");
-        pnlMenu.add(lblContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
+        pnlMenu.add(lblContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
 
         lblErrorDireccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDireccion.setForeground(new java.awt.Color(231, 0, 2));
@@ -291,7 +291,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         lblErrorContacto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorContacto.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 220, 20));
+        pnlMenu.add(lblErrorContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 220, 20));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -302,7 +302,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 90, 30));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 310, 90, 30));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -313,7 +313,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 90, 30));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 310, 90, 30));
 
         btnEditar.setBackground(new java.awt.Color(59, 103, 181));
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -325,12 +325,12 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 80, 30));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 80, 30));
 
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
         lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 210, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
@@ -339,11 +339,11 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 130, -1));
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 210, 130, -1));
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -385,18 +385,18 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
                 btnVisualizarTablaActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, 130, 30));
+        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, 130, 30));
 
         lblTelefono3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTelefono3.setForeground(new java.awt.Color(242, 242, 242));
-        lblTelefono3.setText("Teléfono (Op):");
-        pnlMenu.add(lblTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
-        pnlMenu.add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 220, -1));
+        lblTelefono3.setText("Teléfono3  (Opc):");
+        pnlMenu.add(lblTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+        pnlMenu.add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 220, -1));
 
         lblErrorTelefono2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorTelefono2.setForeground(new java.awt.Color(231, 0, 2));
         pnlMenu.add(lblErrorTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 220, 20));
-        pnlMenu.add(txtTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 220, -1));
+        pnlMenu.add(txtTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 220, -1));
 
         lblErrorTelefono3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorTelefono3.setForeground(new java.awt.Color(231, 0, 2));
@@ -404,22 +404,22 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         lblTelefono4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTelefono4.setForeground(new java.awt.Color(242, 242, 242));
-        lblTelefono4.setText("Teléfono (Op):");
-        pnlMenu.add(lblTelefono4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+        lblTelefono4.setText("Teléfono 2 (Opc):");
+        pnlMenu.add(lblTelefono4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
 
         lblEstado1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado1.setForeground(new java.awt.Color(242, 242, 242));
         lblEstado1.setText("Rubro:");
-        pnlMenu.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
+        pnlMenu.add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
 
         cmbRubro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbRubroActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbRubro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 130, -1));
+        pnlMenu.add(cmbRubro, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 130, -1));
 
-        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 620));
+        pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1230, 560));
 
         pnlTitulo.setBackground(new java.awt.Color(0, 49, 110));
         pnlTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -428,26 +428,24 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         lblTitulo.setForeground(new java.awt.Color(242, 242, 242));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Sistema de Inventario Hospital Odontológico");
-        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+        pnlTitulo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
 
         lblModulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblModulo.setForeground(new java.awt.Color(242, 242, 242));
         lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblModulo.setText("Mantenimiento Proveedores");
-        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 260, 30));
+        pnlTitulo.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 260, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/Isotipo.HospitalOdontológico.UNICAH_SM.png"))); // NOI18N
-        pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 80, 90));
+        pnlTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 80, 90));
 
-        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 640, 130));
+        pnlBackbround.add(pnlTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 1020, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlBackbround, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

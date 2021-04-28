@@ -254,7 +254,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableProveedores);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 1200, 140));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 1200, 140));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));

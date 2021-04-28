@@ -101,25 +101,23 @@ public class ProveedorController
         String trimmedDireccion = direccion.trim();
         String trimmedEstado= estado.trim();
         
-
-
-        
+        /*
         if(Validaciones.validarCampoVacio(trimmedTelefono2))
         {
-           trimmedTelefono2="0";
+           trimmedTelefono2="";
         }
         
         if(Validaciones.validarCampoVacio(trimmedTelefono3))
         {
-           trimmedTelefono3="0";
+           trimmedTelefono3="";
         }
+        */
         
         if(!Validaciones.validarNumeros(trimmedRTN))
         {
            errRTN.setText("El RTN ingresado es incorrecta");
            generalValidacionError = true;
         }        
-        
         
         if(Validaciones.validarCampoVacio(trimmedRTN))
         {
@@ -162,16 +160,25 @@ public class ProveedorController
            errTelefono.setText("El teléfono es un campo obligatorio");
            generalValidacionError = true;
         }
-        if(!Validaciones.validarNumeros(trimmedTelefono2))
+        
+        if(!trimmedTelefono2.equals(""))
         {
-           errTelefono2.setText("El teléfono ingresado es incorrecto");
-           generalValidacionError = true;
+            if(!Validaciones.validarNumeros(trimmedTelefono2))
+            {
+               errTelefono2.setText("El teléfono ingresado es incorrecto");
+               generalValidacionError = true;
+            }
         }
-        if(!Validaciones.validarNumeros(trimmedTelefono3))
+      
+        if(!trimmedTelefono3.equals(""))
         {
-           errTelefono3.setText("El teléfono ingresado es incorrecto");
-           generalValidacionError = true;
-        } 
+              if(!Validaciones.validarNumeros(trimmedTelefono3))
+            {
+               errTelefono3.setText("El teléfono ingresado es incorrecto");
+               generalValidacionError = true;
+            } 
+        }      
+        
         if(!Validaciones.validarLetras(trimmedContacto))
         {
             errContacto.setText("El contacto ingresado es incorrecto");

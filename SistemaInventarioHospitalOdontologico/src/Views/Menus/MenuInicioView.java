@@ -12,9 +12,7 @@ import javax.swing.JPanel;
 import Views.Mantenimientos.AlertasView;
 import Views.Mantenimientos.FacturacionView;
 import Views.Mantenimientos.InformacionPersonalView;
-import Views.Mantenimientos.MantenimientoProveedoresView;
 import Views.Mantenimientos.MantenimientoUsuariosView;
-import Views.Mantenimientos.MantenimientoComprasView;
 
 /**
  *
@@ -307,8 +305,8 @@ public class MenuInicioView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
-        MantenimientoComprasView registrarCompraView = new MantenimientoComprasView();
-        registrarCompraView.setVisible(true);
+        MenuComprasView menuComprasView = new MenuComprasView();
+        menuComprasView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnComprasActionPerformed
 

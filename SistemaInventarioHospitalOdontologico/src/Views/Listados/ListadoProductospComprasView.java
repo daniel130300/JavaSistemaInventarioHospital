@@ -8,7 +8,7 @@ package Views.Listados;
 import Controllers.Controllers.LoginController;
 import java.awt.Color;
 import javax.swing.JPanel;
-import Views.Mantenimientos.MantenimientoComprasView;
+import Views.Mantenimientos.RegistrarCompraView;
 
 /**
  *
@@ -128,17 +128,17 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
 
         tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id producto", "Nombre", "Descripción", "Categoría", "Unidad", "Fecha de caducidad", "Stock"
+                "Id Producto", "Codigo Interno Producto", "Nombre", "Descripción", "Id Categoría", "Categoría"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -189,7 +189,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        MantenimientoComprasView registrarCompraView = new MantenimientoComprasView();
+        RegistrarCompraView registrarCompraView = new RegistrarCompraView();
         registrarCompraView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: inventariohospital
+-- Host: 192.168.0.120    Database: inventariohospital
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18 18:26:00
+-- Dump completed on 2021-04-29 17:03:33

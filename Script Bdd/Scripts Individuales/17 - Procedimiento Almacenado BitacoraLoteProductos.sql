@@ -31,7 +31,7 @@ BEGIN
 			SET cambios =  CONCAT(cambios, "<br>El estado cambio de: ", OldLprEstado, " a: ", NewLprEstado, "; "); 
 		END IF;
 
-		IF(cambios IS NOT NULL OR cambios != "") THEN 
+		IF cambios != "" THEN
         
 			SET cambios = CONCAT("<html><center>", cambios, "</center></html>");
 			SET LoggedUser = (SELECT UsrUsuario FROM loggedusuario);

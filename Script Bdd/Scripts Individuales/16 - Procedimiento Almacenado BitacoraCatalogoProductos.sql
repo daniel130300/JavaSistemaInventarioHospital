@@ -31,7 +31,7 @@ IF Accion LIKE "Insertar" THEN
 
 	SET NewCprDescripcion = (SELECT CprDescripcion FROM categoriasproductos WHERE CprId = NewCprId);
     SET NewUndDescripcion = (SELECT UndDescripcion FROM unidades WHERE UndId = NewUndId);
-    SET LoggedUser = (SELECT * FROM loggedusuario);
+    SET LoggedUser = (SELECT UsrUsuario FROM loggedusuario);
     
 	SET cambios = CONCAT("<html><center>Nuevo producto:<br>Id: ", NewPrdId, ";<br>Nombre: ", NewPrdNombre, ";<br>Descripción: ", NewPrdDescripcion, ";<br>Stock Máximo: ", NewPrdStockMaximo, ";<br>Stock Mínimo: ", NewPrdStockMinimo, ";<br>Estado: ", NewPrdEstado, ";<br>Categoría: ", NewCprDescripcion, ";<br>Unidad: ", NewUndDescripcion, ";</center></html>");
     
@@ -81,7 +81,7 @@ IF Accion LIKE "Actualizar" THEN
 		SET cambios =  CONCAT(cambios, "<br>Unidad del producto cambio de: ", OldUndDescripcion, " a: ", NewUndDescripcion); 
 	END IF;
 
-	IF(cambios IS NOT NULL OR cambios != "") THEN 
+	IF cambios != "" THEN 
 		
         SET cambios = CONCAT("<html><center>", cambios, "</center></html>");
 		SET LoggedUser = (SELECT UsrUsuario FROM loggedusuario);

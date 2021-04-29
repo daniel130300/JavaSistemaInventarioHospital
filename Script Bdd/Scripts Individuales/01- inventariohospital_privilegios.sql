@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: inventariohospital
+-- Host: 192.168.0.120    Database: inventariohospital
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -27,7 +27,7 @@ CREATE TABLE `privilegios` (
   `PriDescripcion` varchar(80) NOT NULL,
   `PriIdModulo` int DEFAULT NULL COMMENT 'Este codigo se utiliza para definir a que modulo general pertenece el privilegio.\n1 - Ventas\n2 - Suministros\n3 - Proveedores\n4 - Compras\n5 - Bodega\n6 - Usuarios\n7 - Alertas ',
   PRIMARY KEY (`PriId`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `privilegios` (
 
 LOCK TABLES `privilegios` WRITE;
 /*!40000 ALTER TABLE `privilegios` DISABLE KEYS */;
-INSERT INTO `privilegios` VALUES (1,'Mantenimiento Usuarios',6),(2,'Mantenimiento Proveedores',3),(3,'Mantenimiento Compras',4),(4,'Mantenimiento Catálogo Bodega',5),(5,'Mantenimiento Inventario Bodega',5),(6,'Mantenimiento Inventario Suministros',2),(7,'Mantenimiento Productos Compuestos',2),(8,'Generar Suministros',2),(9,'Visualizar Alertas',7),(10,'Visualizar Inventario Suministros',2),(11,'Visualizar Inventario Bodega',5),(12,'Facturación',1),(13,'Devolución de Ventas',1),(14,'Bitacora Catálogo Bodega ',5),(15,'Mantenimiento Categorías',5),(16,'Mantenimiento Unidades',5);
+INSERT INTO `privilegios` VALUES (1,'Mantenimiento Usuarios',6),(2,'Mantenimiento Proveedores',3),(3,'Registrar Compras',4),(4,'Mantenimiento Catálogo Bodega',5),(5,'Mantenimiento Inventario Bodega',5),(6,'Mantenimiento Inventario Suministros',2),(7,'Mantenimiento Productos Compuestos',2),(8,'Generar Suministros',2),(9,'Visualizar Alertas',7),(10,'Visualizar Inventario Suministros',2),(11,'Visualizar Inventario Bodega',5),(12,'Facturación',1),(13,'Devolución de Ventas',1),(14,'Bitácora Catálogo Bodega ',5),(15,'Mantenimiento Categorías',5),(16,'Mantenimiento Unidades',5),(17,'Bitácora Inventario Bodega',5),(18,'Mantenimiento Rubros',3),(19,'Devolucion de Compras',4),(20,'Historial de Compras',4);
 /*!40000 ALTER TABLE `privilegios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18 18:26:02
+-- Dump completed on 2021-04-29 17:03:33

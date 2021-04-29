@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: inventariohospital
+-- Host: 192.168.0.120    Database: inventariohospital
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -27,7 +27,7 @@ CREATE TABLE `categoriasproductos` (
   `CprDescripcion` varchar(40) NOT NULL,
   `CprEstado` varchar(15) NOT NULL,
   PRIMARY KEY (`CprId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `categoriasproductos` (
 
 LOCK TABLES `categoriasproductos` WRITE;
 /*!40000 ALTER TABLE `categoriasproductos` DISABLE KEYS */;
-INSERT INTO `categoriasproductos` VALUES (1,'CategoriaPrueba','Activo'),(2,'CategoriaPrueba2','Inactivo'),(3,'Categoria 3','Activo'),(4,'Categora Nueva','Activo'),(5,'Categoria Nueva','Activo');
+INSERT INTO `categoriasproductos` VALUES (1,'Categoria Prueba','Inactivo'),(2,'Categoria Prueba 2','Inactivo'),(3,'Categoria Prueba 3','Activo'),(5,'Categoria Nueva','Inactivo'),(6,'Categoria A','Activo'),(7,'Categoría Nueva 22','Activo'),(8,'cat ew','Inactivo'),(9,'categoria nueva fdsfds','Inactivo');
 /*!40000 ALTER TABLE `categoriasproductos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18 18:26:01
+-- Dump completed on 2021-04-29 17:03:35

@@ -6,9 +6,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `MantenimientoDetalleUsuarios`(
     OUT _Estado VARCHAR(10)
 )
 BEGIN
-	DECLARE i INT unsigned DEFAULT 0;  
-	DECLARE contador INT unsigned DEFAULT 0;
-    
 	SET _Estado = "OK";
     
 	IF _Accion LIKE '%insertar%' THEN

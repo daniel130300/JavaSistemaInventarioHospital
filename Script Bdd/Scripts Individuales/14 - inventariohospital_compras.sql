@@ -16,28 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `unidades`
+-- Table structure for table `compras`
 --
 
-DROP TABLE IF EXISTS `unidades`;
+DROP TABLE IF EXISTS `compras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `unidades` (
-  `UndId` int NOT NULL AUTO_INCREMENT,
-  `UndDescripcion` varchar(20) NOT NULL,
-  `UndEstado` varchar(15) NOT NULL,
-  PRIMARY KEY (`UndId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `compras` (
+  `CmpId` int NOT NULL,
+  `ProId` int NOT NULL,
+  `CmpFactura` varchar(30) NOT NULL,
+  `CmpFotoFacturaPath` varchar(150) NOT NULL,
+  `CmpNumeroTransferencia` varchar(30) NOT NULL,
+  `CmpOrdenCompra` varchar(30) NOT NULL,
+  `CmpFotoOrdenCompraPath` varchar(150) NOT NULL,
+  `CmpFecha` date NOT NULL,
+  `UsrUsuario` varchar(40) NOT NULL,
+  `CmpIsv` decimal(9,2) DEFAULT NULL,
+  PRIMARY KEY (`CmpId`),
+  KEY `IX_Relationship7` (`ProId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `unidades`
+-- Dumping data for table `compras`
 --
 
-LOCK TABLES `unidades` WRITE;
-/*!40000 ALTER TABLE `unidades` DISABLE KEYS */;
-INSERT INTO `unidades` VALUES (1,'Gramos','Activo'),(2,'Kilogramos','Activo'),(3,'Unidad','Activo'),(5,'Centimetros','Inactivo');
-/*!40000 ALTER TABLE `unidades` ENABLE KEYS */;
+LOCK TABLES `compras` WRITE;
+/*!40000 ALTER TABLE `compras` DISABLE KEYS */;
+/*!40000 ALTER TABLE `compras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

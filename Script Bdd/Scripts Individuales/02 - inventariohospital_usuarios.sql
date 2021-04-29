@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: inventariohospital
+-- Host: 192.168.0.120    Database: inventariohospital
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -35,7 +35,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`UsrId`),
   KEY `IX_Relationship1` (`AreId`),
   CONSTRAINT `Usuarios_Areas` FOREIGN KEY (`AreId`) REFERENCES `areas` (`AreId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'0801200006012','Lourdes','Fernandez','lfernandez@unicah.edu','lfernandez','364e75c08b4215d15991c9ef95ce2f02055851abe467ecab693ca93446900e7e','Activo',1),(2,'0801200612345','Héctor Daniel','López Borjas','daniel130300@outlook.com','hlopez','f6cbc0bdda14c7382db819f9b2b0138341fa0000630ef026bcec20fb03a4d7f2','Activo',2),(3,'0801200054321','Enden Gabriel','Midence Castillo','midence@gmail.com','emidence','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855','Activo',1),(4,'0801200098765','José Daniel','Guillen','jguillen130300@outlook.com','jguillen','344dac26d74a0a0ceaae45a1ebcd2af12d8b5abeae0ff248e76e1443af71b1e2','Activo',2),(5,'0801200006014','Ope','Pots','opepots@gmail.com','Opepots','f5fd497e61d4785dbc83fae83d47517cd8186f150de3923de9b48963d60be48f','Activo',3),(11,'0801123454321','Dereck Rene','Zavala','dzavala@gmail.com','dzavala','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855','Activo',4),(14,'0801432112345','Carlos','Ordoñez','cordonez@gmail.com','cordonez','f5fd497e61d4785dbc83fae83d47517cd8186f150de3923de9b48963d60be48f','Activo',1),(15,'0801199912345','Juan Carlos','Ordoñez','juanordonez@gmail.com','jordonez','f5fd497e61d4785dbc83fae83d47517cd8186f150de3923de9b48963d60be48f','Activo',2),(16,'0801432154321','Luis','Martinez','lmartinez@gmail.com','lmartinez','3374c93b2fdf1235bc2bc32e0bd86776e2a55441b2760a69fe24d940c2d62829','Activo',4),(18,'0801199954321','Armando José','López López','arma_jose9@hotmail.es','alopez','f6cbc0bdda14c7382db819f9b2b0138341fa0000630ef026bcec20fb03a4d7f2','Activo',3),(19,'0801123406012','Jose','Lainez','joselainez@gmail.com','jlainez','a4aa9f186b333fbadfd4d9c470a6b8d9c2e4bcf9871944c917d6a40d20a43140','Inactivo',4);
+INSERT INTO `usuarios` VALUES (1,'0801200006012','Lourdes','Fernandez','lfernandez@unicah.edu','lfernandez','f4ac1d342ce20ff32b278ceeb409572b409270b45873d8369742d61f871db7f4','Activo',1),(2,'0801200612345','Héctor Daniel','López Borjas','daniel130300@outlook.com','hlopez','f6cbc0bdda14c7382db819f9b2b0138341fa0000630ef026bcec20fb03a4d7f2','Activo',2),(3,'0801200054321','Enden Gabriel','Midence Castillo','midence@gmail.com','emidence','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855','Activo',1),(4,'0801200098765','José Daniel','Guillen','jguillen130300@outlook.com','jguillen','344dac26d74a0a0ceaae45a1ebcd2af12d8b5abeae0ff248e76e1443af71b1e2','Activo',2),(5,'0801200006014','Ope','Pots','opepots@gmail.com','Opepots','f5fd497e61d4785dbc83fae83d47517cd8186f150de3923de9b48963d60be48f','Activo',3),(11,'0801123454321','Dereck Rene','Zavala','dzavala@gmail.com','dzavala','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855','Activo',4),(14,'0801432112345','Carlos','Ordoñez','cordonez@gmail.com','cordonez','f5fd497e61d4785dbc83fae83d47517cd8186f150de3923de9b48963d60be48f','Activo',1),(15,'0801199912345','Juan Carlos','Ordoñez','juanordonez@gmail.com','jordonez','f5fd497e61d4785dbc83fae83d47517cd8186f150de3923de9b48963d60be48f','Activo',2),(16,'0801432154321','Luis','Martinez','lmartinez@gmail.com','lmartinez','3374c93b2fdf1235bc2bc32e0bd86776e2a55441b2760a69fe24d940c2d62829','Activo',4),(18,'0801199954321','Armando José','López López','arma_jose9@hotmail.es','alopez','f6cbc0bdda14c7382db819f9b2b0138341fa0000630ef026bcec20fb03a4d7f2','Activo',3),(19,'0801123406012','Jose','Lainez','joselainez@gmail.com','jlainez','a4aa9f186b333fbadfd4d9c470a6b8d9c2e4bcf9871944c917d6a40d20a43140','Activo',4),(20,'0801199012345','Luis','Aleman','aleman@gmail.com','laleman','801a29d3ae6f7da4e1c69bd8d103f06700f30a7a98c25c75132b1477fa032cdd','Activo',2),(21,'0801199260123','Javier','Gutierrez','jam@gmail.com','jgutierrez','447ff7c484a0142f4a52382de4d02bd148827cf4a55775b8b5049a93273199af','Activo',3);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18 18:26:01
+-- Dump completed on 2021-04-29 17:03:32

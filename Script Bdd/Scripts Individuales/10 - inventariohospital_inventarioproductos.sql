@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `unidades`
+-- Table structure for table `inventarioproductos`
 --
 
-DROP TABLE IF EXISTS `unidades`;
+DROP TABLE IF EXISTS `inventarioproductos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `unidades` (
-  `UndId` int NOT NULL AUTO_INCREMENT,
-  `UndDescripcion` varchar(20) NOT NULL,
-  `UndEstado` varchar(15) NOT NULL,
-  PRIMARY KEY (`UndId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `inventarioproductos` (
+  `InvPrdId` int NOT NULL,
+  `InvPrdCodInterno` varchar(50) NOT NULL,
+  `InvPrdFchCaducidad` date NOT NULL,
+  `InvPrdEstado` varchar(15) NOT NULL,
+  `InvPrdPadre` int DEFAULT NULL,
+  `InvPrdFactor` int NOT NULL,
+  `InvPrdExtraible` int NOT NULL,
+  `UndId` int DEFAULT NULL,
+  PRIMARY KEY (`InvPrdId`),
+  KEY `IX_Relationship1` (`UndId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `unidades`
+-- Dumping data for table `inventarioproductos`
 --
 
-LOCK TABLES `unidades` WRITE;
-/*!40000 ALTER TABLE `unidades` DISABLE KEYS */;
-INSERT INTO `unidades` VALUES (1,'Gramos','Activo'),(2,'Kilogramos','Activo'),(3,'Unidad','Activo'),(5,'Centimetros','Inactivo');
-/*!40000 ALTER TABLE `unidades` ENABLE KEYS */;
+LOCK TABLES `inventarioproductos` WRITE;
+/*!40000 ALTER TABLE `inventarioproductos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventarioproductos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-29 17:03:35
+-- Dump completed on 2021-04-29 17:03:37

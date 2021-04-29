@@ -42,6 +42,7 @@ BEGIN
 	
 		IF _Estado = "OK" THEN
 			UPDATE catalogoproductos SET 
+            PrdNombre = _PrdNombre,
 			PrdDescripcion = _PrdDescripcion, 
 			PrdStockMaximo = _PrdStockMaximo, 
 			PrdStockMinimo = _PrdStockMinimo, 

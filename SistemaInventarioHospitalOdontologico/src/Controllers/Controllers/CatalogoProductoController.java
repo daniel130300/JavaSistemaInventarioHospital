@@ -54,9 +54,10 @@ public class CatalogoProductoController
 
     public static Boolean MantenimientoProducto(String accion, Integer id,
             String nombre, String descripcion, String stockmaximo , String stockminimo, 
-            String estado,Integer id_categoria , Integer id_unidad,
+            String estado,Integer id_categoria ,
             JLabel errnombre, JLabel errdescripcion, JLabel errstockmaximo, JLabel errstockminimo )
     { 
+        
         Boolean generalValidacionError = false;
         Boolean mntError = false;
         CatalogoProductoController.setErroresToNull(errnombre, errdescripcion, errstockmaximo, errstockminimo);
@@ -75,13 +76,13 @@ public class CatalogoProductoController
                 case "insertar":
                     mntError = CatalogoProductoController.insertarProducto(
                             trimmedNombre, trimmedDescripcion, trimmedStockMaximo, 
-                            trimmedStockMinimo, id_categoria, id_unidad);
+                            trimmedStockMinimo, id_categoria);
                 break;
                 
                 case "editar":
                     mntError = CatalogoProductoController.editarProducto(id, 
                             trimmedNombre, trimmedDescripcion, trimmedStockMaximo, 
-                            trimmedStockMinimo, id_categoria, id_unidad, estado);              
+                            trimmedStockMinimo, id_categoria, estado);              
                 break;
             }
         }
@@ -145,7 +146,7 @@ public class CatalogoProductoController
     
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableProductos, 
             JTextField txtNombre,JTextArea txtDescripcion, JTextField txtStockMaximo,
-            JTextField txtStockMinimo,JComboBox cmbCategoria,JComboBox cmbUnidad,JComboBox cmbEstado )
+            JTextField txtStockMinimo,JComboBox cmbCategoria,JComboBox cmbEstado )
     {
         Integer PrdId = null;
         PrdId = Integer.parseInt((String.valueOf(tableProductos.getModel().getValueAt(seleccion, 0)))); 
@@ -154,8 +155,7 @@ public class CatalogoProductoController
         txtStockMaximo.setText(String.valueOf(tableProductos.getModel().getValueAt(seleccion, 3)));
         txtStockMinimo.setText(String.valueOf(tableProductos.getModel().getValueAt(seleccion, 4)));
         cmbCategoria.setSelectedItem(String.valueOf(tableProductos.getModel().getValueAt(seleccion,6)));
-        cmbUnidad.setSelectedItem(String.valueOf(tableProductos.getModel().getValueAt(seleccion,8)));
-        cmbEstado.setSelectedItem(String.valueOf(tableProductos.getModel().getValueAt(seleccion,9)));
+        cmbEstado.setSelectedItem(String.valueOf(tableProductos.getModel().getValueAt(seleccion,7)));
         
         return PrdId;
     }     
@@ -171,24 +171,15 @@ public class CatalogoProductoController
         }
     } 
     
-    public static void LlenarCmbUnidades(JComboBox cmbUnidades)
-    {
-        ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        unidades = CatalogoProductoConexion.ListadoUnidades();
-        
-        for (int i = 0; i<unidades.size(); i++)
-        {
-            cmbUnidades.addItem(unidades.get(i).getUndDescripcion());
-        }
-    }
-    
+
     public static void LlenarTableProductos(JTable tableProductos, String accion) 
     {  
+        
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel(); 
         modelo.setRowCount(0);
         ArrayList<CatalogoProductoModel> productos = new ArrayList<>();
         productos = CatalogoProductoConexion.ListadoProducto(accion);
-        
+        System.out.println("llegue");
         for (int i = 0; i <productos.size(); i++) 
         {
             modelo.addRow
@@ -201,8 +192,6 @@ public class CatalogoProductoController
                     productos.get(i).getPrdStockMinimo(),
                     productos.get(i).getCprId(),
                     productos.get(i).getCprDescripcion(), 
-                    productos.get(i).getUndId(),                  
-                    productos.get(i).getUndDescripcion(),
                     productos.get(i).getProdEstado()    
                 }
             );
@@ -254,7 +243,7 @@ public class CatalogoProductoController
     public static Integer setDatosEditarFromCache(JTable tableProveedores, 
             JTextField txtNombre, JTextArea txtDescripcion, 
             JTextField txtStockMaximo, JTextField txtStockMinimo,JComboBox cmbCategoria,
-            JComboBox cmbUnidad, JComboBox cmbEstado)
+            JComboBox cmbEstado)
     {
         Integer PrdId = null;
         CatalogoProductoCache productoCache = new CatalogoProductoCache();
@@ -266,7 +255,6 @@ public class CatalogoProductoController
             txtStockMaximo.setText(productoCache.getProducto().getPrdStockMaximo());
             txtStockMinimo.setText(productoCache.getProducto().getPrdStockMinimo());
             cmbCategoria.setSelectedItem(productoCache.getProducto().getCprDescripcion());
-            cmbUnidad.setSelectedItem(productoCache.getProducto().getUndDescripcion());
             cmbEstado.setSelectedItem(productoCache.getProducto().getProdEstado());
             CatalogoProductoController.ProductosProveedores(MantenimientoCatalogoProductosView.tableProveedores, PrdId);
         }
@@ -279,7 +267,7 @@ public class CatalogoProductoController
     
     private static boolean insertarProducto(String trimmedNombre,String trimmedDescripcion,
             String trimmedStockMaximo, String trimmedStockMinimo, 
-            Integer id_categoria, Integer id_unidad)
+            Integer id_categoria)
     {
         boolean error = false;
         Integer id = 0; 
@@ -288,11 +276,19 @@ public class CatalogoProductoController
         DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
         CatalogoProductoCache cache = new CatalogoProductoCache();
         DetalleCatalogoProductosModel detalleproducto = new DetalleCatalogoProductosModel();
-        
+        System.out.println("llego aqui");
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
-                trimmedStockMinimo, id_categoria,id_unidad, estado);
-        String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("insertar", productoModel);      
+                trimmedStockMinimo, id_categoria, estado);
+         System.out.println(productoModel.getPrdId());
+         System.out.println(productoModel.getPrdNombre());
+         System.out.println(productoModel.getPrdDescripcion());
+         System.out.println(productoModel.getPrdStockMaximo());
+         System.out.println(productoModel.getPrdStockMinimo());
+         System.out.println(productoModel.getProdEstado());
+         System.out.println(productoModel.getCprId());
+        String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("insertar", productoModel);    
+       
         switch (resultado) 
         {
             case "OK":  
@@ -322,7 +318,7 @@ public class CatalogoProductoController
     
     private static boolean editarProducto(Integer id,String trimmedNombre,
             String trimmedDescripcion, String trimmedStockMaximo,String trimmedStockMinimo,
-            Integer id_categoria, Integer id_unidad, String estado)
+            Integer id_categoria, String estado)
     {
         boolean error = false; 
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
@@ -330,7 +326,7 @@ public class CatalogoProductoController
 
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
-                trimmedStockMinimo, id_categoria,id_unidad, estado);
+                trimmedStockMinimo, id_categoria, estado);
         String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("editar", productoModel);
         switch (resultado) 
         {
@@ -359,7 +355,7 @@ public class CatalogoProductoController
     
     private static CatalogoProductoModel setProductoModel(Integer id,String trimmedNombre,
             String trimmedDescripcion, String trimmedStockMaximo, String trimmedStockMinimo,
-            Integer id_categoria,Integer id_unidad,String estado)
+            Integer id_categoria,String estado)
     {
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
         productoModel.setPrdId(id);
@@ -369,7 +365,6 @@ public class CatalogoProductoController
         productoModel.setPrdStockMinimo(trimmedStockMinimo);
         productoModel.setProdEstado(estado);       
         productoModel.setCprId(id_categoria);
-        productoModel.setUndId(id_unidad);
         
         return productoModel;
     }   

@@ -35,7 +35,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         CatalogoProductoController.LlenarCmbCategoria(this.cmbCategoria);
-        CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
+        //CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos"); 
         CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
         CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion, this.txtBuscar);
@@ -49,8 +49,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         this.txtStockMaximo.setText(null);
         this.txtStockMinimo.setText(null);
         this.cmbEstado.setSelectedIndex(0);
-        this.cmbCategoria.setSelectedIndex(0);
-        this.cmbUnidad.setSelectedIndex(0);     
+        this.cmbCategoria.setSelectedIndex(0);  
     }
     
     private void LimpiarTable(){
@@ -74,7 +73,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
     {
         this.Id_producto = CatalogoProductoController.setDatosEditarFromCache(this.tableProductos, 
                 this.txtNombre, this.txtDescripcion, this.txtStockMaximo, this.txtStockMinimo,
-                this.cmbCategoria, this.cmbUnidad, this.cmbEstado);
+                this.cmbCategoria, this.cmbEstado);
                 CatalogoProductoController.ProductosProveedores(tableProveedores,Id_producto);
         if(Id_producto != null)
         {
@@ -118,8 +117,6 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         cmbCategoria = new javax.swing.JComboBox<>();
         lblErrorCategoria = new javax.swing.JLabel();
         lblErrorUnidad = new javax.swing.JLabel();
-        cmbUnidad = new javax.swing.JComboBox<>();
-        lblUnidad = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         btnCancelar = new javax.swing.JButton();
@@ -193,11 +190,11 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Id Unidad", "Unidad", "Estado"
+                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -293,18 +290,6 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         lblErrorUnidad.setForeground(new java.awt.Color(231, 0, 2));
         pnlMenu.add(lblErrorUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
 
-        cmbUnidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbUnidadActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 210, -1));
-
-        lblUnidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblUnidad.setForeground(new java.awt.Color(242, 242, 242));
-        lblUnidad.setText("Unidad:");
-        pnlMenu.add(lblUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, -1));
-
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(4);
         jScrollPane3.setViewportView(txtDescripcion);
@@ -358,7 +343,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -526,7 +511,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         if(!CatalogoProductoController.MantenimientoProducto("editar", this.Id_producto,
             this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(),
             this.txtStockMinimo.getText(),cmbEstado.getSelectedItem().toString(),CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
-            CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion,
+            this.lblErrorNombre, this.lblErrorDescripcion,
             this.lblErrorStockMaximo, this.lblErrorStockMinimo))
         {
             this.btnAgregar.setEnabled(true);
@@ -543,7 +528,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         if(!CatalogoProductoController.MantenimientoProducto("insertar", 0,
             this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(),
             this.txtStockMinimo.getText(),"Activo",CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
-            CatalogoProductoConexion.IdUnidad(this.cmbUnidad.getSelectedItem().toString()), this.lblErrorNombre, this.lblErrorDescripcion,
+            this.lblErrorNombre, this.lblErrorDescripcion,
             this.lblErrorStockMaximo, this.lblErrorStockMinimo))
         {
             CatalogoProductoModel productoModel = new CatalogoProductoModel();
@@ -567,10 +552,6 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void cmbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUnidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbUnidadActionPerformed
-
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCategoriaActionPerformed
@@ -593,7 +574,7 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         this.Id_producto = CatalogoProductoController.setDatosEditarFromTable(seleccion,
             this.tableProductos, this.txtNombre, this.txtDescripcion,
             this.txtStockMaximo, this.txtStockMinimo, this.cmbCategoria,
-            this.cmbUnidad,this.cmbEstado);
+            this.cmbEstado);
         
         if(this.Id_producto != null)
         {
@@ -4773,7 +4754,6 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
     private javax.swing.JButton btnVisualizarTabla;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JComboBox<String> cmbUnidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -4798,7 +4778,6 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblStockMaximo;
     private javax.swing.JLabel lblStockMinimo;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblUnidad;
     private javax.swing.JLabel lblUsuarioActual;
     private javax.swing.JPanel pnlBackbround;
     private javax.swing.JTabbedPane pnlGeneral;

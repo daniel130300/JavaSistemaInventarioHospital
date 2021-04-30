@@ -40,8 +40,11 @@ public class BitacoraLoteProductosConexion
         {
             con = Conexion.getConexion(con);
             stm = con.createStatement();
-            String query = "SELECT BcpId, UsrUsuario, blp.LprId, cp.PrdId, PrdNombre, BcpAccion, BcpDescripcionCambios, BcpFecha FROM bitacoraloteproductos blp INNER JOIN loteproductos lp ON blp.LprId = lp.LprId INNER JOIN catalogoproductos cp ON lp.PrdId = cp.PrdId ORDER BY BcpFecha Desc;";
-            
+            String query = "SELECT BcpId,UsrUsuario,LprId,a.PrdId,c.PrdNombre,a.BcpAccion,BcpDescripcionCambios,BcpFecha  FROM bitacoracatalogoproductos a " 
+                            + " INNER JOIN loteproductos b on a.PrdId=b.PrdId" 
+                            + " INNER JOIN catalogoproductos c on c.PrdId=b.PrdId" 
+                            + " ORDER BY BcpFecha DESC;";
+
             rss = stm.executeQuery(query);
             
             while (rss.next()) 

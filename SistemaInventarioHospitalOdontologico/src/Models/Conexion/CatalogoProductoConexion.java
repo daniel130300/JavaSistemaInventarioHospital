@@ -45,9 +45,8 @@ public class CatalogoProductoConexion
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
                     
-                    String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
+                    String query = "SELECT a.*, b.CprDescripcion "
                      + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
-                     + "INNER JOIN unidades c ON c.UndId = a.UndId "
                      + "WHERE PrdEstado = 'Activo' " 
                      + "ORDER BY a.PrdId ASC";
 
@@ -64,8 +63,6 @@ public class CatalogoProductoConexion
                         producto.setProdEstado(rss.getString("PrdEstado"));
                         producto.setCprId(rss.getInt("CprId"));
                         producto.setCprDescripcion(rss.getString("CprDescripcion"));                
-                        producto.setUndId(rss.getInt("UndId"));
-                        producto.setUndDescripcion(rss.getString("UndDescripcion"));
                         productos.add(producto);
                     } 
                     
@@ -82,9 +79,8 @@ public class CatalogoProductoConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
+                    String query = "SELECT a.*, b.CprDescripcion "
                      + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
-                     + "INNER JOIN unidades c ON c.UndId = a.UndId "
                      + "WHERE PrdEstado = 'Inactivo' " 
                      + "ORDER BY a.PrdId ASC";
 
@@ -102,8 +98,6 @@ public class CatalogoProductoConexion
                         producto.setProdEstado(rss.getString("PrdEstado"));
                         producto.setCprId(rss.getInt("CprId"));
                         producto.setCprDescripcion(rss.getString("CprDescripcion"));                
-                        producto.setUndId(rss.getInt("UndId"));
-                        producto.setUndDescripcion(rss.getString("UndDescripcion"));
                         productos.add(producto);
                     } 
                     
@@ -120,9 +114,8 @@ public class CatalogoProductoConexion
                 {
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
-                    String query = "SELECT a.*, b.CprDescripcion, c.UndDescripcion "
+                    String query = "SELECT a.*, b.CprDescripcion "
                     + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
-                    + "INNER JOIN unidades c ON c.UndId = a.UndId "
                     + "ORDER BY a.PrdId ASC";
 
                     rss = stm.executeQuery(query);
@@ -138,8 +131,6 @@ public class CatalogoProductoConexion
                         producto.setProdEstado(rss.getString("PrdEstado"));
                         producto.setCprId(rss.getInt("CprId"));
                         producto.setCprDescripcion(rss.getString("CprDescripcion"));                
-                        producto.setUndId(rss.getInt("UndId"));
-                        producto.setUndDescripcion(rss.getString("UndDescripcion"));
                         productos.add(producto);
                     } 
                     con.close();
@@ -251,34 +242,6 @@ public class CatalogoProductoConexion
         return id_categoria;
     } 
     
-    public static Integer IdUnidad(String Unidades)
-    {
-        Integer id_unidades=0;
-        Connection con = null;
-        Statement stm;
-        ResultSet rss;        
-        try 
-        {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT UndId FROM unidades "
-                    + "WHERE UndDescripcion='"+Unidades+"'";
-             
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                id_unidades=rss.getInt("UndId");
-            }
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }        
-        return id_unidades;
-    }
-    
     public static Integer UltimoPrdId ()
     {   
         Integer Id=0;
@@ -307,38 +270,6 @@ public class CatalogoProductoConexion
         return Id;
     }     
     
-    public static ArrayList<UnidadesModel> ListadoUnidades() 
-    {
-        Connection con = null;
-        Statement stm;
-        ResultSet rss;
-        ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        try 
-        {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT * FROM unidades "
-                    + "WHERE UndEstado='Activo'";
-             
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                UnidadesModel unidad = new UnidadesModel();
-                unidad.setUndId(rss.getInt("UndId"));
-                unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                unidades.add(unidad);
-            }
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }
-
-        return unidades;
-    }
-    
     public static String MantenimientoCatalogoProducto(String accion, CatalogoProductoModel producto )
     {
         String estado = "";
@@ -348,7 +279,7 @@ public class CatalogoProductoConexion
             String query;
             con = Conexion.getConexion(con);
             CrearTablaTemporal(con);
-            query = "{CALL MantenimientoCatalogoProductos(?,?,?,?,?,?,?,?,?,?)}";
+            query = "{CALL MantenimientoCatalogoProductos(?,?,?,?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
             cs.setInt               (2, producto.getPrdId());
@@ -357,11 +288,10 @@ public class CatalogoProductoConexion
             cs.setString            (5, producto.getPrdStockMaximo());   
             cs.setString            (6, producto.getPrdStockMinimo());    
             cs.setString            (7, producto.getProdEstado());
-            cs.setInt               (8, producto.getCprId());    
-            cs.setInt               (9, producto.getUndId());         
-            cs.registerOutParameter (10, Types.VARCHAR);         
+            cs.setInt               (8, producto.getCprId());             
+            cs.registerOutParameter (9, Types.VARCHAR);         
             cs.executeUpdate();                     
-            estado = cs.getString(10);
+            estado = cs.getString(9);
             con.close();
         }
         catch (SQLException e)

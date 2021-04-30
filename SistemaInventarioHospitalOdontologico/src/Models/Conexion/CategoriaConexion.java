@@ -56,6 +56,7 @@ public class CategoriaConexion
                      {
                         CategoriasModel categoria = new CategoriasModel();
                         categoria.setCprId(rss.getInt("CprId"));
+                        categoria.setCprNomenclatura(rss.getString("CprNomenclatura"));
                         categoria.setCprDescripcion(rss.getString("CprDescripcion"));
                         categoria.setCprEstado(rss.getString("CprEstado"));
                         categorias.add(categoria);
@@ -83,6 +84,7 @@ public class CategoriaConexion
                     {
                        CategoriasModel categoria = new CategoriasModel();
                        categoria.setCprId(rss.getInt("CprId"));
+                       categoria.setCprNomenclatura(rss.getString("CprNomenclatura"));
                        categoria.setCprDescripcion(rss.getString("CprDescripcion"));
                        categoria.setCprEstado(rss.getString("CprEstado"));
                        categorias.add(categoria);
@@ -108,6 +110,7 @@ public class CategoriaConexion
                     {
                         CategoriasModel categoria = new CategoriasModel();
                         categoria.setCprId(rss.getInt("CprId"));
+                        categoria.setCprNomenclatura(rss.getString("CprNomenclatura"));
                         categoria.setCprDescripcion(rss.getString("CprDescripcion"));
                         categoria.setCprEstado(rss.getString("CprEstado"));
                         categorias.add(categoria);
@@ -141,15 +144,16 @@ public class CategoriaConexion
             String query;
             con = Conexion.getConexion(con);
                         
-            query = "{CALL MantenimientoCategorias(?,?,?,?,?)}";
+            query = "{CALL MantenimientoCategorias(?,?,?,?,?,?)}";
             CallableStatement cs = con.prepareCall(query);
             cs.setString            (1, accion);
             cs.setInt               (2, categoria.getCprId());
-            cs.setString            (3, categoria.getCprDescripcion());
-            cs.setString            (4, categoria.getCprEstado());
-            cs.registerOutParameter (5, Types.VARCHAR);
+            cs.setString            (3, categoria.getCprNomenclatura());
+            cs.setString            (4, categoria.getCprDescripcion());
+            cs.setString            (5, categoria.getCprEstado());
+            cs.registerOutParameter (6, Types.VARCHAR);
             cs.executeUpdate();
-            estado = cs.getString(5);
+            estado = cs.getString(6);
             con.close();
         }
         catch (SQLException e)

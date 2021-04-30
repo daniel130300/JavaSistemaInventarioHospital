@@ -19,8 +19,6 @@ public class CatalogoProductoModel
     private String PrdStockMinimo;
     private String ProdEstado;
     private Integer CprId;
-    private Integer UndId;
-    private String UndDescripcion;
     private String CprDescripcion;
     public Integer getPrdId() 
     {
@@ -77,23 +75,7 @@ public class CatalogoProductoModel
     public void setCprId(Integer CprId) 
     {
         this.CprId = CprId;
-    }          
-    public Integer getUndId() 
-    {
-        return UndId;
-    }
-    public void setUndId(Integer UndId) 
-    {
-        this.UndId = UndId;
-    }
-     public String getUndDescripcion() 
-    {
-        return UndDescripcion;
-    }
-    public void setUndDescripcion(String UndDescripcion) 
-    {
-        this.UndDescripcion = UndDescripcion;
-    }       
+    }            
     public String getCprDescripcion() 
     {
         return CprDescripcion;

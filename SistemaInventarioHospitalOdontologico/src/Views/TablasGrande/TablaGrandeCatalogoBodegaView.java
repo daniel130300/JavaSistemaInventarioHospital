@@ -125,17 +125,17 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
         tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Id Unidad", "Unidad", "Estado"
+                "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false, true, false, false
+                false, false, false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -259,8 +259,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         productoModel.setPrdStockMaximo(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 3)));
         productoModel.setPrdStockMinimo(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 4)));
         productoModel.setCprDescripcion(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 6)));
-        productoModel.setUndDescripcion(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,8)));
-        productoModel.setProdEstado(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,9))); 
+        productoModel.setProdEstado(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,7))); 
         CatalogoProductoCache productoCache = new CatalogoProductoCache();
         productoCache.setDatosCompartidos(true);
         productoCache.setProducto(productoModel);

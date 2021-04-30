@@ -76,6 +76,9 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         rbnTodos = new javax.swing.JRadioButton();
         rbnActivos = new javax.swing.JRadioButton();
         rbnInactivos = new javax.swing.JRadioButton();
+        lblDescripcion1 = new javax.swing.JLabel();
+        txtDescripcion1 = new javax.swing.JTextField();
+        lblErrorDescripcion1 = new javax.swing.JLabel();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -114,23 +117,23 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 txtDescripcionActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 220, -1));
+        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 110, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 490, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 490, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
-        lblDescripcion.setText("Descripción:");
+        lblDescripcion.setText("Nomenclatura para el código: ");
         pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         tableCategorias.setModel(new javax.swing.table.DefaultTableModel(
@@ -159,7 +162,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableCategorias);
 
-        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 750, 260));
+        pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 750, 250));
 
         lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
@@ -251,7 +254,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         lblVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblVisualizar.setForeground(new java.awt.Color(242, 242, 242));
         lblVisualizar.setText("Visualizar:");
-        pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        pnlMenu.add(lblVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
         rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -263,7 +266,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 rbnTodosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
+        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
         rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -274,7 +277,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 rbnActivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
+        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
         rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
         rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -285,7 +288,23 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
                 rbnInactivosActionPerformed(evt);
             }
         });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
+        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
+
+        lblDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDescripcion1.setForeground(new java.awt.Color(242, 242, 242));
+        lblDescripcion1.setText("Descripción:");
+        pnlMenu.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        txtDescripcion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcion1ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(txtDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 20));
+
+        lblErrorDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcion1.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 220, 20));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 790, 550));
 
@@ -426,6 +445,10 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         rbnActivos.setSelected(false);
         rbnTodos.setSelected(false);
     }//GEN-LAST:event_rbnInactivosActionPerformed
+
+    private void txtDescripcion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcion1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -993,7 +1016,9 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblDescripcion1;
     private javax.swing.JLabel lblErrorDescripcion;
+    private javax.swing.JLabel lblErrorDescripcion1;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
@@ -1013,5 +1038,6 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     private javax.swing.JTable tableCategorias;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtDescripcion1;
     // End of variables declaration//GEN-END:variables
 }

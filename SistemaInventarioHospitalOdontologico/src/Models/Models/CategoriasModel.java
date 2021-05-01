@@ -17,15 +17,22 @@ public class CategoriasModel
     // **************************************************
     
     private Integer CprId;
+    private String CprNomenclatura;
     private String CprDescripcion;
     private String CprEstado;
     
     // **************************************************
     // Getters y Setters
     // **************************************************
-
-    public Integer getCprId() 
+    public String getCprNomenclatura() 
     {
+        return CprNomenclatura;
+    }
+    public void setCprNomenclatura(String CprNomenclatura) {
+        this.CprNomenclatura = CprNomenclatura;
+    }
+
+    public Integer getCprId() {
         return CprId;
     }
 

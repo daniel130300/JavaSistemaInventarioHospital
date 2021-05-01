@@ -23,7 +23,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     public MantenimientoCategoriasView() 
     {
         initComponents();
-        CategoriasController.setPlaceHolders(this.txtDescripcion, this.txtBuscar);
+        CategoriasController.setPlaceHolders(this.txtNomenclatura,this.txtDescripcion, this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tableCategorias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         CategoriasController.LlenarTableCategorias(this.tableCategorias,"Todos"); 
@@ -32,13 +32,14 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     
     private void LimpiarInputs()
     {
+        this.txtNomenclatura.setText(null);
         this.txtDescripcion.setText(null);
         this.cmbEstado.setSelectedIndex(0);
     }
     
     private void LimpiarErrLabels()
     {
-        this.lblErrorDescripcion.setText(null);
+        this.lblErrorNomenclatura.setText(null);
         this.lblErrorDescripcion.setText(null);
     }
      
@@ -57,13 +58,13 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         lblUsuarioActual = new javax.swing.JLabel();
         lblMensajeBienvenida = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        txtDescripcion = new javax.swing.JTextField();
+        txtNomenclatura = new javax.swing.JTextField();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        lblDescripcion = new javax.swing.JLabel();
+        lblNomenclatura = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCategorias = new javax.swing.JTable();
-        lblErrorDescripcion = new javax.swing.JLabel();
+        lblErrorNomenclatura = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -77,8 +78,8 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         rbnActivos = new javax.swing.JRadioButton();
         rbnInactivos = new javax.swing.JRadioButton();
         lblDescripcion1 = new javax.swing.JLabel();
-        txtDescripcion1 = new javax.swing.JTextField();
-        lblErrorDescripcion1 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        lblErrorDescripcion = new javax.swing.JLabel();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -112,12 +113,12 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+        txtNomenclatura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
+                txtNomenclaturaActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 110, -1));
+        pnlMenu.add(txtNomenclatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 110, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
@@ -131,21 +132,21 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         });
         pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 490, -1));
 
-        lblDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblDescripcion.setForeground(new java.awt.Color(242, 242, 242));
-        lblDescripcion.setText("Nomenclatura para el código: ");
-        pnlMenu.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        lblNomenclatura.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNomenclatura.setForeground(new java.awt.Color(242, 242, 242));
+        lblNomenclatura.setText("Nomenclatura para el código: ");
+        pnlMenu.add(lblNomenclatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         tableCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id Categoría", "Descripción", "Estado"
+                "Id Categoría", "Nomenclatura", "Descripción", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -161,9 +162,9 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
 
         pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 750, 250));
 
-        lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 220, 20));
+        lblErrorNomenclatura.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorNomenclatura.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorNomenclatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 220, 20));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -292,16 +293,16 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         lblDescripcion1.setText("Descripción:");
         pnlMenu.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        txtDescripcion1.addActionListener(new java.awt.event.ActionListener() {
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcion1ActionPerformed(evt);
+                txtDescripcionActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 20));
+        pnlMenu.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 20));
 
-        lblErrorDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorDescripcion1.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 220, 20));
+        lblErrorDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcion.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 220, 20));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 790, 550));
 
@@ -364,14 +365,14 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentidad5ActionPerformed
 
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+    private void txtNomenclaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomenclaturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
+    }//GEN-LAST:event_txtNomenclaturaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
         if(!CategoriasController.MantenimientoCategorias("insertar", 0, 
-            this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), this.lblErrorDescripcion))
+            this.txtNomenclatura.getText(), this.txtDescripcion.getText(),this.cmbEstado.getSelectedItem().toString(),this.lblErrorDescripcion, this.lblErrorNomenclatura))
         {
             this.LimpiarInputs();
             CategoriasController.LlenarTableCategorias(tableCategorias,"Todos");
@@ -381,8 +382,8 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
         if(!CategoriasController.MantenimientoCategorias("editar", this.CprId, 
-        this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(), 
-        this.lblErrorDescripcion))
+        this.txtNomenclatura.getText(),this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),this.lblErrorDescripcion, 
+        this.lblErrorNomenclatura))
         {
             this.btnAgregar.setEnabled(true);
             this.btnEditar.setEnabled(false);
@@ -409,9 +410,10 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
        int seleccion = this.tableCategorias.rowAtPoint(evt.getPoint()); 
         
         this.CprId = CategoriasController.setDatosEditarFromTable(seleccion, 
-                this.tableCategorias, this.txtDescripcion, this.cmbEstado);
+                this.tableCategorias, this.txtNomenclatura,this.txtDescripcion, this.cmbEstado);
         if(this.CprId != null)
         {
+            this.txtNomenclatura.setEnabled(false);
             this.LimpiarErrLabels();
             this.cmbEstado.setEnabled(true);
             this.btnAgregar.setEnabled(false);
@@ -443,9 +445,9 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         rbnTodos.setSelected(false);
     }//GEN-LAST:event_rbnInactivosActionPerformed
 
-    private void txtDescripcion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcion1ActionPerformed
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcion1ActionPerformed
+    }//GEN-LAST:event_txtDescripcionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1012,15 +1014,15 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion1;
     private javax.swing.JLabel lblErrorDescripcion;
-    private javax.swing.JLabel lblErrorDescripcion1;
+    private javax.swing.JLabel lblErrorNomenclatura;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
+    private javax.swing.JLabel lblNomenclatura;
     private javax.swing.JLabel lblRegresar;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuarioActual;
@@ -1035,6 +1037,6 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
     private javax.swing.JTable tableCategorias;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtDescripcion1;
+    private javax.swing.JTextField txtNomenclatura;
     // End of variables declaration//GEN-END:variables
 }

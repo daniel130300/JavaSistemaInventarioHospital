@@ -33,8 +33,9 @@ public class CategoriasController
     // Métodos Públicos
     // **************************************************
     
-     public static void setPlaceHolders(JTextField txtDescripcion, JTextField txtBuscar)
+     public static void setPlaceHolders(JTextField txtNomenclatura,JTextField txtDescripcion, JTextField txtBuscar)
     {
+        TextPrompt placeholderNomenclatura = new TextPrompt(" Ingrese la nomenclatura", txtNomenclatura);
         TextPrompt placeholderDescripcion = new TextPrompt(" Ingrese la descripción de la categoría ", txtDescripcion);
         TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
     }
@@ -50,22 +51,23 @@ public class CategoriasController
     * @return Boolean
     */
     public static Boolean MantenimientoCategorias(String accion, Integer id, 
-            String descripcion, String estado, JLabel errDescripcion)
+            String nomenclatura,String descripcion, String estado, JLabel errDescripcion, JLabel errNomenclatura)
     { 
         Boolean generalValidacionError = false;
         Boolean mntError = false;
         
         errDescripcion.setText(null);
-
-        String trimmedDescripcion = descripcion.trim();
-
-        generalValidacionError = CategoriasController.validacionesGenerales(trimmedDescripcion,errDescripcion);
+        errNomenclatura.setText(null);
         
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedNomenclatura = nomenclatura.trim();
+        generalValidacionError = CategoriasController.validacionesGenerales(trimmedDescripcion,trimmedNomenclatura,errDescripcion,errNomenclatura);
         if(generalValidacionError == false)
         { 
             CategoriasModel categoria = new CategoriasModel();
             categoria.setCprId(id);
-            categoria.setCprDescripcion(descripcion);
+            categoria.setCprNomenclatura(trimmedNomenclatura);
+            categoria.setCprDescripcion(trimmedDescripcion);
             String msj = "";
             String resultado = "";
             
@@ -81,7 +83,7 @@ public class CategoriasController
                 case "editar":
                      categoria.setCprEstado(estado);
                     resultado = CategoriaConexion.MantenimientoCategorias(accion, categoria);
-                    msj =  "Caetgoría actualizada con éxito.";
+                    msj =  "Categoría actualizada con éxito.";
                     mntError = CategoriasController.mensajesRetroalimentacion(msj, resultado);                   
                 break;
             }
@@ -100,13 +102,14 @@ public class CategoriasController
     * correspondientes para poder ser editados y retorna el Id de la categoría de la tabla
     * @return Integer
     */
-    public static Integer setDatosEditarFromTable(int seleccion, JTable tableCategorias, 
+    public static Integer setDatosEditarFromTable(int seleccion, JTable tableCategorias,JTextField txtNomenclatura, 
             JTextField txtDescripcion, JComboBox cmbEstado)
     {
         Integer CprId = null;
-        CprId = Integer.parseInt((String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 0)))); 
-        txtDescripcion.setText(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 1)));
-        cmbEstado.setSelectedItem(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 2)));
+        CprId = Integer.parseInt((String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 0))));
+        txtNomenclatura.setText(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 1)));
+        txtDescripcion.setText(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 2)));
+        cmbEstado.setSelectedItem(String.valueOf(tableCategorias.getModel().getValueAt(seleccion, 3)));
 
         
         return CprId;
@@ -138,6 +141,7 @@ public class CategoriasController
                     (new Object[]
                         {
                             categorias.get(i).getCprId(),
+                            categorias.get(i).getCprNomenclatura(),
                             categorias.get(i).getCprDescripcion(),
                             categorias.get(i).getCprEstado()
                         }
@@ -155,6 +159,7 @@ public class CategoriasController
                     (new Object[]
                         {
                             categorias.get(i).getCprId(),
+                            categorias.get(i).getCprNomenclatura(),
                             categorias.get(i).getCprDescripcion(),
                             categorias.get(i).getCprEstado()
                         }
@@ -172,6 +177,7 @@ public class CategoriasController
                     (new Object[]
                         {
                             categorias.get(i).getCprId(),
+                            categorias.get(i).getCprNomenclatura(),
                             categorias.get(i).getCprDescripcion(),
                             categorias.get(i).getCprEstado()
                         }
@@ -258,6 +264,11 @@ public class CategoriasController
                 error = true;
             break;
             
+            case "errNomenclatura":
+                JOptionPane.showMessageDialog(null, "La nomenclatura ya se encuentra registrada.");
+                error = true;
+            break;
+            
             default:
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
                 error = true;
@@ -276,8 +287,8 @@ public class CategoriasController
     * de lo contrario retorna false. 
     * @return boolean
     */
-    private static boolean validacionesGenerales(String trimmedDescripcion,
-        JLabel errDescripcion)
+    private static boolean validacionesGenerales(String trimmedDescripcion,String trimmedNomenclatura,
+        JLabel errDescripcion,JLabel errNomenclatura)
     {
         boolean error = false;
        
@@ -292,7 +303,16 @@ public class CategoriasController
             errDescripcion.setText("La descripción ingresada es incorrecta");
             error = true;
         }
-        
+        if(Validaciones.validarCampoVacio(trimmedNomenclatura))
+        {
+           errNomenclatura.setText("La nomenclatura es un campo obligatorio");
+           error = true;
+        }
+        if(!Validaciones.validarNomenclatura(trimmedNomenclatura))
+        {
+            errNomenclatura.setText("La nomenclatura ingresada es incorrecta");
+            error = true;
+        }
         return error;
     }
 }

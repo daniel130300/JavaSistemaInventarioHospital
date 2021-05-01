@@ -6,15 +6,13 @@ CREATE DEFINER=`root`@`localhost` TRIGGER `actualizar_bitacora_catalogoproductos
 	New.PrdDescripcion,
 	New.PrdStockMaximo,
 	New.PrdStockMinimo,
-    New.PrdEstado,
+	New.PrdEstado,
 	New.CprId,
-	New.UndId,
-    Old.PrdId, 
+	Old.PrdId,
 	Old.PrdNombre,
 	Old.PrdDescripcion,
 	Old.PrdStockMaximo,
 	Old.PrdStockMinimo,
 	Old.PrdEstado,
-	Old.CprId,
-	Old.UndId
+	Old.CprId
 )

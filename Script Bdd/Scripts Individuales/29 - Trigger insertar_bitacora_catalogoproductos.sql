@@ -6,15 +6,13 @@ CREATE DEFINER=`root`@`localhost` TRIGGER `insertar_bitacora_catalogoproductos` 
 	New.PrdDescripcion,
 	New.PrdStockMaximo,
 	New.PrdStockMinimo,
-    New.PrdEstado,
+	New.PrdEstado,
 	New.CprId,
-	New.UndId,
-    0,
-    "",
-    "",
-    0,
-    0,
-    "",
-    0,
-    0
+	0,
+	"",
+	"",
+	0,
+	0,
+	"",
+	0
 )

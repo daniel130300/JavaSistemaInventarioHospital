@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `categoriasproductos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categoriasproductos` (
   `CprId` int NOT NULL AUTO_INCREMENT,
+  `CprNomenclatura` varchar(5) NOT NULL,
   `CprDescripcion` varchar(40) NOT NULL,
   `CprEstado` varchar(15) NOT NULL,
   PRIMARY KEY (`CprId`)
@@ -36,7 +37,7 @@ CREATE TABLE `categoriasproductos` (
 
 LOCK TABLES `categoriasproductos` WRITE;
 /*!40000 ALTER TABLE `categoriasproductos` DISABLE KEYS */;
-INSERT INTO `categoriasproductos` VALUES (1,'Categoria Prueba','Inactivo'),(2,'Categoria Prueba 2','Inactivo'),(3,'Categoria Prueba 3','Activo'),(5,'Categoria Nueva','Inactivo'),(6,'Categoria A','Activo'),(7,'Categoría Nueva 22','Activo'),(8,'cat ew','Inactivo'),(9,'categoria nueva fdsfds','Inactivo');
+INSERT INTO `categoriasproductos` VALUES (1,'CAT1','Categoria Prueba','Inactivo'),(2,'CAT2','Categoria Prueba 2','Inactivo'),(3,'CAT3','Categoria Prueba 3','Activo'),(5,'CAT4','Categoria Nueva','Inactivo'),(6,'CAT5','Categoria A','Activo'),(7,'CAT6','Categoría Nueva 22','Activo'),(8,'CAT7','cat ew','Inactivo'),(9,'CAT8','categoria nueva fdsfds','Inactivo');
 /*!40000 ALTER TABLE `categoriasproductos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-29 17:03:35
+-- Dump completed on 2021-04-30 21:57:00

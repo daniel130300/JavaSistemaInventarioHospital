@@ -1,0 +1,20 @@
+CREATE DEFINER=`root`@`%` TRIGGER `actualizar_bitacora_inventarioproductos` AFTER UPDATE ON `inventarioproductos` FOR EACH ROW CALL BitacoraInventarioProductos
+(
+	"Actualizar",
+	New.InvPrdId,
+	New.InvPrdCodInterno,
+	New.InvPrdFchCaducidad,
+	New.InvPrdEstado,
+	New.InvPrdPadre,
+    New.InvPrdFactor,
+    New.InvPrdExtraible,
+    New.UndId,
+    Old.InvPrdId,
+	Old.InvPrdCodInterno,
+	Old.InvPrdFchCaducidad,
+	Old.InvPrdEstado,
+	Old.InvPrdPadre,
+    Old.InvPrdFactor,
+    Old.InvPrdExtraible,
+    Old.UndId
+)

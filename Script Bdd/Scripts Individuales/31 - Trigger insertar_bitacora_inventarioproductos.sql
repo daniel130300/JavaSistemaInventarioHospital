@@ -1,0 +1,20 @@
+CREATE DEFINER=`root`@`%` TRIGGER `insertar_bitacora_inventarioproductos` AFTER INSERT ON `inventarioproductos` FOR EACH ROW CALL BitacoraInventarioProductos
+(
+	"Insertar",
+	New.InvPrdId,
+	New.InvPrdCodInterno,
+	New.InvPrdFchCaducidad,
+	New.InvPrdEstado,
+	New.InvPrdPadre,
+	New.InvPrdFactor,
+	New.InvPrdExtraible,
+	New.UndId,
+	0,
+	"",
+	null,
+	"",
+	0,
+	0,
+	"",
+	0
+)

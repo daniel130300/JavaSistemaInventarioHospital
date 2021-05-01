@@ -138,10 +138,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
 
         tableCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id Categoría", "Descripción", "Estado"

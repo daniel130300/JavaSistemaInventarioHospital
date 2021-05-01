@@ -501,10 +501,7 @@ public class MantenimientoSuministrosView extends javax.swing.JFrame {
 
         tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id producto", "Nombre", "Descripción", "Fecha caducidad", "Cantidad", "Precio venta"

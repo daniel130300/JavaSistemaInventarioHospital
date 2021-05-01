@@ -230,10 +230,7 @@ public class MantenimientoProveedoresView extends javax.swing.JFrame {
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id proveedor", "RTN", "Nombre", "Correo", "Telefono", "Telefono(Opcional)", "Telefono(Opcional)", "Rubro Id", "Rubro", "Contacto", "Direccion", "Estado"

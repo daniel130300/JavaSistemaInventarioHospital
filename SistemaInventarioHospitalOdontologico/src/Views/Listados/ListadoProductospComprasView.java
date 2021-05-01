@@ -128,10 +128,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
 
         tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id Producto", "Codigo Interno Producto", "Nombre", "Descripción", "Id Categoría", "Categoría"

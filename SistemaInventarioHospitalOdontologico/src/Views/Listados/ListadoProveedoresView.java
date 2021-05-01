@@ -93,10 +93,7 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id Proveedor", "RTN", "Nombre", "Correo", "Telefono", "Contacto", "Dirección"

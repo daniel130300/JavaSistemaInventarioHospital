@@ -142,10 +142,7 @@ public class TablaGrandeInventarioSuministrosView extends javax.swing.JFrame {
 
         tableSuministros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id suministro", "Nombre", "Costos fijos", "Precio venta", "Stock", "Stock Máximo", "Stock Mínimo", "Categoría", "Estado"

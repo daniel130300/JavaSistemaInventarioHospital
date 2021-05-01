@@ -234,7 +234,7 @@
                 <Component class="javax.swing.JTable" name="tableSuministros">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="9" rowCount="4">
+                      <Table columnCount="9" rowCount="0">
                         <Column editable="false" title="Id suministro" type="java.lang.Object"/>
                         <Column editable="false" title="Nombre" type="java.lang.Object"/>
                         <Column editable="false" title="Costos fijos" type="java.lang.Object"/>

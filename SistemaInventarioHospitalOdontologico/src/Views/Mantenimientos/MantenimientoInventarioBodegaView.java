@@ -239,10 +239,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
         tableBodega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id lote", "Id producto", "Nombre", "Descripción", "Stock actual", "Stock máximo", "Stock mínimo", "Fecha Caducidad", "Categoría", "Unidad", "Estado"
@@ -279,7 +276,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);

@@ -132,10 +132,7 @@ public class MantenimientoUnidadesView extends javax.swing.JFrame {
 
         tableUnidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id Unidad", "Descripción", "Estado"

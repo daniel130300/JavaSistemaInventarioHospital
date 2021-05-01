@@ -143,10 +143,7 @@ public class MantenimientoProductosCompuestosView extends javax.swing.JFrame {
 
         tableProductosCompuestos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id producto compuesto", "Nombre", "Descripción"

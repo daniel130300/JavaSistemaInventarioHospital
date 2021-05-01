@@ -126,10 +126,7 @@ public class MantenimientoRubrosView extends javax.swing.JFrame {
 
         tableRubros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id Rubros", "Descripción", "Estado"

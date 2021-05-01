@@ -8,7 +8,7 @@ package Views.Menus;
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.MenuBodegaController;
 import Views.Mantenimientos.BitacoraCatalogoProductoView;
-import Views.Mantenimientos.BitacoraLoteProductosView;
+import Views.Mantenimientos.BitacoraInventarioProductosView;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.InventarioBodegaView;
@@ -326,7 +326,7 @@ public class MenuBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientoCatalogoBodegaActionPerformed
 
     private void btnBitacoraInventarioBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBitacoraInventarioBodegaActionPerformed
-        BitacoraLoteProductosView bitacoraLoteProductosView  = new BitacoraLoteProductosView();
+        BitacoraInventarioProductosView bitacoraLoteProductosView  = new BitacoraInventarioProductosView();
         bitacoraLoteProductosView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBitacoraInventarioBodegaActionPerformed

@@ -137,10 +137,7 @@ public class InventarioBodegaView extends javax.swing.JFrame {
 
         tableBodega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id lote", "Id producto", "Nombre", "Descripción", "Stock actual", "Stock máximo", "Stock mínimo", "Fecha Caducidad", "Categoría", "Unidad", "Estado"

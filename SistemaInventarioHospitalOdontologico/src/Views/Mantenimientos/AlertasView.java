@@ -114,10 +114,7 @@ public class AlertasView extends javax.swing.JFrame {
 
         tableAlertas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Listado de Alertas"

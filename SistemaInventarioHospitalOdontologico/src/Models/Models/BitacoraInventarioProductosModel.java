@@ -11,7 +11,7 @@ package Models.Models;
  *  Clase que se encarga de establecer el modelo de datos para la Bitacora del 
  *  Lote de Productos
  */
-public class BitacoraLoteProductosModel 
+public class BitacoraInventarioProductosModel 
 {
     // **************************************************
     // Variables
@@ -19,12 +19,12 @@ public class BitacoraLoteProductosModel
     
     private Integer BcpId;
     private String UsrUsuario;
-    private Integer LprId;
-    private Integer PrdId;
-    private String PrdNombre;
+    private Integer InvPrdId;
+    private String InvPrdCodInterno;    
     private String BcpAccion;
     private String BcpDescripcionCambios;
     private String BcpFecha;
+
 
     // **************************************************
     // Getters y Setters
@@ -79,30 +79,19 @@ public class BitacoraLoteProductosModel
         this.BcpFecha = BcpFecha;
     }
 
-    public Integer getPrdId() {
-        return PrdId;
+    public Integer getInvPrdId() {
+        return InvPrdId;
     }
 
-    public void setPrdId(Integer PrdId) 
-    {
-        this.PrdId = PrdId;
+    public void setInvPrdId(Integer InvPrdId) {
+        this.InvPrdId = InvPrdId;
     }
 
-    public String getPrdNombre() {
-        return PrdNombre;
+    public String getInvPrdCodInterno() {
+        return InvPrdCodInterno;
     }
 
-    public void setPrdNombre(String PrdNombre) 
-    {
-        this.PrdNombre = PrdNombre;
-    } 
-
-    public Integer getLprId() {
-        return LprId;
-    }
-
-    public void setLprId(Integer LprId) 
-    {
-        this.LprId = LprId;
+    public void setInvPrdCodInterno(String InvPrdCodInterno) {
+        this.InvPrdCodInterno = InvPrdCodInterno;
     }
 }

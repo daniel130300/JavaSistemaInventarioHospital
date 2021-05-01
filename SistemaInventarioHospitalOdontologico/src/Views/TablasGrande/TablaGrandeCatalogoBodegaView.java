@@ -125,10 +125,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
         tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id producto", "Nombre", "Descripción", "Stock máximo", "Stock mínimo", "Id Categoría", "Categoría", "Estado"
@@ -192,7 +189,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
         btnRegresar1.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegresar1.setInheritsPopupMenu(true);
         btnRegresar1.addMouseListener(new java.awt.event.MouseAdapter() {

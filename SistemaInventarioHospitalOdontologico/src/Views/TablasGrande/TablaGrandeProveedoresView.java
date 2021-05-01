@@ -160,10 +160,7 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
 
         tableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id proveedor", "Registro Sanitario", "RTN", "Nombre", "Correo", "Telefono", "Telefono(Opcional)", "Telefono(Opcional)", "Id Rubro", "Rubro", "Direccion", "Estado"

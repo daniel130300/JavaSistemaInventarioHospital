@@ -123,4 +123,9 @@ public class Validaciones
         
         return false;
     }
+    
+    public static Boolean validarNomenclatura(String letras) 
+    {
+        return letras.matches("[a-zA-Z]{3}");
+    }
 }

@@ -54,7 +54,7 @@ public class UsuarioConexion
                     stm = con.createStatement();
                     String query = "SELECT u.*, a.AreDescripcion "
                             + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                            + "WHERE UsrEstado = 'Activo' "
+                            + "WHERE UsrEstado = 1"
                             + "ORDER BY u.UsrId ASC";
 
                     rss = stm.executeQuery(query);
@@ -68,7 +68,7 @@ public class UsuarioConexion
                         usuario.setUsrApellido(rss.getString("UsrApellido"));
                         usuario.setUsrCorreo(rss.getString("UsrCorreo"));
                         usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                        usuario.setUsrEstado(rss.getString("UsrEstado"));
+                        usuario.setUsrEstado(rss.getInt("UsrEstado"));
                         usuario.setAreId(rss.getInt("AreId"));
                         usuario.setAreDescripcion(rss.getString("AreDescripcion"));
                         usuarios.add(usuario);
@@ -88,7 +88,7 @@ public class UsuarioConexion
                     stm = con.createStatement();
                     String query = "SELECT u.*, a.AreDescripcion "
                             + "FROM usuarios u INNER JOIN areas a ON u.AreId = a.AreId "
-                            + "WHERE UsrEstado = 'Inactivo' "
+                            + "WHERE UsrEstado = 0"
                             + "ORDER BY u.UsrId ASC";
 
                     rss = stm.executeQuery(query);
@@ -102,7 +102,7 @@ public class UsuarioConexion
                         usuario.setUsrApellido(rss.getString("UsrApellido"));
                         usuario.setUsrCorreo(rss.getString("UsrCorreo"));
                         usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                        usuario.setUsrEstado(rss.getString("UsrEstado"));
+                        usuario.setUsrEstado(rss.getInt("UsrEstado"));
                         usuario.setAreId(rss.getInt("AreId"));
                         usuario.setAreDescripcion(rss.getString("AreDescripcion"));
                         usuarios.add(usuario);
@@ -136,7 +136,7 @@ public class UsuarioConexion
                         usuario.setUsrApellido(rss.getString("UsrApellido"));
                         usuario.setUsrCorreo(rss.getString("UsrCorreo"));
                         usuario.setUsrUsuario(rss.getString("UsrUsuario"));
-                        usuario.setUsrEstado(rss.getString("UsrEstado"));
+                        usuario.setUsrEstado(rss.getInt("UsrEstado"));
                         usuario.setAreId(rss.getInt("AreId"));
                         usuario.setAreDescripcion(rss.getString("AreDescripcion"));
                         usuarios.add(usuario);
@@ -369,7 +369,7 @@ public class UsuarioConexion
             cs.setString            (6, usuario.getUsrCorreo());
             cs.setString            (7, usuario.getUsrUsuario());
             cs.setString            (8, usuario.getUsrContrasenia());
-            cs.setString            (9, usuario.getUsrEstado());
+            cs.setInt               (9, usuario.getUsrEstado());
             cs.setInt               (10, usuario.getAreId());
             cs.registerOutParameter (11, Types.VARCHAR);
             cs.executeUpdate();

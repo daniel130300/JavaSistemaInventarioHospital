@@ -385,6 +385,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         this.txtNomenclatura.getText(),this.txtDescripcion.getText(), this.cmbEstado.getSelectedItem().toString(),this.lblErrorDescripcion, 
         this.lblErrorNomenclatura))
         {
+            this.txtNomenclatura.setEnabled(true);
             this.btnAgregar.setEnabled(true);
             this.btnEditar.setEnabled(false);
             this.cmbEstado.setEnabled(false);
@@ -400,6 +401,7 @@ public class MantenimientoCategoriasView extends javax.swing.JFrame {
         this.tableCategorias.clearSelection();
         this.LimpiarInputs();
         this.LimpiarErrLabels();
+        this.txtNomenclatura.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed

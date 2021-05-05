@@ -28,6 +28,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import Utils.Estados.Estados;
 
 
 /**
@@ -215,6 +216,7 @@ public class UsuarioController extends GeneralController
         DefaultTableModel modelo = (DefaultTableModel) tableUsuarios.getModel(); 
         modelo.setRowCount(0);
         ArrayList<UsuarioModel> usuarios = new ArrayList<>();
+        Estados estados = new Estados();
         
         switch(accion)
         {
@@ -232,7 +234,7 @@ public class UsuarioController extends GeneralController
                             usuarios.get(i).getUsrApellido(),
                             usuarios.get(i).getUsrCorreo(),
                             usuarios.get(i).getUsrUsuario(),
-                            usuarios.get(i).getUsrEstado(),
+                            estados.getEstadoKey(usuarios.get(i).getUsrEstado()),
                             usuarios.get(i).getAreId(),
                             usuarios.get(i).getAreDescripcion()
                         }
@@ -255,7 +257,7 @@ public class UsuarioController extends GeneralController
                             usuarios.get(i).getUsrApellido(),
                             usuarios.get(i).getUsrCorreo(),
                             usuarios.get(i).getUsrUsuario(),
-                            usuarios.get(i).getUsrEstado(),
+                            estados.getEstadoKey(usuarios.get(i).getUsrEstado()),
                             usuarios.get(i).getAreId(),
                             usuarios.get(i).getAreDescripcion()
                         }
@@ -278,7 +280,7 @@ public class UsuarioController extends GeneralController
                             usuarios.get(i).getUsrApellido(),
                             usuarios.get(i).getUsrCorreo(),
                             usuarios.get(i).getUsrUsuario(),
-                            usuarios.get(i).getUsrEstado(),
+                            estados.getEstadoKey(usuarios.get(i).getUsrEstado()),
                             usuarios.get(i).getAreId(),
                             usuarios.get(i).getAreDescripcion()
                         }
@@ -395,6 +397,7 @@ public class UsuarioController extends GeneralController
             JComboBox cmbEstado, JComboBox cmbArea)
     {
         Integer UsrId = null;
+        Estados estados = new Estados();
         UsuariosCache usuarioCache = new UsuariosCache();
         if(usuarioCache.isDatosCompartidos())
         {
@@ -404,7 +407,7 @@ public class UsuarioController extends GeneralController
             txtApellido.setText(usuarioCache.getUsuario().getUsrApellido());
             txtCorreo.setText(usuarioCache.getUsuario().getUsrCorreo());
             txtUsuario.setText(usuarioCache.getUsuario().getUsrUsuario());
-            cmbEstado.setSelectedItem(usuarioCache.getUsuario().getUsrEstado());
+            cmbEstado.setSelectedItem(estados.getEstadoKey(usuarioCache.getUsuario().getUsrEstado()));
             cmbArea.setSelectedItem(usuarioCache.getUsuario().getAreDescripcion());
         }
         
@@ -632,6 +635,8 @@ public class UsuarioController extends GeneralController
             Integer id_area)
     {
         UsuarioModel usuarioModel = new UsuarioModel();
+        Estados estados = new Estados();
+        
         usuarioModel.setUsrId(id);
         usuarioModel.setUsrIdentidad(trimmedIdentidad);
         usuarioModel.setUsrNombre(trimmedNombre);
@@ -639,7 +644,7 @@ public class UsuarioController extends GeneralController
         usuarioModel.setUsrCorreo(trimmedCorreo);
         usuarioModel.setUsrUsuario(trimmedUsuario);
         usuarioModel.setUsrContrasenia(hashedpassword);
-        usuarioModel.setUsrEstado(estado);
+        usuarioModel.setUsrEstado(estados.getValueEstado(estado));
         usuarioModel.setAreId(id_area+1);
         
         return usuarioModel;

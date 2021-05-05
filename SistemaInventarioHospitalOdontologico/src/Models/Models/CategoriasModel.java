@@ -19,7 +19,7 @@ public class CategoriasModel
     private Integer CprId;
     private String CprNomenclatura;
     private String CprDescripcion;
-    private String CprEstado;
+    private Integer CprEstado;
     
     // **************************************************
     // Getters y Setters
@@ -28,6 +28,7 @@ public class CategoriasModel
     {
         return CprNomenclatura;
     }
+    
     public void setCprNomenclatura(String CprNomenclatura) {
         this.CprNomenclatura = CprNomenclatura;
     }
@@ -51,13 +52,11 @@ public class CategoriasModel
         this.CprDescripcion = CprDescripcion;
     }
 
-    public String getCprEstado() 
-    {
+    public Integer getCprEstado() {
         return CprEstado;
     }
 
-    public void setCprEstado(String CprEstado) 
-    {
+    public void setCprEstado(Integer CprEstado) {
         this.CprEstado = CprEstado;
     }
 }

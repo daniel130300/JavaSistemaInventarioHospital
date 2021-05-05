@@ -9,6 +9,7 @@ import Controllers.Controllers.LoginController;
 import Controllers.Controllers.UsuarioController;
 import Models.Models.UsuarioModel;
 import Utils.Cache.UsuariosCache;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoUsuariosView;
 import java.awt.Color;
@@ -257,7 +258,8 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void tableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseClicked
-        int seleccion = this.tableUsuarios.rowAtPoint(evt.getPoint()); ;
+        int seleccion = this.tableUsuarios.rowAtPoint(evt.getPoint()); 
+        Estados estados = new Estados();
         UsuarioModel usuarioModel = new UsuarioModel();
         usuarioModel.setUsrId(Integer.parseInt(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 0)))); 
         usuarioModel.setUsrIdentidad(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 1)));
@@ -265,7 +267,7 @@ public class TablaGrandeUsuariosView extends javax.swing.JFrame {
         usuarioModel.setUsrApellido(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 3)));
         usuarioModel.setUsrCorreo(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 4)));
         usuarioModel.setUsrUsuario(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion, 5)));
-        usuarioModel.setUsrEstado(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,6)));
+        usuarioModel.setUsrEstado(estados.getValueEstado((String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,6)))));
         usuarioModel.setAreDescripcion(String.valueOf(this.tableUsuarios.getModel().getValueAt(seleccion,8)));
         UsuariosCache usuarioCache = new UsuariosCache();
         usuarioCache.setDatosCompartidos(true);

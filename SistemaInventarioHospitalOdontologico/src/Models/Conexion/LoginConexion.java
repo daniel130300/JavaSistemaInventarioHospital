@@ -57,7 +57,7 @@ public class LoginConexion
                 usuarioModel.setUsrNombre(rss.getString("UsrNombre"));
                 usuarioModel.setUsrApellido(rss.getString("UsrApellido"));
                 usuarioModel.setUsrCorreo(rss.getString("UsrCorreo"));
-                usuarioModel.setUsrEstado(rss.getString("UsrEstado"));
+                usuarioModel.setUsrEstado(rss.getInt("UsrEstado"));
             }
             
             con.close();

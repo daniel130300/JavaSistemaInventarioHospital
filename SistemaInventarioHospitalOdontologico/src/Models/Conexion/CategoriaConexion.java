@@ -48,7 +48,7 @@ public class CategoriaConexion
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
                     String query = "SELECT *FROM categoriasproductos"
-                            + " WHERE CprEstado = 'Activo'";
+                            + " WHERE CprEstado = 1";
 
                      rss = stm.executeQuery(query); 
 
@@ -58,7 +58,7 @@ public class CategoriaConexion
                         categoria.setCprId(rss.getInt("CprId"));
                         categoria.setCprNomenclatura(rss.getString("CprNomenclatura"));
                         categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                        categoria.setCprEstado(rss.getString("CprEstado"));
+                        categoria.setCprEstado(rss.getInt("CprEstado"));
                         categorias.add(categoria);
                      }  
                         con.close();
@@ -75,7 +75,7 @@ public class CategoriaConexion
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
                     String query = "SELECT *FROM categoriasproductos "
-                            + "WHERE CprEstado = 'Inactivo'";
+                            + "WHERE CprEstado = 0";
 
 
                     rss = stm.executeQuery(query); 
@@ -86,7 +86,7 @@ public class CategoriaConexion
                        categoria.setCprId(rss.getInt("CprId"));
                        categoria.setCprNomenclatura(rss.getString("CprNomenclatura"));
                        categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                       categoria.setCprEstado(rss.getString("CprEstado"));
+                       categoria.setCprEstado(rss.getInt("CprEstado"));
                        categorias.add(categoria);
                     }  
                     con.close();
@@ -112,7 +112,7 @@ public class CategoriaConexion
                         categoria.setCprId(rss.getInt("CprId"));
                         categoria.setCprNomenclatura(rss.getString("CprNomenclatura"));
                         categoria.setCprDescripcion(rss.getString("CprDescripcion"));
-                        categoria.setCprEstado(rss.getString("CprEstado"));
+                        categoria.setCprEstado(rss.getInt("CprEstado"));
                         categorias.add(categoria);
                     }  
                     
@@ -150,7 +150,7 @@ public class CategoriaConexion
             cs.setInt               (2, categoria.getCprId());
             cs.setString            (3, categoria.getCprNomenclatura());
             cs.setString            (4, categoria.getCprDescripcion());
-            cs.setString            (5, categoria.getCprEstado());
+            cs.setInt               (5, categoria.getCprEstado());
             cs.registerOutParameter (6, Types.VARCHAR);
             cs.executeUpdate();
             estado = cs.getString(6);

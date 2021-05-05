@@ -8,6 +8,7 @@ package Controllers.Controllers;
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.CategoriaConexion;
 import Models.Models.CategoriasModel;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class CategoriasController
         if(generalValidacionError == false)
         { 
             CategoriasModel categoria = new CategoriasModel();
+            Estados estados = new Estados();
             categoria.setCprId(id);
             categoria.setCprNomenclatura(trimmedNomenclatura);
             categoria.setCprDescripcion(trimmedDescripcion);
@@ -74,14 +76,14 @@ public class CategoriasController
             switch(accion)
             {
                 case "insertar":
-                    categoria.setCprEstado("Activo");
+                    categoria.setCprEstado(estados.getValueEstado("Activo"));
                     resultado = CategoriaConexion.MantenimientoCategorias(accion, categoria);
                     msj =  "Categoría insertada con éxito.";
                     mntError = CategoriasController.mensajesRetroalimentacion(msj, resultado);
                 break;
                 
                 case "editar":
-                     categoria.setCprEstado(estado);
+                     categoria.setCprEstado(estados.getValueEstado(estado));
                     resultado = CategoriaConexion.MantenimientoCategorias(accion, categoria);
                     msj =  "Categoría actualizada con éxito.";
                     mntError = CategoriasController.mensajesRetroalimentacion(msj, resultado);                   
@@ -130,6 +132,7 @@ public class CategoriasController
         DefaultTableModel modelo = (DefaultTableModel) tableCategorias.getModel(); 
         modelo.setRowCount(0);
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
+         Estados estados = new Estados();
         switch(accion)
         {
             case "Activos":
@@ -143,7 +146,7 @@ public class CategoriasController
                             categorias.get(i).getCprId(),
                             categorias.get(i).getCprNomenclatura(),
                             categorias.get(i).getCprDescripcion(),
-                            categorias.get(i).getCprEstado()
+                            estados.getEstadoKey(categorias.get(i).getCprEstado())    
                         }
                     );
                 }
@@ -161,7 +164,7 @@ public class CategoriasController
                             categorias.get(i).getCprId(),
                             categorias.get(i).getCprNomenclatura(),
                             categorias.get(i).getCprDescripcion(),
-                            categorias.get(i).getCprEstado()
+                            estados.getEstadoKey(categorias.get(i).getCprEstado())   
                         }
                     );
                 }
@@ -179,7 +182,7 @@ public class CategoriasController
                             categorias.get(i).getCprId(),
                             categorias.get(i).getCprNomenclatura(),
                             categorias.get(i).getCprDescripcion(),
-                            categorias.get(i).getCprEstado()
+                            estados.getEstadoKey(categorias.get(i).getCprEstado())   
                         }
                     );
                 }

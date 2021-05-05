@@ -77,7 +77,7 @@ public class LoginController
                     UsuarioLogueadoCache.setUsrApellido(usuarioModel.getUsrApellido());
                     UsuarioLogueadoCache.setUsrCorreo(usuarioModel.getUsrCorreo());    
 
-                    if(usuarioModel.getUsrEstado().equals("Activo"))
+                    if(usuarioModel.getUsrEstado() == 1)
                     {
                         autorizacion = true;
                         privilegios = setUsrLogueadoPrivilegios(UsuarioLogueadoCache.getUsrId(), autorizacion);

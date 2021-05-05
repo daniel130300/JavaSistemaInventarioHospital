@@ -23,7 +23,7 @@ public class UsuarioModel
     private String UsrCorreo;
     private String UsrUsuario;
     private String UsrContrasenia;
-    private String UsrEstado;
+    private Integer UsrEstado;
     private Integer AreId;
     private String AreDescripcion;
     
@@ -101,13 +101,11 @@ public class UsuarioModel
         this.UsrContrasenia = UsrContrasenia;
     }
 
-    public String getUsrEstado() 
-    {
+    public Integer getUsrEstado() {
         return UsrEstado;
     }
 
-    public void setUsrEstado(String UsrEstado) 
-    {
+    public void setUsrEstado(Integer UsrEstado) {
         this.UsrEstado = UsrEstado;
     }
 

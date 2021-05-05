@@ -6,6 +6,7 @@
 package Views.Mantenimientos;
 
 import Controllers.Controllers.LoginController;
+import Controllers.Controllers.RegistrarCompraController;
 import Views.Listados.ListadoProductospComprasView;
 import Views.Menus.MenuComprasView;
 import Views.Menus.MenuInicioView;
@@ -25,6 +26,8 @@ public class RegistrarCompraView extends javax.swing.JFrame {
     {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        RegistrarCompraController.setPlaceHolders(this.txtNumeroFactura, this.txtNumeroTransferencia, this.txtNumeroOrden,
+            this.txtNombreProducto, this.txtDescripcionProducto, this.txtFechaCaducidad, this.txtCantidad, this.txtPrecio, this.txtBuscar);
     }
 
     /**

@@ -47,7 +47,7 @@ public class UnidadesConexion
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
                     String query = "SELECT *FROM unidades"
-                            + " WHERE UndEstado = 'Activo'";
+                            + " WHERE UndEstado = 1";
 
                     rss = stm.executeQuery(query); 
 
@@ -56,7 +56,7 @@ public class UnidadesConexion
                         UnidadesModel unidad = new UnidadesModel();
                         unidad.setUndId(rss.getInt("UndId"));
                         unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                        unidad.setUndEstado(rss.getString("UndEstado"));
+                        unidad.setUndEstado(rss.getInt("UndEstado"));
                         unidades.add(unidad);
                     }  
                     
@@ -74,7 +74,7 @@ public class UnidadesConexion
                     con = Conexion.getConexion(con);
                     stm = con.createStatement();
                     String query = "SELECT *FROM unidades "
-                            + "WHERE UndEstado = 'Inactivo'";
+                            + "WHERE UndEstado = 0";
 
 
                     rss = stm.executeQuery(query); 
@@ -84,7 +84,7 @@ public class UnidadesConexion
                         UnidadesModel unidad = new UnidadesModel();
                         unidad.setUndId(rss.getInt("UndId"));
                         unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                        unidad.setUndEstado(rss.getString("UndEstado"));
+                        unidad.setUndEstado(rss.getInt("UndEstado"));
                         unidades.add(unidad);
                     }  
                     
@@ -112,7 +112,7 @@ public class UnidadesConexion
                         UnidadesModel unidad = new UnidadesModel();
                         unidad.setUndId(rss.getInt("UndId"));
                         unidad.setUndDescripcion(rss.getString("UndDescripcion"));
-                        unidad.setUndEstado(rss.getString("UndEstado"));
+                        unidad.setUndEstado(rss.getInt("UndEstado"));
                         unidades.add(unidad);
                     }  
                     
@@ -149,7 +149,7 @@ public class UnidadesConexion
             cs.setString            (1, accion);
             cs.setInt               (2, unidad.getUndId());
             cs.setString            (3, unidad.getUndDescripcion());
-            cs.setString            (4, unidad.getUndEstado());
+            cs.setInt            (4, unidad.getUndEstado());
             cs.registerOutParameter (5, Types.VARCHAR);
             cs.executeUpdate();
             estado = cs.getString(5);

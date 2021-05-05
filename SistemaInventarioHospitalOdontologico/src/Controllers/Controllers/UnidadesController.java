@@ -8,6 +8,7 @@ package Controllers.Controllers;
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.UnidadesConexion;
 import Models.Models.UnidadesModel;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class UnidadesController
         if(generalValidacionError == false)
         { 
             UnidadesModel unidad = new UnidadesModel();
+            Estados estados = new Estados();
             unidad.setUndId(id);
             unidad.setUndDescripcion(descripcion);
             String msj = "";
@@ -72,7 +74,7 @@ public class UnidadesController
             switch(accion)
             {
                 case "insertar":
-                    unidad.setUndEstado("Activo");
+                    unidad.setUndEstado(estados.getValueEstado("Activo"));
                     resultado = UnidadesConexion.MantenimientoUnidades(accion, unidad);
                     msj =  "Unidad insertada con éxito";
                     mntError = UnidadesController.mensajesRetroalimentacion(msj, resultado);
@@ -80,7 +82,7 @@ public class UnidadesController
                 break;
                 
                 case "editar":
-                    unidad.setUndEstado(estado);
+                    unidad.setUndEstado(estados.getValueEstado(estado));
                     resultado = UnidadesConexion.MantenimientoUnidades(accion, unidad);
                     msj =  "Unidad actualizada con éxito";
                     mntError = UnidadesController.mensajesRetroalimentacion(msj, resultado);                   
@@ -123,6 +125,7 @@ public class UnidadesController
     {  
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
+        Estados estados = new Estados();
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
         switch(accion)
         {
@@ -135,7 +138,7 @@ public class UnidadesController
                         {
                             unidades.get(i).getUndId(),
                             unidades.get(i).getUndDescripcion(),
-                            unidades.get(i).getUndEstado()
+                            estados.getEstadoKey(unidades.get(i).getUndEstado())
                         }
                     );
                 }
@@ -151,7 +154,7 @@ public class UnidadesController
                         {
                             unidades.get(i).getUndId(),
                             unidades.get(i).getUndDescripcion(),
-                            unidades.get(i).getUndEstado()
+                            estados.getEstadoKey(unidades.get(i).getUndEstado())
                         }
                     );
                 }
@@ -167,7 +170,7 @@ public class UnidadesController
                         {
                             unidades.get(i).getUndId(),
                             unidades.get(i).getUndDescripcion(),
-                            unidades.get(i).getUndEstado()
+                           estados.getEstadoKey(unidades.get(i).getUndEstado())
                         }
                     );
                 }

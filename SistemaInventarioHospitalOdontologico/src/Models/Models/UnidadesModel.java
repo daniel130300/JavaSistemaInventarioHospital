@@ -18,7 +18,7 @@ public class UnidadesModel {
     
     private Integer UndId;
     private String UndDescripcion;
-    private String UndEstado;
+    private Integer UndEstado;
 
     // **************************************************
     // Getters y Setters
@@ -44,13 +44,13 @@ public class UnidadesModel {
         this.UndDescripcion = UndDescripcion;
     }
 
-    public String getUndEstado() 
-    {
+    public Integer getUndEstado() {
         return UndEstado;
     }
 
-    public void setUndEstado(String UndEstado) 
-    {
+    public void setUndEstado(Integer UndEstado) {
         this.UndEstado = UndEstado;
-    } 
+    }
+
+   
 }

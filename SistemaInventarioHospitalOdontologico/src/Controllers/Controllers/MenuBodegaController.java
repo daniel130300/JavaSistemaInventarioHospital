@@ -44,16 +44,18 @@ public class MenuBodegaController
             JButton btnBitacoraCatalogoBodega,
             JButton btnMantenimientoInventarioBodega,
             JButton btnInventarioBodega, 
-            JButton btnBitacoraInventarioBodega
+            JButton btnBitacoraInventarioBodega,
+            JButton btnMantenimientoKits
             )
     {
         this.AccessoModuloMantenimientoCatalogoBodega(btnMantenimientoCatalogoBodega);
+        this.AccessoModuloMantenimientoKits(btnMantenimientoKits);
         this.AccessoModuloMantenimientoCategorias(btnMantenimientoCategorias);
         this.AccessoModuloMantenimientoUnidades(btnMantenimientoUnidades);
         this.AccessoModuloBitacoraCatalogoBodega(btnBitacoraCatalogoBodega);
         this.AccessoModuloMantenimientoInventarioBodega(btnMantenimientoInventarioBodega);
         this.AccessoModuloInventarioBodega(btnInventarioBodega);
-        this.AccessoModuloBitacoraInventarioBodega(btnBitacoraInventarioBodega);
+        this.AccessoModuloBitacoraInventarioBodega(btnBitacoraInventarioBodega);   
     }
     
     // **************************************************
@@ -77,7 +79,6 @@ public class MenuBodegaController
             this.setModuloBloqueado(btnMantenimientoCatalogoBodega);
         }
     }  
-    
     /**
     * @param btnMantenimientoCategorias JButton
     * Método que se encarga de proporcionar o no acceso al módulo Mantenimiento Categorías
@@ -202,7 +203,19 @@ public class MenuBodegaController
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }
-    
+        private void AccessoModuloMantenimientoKits(JButton btnMantenimientoKits)
+    {  
+        if(privilegios.get("bodega")
+                .get(4) != null)
+        {
+            btnMantenimientoKits.setEnabled(true);
+            btnMantenimientoKits.setText("<html><center>Mantenimiento Kits</center></html>");
+        }
+        else
+        {
+            this.setModuloBloqueado(btnMantenimientoKits);
+        }
+    } 
     /**
     * @param boton JButton
     * Método que se encarga de bloquear un módulo.

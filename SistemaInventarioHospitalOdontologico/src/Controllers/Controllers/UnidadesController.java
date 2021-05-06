@@ -127,11 +127,8 @@ public class UnidadesController
         modelo.setRowCount(0);
         Estados estados = new Estados();
         ArrayList<UnidadesModel> unidades = new ArrayList<>();
-        switch(accion)
-        {
-            case "Activos":
-                unidades = UnidadesConexion.ListadoUnidades("Activos");
-                for (int i = 0; i <unidades.size(); i++) 
+        unidades = UnidadesConexion.ListadoUnidades(accion);
+        for (int i = 0; i <unidades.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
@@ -143,41 +140,7 @@ public class UnidadesController
                     );
                 }
                 FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;
-        
-            case "Inactivos":
-                unidades = UnidadesConexion.ListadoUnidades("Inactivos");
-                for (int i = 0; i <unidades.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            unidades.get(i).getUndId(),
-                            unidades.get(i).getUndDescripcion(),
-                            estados.getEstadoKey(unidades.get(i).getUndEstado())
-                        }
-                    );
-                }
-                FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;  
-        
-            case "Todos":
-                unidades = UnidadesConexion.ListadoUnidades("Todos");    
-                for (int i = 0; i <unidades.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            unidades.get(i).getUndId(),
-                            unidades.get(i).getUndDescripcion(),
-                           estados.getEstadoKey(unidades.get(i).getUndEstado())
-                        }
-                    );
-                }
-                FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;
-        }
-    } 
+ } 
     /*
     * @param tableCategorias JTable
     * @param fieldBusqueda JTextField 

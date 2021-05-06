@@ -132,13 +132,9 @@ public class CategoriasController
         DefaultTableModel modelo = (DefaultTableModel) tableCategorias.getModel(); 
         modelo.setRowCount(0);
         ArrayList<CategoriasModel> categorias = new ArrayList<>();
-         Estados estados = new Estados();
-        switch(accion)
-        {
-            case "Activos":
-                categorias = CategoriaConexion.ListadoCategorias("Activos");
-
-                for (int i = 0; i <categorias.size(); i++) 
+        Estados estados = new Estados();
+        categorias = CategoriaConexion.ListadoCategorias(accion);
+        for (int i = 0; i <categorias.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
@@ -150,47 +146,8 @@ public class CategoriasController
                         }
                     );
                 }
-                FormatoTabla(tableCategorias, modelo.getColumnCount());
-            break;
-            
-            case "Inactivos":
-                categorias = CategoriaConexion.ListadoCategorias("Inactivos");
-
-                for (int i = 0; i <categorias.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            categorias.get(i).getCprId(),
-                            categorias.get(i).getCprNomenclatura(),
-                            categorias.get(i).getCprDescripcion(),
-                            estados.getEstadoKey(categorias.get(i).getCprEstado())   
-                        }
-                    );
-                }
-                FormatoTabla(tableCategorias, modelo.getColumnCount());
-            break;  
-            
-            case "Todos":
-                categorias = CategoriaConexion.ListadoCategorias("Todos");
-
-                for (int i = 0; i <categorias.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            categorias.get(i).getCprId(),
-                            categorias.get(i).getCprNomenclatura(),
-                            categorias.get(i).getCprDescripcion(),
-                            estados.getEstadoKey(categorias.get(i).getCprEstado())   
-                        }
-                    );
-                }
-                FormatoTabla(tableCategorias, modelo.getColumnCount());
-            break;
-        }
+            FormatoTabla(tableCategorias, modelo.getColumnCount());
     }
-    
     /**
     * 
     * @param tableCategorias JTable

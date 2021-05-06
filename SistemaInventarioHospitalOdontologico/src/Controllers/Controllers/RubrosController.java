@@ -114,11 +114,8 @@ public class RubrosController
         DefaultTableModel modelo = (DefaultTableModel) tableUnidades.getModel(); 
         modelo.setRowCount(0);
         ArrayList<RubrosModel> rubros = new ArrayList<>();
-        switch(accion)
-        {
-            case "Activos":
-                rubros = RubrosConexion.ListadoRubros("Activos");
-                for (int i = 0; i <rubros.size(); i++) 
+        rubros = RubrosConexion.ListadoRubros(accion);     
+        for (int i = 0; i <rubros.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
@@ -130,40 +127,6 @@ public class RubrosController
                     );
                 }
                 FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;
-        
-            case "Inactivos":
-                rubros = RubrosConexion.ListadoRubros("Inactivos");
-                for (int i = 0; i <rubros.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            rubros.get(i).getRubId(),
-                            rubros.get(i).getRubDescripcion(),
-                            rubros.get(i).getRubEstado()
-                        }
-                    );
-                }
-                FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;  
-        
-            case "Todos":
-                rubros = RubrosConexion.ListadoRubros("Todos");    
-                for (int i = 0; i <rubros.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            rubros.get(i).getRubId(),
-                            rubros.get(i).getRubDescripcion(),
-                            rubros.get(i).getRubEstado()
-                        }
-                    );
-                }
-                FormatoTabla(tableUnidades, modelo.getColumnCount());
-            break;
-        }
     } 
     /*
     * @param tableCategorias JTable

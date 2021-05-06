@@ -47,7 +47,7 @@ public class CatalogoProductoConexion
                     
                     String query = "SELECT a.*, b.CprDescripcion "
                      + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
-                     + "WHERE PrdEstado = 'Activo' " 
+                     + "WHERE PrdEstado = 1 " 
                      + "ORDER BY a.PrdId ASC";
 
                     rss = stm.executeQuery(query);
@@ -60,7 +60,7 @@ public class CatalogoProductoConexion
                         producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
                         producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
                         producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
-                        producto.setProdEstado(rss.getString("PrdEstado"));
+                        producto.setProdEstado(rss.getInt("PrdEstado"));
                         producto.setCprId(rss.getInt("CprId"));
                         producto.setCprDescripcion(rss.getString("CprDescripcion"));                
                         productos.add(producto);
@@ -81,7 +81,7 @@ public class CatalogoProductoConexion
                     stm = con.createStatement();
                     String query = "SELECT a.*, b.CprDescripcion "
                      + "FROM catalogoproductos a INNER JOIN categoriasproductos b ON b.CprId = a.CprId "
-                     + "WHERE PrdEstado = 'Inactivo' " 
+                     + "WHERE PrdEstado = 0 " 
                      + "ORDER BY a.PrdId ASC";
 
 
@@ -95,7 +95,7 @@ public class CatalogoProductoConexion
                         producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
                         producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
                         producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
-                        producto.setProdEstado(rss.getString("PrdEstado"));
+                        producto.setProdEstado(rss.getInt("PrdEstado"));
                         producto.setCprId(rss.getInt("CprId"));
                         producto.setCprDescripcion(rss.getString("CprDescripcion"));                
                         productos.add(producto);
@@ -128,7 +128,7 @@ public class CatalogoProductoConexion
                         producto.setPrdDescripcion(rss.getString("PrdDescripcion"));;
                         producto.setPrdStockMaximo(rss.getString("PrdStockMaximo"));
                         producto.setPrdStockMinimo(rss.getString("PrdStockMinimo"));
-                        producto.setProdEstado(rss.getString("PrdEstado"));
+                        producto.setProdEstado(rss.getInt("PrdEstado"));
                         producto.setCprId(rss.getInt("CprId"));
                         producto.setCprDescripcion(rss.getString("CprDescripcion"));                
                         productos.add(producto);
@@ -193,7 +193,7 @@ public class CatalogoProductoConexion
             con = Conexion.getConexion(con);
             stm = con.createStatement();
             String query = "SELECT * FROM categoriasproductos "
-                    + "WHERE CprEstado='Activo'";
+                    + "WHERE CprEstado=1";
              
             rss = stm.executeQuery(query);
             
@@ -287,7 +287,7 @@ public class CatalogoProductoConexion
             cs.setString            (4, producto.getPrdDescripcion());       
             cs.setString            (5, producto.getPrdStockMaximo());   
             cs.setString            (6, producto.getPrdStockMinimo());    
-            cs.setString            (7, producto.getProdEstado());
+            cs.setInt               (7, producto.getProdEstado());
             cs.setInt               (8, producto.getCprId());             
             cs.registerOutParameter (9, Types.VARCHAR);         
             cs.executeUpdate();                     

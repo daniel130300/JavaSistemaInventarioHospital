@@ -17,7 +17,7 @@ public class CatalogoProductoModel
     private String PrdDescripcion;
     private String PrdStockMaximo;
     private String PrdStockMinimo;
-    private String ProdEstado;
+    private Integer ProdEstado;
     private Integer CprId;
     private String CprDescripcion;
     public Integer getPrdId() 
@@ -59,15 +59,15 @@ public class CatalogoProductoModel
     public void setPrdStockMinimo(String PrdStockMinimo) 
     {
         this.PrdStockMinimo = PrdStockMinimo;
-    }    
-    public String getProdEstado() 
-    {
+    }       
+
+    public Integer getProdEstado() {
         return ProdEstado;
     }
-    public void setProdEstado(String ProdEstado) 
-    {
+
+    public void setProdEstado(Integer ProdEstado) {
         this.ProdEstado = ProdEstado;
-    }    
+    }
     public Integer getCprId() 
     {
         return CprId;

@@ -23,7 +23,15 @@ public class ProveedorModel
      private String RubDescripcion;
     private String ProContacto;
     private String ProDireccion;
-    private String ProEstado;
+    private Integer ProEstado;
+
+    public Integer getProEstado() {
+        return ProEstado;
+    }
+
+    public void setProEstado(Integer ProEstado) {
+        this.ProEstado = ProEstado;
+    }
 
     public String getRubDescripcion() {
         return RubDescripcion;
@@ -70,15 +78,6 @@ public class ProveedorModel
     {
         this.ProId = ProId;
     }
-    public String getProEstado() {
-        return ProEstado;
-    }
-
-    public void setProEstado(String ProEstado) 
-    {
-        this.ProEstado = ProEstado;
-    }    
-
     public String getProRTN() 
     {
         return ProRTN;

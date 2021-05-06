@@ -49,7 +49,7 @@ public class ProveedorConexion
                     stm = con.createStatement();
                     String query = "SELECT a.*,RubDescripcion FROM proveedores a " 
                             + "INNER JOIN rubros b on a.RubId = b.RubId "
-                            + "WHERE ProEstado = 'Activo'"
+                            + "WHERE ProEstado =1"
                             + " ORDER BY ProId ASC";
 
                     rss = stm.executeQuery(query);
@@ -68,7 +68,7 @@ public class ProveedorConexion
                         proveedor.setRubDescripcion(rss.getString("RubDescripcion"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
-                        proveedor.setProEstado(rss.getString("ProEstado"));
+                        proveedor.setProEstado(rss.getInt("ProEstado"));
 
                         proveedores.add(proveedor);
                     } 
@@ -87,7 +87,7 @@ public class ProveedorConexion
                     stm = con.createStatement();
                     String query = "SELECT a.*,RubDescripcion FROM proveedores a " 
                             + "INNER JOIN rubros b on a.RubId = b.RubId "
-                            + "WHERE ProEstado = 'Inactivo'"
+                            + "WHERE ProEstado = 0"
                             + " ORDER BY ProId ASC";
 
                     rss = stm.executeQuery(query);
@@ -106,7 +106,7 @@ public class ProveedorConexion
                         proveedor.setRubDescripcion(rss.getString("RubDescripcion"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
-                        proveedor.setProEstado(rss.getString("ProEstado"));
+                        proveedor.setProEstado(rss.getInt("ProEstado"));
 
                         proveedores.add(proveedor);
                     } 
@@ -142,7 +142,7 @@ public class ProveedorConexion
                         proveedor.setRubDescripcion(rss.getString("RubDescripcion"));
                         proveedor.setProContacto(rss.getString("ProContacto"));
                         proveedor.setProDireccion(rss.getString("ProDireccion"));
-                        proveedor.setProEstado(rss.getString("ProEstado"));
+                        proveedor.setProEstado(rss.getInt("ProEstado"));
 
                         proveedores.add(proveedor);
                     } 
@@ -169,7 +169,7 @@ public class ProveedorConexion
         {
             con = Conexion.getConexion(con);
             stm = con.createStatement();
-            String query = "SELECT * FROM proveedores WHERE ProEstado='Activo' ORDER BY ProId ASC";
+            String query = "SELECT * FROM proveedores WHERE ProEstado=1 ORDER BY ProId ASC";
              
             rss = stm.executeQuery(query);
             
@@ -186,7 +186,7 @@ public class ProveedorConexion
                 proveedor.setRubId(rss.getInt("RubId"));
                 proveedor.setProContacto(rss.getString("ProContacto"));
                 proveedor.setProDireccion(rss.getString("ProDireccion"));
-                proveedor.setProEstado(rss.getString("ProEstado"));
+                proveedor.setProEstado(rss.getInt("ProEstado"));
                 
                 proveedores.add(proveedor);
             } 
@@ -210,7 +210,7 @@ public class ProveedorConexion
             con = Conexion.getConexion(con);
             stm = con.createStatement();
             String query = "SELECT * FROM rubros "
-                    + "WHERE RubEstado='Activo'";
+                    + "WHERE RubEstado=1";
              
             rss = stm.executeQuery(query);
             
@@ -289,7 +289,7 @@ public class ProveedorConexion
             cs.setInt               (9, proveedor.getRubId());
             cs.setString            (10, proveedor.getProContacto());
             cs.setString            (11, proveedor.getProDireccion());
-            cs.setString            (12, proveedor.getProEstado());
+            cs.setInt               (12, proveedor.getProEstado());
             cs.registerOutParameter (13, Types.VARCHAR);
             cs.executeUpdate();
             estado = cs.getString(13);

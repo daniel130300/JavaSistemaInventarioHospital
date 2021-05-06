@@ -13,6 +13,7 @@ import Models.Models.CategoriasModel;
 import Models.Models.DetalleCatalogoProductosModel;
 import Models.Models.UnidadesModel;
 import Utils.Cache.CatalogoProductoCache;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import Views.Mantenimientos.MantenimientoCatalogoProductosView;
@@ -71,6 +72,7 @@ public class CatalogoProductoController
         
         if(generalValidacionError == false)
         {
+            
             switch(accion)
             {
                 case "insertar":
@@ -79,7 +81,7 @@ public class CatalogoProductoController
                             trimmedStockMinimo, id_categoria);
                 break;
                 
-                case "editar":
+                case "editar":   
                     mntError = CatalogoProductoController.editarProducto(id, 
                             trimmedNombre, trimmedDescripcion, trimmedStockMaximo, 
                             trimmedStockMinimo, id_categoria, estado);              
@@ -177,9 +179,9 @@ public class CatalogoProductoController
         
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel(); 
         modelo.setRowCount(0);
+        Estados estados = new Estados();
         ArrayList<CatalogoProductoModel> productos = new ArrayList<>();
         productos = CatalogoProductoConexion.ListadoProducto(accion);
-        System.out.println("llegue");
         for (int i = 0; i <productos.size(); i++) 
         {
             modelo.addRow
@@ -192,7 +194,7 @@ public class CatalogoProductoController
                     productos.get(i).getPrdStockMinimo(),
                     productos.get(i).getCprId(),
                     productos.get(i).getCprDescripcion(), 
-                    productos.get(i).getProdEstado()    
+                    estados.getEstadoKey(productos.get(i).getProdEstado())    
                 }
             );
         } 
@@ -247,6 +249,7 @@ public class CatalogoProductoController
     {
         Integer PrdId = null;
         CatalogoProductoCache productoCache = new CatalogoProductoCache();
+        Estados estados = new Estados();
         if(productoCache.isDatosCompartidos())
         {
             PrdId = productoCache.getProducto().getPrdId();
@@ -255,7 +258,7 @@ public class CatalogoProductoController
             txtStockMaximo.setText(productoCache.getProducto().getPrdStockMaximo());
             txtStockMinimo.setText(productoCache.getProducto().getPrdStockMinimo());
             cmbCategoria.setSelectedItem(productoCache.getProducto().getCprDescripcion());
-            cmbEstado.setSelectedItem(productoCache.getProducto().getProdEstado());
+            cmbEstado.setSelectedItem(estados.getEstadoKey(productoCache.getProducto().getProdEstado()));
             CatalogoProductoController.ProductosProveedores(MantenimientoCatalogoProductosView.tableProveedores, PrdId);
         }
         return PrdId;
@@ -269,24 +272,18 @@ public class CatalogoProductoController
             String trimmedStockMaximo, String trimmedStockMinimo, 
             Integer id_categoria)
     {
+        Estados estados = new Estados();
         boolean error = false;
         Integer id = 0; 
-        String estado = "Activo";
+        Integer estado = estados.getValueEstado("Activo");
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
         DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
         CatalogoProductoCache cache = new CatalogoProductoCache();
         DetalleCatalogoProductosModel detalleproducto = new DetalleCatalogoProductosModel();
-        System.out.println("llego aqui");
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
                 trimmedStockMinimo, id_categoria, estado);
-         System.out.println(productoModel.getPrdId());
-         System.out.println(productoModel.getPrdNombre());
-         System.out.println(productoModel.getPrdDescripcion());
-         System.out.println(productoModel.getPrdStockMaximo());
-         System.out.println(productoModel.getPrdStockMinimo());
          System.out.println(productoModel.getProdEstado());
-         System.out.println(productoModel.getCprId());
         String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("insertar", productoModel);    
        
         switch (resultado) 
@@ -320,13 +317,14 @@ public class CatalogoProductoController
             String trimmedDescripcion, String trimmedStockMaximo,String trimmedStockMinimo,
             Integer id_categoria, String estado)
     {
+        Estados estados = new Estados();
         boolean error = false; 
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
         DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
-
+        Integer est = estados.getValueEstado(estado);
         productoModel = CatalogoProductoController.setProductoModel(id, 
                 trimmedNombre, trimmedDescripcion,trimmedStockMaximo,
-                trimmedStockMinimo, id_categoria, estado);
+                trimmedStockMinimo, id_categoria, est);
         String resultado = CatalogoProductoConexion.MantenimientoCatalogoProducto("editar", productoModel);
         switch (resultado) 
         {
@@ -355,8 +353,9 @@ public class CatalogoProductoController
     
     private static CatalogoProductoModel setProductoModel(Integer id,String trimmedNombre,
             String trimmedDescripcion, String trimmedStockMaximo, String trimmedStockMinimo,
-            Integer id_categoria,String estado)
+            Integer id_categoria,Integer estado)
     {
+        Estados estados = new Estados();
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
         productoModel.setPrdId(id);
         productoModel.setPrdNombre(trimmedNombre);
@@ -414,11 +413,11 @@ public class CatalogoProductoController
            errStockMinimo.setText("El stock mínimo es un campo obligatorio");
            error = true;
         }
-        if(Validaciones.validarTabla(MantenimientoCatalogoProductosView.tableProveedores)==true)
+      /*  if(Validaciones.validarTabla(MantenimientoCatalogoProductosView.tableProveedores)==true)
         {
             JOptionPane.showMessageDialog(null,"Error la tabla proveedores está vacía");
             error = true;
-        } 
+        } */
         return error;
     }    
     

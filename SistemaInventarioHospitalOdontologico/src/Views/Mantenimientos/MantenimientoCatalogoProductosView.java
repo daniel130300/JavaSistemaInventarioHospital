@@ -35,7 +35,6 @@ public class MantenimientoCatalogoProductosView extends javax.swing.JFrame {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         CatalogoProductoController.LlenarCmbCategoria(this.cmbCategoria);
-        //CatalogoProductoController.LlenarCmbUnidades(this.cmbUnidad);
         CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos"); 
         CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
         CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion, this.txtBuscar);

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import Utils.Cache.ProveedorCache;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -197,10 +198,11 @@ public class ProveedorController
          
         if(generalValidacionError == false)
         {
+            Estados estados = new Estados();
             switch(accion)
             {
                 case "insertar":
-                    id = 0;                    
+                    id = 0;               
                     ProveedorModel proveedorModel = new ProveedorModel();
                     proveedorModel.setProId(id);
                     proveedorModel.setProRTN(trimmedRTN);
@@ -212,9 +214,9 @@ public class ProveedorController
                     proveedorModel.setRubId(trimmedRubro);
                     proveedorModel.setProContacto(trimmedContacto);
                     proveedorModel.setProDireccion(trimmedDireccion);            
-
+                    proveedorModel.setProEstado(estados.getValueEstado("Activo"));
+                    System.out.println(proveedorModel.getProEstado());
                     String resultado = ProveedorConexion.MantenimientoProveedores(accion, proveedorModel);
-
                     switch (resultado) 
                     {
                         case "Ok":
@@ -245,7 +247,7 @@ public class ProveedorController
                     proveedoModel.setRubId(trimmedRubro);
                     proveedoModel.setProContacto(trimmedContacto);
                     proveedoModel.setProDireccion(trimmedDireccion);
-                    proveedoModel.setProEstado(trimmedEstado);
+                    proveedoModel.setProEstado(estados.getValueEstado(trimmedEstado));
 
                     String resultados = ProveedorConexion.MantenimientoProveedores(accion, proveedoModel);
 
@@ -347,7 +349,7 @@ public class ProveedorController
     {
         ProveedorCache proveedorCache = new ProveedorCache();
         Integer ProId = null;
-   
+        Estados estados = new Estados();
         if(proveedorCache.isDatosCompartidos())
         {   
             ProId = proveedorCache.getid().getProId();
@@ -360,7 +362,7 @@ public class ProveedorController
             cmbRubro.setSelectedItem(proveedorCache.getid().getRubDescripcion());
             txtContacto.setText(proveedorCache.getid().getProContacto());
             txtDireccion.setText(proveedorCache.getid().getProDireccion());
-            cmbEstado.setSelectedItem(proveedorCache.getid().getProEstado());
+            cmbEstado.setSelectedItem(estados.getEstadoKey(proveedorCache.getid().getProEstado()));
         }
         
         return ProId;
@@ -426,7 +428,7 @@ public class ProveedorController
         DefaultTableModel modelo = (DefaultTableModel) tableProveedores.getModel(); 
         modelo.setRowCount(0);
         ArrayList<ProveedorModel> proveedores = new ArrayList<>();
-        
+        Estados estados = new Estados();
         switch(accion)
         {    
             case "Activos":
@@ -448,7 +450,7 @@ public class ProveedorController
                             proveedores.get(i).getRubDescripcion(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
-                            proveedores.get(i).getProEstado()
+                            estados.getEstadoKey(proveedores.get(i).getProEstado())
                         }
                     );
                 }
@@ -474,7 +476,7 @@ public class ProveedorController
                             proveedores.get(i).getRubDescripcion(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
-                            proveedores.get(i).getProEstado()
+                            estados.getEstadoKey(proveedores.get(i).getProEstado())
                         }
                     );
                 }
@@ -500,7 +502,7 @@ public class ProveedorController
                             proveedores.get(i).getRubDescripcion(),
                             proveedores.get(i).getProContacto(),
                             proveedores.get(i).getProDireccion(),
-                            proveedores.get(i).getProEstado()
+                            estados.getEstadoKey(proveedores.get(i).getProEstado())
                         }
                     );
                 }
@@ -515,7 +517,7 @@ public class ProveedorController
         modelo.setRowCount(0);
         ArrayList<ProveedorModel> proveedores = new ArrayList<>();
         proveedores = ProveedorConexion.ListadoDetalleProductoProveedores();
-        
+        Estados estados = new Estados();
         for (int i = 0; i <proveedores.size(); i++) 
         {
             modelo.addRow
@@ -532,7 +534,7 @@ public class ProveedorController
                     proveedores.get(i).getRubDescripcion(),
                     proveedores.get(i).getProContacto(),
                     proveedores.get(i).getProDireccion(),
-                    proveedores.get(i).getProEstado()
+                    estados.getEstadoKey(proveedores.get(i).getProEstado())
                 }
             );
         }

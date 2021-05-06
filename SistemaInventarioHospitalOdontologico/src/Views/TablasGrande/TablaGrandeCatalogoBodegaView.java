@@ -10,6 +10,7 @@ import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Models.Models.CatalogoProductoModel;
 import Utils.Cache.CatalogoProductoCache;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoCatalogoProductosView;
 import java.awt.Color;
@@ -249,6 +250,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
 
     private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
         int seleccion = this.tableProductos.rowAtPoint(evt.getPoint()); 
+        Estados estados = new Estados();
         CatalogoProductoModel productoModel = new CatalogoProductoModel();
         productoModel.setPrdId(Integer.parseInt(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 0)))); 
         productoModel.setPrdNombre(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 1)));
@@ -256,7 +258,7 @@ public class TablaGrandeCatalogoBodegaView extends javax.swing.JFrame {
         productoModel.setPrdStockMaximo(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 3)));
         productoModel.setPrdStockMinimo(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 4)));
         productoModel.setCprDescripcion(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion, 6)));
-        productoModel.setProdEstado(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,7))); 
+        productoModel.setProdEstado(estados.getValueEstado(String.valueOf(this.tableProductos.getModel().getValueAt(seleccion,7)))); 
         CatalogoProductoCache productoCache = new CatalogoProductoCache();
         productoCache.setDatosCompartidos(true);
         productoCache.setProducto(productoModel);

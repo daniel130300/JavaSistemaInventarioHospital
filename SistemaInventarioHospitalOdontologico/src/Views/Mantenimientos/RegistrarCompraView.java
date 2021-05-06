@@ -5,6 +5,7 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.ComprasController;
 import Controllers.Controllers.LoginController;
 import Controllers.Controllers.RegistrarCompraController;
 import Views.Listados.ListadoProductospComprasView;
@@ -565,16 +566,15 @@ public class RegistrarCompraView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroOrdenActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-  
+      ComprasController.SelectFotos(lblFotoSelecciondaFactura);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnFotoFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoFacturaActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnFotoFacturaActionPerformed
 
     private void btnFotoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoOrdenActionPerformed
-        // TODO add your handling code here:
+       ComprasController.SelectFotos(lblFotoSeleccionadaOrden);
     }//GEN-LAST:event_btnFotoOrdenActionPerformed
 
     private void btnSeleccionarPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarPadreActionPerformed

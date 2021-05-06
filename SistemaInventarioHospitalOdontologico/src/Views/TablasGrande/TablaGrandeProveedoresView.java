@@ -9,6 +9,7 @@ import Controllers.Controllers.LoginController;
 import Controllers.Controllers.ProveedorController;
 import Models.Models.ProveedorModel;
 import Utils.Cache.ProveedorCache;
+import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -252,7 +253,8 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
-        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint()); ;
+        int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint());
+        Estados estados = new Estados();
         ProveedorModel proveedorModel = new ProveedorModel();
         proveedorModel.setProId(Integer.parseInt(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 0)))); 
         proveedorModel.setProRTN(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 1)));
@@ -264,7 +266,7 @@ public class TablaGrandeProveedoresView extends javax.swing.JFrame {
         proveedorModel.setRubDescripcion(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 8)));
         proveedorModel.setProContacto(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 9)));
         proveedorModel.setProDireccion(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion,10)));
-        proveedorModel.setProEstado(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion,11))); 
+        proveedorModel.setProEstado(estados.getValueEstado(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion,11)))); 
         ProveedorCache proveedorCache = new ProveedorCache();
         proveedorCache.setDatosCompartidos(true);
         proveedorCache.setid(proveedorModel);

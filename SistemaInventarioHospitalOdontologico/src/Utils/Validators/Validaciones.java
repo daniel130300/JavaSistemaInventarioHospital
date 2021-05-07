@@ -76,6 +76,17 @@ public class Validaciones
             return true;
         }
     }
+    public static boolean validarContraseniaCoincide(String contrasenia, String confirmcontrasenia)
+    {
+        if(contrasenia.equals(confirmcontrasenia))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
     
     /**
     * 

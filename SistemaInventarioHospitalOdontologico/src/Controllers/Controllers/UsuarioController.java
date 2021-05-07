@@ -42,7 +42,7 @@ public class UsuarioController extends GeneralController
 
     public static void setPlaceHolders(JTextField txtIdentidad, JTextField txtNombre, 
             JTextField txtApellido, JTextField txtCorreo, JTextField txtUsuario,
-            JTextField txtContrasenia, JTextField txtBuscar)
+            JTextField txtContrasenia,JTextField txtConfirmarContrasenia, JTextField txtBuscar)
     {
         TextPrompt placeholderIdentidad = new TextPrompt(" Ej: 0801200054321 ", txtIdentidad);
         TextPrompt placeholderNombre = new TextPrompt(" Ingrese el nombre de la persona ", txtNombre);
@@ -50,6 +50,7 @@ public class UsuarioController extends GeneralController
         TextPrompt placeholderCorreo = new TextPrompt(" Ingrese el correo de la persona ", txtCorreo);
         TextPrompt placeholderUsuario = new TextPrompt(" Ingrese el usuario de la persona ", txtUsuario);
         TextPrompt placeholderContrasenia = new TextPrompt(" Ingrese el usuario de la persona ", txtContrasenia);
+        TextPrompt placeholderConfirmContrasenia = new TextPrompt(" Confirme Contraseña", txtConfirmarContrasenia);
         TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
     }
     
@@ -80,9 +81,9 @@ public class UsuarioController extends GeneralController
     */
     public static Boolean MantenimientoUsuarios(String accion, Integer id, 
             String identidad, String nombre, String apellido, String correo, 
-            String usuario, String contrasenia, String estado, Integer id_area,
+            String usuario, String contrasenia,String confirmarcontrasenia ,String estado, Integer id_area,
             JLabel errIdentidad, JLabel errNombre, JLabel errApellido, 
-            JLabel errCorreo, JLabel errUsuario, JLabel errContrasenia, 
+            JLabel errCorreo, JLabel errUsuario, JLabel errContrasenia,JLabel errConfirmarContrasenia ,
             JLabel errEstado, JLabel errPrivilegios, DefaultListModel modeloLstPrivilegiosSeleccionados)
     { 
         Boolean contraseniaValidacionError = false;
@@ -90,7 +91,7 @@ public class UsuarioController extends GeneralController
         Boolean mntError = false;
         Boolean dohash = false;
         
-        UsuarioController.setErroresToNull(errIdentidad, errNombre, errApellido, errCorreo, errUsuario, errContrasenia, errEstado, errPrivilegios);
+        UsuarioController.setErroresToNull(errIdentidad, errNombre, errApellido, errCorreo, errUsuario, errContrasenia,errConfirmarContrasenia, errEstado, errPrivilegios);
 
         String trimmedIdentidad = identidad.trim();
         String trimmedNombre = nombre.trim();
@@ -98,6 +99,7 @@ public class UsuarioController extends GeneralController
         String trimmedCorreo = correo.trim();
         String trimmedUsuario = usuario.trim();
         String trimmedContrasenia = contrasenia.trim();
+        String trimmedConfirmContrasenia = confirmarcontrasenia.trim();
 
         generalValidacionError = UsuarioController.validacionesGenerales(trimmedIdentidad, trimmedNombre, 
                trimmedApellido, trimmedCorreo, trimmedUsuario, modeloLstPrivilegiosSeleccionados, 
@@ -121,7 +123,11 @@ public class UsuarioController extends GeneralController
                         errContrasenia.setText("La contraseña es un campo obligatorio");
                         contraseniaValidacionError = true;
                     }
-                    
+                   if(Validaciones.validarContraseniaCoincide(trimmedContrasenia, trimmedConfirmContrasenia))
+                    {
+                        errConfirmarContrasenia.setText(" Las Contraseña no coinciden");
+                        contraseniaValidacionError = true;
+                    }
                     if(contraseniaValidacionError == false)
                     {
                         mntError = UsuarioController.insertarUsuario(
@@ -142,7 +148,11 @@ public class UsuarioController extends GeneralController
                         }
                         dohash = true;
                     }
-                    
+                     if(Validaciones.validarContraseniaCoincide(trimmedContrasenia, trimmedConfirmContrasenia))
+                            {
+                                errConfirmarContrasenia.setText(" Las Contraseña no coinciden");
+                                contraseniaValidacionError = true;
+                            }
                     if(contraseniaValidacionError == false)
                     {
                         mntError = UsuarioController.editarUsuario(dohash, id, 
@@ -217,13 +227,8 @@ public class UsuarioController extends GeneralController
         modelo.setRowCount(0);
         ArrayList<UsuarioModel> usuarios = new ArrayList<>();
         Estados estados = new Estados();
-        
-        switch(accion)
-        {
-            case "Activos":
-                usuarios = UsuarioConexion.ListadoUsuarios("Activos");
-
-                for (int i = 0; i <usuarios.size(); i++) 
+        usuarios = UsuarioConexion.ListadoUsuarios(accion);
+        for (int i = 0; i <usuarios.size(); i++) 
                 {
                     modelo.addRow
                     (new Object[]
@@ -240,56 +245,7 @@ public class UsuarioController extends GeneralController
                         }
                     );
                 }
-
                 FormatoTabla(tableUsuarios, modelo.getColumnCount());
-                break;
-            case "Inactivos":
-                usuarios = UsuarioConexion.ListadoUsuarios("Inactivos");
-
-                for (int i = 0; i <usuarios.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            usuarios.get(i).getUsrId(), 
-                            usuarios.get(i).getUsrIdentidad(),
-                            usuarios.get(i).getUsrNombre(),
-                            usuarios.get(i).getUsrApellido(),
-                            usuarios.get(i).getUsrCorreo(),
-                            usuarios.get(i).getUsrUsuario(),
-                            estados.getEstadoKey(usuarios.get(i).getUsrEstado()),
-                            usuarios.get(i).getAreId(),
-                            usuarios.get(i).getAreDescripcion()
-                        }
-                    );
-                }
-
-                FormatoTabla(tableUsuarios, modelo.getColumnCount());
-                break;
-            case "Todos":
-                usuarios = UsuarioConexion.ListadoUsuarios("Todos");
-
-                for (int i = 0; i <usuarios.size(); i++) 
-                {
-                    modelo.addRow
-                    (new Object[]
-                        {
-                            usuarios.get(i).getUsrId(), 
-                            usuarios.get(i).getUsrIdentidad(),
-                            usuarios.get(i).getUsrNombre(),
-                            usuarios.get(i).getUsrApellido(),
-                            usuarios.get(i).getUsrCorreo(),
-                            usuarios.get(i).getUsrUsuario(),
-                            estados.getEstadoKey(usuarios.get(i).getUsrEstado()),
-                            usuarios.get(i).getAreId(),
-                            usuarios.get(i).getAreDescripcion()
-                        }
-                    );
-                }
-
-                FormatoTabla(tableUsuarios, modelo.getColumnCount());
-                break;
-        }
     }
     
     /**
@@ -506,7 +462,7 @@ public class UsuarioController extends GeneralController
     */
     private static void setErroresToNull(JLabel errIdentidad, JLabel errNombre, 
             JLabel errApellido, JLabel errCorreo, JLabel errUsuario, 
-            JLabel errContrasenia, JLabel errEstado, JLabel errPrivilegios)
+            JLabel errContrasenia,JLabel errConfirmarContrasenia ,JLabel errEstado, JLabel errPrivilegios)
     {
         errIdentidad.setText(null);
         errNombre.setText(null);
@@ -514,6 +470,7 @@ public class UsuarioController extends GeneralController
         errCorreo.setText(null);
         errUsuario.setText(null);
         errContrasenia.setText(null);
+        errConfirmarContrasenia.setText(null);
         errEstado.setText(null);
         errPrivilegios.setText(null);
     }

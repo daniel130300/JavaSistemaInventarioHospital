@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import Views.TablasGrande.TablaGrandeUsuariosView;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -33,7 +34,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         initComponents();
         
         UsuarioController.setPlaceHolders(this.txtIdentidad, this.txtNombre, 
-            this.txtApellido, this.txtCorreo, this.txtUsuario, this.txtContrasenia, 
+            this.txtApellido, this.txtCorreo, this.txtUsuario, this.txtContrasenia,this.txtConfirmarContrasenia ,
             this.txtBuscar);
         
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
@@ -54,6 +55,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.txtApellido.setText(null);
         this.txtCorreo.setText(null);
         this.txtUsuario.setText(null);
+        this.txtConfirmarContrasenia.setText(null);
         this.txtContrasenia.setText(null);
         this.cmbArea.setSelectedIndex(0);
         this.cmbEstado.setSelectedIndex(0);
@@ -67,6 +69,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         this.lblErrorCorreo.setText(null);
         this.lblErrorUsuario.setText(null);
         this.lblErrorContrasenia.setText(null);
+        this.lblErrorConfirmarContrasenia.setText(null);
         this.lblErrorArea.setText(null);
         this.lblErrorEstado.setText(null);
         this.lblErrorPrivilegios.setText(null);
@@ -125,7 +128,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableUsuarios = new javax.swing.JTable();
-        lblContrasenia = new javax.swing.JLabel();
+        lblConfirmarContrasenia = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
         lblPrivilegios = new javax.swing.JLabel();
         txtIdentidad = new javax.swing.JTextField();
@@ -147,7 +150,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorIdentidad = new javax.swing.JLabel();
         lblErrorUsuario = new javax.swing.JLabel();
         lblErrorPrivilegios = new javax.swing.JLabel();
-        lblErrorContrasenia = new javax.swing.JLabel();
+        lblErrorConfirmarContrasenia = new javax.swing.JLabel();
         lblErrorApellido = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
         cmbArea = new javax.swing.JComboBox<>();
@@ -156,6 +159,9 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         btnVisualizarTabla = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        lblContrasenia1 = new javax.swing.JLabel();
+        txtConfirmarContrasenia = new javax.swing.JPasswordField();
+        lblErrorContrasenia = new javax.swing.JLabel();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -306,10 +312,10 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
 
         pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 1260, 140));
 
-        lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblContrasenia.setForeground(new java.awt.Color(242, 242, 242));
-        lblContrasenia.setText("Contraseña: ");
-        pnlMenu.add(lblContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        lblConfirmarContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblConfirmarContrasenia.setForeground(new java.awt.Color(242, 242, 242));
+        lblConfirmarContrasenia.setText("Confirmar Contraseña");
+        pnlMenu.add(lblConfirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         cmbEstado.setEnabled(false);
@@ -318,7 +324,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 cmbEstadoActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 130, -1));
+        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, 130, -1));
 
         lblPrivilegios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPrivilegios.setForeground(new java.awt.Color(242, 242, 242));
@@ -336,7 +342,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(242, 242, 242));
         lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
+        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, -1, -1));
         pnlMenu.add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 210, -1));
 
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -399,7 +405,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 160, 20));
+        pnlMenu.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, 160, 20));
 
         lblErrorNombre.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -421,10 +427,10 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblErrorPrivilegios.setForeground(new java.awt.Color(231, 0, 2));
         pnlMenu.add(lblErrorPrivilegios, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 260, 240, 20));
 
-        lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
-        lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorContrasenia.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 300, 50));
+        lblErrorConfirmarContrasenia.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorConfirmarContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorConfirmarContrasenia.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorConfirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 230, 20));
 
         lblErrorApellido.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorApellido.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -434,19 +440,19 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         lblArea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblArea.setForeground(new java.awt.Color(242, 242, 242));
         lblArea.setText("Área:");
-        pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
+        pnlMenu.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
 
         cmbArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreaActionPerformed(evt);
             }
         });
-        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 130, -1));
+        pnlMenu.add(cmbArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 130, -1));
 
         lblErrorArea.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorArea.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 160, 20));
+        pnlMenu.add(lblErrorArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 160, 20));
 
         btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -457,7 +463,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 280, 90, -1));
+        pnlMenu.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 290, 90, -1));
 
         btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
         btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -485,7 +491,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 280, 90, -1));
+        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 290, 90, -1));
 
         btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -501,7 +507,18 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 90, -1));
+        pnlMenu.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, 90, -1));
+
+        lblContrasenia1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblContrasenia1.setForeground(new java.awt.Color(242, 242, 242));
+        lblContrasenia1.setText("Contraseña: ");
+        pnlMenu.add(lblContrasenia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
+        pnlMenu.add(txtConfirmarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 210, -1));
+
+        lblErrorContrasenia.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorContrasenia.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu.add(lblErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, 300, 30));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1310, 540));
 
@@ -623,10 +640,10 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
         if(!UsuarioController.MantenimientoUsuarios("editar", this.Id_usuario, 
             this.txtIdentidad.getText(), this.txtNombre.getText(), 
             this.txtApellido.getText(), this.txtCorreo.getText(), 
-            this.txtUsuario.getText(), this.txtContrasenia.getText(), 
+            this.txtUsuario.getText(),this.txtConfirmarContrasenia.getText() ,this.txtContrasenia.getText(), 
             this.cmbEstado.getSelectedItem().toString(), this.cmbArea.getSelectedIndex(),
             this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
-            this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
+            this.lblErrorCorreo, this.lblErrorUsuario,this.lblErrorContrasenia ,this.lblErrorConfirmarContrasenia, 
             this.lblErrorEstado, this.lblErrorPrivilegios, this.modeloLstPrivilegiosSeleccionados))
         {
             this.btnAgregar.setEnabled(true);
@@ -647,19 +664,20 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
         if(!UsuarioController.MantenimientoUsuarios("insertar", 0, 
             this.txtIdentidad.getText(), this.txtNombre.getText(), 
             this.txtApellido.getText(), this.txtCorreo.getText(), 
-            this.txtUsuario.getText(), this.txtContrasenia.getText(), 
+            this.txtUsuario.getText(),this.txtConfirmarContrasenia.getText() ,this.txtContrasenia.getText(), 
             "Activo", this.cmbArea.getSelectedIndex(),
             this.lblErrorIdentidad, this.lblErrorNombre, this.lblErrorApellido, 
-            this.lblErrorCorreo, this.lblErrorUsuario, this.lblErrorContrasenia, 
+            this.lblErrorCorreo, this.lblErrorUsuario,this.lblErrorContrasenia ,this.lblErrorConfirmarContrasenia, 
             this.lblErrorEstado, this.lblErrorPrivilegios, this.modeloLstPrivilegiosSeleccionados))
         {
             this.LimpiarInputs();
             this.ResetJlists();
             UsuarioController.LlenarTableUsuarios(tableUsuarios, "Todos");
-        }    
+        }   
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPrivilegiosActionPerformed
@@ -863,10 +881,12 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblContrasenia;
+    private javax.swing.JLabel lblConfirmarContrasenia;
+    private javax.swing.JLabel lblContrasenia1;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblErrorApellido;
     private javax.swing.JLabel lblErrorArea;
+    private javax.swing.JLabel lblErrorConfirmarContrasenia;
     private javax.swing.JLabel lblErrorContrasenia;
     private javax.swing.JLabel lblErrorCorreo;
     private javax.swing.JLabel lblErrorEstado;
@@ -897,6 +917,7 @@ public class MantenimientoUsuariosView extends javax.swing.JFrame {
     private javax.swing.JTable tableUsuarios;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JPasswordField txtConfirmarContrasenia;
     private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtIdentidad;

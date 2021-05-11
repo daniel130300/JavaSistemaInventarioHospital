@@ -26,42 +26,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     
     public MantenimientoInventarioBodegaView() {
         initComponents();
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        this.tableBodega.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
-        TextPrompt placeholderFecha = new TextPrompt(" Año-Mes-Día ", txtFechaCaducidad);
-        TextPrompt placeholderBuscar = new TextPrompt(" Buscar ", txtBuscar);
-        LlenarDatos();
-    }
-    
-    private void LimpiarInputs()
-    {
-        this.txtFechaCaducidad.setText(null);
-        this.numStock.setValue(0);
-        this.cmbEstado.setSelectedIndex(0);
-    }
-    
-    private void LimpiarErrLabels()
-    {
-        this.lblErrorFechaCaducidad.setText(null);
-        this.lblErrorStock.setText(null);
-        this.lblErrorDescripcion1.setText(null);
-    }
-    private void LlenarDatos()
-    {
-        this.Id_Lote = InventarioBodegaController.setDatosEditarFromCache(this.tableBodega, 
-                this.numStock ,this.txtFechaCaducidad,this.cmbEstado);
-        
-        if(Id_Lote != null)
-        {
-            this.cmbEstado.setEnabled(true);
-            this.btnEditar.setEnabled(true);
-            this.txtFechaCaducidad.setEnabled(true);
-            this.numStock.setEnabled(true);
-            this.btnCancelar1.setEnabled(true);
-        }
-    }   
+    }  
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,25 +48,89 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblUsuarioActual = new javax.swing.JLabel();
         lblMensajeBienvenida = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        txtFechaCaducidad = new javax.swing.JTextField();
-        lblBuscar = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
-        lblStock = new javax.swing.JLabel();
-        lblErrorStock = new javax.swing.JLabel();
-        btnVisualizarTabla = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        lblEstado = new javax.swing.JLabel();
-        cmbEstado = new javax.swing.JComboBox<>();
-        lblFechaCaducidad = new javax.swing.JLabel();
-        numStock = new javax.swing.JSpinner();
-        lblErrorDescripcion1 = new javax.swing.JLabel();
-        lblErrorFechaCaducidad = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableBodega = new javax.swing.JTable();
-        btnCancelar1 = new javax.swing.JButton();
+        pnlGeneral = new javax.swing.JTabbedPane();
+        pnlMenu1 = new javax.swing.JPanel();
+        lblErrorEstado = new javax.swing.JLabel();
+        lblErrorCategoria = new javax.swing.JLabel();
+        lblErrorUnidad = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablePadre = new javax.swing.JTable();
+        lblBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
+        lblNombre1 = new javax.swing.JLabel();
+        lblNombre2 = new javax.swing.JLabel();
+        lblNombre3 = new javax.swing.JLabel();
+        lblNombre4 = new javax.swing.JLabel();
+        lblNombre5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripcionPadre = new javax.swing.JTextArea();
+        lblErrorCantidadPadre = new javax.swing.JLabel();
+        lblErrorNombre1 = new javax.swing.JLabel();
+        txtCantidadPadre = new javax.swing.JTextField();
+        txtProducto = new javax.swing.JTextField();
+        lblErrorNombre2 = new javax.swing.JLabel();
+        lblErrorFechaCaducidad = new javax.swing.JLabel();
+        txtFechaCaducidad = new javax.swing.JTextField();
+        lblErrorDescripcionPadre = new javax.swing.JLabel();
+        txtUnidadPadre = new javax.swing.JTextField();
+        lblErrorUnidadPadre = new javax.swing.JLabel();
+        txtKit = new javax.swing.JTextField();
+        lblErrorNombre6 = new javax.swing.JLabel();
+        btnVisualizarTabla = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnSeleccionarUnidadPadre = new javax.swing.JButton();
+        btnSeleccionarProducto = new javax.swing.JButton();
+        pnlMenu2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableHijo = new javax.swing.JTable();
+        lblNombre6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtDescripcionHijo = new javax.swing.JTextArea();
+        lblErrorUnidadHijo = new javax.swing.JLabel();
+        lblNombre7 = new javax.swing.JLabel();
+        txtCantidadHijo = new javax.swing.JTextField();
+        lblErrorDescripcionHijo = new javax.swing.JLabel();
+        lblBuscar1 = new javax.swing.JLabel();
+        txtBuscar1 = new javax.swing.JTextField();
+        btnVisualizarTablaHijo = new javax.swing.JButton();
+        lblNombre8 = new javax.swing.JLabel();
+        txtUnidadHijo = new javax.swing.JTextField();
+        btnAgregar1 = new javax.swing.JButton();
+        btnEditar1 = new javax.swing.JButton();
+        btnCancelar1 = new javax.swing.JButton();
+        lblErrorCantidadHijo = new javax.swing.JLabel();
+        btnSeleccionarUnidadHijo = new javax.swing.JButton();
+        pnlMenu3 = new javax.swing.JPanel();
+        lblErrorStockMinimo1 = new javax.swing.JLabel();
+        lblErrorEstado1 = new javax.swing.JLabel();
+        lblErrorCantidadNieto = new javax.swing.JLabel();
+        lblErrorCategoria1 = new javax.swing.JLabel();
+        lblErrorUnidad1 = new javax.swing.JLabel();
+        lblNombre9 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtDescripcionNieto = new javax.swing.JTextArea();
+        lblErrorUnidadNieto = new javax.swing.JLabel();
+        lblNombre10 = new javax.swing.JLabel();
+        txtCantidadNieto = new javax.swing.JTextField();
+        lblErrorNombre10 = new javax.swing.JLabel();
+        lblNombre11 = new javax.swing.JLabel();
+        txtUnidadNieto = new javax.swing.JTextField();
+        btnAgregar2 = new javax.swing.JButton();
+        btnEditar2 = new javax.swing.JButton();
+        btnCancelar2 = new javax.swing.JButton();
+        txtBuscar2 = new javax.swing.JTextField();
+        lblBuscar2 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableNieto = new javax.swing.JTable();
+        btnSeleccionarUnidadNieto = new javax.swing.JButton();
+        lblErrorDescripcionNieto = new javax.swing.JLabel();
+        btnVisualizarTablaNieto1 = new javax.swing.JButton();
         pnlTitulo1 = new javax.swing.JPanel();
         lblTitulo1 = new javax.swing.JLabel();
         lblModulo1 = new javax.swing.JLabel();
@@ -155,124 +185,25 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(0, 49, 110));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtFechaCaducidad.setEnabled(false);
-        txtFechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaCaducidadActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 220, -1));
+        pnlGeneral.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
-        lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        pnlMenu1.setBackground(new java.awt.Color(0, 49, 110));
+        pnlMenu1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 490, -1));
+        lblErrorEstado.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorEstado.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 140, -1));
 
-        lblStock.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblStock.setForeground(new java.awt.Color(242, 242, 242));
-        lblStock.setText("Stock:");
-        pnlMenu.add(lblStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+        lblErrorCategoria.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCategoria.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCategoria.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 140, -1));
 
-        lblErrorStock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorStock.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 150, 20));
-
-        btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
-        btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnVisualizarTabla.setForeground(new java.awt.Color(242, 242, 242));
-        btnVisualizarTabla.setText("Visualizar tabla");
-        btnVisualizarTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarTablaActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 230, 140, 30));
-
-        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(242, 242, 242));
-        btnEditar.setText("Editar");
-        btnEditar.setEnabled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 80, 30));
-
-        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblEstado.setForeground(new java.awt.Color(242, 242, 242));
-        lblEstado.setText("Estado: ");
-        pnlMenu.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
-
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        cmbEstado.setEnabled(false);
-        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEstadoActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 130, -1));
-
-        lblFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFechaCaducidad.setForeground(new java.awt.Color(242, 242, 242));
-        lblFechaCaducidad.setText("Fecha de caducidad: ");
-        pnlMenu.add(lblFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
-
-        numStock.setEnabled(false);
-        pnlMenu.add(numStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 90, -1));
-
-        lblErrorDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorDescripcion1.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 200, 20));
-
-        lblErrorFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblErrorFechaCaducidad.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 310, 20));
-
-        tableBodega.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id lote", "Id producto", "Nombre", "Descripción", "Stock actual", "Stock máximo", "Stock mínimo", "Fecha Caducidad", "Categoría", "Unidad", "Estado"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableBodega.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableBodegaMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableBodega);
-
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 960, 270));
-
-        btnCancelar1.setBackground(new java.awt.Color(59, 103, 181));
-        btnCancelar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCancelar1.setForeground(new java.awt.Color(242, 242, 242));
-        btnCancelar1.setText("Cancelar");
-        btnCancelar1.setEnabled(false);
-        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelar1ActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 90, 30));
+        lblErrorUnidad.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorUnidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorUnidad.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
@@ -298,7 +229,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblIconoRegresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addContainerGap())
         );
         btnRegresarLayout.setVerticalGroup(
@@ -307,7 +238,495 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
             .addComponent(lblRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+        pnlMenu1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
+
+        tablePadre.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id Padre", "Código Interno", "Descripcion", "Fecha Caducidad", "Cantidad", "Unidad", "Kit", "Nombre Producto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablePadre);
+        if (tablePadre.getColumnModel().getColumnCount() > 0) {
+            tablePadre.getColumnModel().getColumn(0).setMaxWidth(80);
+            tablePadre.getColumnModel().getColumn(1).setHeaderValue("Código Interno");
+            tablePadre.getColumnModel().getColumn(3).setHeaderValue("Fecha Caducidad");
+            tablePadre.getColumnModel().getColumn(7).setHeaderValue("Nombre Producto");
+        }
+
+        pnlMenu1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 397, 970, 120));
+
+        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
+        lblBuscar.setText("Buscar: ");
+        pnlMenu1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 590, -1));
+
+        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        pnlMenu1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, 90, 30));
+
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre.setText("Producto:");
+        pnlMenu1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        lblNombre1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre1.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre1.setText("Descripcion:");
+        pnlMenu1.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+
+        lblNombre2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre2.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre2.setText("Fecha Caducidad:");
+        pnlMenu1.add(lblNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        lblNombre3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre3.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre3.setText("Cantidad:");
+        pnlMenu1.add(lblNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, -1));
+
+        lblNombre4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre4.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre4.setText("Unidad:");
+        pnlMenu1.add(lblNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, -1, -1));
+
+        lblNombre5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre5.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre5.setText("Kit:");
+        pnlMenu1.add(lblNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+
+        txtDescripcionPadre.setColumns(20);
+        txtDescripcionPadre.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcionPadre);
+
+        pnlMenu1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 260, 70));
+
+        lblErrorCantidadPadre.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCantidadPadre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCantidadPadre.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorCantidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 270, 20));
+
+        lblErrorNombre1.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorNombre1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorNombre1.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 210, 20));
+
+        txtCantidadPadre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadPadreActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(txtCantidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 90, 20));
+
+        txtProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductoActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 200, 20));
+
+        lblErrorNombre2.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorNombre2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorNombre2.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 240, 20));
+
+        lblErrorFechaCaducidad.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorFechaCaducidad.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 270, 20));
+
+        txtFechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaCaducidadActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(txtFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 200, 20));
+
+        lblErrorDescripcionPadre.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorDescripcionPadre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcionPadre.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorDescripcionPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 270, 20));
+
+        txtUnidadPadre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnidadPadreActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(txtUnidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 200, 20));
+
+        lblErrorUnidadPadre.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorUnidadPadre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorUnidadPadre.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorUnidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 240, 20));
+
+        txtKit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKitActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(txtKit, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 200, 20));
+
+        lblErrorNombre6.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorNombre6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorNombre6.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 240, 20));
+
+        btnVisualizarTabla.setBackground(new java.awt.Color(59, 103, 181));
+        btnVisualizarTabla.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVisualizarTabla.setForeground(new java.awt.Color(255, 255, 255));
+        btnVisualizarTabla.setText("Visualizar Tabla");
+        pnlMenu1.add(btnVisualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(833, 350, 130, 30));
+
+        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("Agregar");
+        pnlMenu1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 90, 30));
+
+        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        pnlMenu1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 90, 30));
+
+        btnSeleccionarUnidadPadre.setBackground(new java.awt.Color(59, 103, 181));
+        btnSeleccionarUnidadPadre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btnSeleccionarUnidadPadre.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionarUnidadPadre.setText("Seleccionar");
+        btnSeleccionarUnidadPadre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarUnidadPadreActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnSeleccionarUnidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, -1, 30));
+
+        btnSeleccionarProducto.setBackground(new java.awt.Color(59, 103, 181));
+        btnSeleccionarProducto.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btnSeleccionarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionarProducto.setText("Seleccionar");
+        btnSeleccionarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarProductoActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnSeleccionarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, 30));
+
+        pnlGeneral.addTab("Padre", pnlMenu1);
+
+        pnlMenu2.setBackground(new java.awt.Color(0, 49, 110));
+        pnlMenu2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tableHijo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id Hijo", "Descripcion", "Cantidad", "Id Padre", "Unidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tableHijo);
+        if (tableHijo.getColumnModel().getColumnCount() > 0) {
+            tableHijo.getColumnModel().getColumn(0).setMaxWidth(80);
+        }
+
+        pnlMenu2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 397, 950, 120));
+
+        lblNombre6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre6.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre6.setText("Descripcion:");
+        pnlMenu2.add(lblNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        txtDescripcionHijo.setColumns(20);
+        txtDescripcionHijo.setRows(5);
+        jScrollPane4.setViewportView(txtDescripcionHijo);
+
+        pnlMenu2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 260, 70));
+
+        lblErrorUnidadHijo.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorUnidadHijo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorUnidadHijo.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu2.add(lblErrorUnidadHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 250, 20));
+
+        lblNombre7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre7.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre7.setText("Cantidad:");
+        pnlMenu2.add(lblNombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        txtCantidadHijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadHijoActionPerformed(evt);
+            }
+        });
+        pnlMenu2.add(txtCantidadHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 90, 20));
+
+        lblErrorDescripcionHijo.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorDescripcionHijo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcionHijo.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu2.add(lblErrorDescripcionHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 270, 20));
+
+        lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
+        lblBuscar1.setText("Buscar: ");
+        pnlMenu2.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        txtBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscar1ActionPerformed(evt);
+            }
+        });
+        pnlMenu2.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 590, -1));
+
+        btnVisualizarTablaHijo.setBackground(new java.awt.Color(59, 103, 181));
+        btnVisualizarTablaHijo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVisualizarTablaHijo.setForeground(new java.awt.Color(255, 255, 255));
+        btnVisualizarTablaHijo.setText("Visualizar Tabla");
+        pnlMenu2.add(btnVisualizarTablaHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(833, 350, 130, 30));
+
+        lblNombre8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre8.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre8.setText("Unidad:");
+        pnlMenu2.add(lblNombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, -1, -1));
+
+        txtUnidadHijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnidadHijoActionPerformed(evt);
+            }
+        });
+        pnlMenu2.add(txtUnidadHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 200, 20));
+
+        btnAgregar1.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar1.setText("Agregar");
+        pnlMenu2.add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 90, 30));
+
+        btnEditar1.setBackground(new java.awt.Color(59, 103, 181));
+        btnEditar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar1.setText("Editar");
+        pnlMenu2.add(btnEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 90, 30));
+
+        btnCancelar1.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar1.setText("Cancelar");
+        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar1ActionPerformed(evt);
+            }
+        });
+        pnlMenu2.add(btnCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 90, 30));
+
+        lblErrorCantidadHijo.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCantidadHijo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCantidadHijo.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu2.add(lblErrorCantidadHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 230, 20));
+
+        btnSeleccionarUnidadHijo.setBackground(new java.awt.Color(59, 103, 181));
+        btnSeleccionarUnidadHijo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btnSeleccionarUnidadHijo.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionarUnidadHijo.setText("Seleccionar");
+        btnSeleccionarUnidadHijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarUnidadHijoActionPerformed(evt);
+            }
+        });
+        pnlMenu2.add(btnSeleccionarUnidadHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 80, -1, 30));
+
+        pnlGeneral.addTab("Hijo", pnlMenu2);
+
+        pnlMenu3.setBackground(new java.awt.Color(0, 49, 110));
+        pnlMenu3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblErrorStockMinimo1.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorStockMinimo1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorStockMinimo1.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorStockMinimo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 290, 20));
+
+        lblErrorEstado1.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorEstado1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorEstado1.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 140, -1));
+
+        lblErrorCantidadNieto.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCantidadNieto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCantidadNieto.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorCantidadNieto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 220, 20));
+
+        lblErrorCategoria1.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCategoria1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCategoria1.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 140, -1));
+
+        lblErrorUnidad1.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorUnidad1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorUnidad1.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorUnidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, 140, -1));
+
+        lblNombre9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre9.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre9.setText("Descripcion:");
+        pnlMenu3.add(lblNombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        txtDescripcionNieto.setColumns(20);
+        txtDescripcionNieto.setRows(5);
+        jScrollPane5.setViewportView(txtDescripcionNieto);
+
+        pnlMenu3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 260, 70));
+
+        lblErrorUnidadNieto.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorUnidadNieto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorUnidadNieto.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorUnidadNieto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 260, 20));
+
+        lblNombre10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre10.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre10.setText("Cantidad:");
+        pnlMenu3.add(lblNombre10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        txtCantidadNieto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadNietoActionPerformed(evt);
+            }
+        });
+        pnlMenu3.add(txtCantidadNieto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 90, 20));
+
+        lblErrorNombre10.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorNombre10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorNombre10.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorNombre10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 230, 20));
+
+        lblNombre11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNombre11.setForeground(new java.awt.Color(242, 242, 242));
+        lblNombre11.setText("Unidad:");
+        pnlMenu3.add(lblNombre11, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, -1, -1));
+
+        txtUnidadNieto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnidadNietoActionPerformed(evt);
+            }
+        });
+        pnlMenu3.add(txtUnidadNieto, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 200, 20));
+
+        btnAgregar2.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar2.setText("Agregar");
+        pnlMenu3.add(btnAgregar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 90, 30));
+
+        btnEditar2.setBackground(new java.awt.Color(59, 103, 181));
+        btnEditar2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar2.setText("Editar");
+        pnlMenu3.add(btnEditar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 90, 30));
+
+        btnCancelar2.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar2.setText("Cancelar");
+        btnCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar2ActionPerformed(evt);
+            }
+        });
+        pnlMenu3.add(btnCancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 90, 30));
+
+        txtBuscar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscar2ActionPerformed(evt);
+            }
+        });
+        pnlMenu3.add(txtBuscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 590, -1));
+
+        lblBuscar2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBuscar2.setForeground(new java.awt.Color(242, 242, 242));
+        lblBuscar2.setText("Buscar: ");
+        pnlMenu3.add(lblBuscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+
+        tableNieto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id Nieto", "Descripcion", "Cantidad", "Id Hijo", "Unidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tableNieto);
+        if (tableNieto.getColumnModel().getColumnCount() > 0) {
+            tableNieto.getColumnModel().getColumn(0).setMaxWidth(80);
+        }
+
+        pnlMenu3.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 397, 950, 120));
+
+        btnSeleccionarUnidadNieto.setBackground(new java.awt.Color(59, 103, 181));
+        btnSeleccionarUnidadNieto.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btnSeleccionarUnidadNieto.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionarUnidadNieto.setText("Seleccionar");
+        btnSeleccionarUnidadNieto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarUnidadNietoActionPerformed(evt);
+            }
+        });
+        pnlMenu3.add(btnSeleccionarUnidadNieto, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, -1, 30));
+
+        lblErrorDescripcionNieto.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorDescripcionNieto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorDescripcionNieto.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu3.add(lblErrorDescripcionNieto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 270, 20));
+
+        btnVisualizarTablaNieto1.setBackground(new java.awt.Color(59, 103, 181));
+        btnVisualizarTablaNieto1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVisualizarTablaNieto1.setForeground(new java.awt.Color(255, 255, 255));
+        btnVisualizarTablaNieto1.setText("Visualizar Tabla");
+        pnlMenu3.add(btnVisualizarTablaNieto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(833, 350, 130, 30));
+
+        pnlGeneral.addTab("Nieto", pnlMenu3);
+
+        pnlMenu.add(pnlGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 570));
 
         getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1000, 570));
 
@@ -335,81 +754,85 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
-
-    private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
-        TablaGrandeMantenimientoInventarioBodegaView tablaGrandeMantenimientoInventarioBodegaView  = new TablaGrandeMantenimientoInventarioBodegaView();
-        tablaGrandeMantenimientoInventarioBodegaView.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVisualizarTablaActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-    
-        if(!InventarioBodegaController.MantenimientoInventarioBodega("editar", this.Id_Lote, 
-            (Integer) this.numStock.getValue(),this.txtFechaCaducidad.getText(), 
-            this.cmbEstado.getSelectedItem().toString(), this.lblErrorFechaCaducidad, 
-            this.lblErrorStock))
-            
-            {
-                this.btnEditar.setEnabled(false);
-                this.cmbEstado.setEnabled(false);
-                this.txtFechaCaducidad.setEnabled(false);
-                this.numStock.setEnabled(false);
-                this.btnCancelar1.setEnabled(false);
-                this.LimpiarInputs();
-                InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-            }
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstadoActionPerformed
-
-    private void txtFechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCaducidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaCaducidadActionPerformed
-
-    private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
-        
-        this.btnEditar.setEnabled(false);
-        this.cmbEstado.setEnabled(false);
-        this.txtFechaCaducidad.setEnabled(false);
-        this.numStock.setEnabled(false);
-        this.btnCancelar1.setEnabled(false);
-        this.tableBodega.clearSelection();
-        this.btnVisualizarTabla.setEnabled(true); 
-        this.LimpiarInputs();
-        this.LimpiarErrLabels();
-        
-    }//GEN-LAST:event_btnCancelar1ActionPerformed
-
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        InventarioBodegaCache inventarioCache = new InventarioBodegaCache();
-        inventarioCache.setDatosCompartidos(false);
+        InventarioBodegaCache InventarioBodegaCache = new InventarioBodegaCache();
+        InventarioBodegaCache.setDatosCompartidos(false);
         MenuBodegaView menuBodegaView = new MenuBodegaView();
         menuBodegaView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
-    private void tableBodegaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBodegaMouseClicked
-        
-        int seleccion = this.tableBodega.rowAtPoint(evt.getPoint()); 
-        
-        this.Id_Lote = InventarioBodegaController.setDatosEditarFromTable(seleccion, this.tableBodega, 
-                 this.numStock, this.txtFechaCaducidad, this.cmbEstado);
-        
-        if( this.Id_Lote != null)
-        {
-            this.LimpiarErrLabels();
-            this.cmbEstado.setEnabled(true);
-            this.btnEditar.setEnabled(true);
-            this.txtFechaCaducidad.setEnabled(true);
-            this.numStock.setEnabled(true);
-            this.btnCancelar1.setEnabled(true);
-        }
-    }//GEN-LAST:event_tableBodegaMouseClicked
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtCantidadPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadPadreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadPadreActionPerformed
+
+    private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProductoActionPerformed
+
+    private void txtFechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCaducidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaCaducidadActionPerformed
+
+    private void txtUnidadPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadPadreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidadPadreActionPerformed
+
+    private void txtKitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKitActionPerformed
+
+    private void txtCantidadHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadHijoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadHijoActionPerformed
+
+    private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar1ActionPerformed
+
+    private void txtUnidadHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadHijoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidadHijoActionPerformed
+
+    private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelar1ActionPerformed
+
+    private void txtCantidadNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadNietoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadNietoActionPerformed
+
+    private void txtUnidadNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidadNietoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidadNietoActionPerformed
+
+    private void btnCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelar2ActionPerformed
+
+    private void txtBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar2ActionPerformed
+
+    private void btnSeleccionarUnidadNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadNietoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarUnidadNietoActionPerformed
+
+    private void btnSeleccionarUnidadHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadHijoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarUnidadHijoActionPerformed
+
+    private void btnSeleccionarUnidadPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadPadreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarUnidadPadreActionPerformed
+
+    private void btnSeleccionarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4552,38 +4975,102 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
+    private javax.swing.JButton btnAgregar2;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelar1;
+    private javax.swing.JButton btnCancelar2;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEditar1;
+    private javax.swing.JButton btnEditar2;
     private javax.swing.JPanel btnRegresar;
+    private javax.swing.JButton btnSeleccionarProducto;
+    private javax.swing.JButton btnSeleccionarUnidadHijo;
+    private javax.swing.JButton btnSeleccionarUnidadNieto;
+    private javax.swing.JButton btnSeleccionarUnidadPadre;
     private javax.swing.JButton btnVisualizarTabla;
-    private javax.swing.JComboBox<String> cmbEstado;
+    private javax.swing.JButton btnVisualizarTablaHijo;
+    private javax.swing.JButton btnVisualizarTablaNieto1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblErrorDescripcion1;
+    private javax.swing.JLabel lblBuscar1;
+    private javax.swing.JLabel lblBuscar2;
+    private javax.swing.JLabel lblErrorCantidadHijo;
+    private javax.swing.JLabel lblErrorCantidadNieto;
+    private javax.swing.JLabel lblErrorCantidadPadre;
+    private javax.swing.JLabel lblErrorCategoria;
+    private javax.swing.JLabel lblErrorCategoria1;
+    private javax.swing.JLabel lblErrorDescripcionHijo;
+    private javax.swing.JLabel lblErrorDescripcionNieto;
+    private javax.swing.JLabel lblErrorDescripcionPadre;
+    private javax.swing.JLabel lblErrorEstado;
+    private javax.swing.JLabel lblErrorEstado1;
     private javax.swing.JLabel lblErrorFechaCaducidad;
-    private javax.swing.JLabel lblErrorStock;
-    private javax.swing.JLabel lblEstado;
-    private javax.swing.JLabel lblFechaCaducidad;
+    private javax.swing.JLabel lblErrorNombre1;
+    private javax.swing.JLabel lblErrorNombre10;
+    private javax.swing.JLabel lblErrorNombre2;
+    private javax.swing.JLabel lblErrorNombre6;
+    private javax.swing.JLabel lblErrorStockMinimo1;
+    private javax.swing.JLabel lblErrorUnidad;
+    private javax.swing.JLabel lblErrorUnidad1;
+    private javax.swing.JLabel lblErrorUnidadHijo;
+    private javax.swing.JLabel lblErrorUnidadNieto;
+    private javax.swing.JLabel lblErrorUnidadPadre;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblModulo1;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombre1;
+    private javax.swing.JLabel lblNombre10;
+    private javax.swing.JLabel lblNombre11;
+    private javax.swing.JLabel lblNombre2;
+    private javax.swing.JLabel lblNombre3;
+    private javax.swing.JLabel lblNombre4;
+    private javax.swing.JLabel lblNombre5;
+    private javax.swing.JLabel lblNombre6;
+    private javax.swing.JLabel lblNombre7;
+    private javax.swing.JLabel lblNombre8;
+    private javax.swing.JLabel lblNombre9;
     private javax.swing.JLabel lblRegresar;
-    private javax.swing.JLabel lblStock;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblUsuarioActual;
-    private javax.swing.JSpinner numStock;
     private javax.swing.JPanel pnlBackbround;
+    private javax.swing.JTabbedPane pnlGeneral;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPanel pnlMenu1;
+    private javax.swing.JPanel pnlMenu2;
+    private javax.swing.JPanel pnlMenu3;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlTitulo1;
     private javax.swing.JPanel pnlUsuario;
-    private javax.swing.JTable tableBodega;
+    private javax.swing.JTable tableHijo;
+    private javax.swing.JTable tableNieto;
+    private javax.swing.JTable tablePadre;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscar1;
+    private javax.swing.JTextField txtBuscar2;
+    private javax.swing.JTextField txtCantidadHijo;
+    private javax.swing.JTextField txtCantidadNieto;
+    private javax.swing.JTextField txtCantidadPadre;
+    private javax.swing.JTextArea txtDescripcionHijo;
+    private javax.swing.JTextArea txtDescripcionNieto;
+    private javax.swing.JTextArea txtDescripcionPadre;
     private javax.swing.JTextField txtFechaCaducidad;
+    private javax.swing.JTextField txtKit;
+    private javax.swing.JTextField txtProducto;
+    private javax.swing.JTextField txtUnidadHijo;
+    private javax.swing.JTextField txtUnidadNieto;
+    private javax.swing.JTextField txtUnidadPadre;
     // End of variables declaration//GEN-END:variables
 }

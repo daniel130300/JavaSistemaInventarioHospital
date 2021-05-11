@@ -394,9 +394,9 @@
                   <Color blue="f2" green="f2" red="f2" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Views/Images/icons8_warehouse_32px.png"/>
+                  <Image iconType="3" name="/Views/Images/icons8_box_32px.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Mantenimiento Cat&#xe1;logo Productos"/>
+                <Property name="text" type="java.lang.String" value="Mantenimiento Kits"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>

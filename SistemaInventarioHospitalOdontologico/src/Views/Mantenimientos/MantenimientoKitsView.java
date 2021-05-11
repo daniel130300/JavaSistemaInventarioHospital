@@ -6,15 +6,17 @@
 package Views.Mantenimientos;
 
 import Controllers.Controllers.CatalogoProductoController;
+import Controllers.Controllers.KitController;
 import Controllers.Controllers.LoginController;
-import Models.Conexion.CatalogoProductoConexion;
+import Models.Conexion.KitConexion;
 import Models.Models.CatalogoProductoModel;
+import Models.Models.KitModel;
 import Utils.Cache.CatalogoProductoCache;
+import Utils.Cache.kitCache;
 import java.awt.Color;
 import javax.swing.JPanel;
-import Views.TablasGrande.TablaGrandeCatalogoBodegaView;
-import Views.Listados.ListadoProveedoresView;
 import Views.Menus.MenuBodegaView;
+import Views.TablasGrande.TablaGrandeMantenimientoKits;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,61 +29,59 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
      * Creates new form LoginView
      */
 
-    static Integer Id_producto;
-    static Integer Id_proveedor = 0;
-    
+    static Integer Id_kit;
+    static Integer Id_Producto =0;
     public MantenimientoKitsView() 
     {
         initComponents();
+        this.LlenarDatos();
+        KitController.LlenarCmbUnidades(this.cmbUnidad);
+        KitController.LlenarCmbProducto(this.cmbProducto);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-    //    CatalogoProductoController.LlenarCmbCategoria(this.cmbCategoria);
-    //    CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos"); 
-    //    CatalogoProductoController.FiltroTableProducto(this.tableProductos, this.txtBuscar);
+        KitController.LlenarTableKit(tableKits, "Todos"); 
+        KitController.FiltroTableProducto(this.tableKits, this.txtBuscar);
     //    CatalogoProductoController.setPlaceHolders(this.txtNombre, this.txtDescripcion, this.txtBuscar);
-    //    this.LlenarDatos();
+       
     }
-    
-   /* private void LimpiarInputs()
-    {
-        this.txtNombre.setText(null);
-        this.txtDescripcion.setText(null);
-        this.txtStockMaximo.setText(null);
-        this.txtStockMinimo.setText(null);
-        this.cmbEstado.setSelectedIndex(0);
-        this.cmbCategoria.setSelectedIndex(0);  
-    }
-    
-    private void LimpiarTable(){
-        DefaultTableModel model =(DefaultTableModel) tableProveedores.getModel();
-        int fila= model.getRowCount();
-        for(int i = 0; i < fila; i++  )
-        {       
-                model.removeRow(0);  
-        }
-    }
+       
     
     private void LimpiarErrLabels()
     {
         this.lblErrorNombre.setText(null);
         this.lblErrorDescripcion.setText(null);
-        this.lblErrorStockMaximo.setText(null);
-        this.lblErrorStockMinimo.setText(null);
-    }
+        this.lblErrorCantidad.setText(null);
+    } 
+    private void LimpiarTable(){
+        DefaultTableModel model =(DefaultTableModel) tableProducto.getModel();
+        int fila= model.getRowCount();
+        for(int i = 0; i < fila; i++  )
+        {       
+                model.removeRow(0);  
+        }
+    }       
+    private void LimpiarInputs()
+    {
+        this.txtNombre.setText(null);
+        this.txtDescripcion.setText(null);
+        this.cmbEstado.setSelectedIndex(0);
+    }    
     
     private void LlenarDatos()
     {
-        this.Id_producto = CatalogoProductoController.setDatosEditarFromCache(this.tableProductos, 
-                this.txtNombre, this.txtDescripcion, this.txtStockMaximo, this.txtStockMinimo,
-                this.cmbCategoria, this.cmbEstado);
-                CatalogoProductoController.ProductosProveedores(tableProveedores,Id_producto);
-        if(Id_producto != null)
+        this.Id_kit = KitController.setDatosEditarFromCache(this.tableKits, 
+                this.txtNombre, this.txtDescripcion, this.cmbEstado);
+                CatalogoProductoController.ProductosProveedores(tableKits,Id_kit);
+        if(Id_kit != null)
         {
             
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
             this.cmbEstado.setEnabled(true);
         }
-    }*/
+    }
+
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,15 +115,17 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProducto = new javax.swing.JTable();
         btnEliminarProveedor = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         txtCantidad = new javax.swing.JTextField();
         lblProducto = new javax.swing.JLabel();
         lblUnidad = new javax.swing.JLabel();
         lblCantidad = new javax.swing.JLabel();
         cmbUnidad = new javax.swing.JComboBox<>();
         cmbProducto = new javax.swing.JComboBox<>();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnAgregarProducto = new javax.swing.JButton();
+        lblErrorCantidad = new javax.swing.JLabel();
         pnlUsuario = new javax.swing.JPanel();
         lblIconoUsuarioActual = new javax.swing.JLabel();
         lblUsuarioActual = new javax.swing.JLabel();
@@ -284,11 +286,11 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Unidad", "Cantidad"
+                "Id Producto", "Producto", "Id Unidad", "Unidad", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -313,41 +315,7 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
                 btnEliminarProveedorActionPerformed(evt);
             }
         });
-        pnlMenu1.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 190, 30));
-
-        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        pnlMenu1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, 30));
-
-        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(242, 242, 242));
-        btnEditar.setText("Editar");
-        btnEditar.setEnabled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        pnlMenu1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 80, 30));
-
-        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(242, 242, 242));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        pnlMenu1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, 30));
+        pnlMenu1.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 190, 30));
 
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,7 +339,6 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
         lblCantidad.setText("Cantidad:");
         pnlMenu1.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, -1, 20));
 
-        cmbUnidad.setEnabled(false);
         cmbUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbUnidadActionPerformed(evt);
@@ -379,13 +346,62 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
         });
         pnlMenu1.add(cmbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 180, -1));
 
-        cmbProducto.setEnabled(false);
         cmbProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbProductoActionPerformed(evt);
             }
         });
         pnlMenu1.add(cmbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 180, -1));
+
+        btnAgregar.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
+
+        btnEditar.setBackground(new java.awt.Color(59, 103, 181));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(242, 242, 242));
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 80, 30));
+
+        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(242, 242, 242));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, 30));
+
+        btnAgregarProducto.setBackground(new java.awt.Color(59, 103, 181));
+        btnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregarProducto.setForeground(new java.awt.Color(242, 242, 242));
+        btnAgregarProducto.setText("Agregar Producto");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductoActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 190, 30));
+
+        lblErrorCantidad.setBackground(new java.awt.Color(255, 51, 51));
+        lblErrorCantidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblErrorCantidad.setForeground(new java.awt.Color(231, 0, 2));
+        pnlMenu1.add(lblErrorCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 200, 20));
 
         pnlGeneral.addTab("Agregar Productos", pnlMenu1);
 
@@ -446,63 +462,59 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
-        CatalogoProductoController.QuitarTablePSeleccionados(Id_proveedor );  
+        KitController.QuitarTableProSeleccionados(Id_Producto);   
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
     private void tableProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductoMouseClicked
-        int seleccion = this.tableProducto.rowAtPoint(evt.getPoint());    
-        Id_proveedor=Integer.parseInt(String.valueOf(this.tableProducto.getModel().getValueAt(seleccion, 0)));  
+    int seleccion = this.tableProducto.rowAtPoint(evt.getPoint());    
+    CatalogoProductoModel  producto = new  CatalogoProductoModel();
+    Id_Producto =Integer.parseInt(String.valueOf(this.tableProducto.getModel().getValueAt(seleccion, 0)));    
     }//GEN-LAST:event_tableProductoMouseClicked
 
     private void btnVisualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarTablaActionPerformed
-        TablaGrandeCatalogoBodegaView consultaProductoView = new TablaGrandeCatalogoBodegaView();
-        consultaProductoView.setVisible(true);
+        TablaGrandeMantenimientoKits consultakitsView = new TablaGrandeMantenimientoKits();
+        consultakitsView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVisualizarTablaActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
-   /*     if(!CatalogoProductoController.MantenimientoProducto("editar", this.Id_producto,
-            this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(),
-            this.txtStockMinimo.getText(),cmbEstado.getSelectedItem().toString(),CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
-            this.lblErrorNombre, this.lblErrorDescripcion,
-            this.lblErrorStockMaximo, this.lblErrorStockMinimo))
+        if(!KitController.MantenimientoKit("editar", this.Id_kit,
+            this.txtNombre.getText(),this.txtDescripcion.getText(),cmbEstado.getSelectedItem().toString(),this.txtCantidad.getText(),
+            this.lblErrorNombre, this.lblErrorDescripcion , this.lblErrorCantidad))
         {
             this.btnAgregar.setEnabled(true);
             this.btnEditar.setEnabled(false);
             this.cmbEstado.setEnabled(false);
             this.LimpiarInputs();
-            CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
-            CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos");
+            this.LimpiarErrLabels();
+            KitController.LlenarTableKit(tableKits, "Todos"); 
             this.LimpiarTable();
-        }*/
+
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-      /*  if(!CatalogoProductoController.MantenimientoProducto("insertar", 0,
-            this.txtNombre.getText(),this.txtDescripcion.getText(), this.txtStockMaximo.getText(),
-            this.txtStockMinimo.getText(),"Activo",CatalogoProductoConexion.IdCategoria(this.cmbCategoria.getSelectedItem().toString()),
-            this.lblErrorNombre, this.lblErrorDescripcion,
-            this.lblErrorStockMaximo, this.lblErrorStockMinimo))
+       if(!KitController.MantenimientoKit("insertar",0,
+            this.txtNombre.getText(),this.txtDescripcion.getText(),"Activo",this.txtCantidad.getText(),  
+            this.lblErrorNombre, this.lblErrorDescripcion, this.lblErrorCantidad ))
         {
-            CatalogoProductoModel productoModel = new CatalogoProductoModel();
-            Id_producto = productoModel.getPrdId();
-            CatalogoProductoController.LlenarTableProductos(tableProductos, "Todos");
-            this.LimpiarTable();
+            KitModel kitmodel = new KitModel();
+            Id_kit = kitmodel.getKitId();
+            KitController.LlenarTableKit(tableKits, "Todos"); 
             this.LimpiarInputs();
-        }*/
+            this.LimpiarErrLabels();
+            this.LimpiarTable();
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /*this.btnAgregar.setEnabled(true);
+        this.btnAgregar.setEnabled(true);
         this.btnEditar.setEnabled(false);
         this.cmbEstado.setEnabled(false);
-        this.tableProductos.clearSelection();
-        this.btnVisualizarTabla.setEnabled(true);
+        this.tableKits.clearSelection();
         this.btnVisualizarTabla.setEnabled(true);
         this.LimpiarInputs();
         this.LimpiarErrLabels();
-        this.LimpiarTable();*/
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -519,28 +531,25 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbEstadoActionPerformed
 
     private void tableKitsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKitsMouseClicked
-        /*int seleccion = this.tableProductos.rowAtPoint(evt.getPoint());
-        CatalogoProductoCache proveedor = new CatalogoProductoCache();
-        this.Id_producto = CatalogoProductoController.setDatosEditarFromTable(seleccion,
-            this.tableProductos, this.txtNombre, this.txtDescripcion,
-            this.txtStockMaximo, this.txtStockMinimo, this.cmbCategoria,
-            this.cmbEstado);
-        
-        if(this.Id_producto != null)
+        int seleccion = this.tableKits.rowAtPoint(evt.getPoint());
+        kitCache kit = new kitCache();
+        this.Id_kit =  KitController.setDatosEditarFromTable(seleccion,
+            this.tableKits, this.txtNombre, this.txtDescripcion, this.cmbEstado);
+        if(this.Id_kit != null)
         {
-            proveedor.setPrdId(Id_producto);
-            CatalogoProductoController.ProductosProveedores(this.tableProveedores,Id_producto);
+            kit.setKitId(Id_kit);
+            KitController.LlenarTableDetalleKit(Id_kit);
             this.LimpiarErrLabels();
             this.cmbEstado.setEnabled(true);
             this.btnAgregar.setEnabled(false);
             this.btnEditar.setEnabled(true);
-        }*/
+        }
 
     }//GEN-LAST:event_tableKitsMouseClicked
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        CatalogoProductoCache productoCache = new CatalogoProductoCache();
-        productoCache.setDatosCompartidos(false);
+        kitCache kitCache = new kitCache();
+        kitCache.setDatosCompartidos(false);
         MenuBodegaView menuBodegaView = new MenuBodegaView();
         menuBodegaView.setVisible(true);
         this.dispose();
@@ -557,6 +566,12 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
     private void cmbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbProductoActionPerformed
+
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        KitController.AgregarProducto(new Object[]{KitConexion.PrdId(cmbProducto.getSelectedItem().toString()) ,cmbProducto.getSelectedItem().toString(),KitConexion.UndId(cmbUnidad.getSelectedItem().toString()),cmbUnidad.getSelectedItem().toString(),
+                                                  txtCantidad.getText()}, tableProducto, lblErrorCantidad, txtCantidad);  
+        
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4700,6 +4715,7 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminarProveedor;
@@ -4715,6 +4731,7 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JLabel lblErrorCantidad;
     private javax.swing.JLabel lblErrorDescripcion;
     private javax.swing.JLabel lblErrorNombre;
     private javax.swing.JLabel lblEstado;

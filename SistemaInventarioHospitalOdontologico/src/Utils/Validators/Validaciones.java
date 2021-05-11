@@ -64,6 +64,13 @@ public class Validaciones
         N2= Integer.parseInt(n2);
         if(N1>=N2){return  true;}else{return  false;}
     }
+
+    public static Boolean validarmayor0(String n1)
+    {
+        Integer N1;
+        N1= Integer.parseInt(n1);
+        if(N1>0){return  true;}else{return  false;}
+    }
     
     public static boolean validarTabla(JTable proveedor)
     {

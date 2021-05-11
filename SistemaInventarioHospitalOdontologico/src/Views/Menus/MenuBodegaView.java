@@ -53,6 +53,7 @@ public class MenuBodegaView extends javax.swing.JFrame {
         this.btnMantenimientoInventarioBodega.setFocusable(false);
         this.btnInventarioBodega.setFocusable(false);
         this.btnBitacoraInventarioBodega.setFocusable(false);
+        this.btnMantenimientoKits.setFocusable(false);
     }
 
     /**
@@ -250,8 +251,8 @@ public class MenuBodegaView extends javax.swing.JFrame {
         btnMantenimientoKits.setBackground(new java.awt.Color(45, 83, 150));
         btnMantenimientoKits.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMantenimientoKits.setForeground(new java.awt.Color(242, 242, 242));
-        btnMantenimientoKits.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_warehouse_32px.png"))); // NOI18N
-        btnMantenimientoKits.setText("Mantenimiento Catálogo Productos");
+        btnMantenimientoKits.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Images/icons8_box_32px.png"))); // NOI18N
+        btnMantenimientoKits.setText("Mantenimiento Kits");
         btnMantenimientoKits.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMantenimientoKits.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnMantenimientoKits.addActionListener(new java.awt.event.ActionListener() {

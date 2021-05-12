@@ -5,7 +5,7 @@
  */
 package Views.Mantenimientos;
 
-import Controllers.Controllers.InventarioBodegaController;
+import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.LoginController;
 import Utils.PlaceHolders.TextPrompt;
 import java.awt.Color;
@@ -23,10 +23,10 @@ public class InventarioBodegaView extends javax.swing.JFrame {
      */
     public InventarioBodegaView() {
         initComponents();
-        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", txtBuscar);
+        TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
+        InventarioPadreController.LlenarTableInventarioPadre(tableBodega);
+        InventarioPadreController.FiltroTableInventarioPadre(this.tableBodega, this.txtBuscar);
     }
 
     /**
@@ -47,14 +47,10 @@ public class InventarioBodegaView extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JPanel();
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
-        lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBodega = new javax.swing.JTable();
         lblBuscar1 = new javax.swing.JLabel();
-        rbnInactivos = new javax.swing.JRadioButton();
-        rbnTodos = new javax.swing.JRadioButton();
-        rbnActivos = new javax.swing.JRadioButton();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -123,28 +119,23 @@ public class InventarioBodegaView extends javax.swing.JFrame {
 
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 150, 30));
 
-        lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
-        lblBuscar.setText("Visualizar:");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 510, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 510, -1));
 
         tableBodega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id lote", "Id producto", "Nombre", "Descripción", "Stock actual", "Stock máximo", "Stock mínimo", "Fecha Caducidad", "Categoría", "Unidad", "Estado"
+                "Id Padre", "Descripción", "Fecha Caducidad", "Cantidad", "Unidad", "Id Kit", "Nombre Kit", "Id Producto", "Nombre Producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,46 +144,12 @@ public class InventarioBodegaView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableBodega);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 810, 370));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 810, 390));
 
         lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar1.setText("Buscar: ");
-        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-
-        rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnInactivos.setForeground(new java.awt.Color(242, 242, 242));
-        rbnInactivos.setText("Inactivos");
-        rbnInactivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnInactivosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
-
-        rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnTodos.setForeground(new java.awt.Color(242, 242, 242));
-        rbnTodos.setSelected(true);
-        rbnTodos.setText("Todos");
-        rbnTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnTodosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
-
-        rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnActivos.setForeground(new java.awt.Color(242, 242, 242));
-        rbnActivos.setText("Activos");
-        rbnActivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnActivosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 850, 550));
 
@@ -242,24 +199,6 @@ public class InventarioBodegaView extends javax.swing.JFrame {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
-
-    private void rbnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnTodosActionPerformed
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        rbnActivos.setSelected(false);
-        rbnInactivos.setSelected(false);
-    }//GEN-LAST:event_rbnTodosActionPerformed
-
-    private void rbnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnActivosActionPerformed
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Activos");
-        rbnTodos.setSelected(false);
-        rbnInactivos.setSelected(false);
-    }//GEN-LAST:event_rbnActivosActionPerformed
-
-    private void rbnInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInactivosActionPerformed
-         InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Inactivos");
-        rbnActivos.setSelected(false);
-        rbnTodos.setSelected(false);
-    }//GEN-LAST:event_rbnInactivosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4405,7 +4344,6 @@ public class InventarioBodegaView extends javax.swing.JFrame {
     private javax.swing.JPanel btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblBuscar1;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
@@ -4418,9 +4356,6 @@ public class InventarioBodegaView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
-    private javax.swing.JRadioButton rbnActivos;
-    private javax.swing.JRadioButton rbnInactivos;
-    private javax.swing.JRadioButton rbnTodos;
     private javax.swing.JTable tableBodega;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

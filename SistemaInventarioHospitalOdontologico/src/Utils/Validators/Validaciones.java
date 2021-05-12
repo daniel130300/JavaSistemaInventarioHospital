@@ -57,6 +57,18 @@ public class Validaciones
         return contrasenia.matches(regex);
     }   
     
+    public static boolean validarContraseniaCoincide(String contrasenia, String confirmcontrasenia)
+    {
+        if(contrasenia.equals(confirmcontrasenia))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
     public static Boolean validarStocks(String n1 , String n2)
     {
         Integer N1,N2;
@@ -91,11 +103,10 @@ public class Validaciones
     * de lo contrario retorna false.
     * @return Boolean
     */
-    public static Boolean ValidarFormatoFecha(String fecha)
+     public static Boolean ValidarFormatoFecha(String fecha)
     {
-        String regex= "^\\d{4}([\\-])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$";
+        String regex= "^\\d{4}([\\-])(0?[1-9]|1[0-2])\\1(3[01]|[12][0-9]|0?[1-9])$";
         return fecha.matches(regex);
-        
     }
     
     /**

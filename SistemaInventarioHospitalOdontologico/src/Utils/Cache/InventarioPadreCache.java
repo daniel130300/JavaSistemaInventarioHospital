@@ -5,6 +5,7 @@
  */
 package Utils.Cache;
 
+import Models.Models.InventarioHijoModel;
 import Models.Models.InventarioPadreModel;
 
 /**
@@ -17,8 +18,11 @@ import Models.Models.InventarioPadreModel;
  */
 public class InventarioPadreCache {
     private static boolean DatosCompartidos = false;
+    public static Integer InvPId;
+    public static Integer InvHId;
     private static InventarioPadreModel Id;
-
+    private static InventarioHijoModel IdH;
+    
     public boolean isDatosCompartidos() {
         return DatosCompartidos;
     }
@@ -35,4 +39,28 @@ public class InventarioPadreCache {
 
         InventarioPadreCache.Id = Id;
     }
+
+    public Integer getInvPId() {
+        return InvPId;
+    }
+
+    public void setInvPId(Integer InvPId) {
+        InventarioPadreCache.InvPId = InvPId;
+    }
+
+    public Integer getInvHId() {
+        return InvHId;
+    }
+
+    public void setInvHId(Integer InvHId) {
+        InventarioPadreCache.InvHId = InvHId;
+    }
+
+    public InventarioHijoModel getIdH() {
+        return IdH;
+    }
+
+    public void setIdH(InventarioHijoModel IdH) {
+        InventarioPadreCache.IdH = IdH;
+    } 
 }

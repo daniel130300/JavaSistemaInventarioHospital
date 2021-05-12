@@ -5,10 +5,12 @@
  */
 package Views.TablasGrande;
 
-import Controllers.Controllers.InventarioBodegaController;
+import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.LoginController;
-import Models.Models.InventarioBodegaModel;
-import Utils.Cache.InventarioBodegaCache;
+import Models.Conexion.InventarioPadreConexion;
+import Models.Models.InventarioPadreModel;
+import Models.Models.InventarioPadreModel;
+import Utils.Cache.InventarioPadreCache;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import java.awt.Color;
@@ -28,8 +30,8 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         initComponents();
         TextPrompt placeholderBuscar = new TextPrompt(" Ingrese su búsqueda ", this.txtBuscar);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        InventarioBodegaController.FiltroTableInventarioBodega(this.tableBodega, this.txtBuscar);
+        InventarioPadreController.LlenarTableInventarioPadre(tableBodega);
+        InventarioPadreController.FiltroTableInventarioPadre(this.tableBodega, this.txtBuscar);
     }
 
     /**
@@ -58,10 +60,6 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBodega = new javax.swing.JTable();
-        rbnTodos = new javax.swing.JRadioButton();
-        lblBuscar1 = new javax.swing.JLabel();
-        rbnActivos = new javax.swing.JRadioButton();
-        rbnInactivos = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -149,25 +147,25 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         lblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar.setForeground(new java.awt.Color(242, 242, 242));
         lblBuscar.setText("Buscar: ");
-        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        pnlMenu.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
             }
         });
-        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 520, -1));
+        pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 520, -1));
 
         tableBodega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id lote", "Id producto", "Nombre", "Descripción", "Stock actual", "Stock máximo", "Stock mínimo", "Fecha Caducidad", "Categoría", "Unidad", "Estado"
+                "Id Padre", "Código Interno", "Descripción", "Fecha Caducidad", "Cantidad", "Unidad", "Id Kit", "Nombre Kit", "Id Producto", "Nombre Producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,46 +179,7 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         });
         jScrollPane1.setViewportView(tableBodega);
 
-        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 1020, 370));
-
-        rbnTodos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnTodos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnTodos.setForeground(new java.awt.Color(242, 242, 242));
-        rbnTodos.setSelected(true);
-        rbnTodos.setText("Todos");
-        rbnTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnTodosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
-
-        lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
-        lblBuscar1.setText("Visualizar:");
-        pnlMenu.add(lblBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        rbnActivos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnActivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnActivos.setForeground(new java.awt.Color(255, 255, 255));
-        rbnActivos.setText("Activos");
-        rbnActivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnActivosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
-
-        rbnInactivos.setBackground(new java.awt.Color(0, 49, 110));
-        rbnInactivos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rbnInactivos.setForeground(new java.awt.Color(255, 255, 255));
-        rbnInactivos.setText("Inactivos");
-        rbnInactivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbnInactivosActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(rbnInactivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+        pnlMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1020, 390));
 
         pnlBackbround.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1060, 550));
 
@@ -251,32 +210,17 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void rbnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnTodosActionPerformed
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Todos");
-        rbnActivos.setSelected(false);
-        rbnInactivos.setSelected(false);
-    }//GEN-LAST:event_rbnTodosActionPerformed
-
-    private void rbnActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnActivosActionPerformed
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Activos");
-        rbnTodos.setSelected(false);
-        rbnInactivos.setSelected(false);
-    }//GEN-LAST:event_rbnActivosActionPerformed
-
-    private void rbnInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInactivosActionPerformed
-        InventarioBodegaController.LlenarTableInventarioBodega(tableBodega, "Inactivos");
-        rbnActivos.setSelected(false);
-        rbnTodos.setSelected(false);
-    }//GEN-LAST:event_rbnInactivosActionPerformed
-
     private void tableBodegaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBodegaMouseClicked
         int seleccion = this.tableBodega.rowAtPoint(evt.getPoint());
-        InventarioBodegaModel inventario = new  InventarioBodegaModel();
-        inventario.setLprId(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 0))));
-        inventario.setLprStock(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 4))));
-        inventario.setLprFechaCaducidad(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 7)));
-        inventario.setLprEstado(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion,10)));
-        InventarioBodegaCache inventarioCache = new InventarioBodegaCache();
+        InventarioPadreModel inventario = new  InventarioPadreModel();
+        inventario.setInvPId(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 0))));
+        inventario.setInvPDescripcion(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 2)));
+        inventario.setInvPFchCaducidad(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 3)));
+        inventario.setInvPCantidad(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion,4))));
+        inventario.setUndDescripcion(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 5)));
+        inventario.setKitNombre(InventarioPadreConexion.getNombreKit(Integer.parseInt(this.tableBodega.getModel().getValueAt(seleccion, 6).toString())));
+        inventario.setPrdNombre(InventarioPadreConexion.getNombreProducto(Integer.parseInt(this.tableBodega.getModel().getValueAt(seleccion, 8).toString())));
+        InventarioPadreCache inventarioCache = new InventarioPadreCache();
         inventarioCache.setDatosCompartidos(true);
         inventarioCache.setId(inventario);
         MantenimientoInventarioBodegaView mantenimientoInventarioBodegaView = new MantenimientoInventarioBodegaView();
@@ -8525,7 +8469,6 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JLabel lblBuscar1;
     private javax.swing.JLabel lblIconoRegresar;
     private javax.swing.JLabel lblIconoUsuarioActual;
     private javax.swing.JLabel lblMensajeBienvenida;
@@ -8537,9 +8480,6 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
-    private javax.swing.JRadioButton rbnActivos;
-    private javax.swing.JRadioButton rbnInactivos;
-    private javax.swing.JRadioButton rbnTodos;
     private javax.swing.JTable tableBodega;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

@@ -5,8 +5,10 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.InventarioHijoController;
 import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.LoginController;
+import Models.Models.InventarioHijoModel;
 import Models.Models.InventarioPadreModel;
 import Utils.Cache.InventarioPadreCache;
 import Views.Listados.ListadoCatalogoBodegaView;
@@ -27,6 +29,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
    public static Integer Id_Padre = null;
    public static Integer Id_producto = null;
+   public static Integer Id_Hijo = null;
     
     ListadoCatalogoBodegaView producto = new ListadoCatalogoBodegaView();
     ListadoKitsView kit = new ListadoKitsView();
@@ -45,6 +48,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 this.txtBuscar1);
         InventarioPadreController.setPlaceHolders(this.txtDescripcionNieto, this.txtCantidadNieto, this.txtUnidadNieto,
                 this.txtBuscar2);
+        InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
         LlenarDatosPadre();
         ValidadSeleccion();
     }  
@@ -644,6 +648,11 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableHijo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableHijoMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tableHijo);
         if (tableHijo.getColumnModel().getColumnCount() > 0) {
             tableHijo.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -712,6 +721,11 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         btnAgregarHijo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAgregarHijo.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarHijo.setText("Agregar");
+        btnAgregarHijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarHijoActionPerformed(evt);
+            }
+        });
         pnlMenu2.add(btnAgregarHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 90, 30));
 
         btnEditarHijo.setBackground(new java.awt.Color(59, 103, 181));
@@ -971,7 +985,11 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUnidadHijoActionPerformed
 
     private void btnCancelarHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarHijoActionPerformed
-        // TODO add your handling code here:
+        this.btnAgregarHijo.setEnabled(true);
+        this.btnEditarHijo.setEnabled(false);
+        this.tableHijo.clearSelection();
+        this.LimpiarInputsHijo();
+        this.LimpiarErrLabelsHijo();
     }//GEN-LAST:event_btnCancelarHijoActionPerformed
 
     private void txtCantidadNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadNietoActionPerformed
@@ -995,7 +1013,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionarUnidadNietoActionPerformed
 
     private void btnSeleccionarUnidadHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadHijoActionPerformed
-        // TODO add your handling code here:
+        unidad.setVisible(true);
+        unidad.tableUnidades.clearSelection();
     }//GEN-LAST:event_btnSeleccionarUnidadHijoActionPerformed
 
     private void btnSeleccionarUnidadPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadPadreActionPerformed
@@ -1175,6 +1194,35 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         this.rbnPadre.setSelected(false);
         this.rbnNieto.setSelected(false);
     }//GEN-LAST:event_rbnHijoActionPerformed
+
+    private void btnAgregarHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHijoActionPerformed
+       
+        if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
+            this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
+            this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
+        {
+            InventarioHijoModel HijoModel = new InventarioHijoModel();
+            Id_Hijo = HijoModel.getInvHId();
+            InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
+            this.LimpiarInputsHijo();
+        }
+    }//GEN-LAST:event_btnAgregarHijoActionPerformed
+
+    private void tableHijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHijoMouseClicked
+        
+        int seleccion = this.tableHijo.rowAtPoint(evt.getPoint());
+        InventarioPadreCache padre = new InventarioPadreCache();
+        
+        this.Id_Hijo = InventarioHijoController.setDatosEditarFromTable(seleccion, this.tableHijo, 
+                this.txtDescripcionHijo, this.txtCantidadHijo,this.txtUnidadHijo);
+        
+        if(Id_Hijo != null)
+        {
+            this.btnAgregarHijo.setEnabled(false);
+            this.btnEditarHijo.setEnabled(true);
+            this.btnCancelarHijo.setEnabled(true);
+        }
+    }//GEN-LAST:event_tableHijoMouseClicked
 
     /**
      * @param args the command line arguments

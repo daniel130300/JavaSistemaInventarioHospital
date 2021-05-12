@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: 192.168.0.120    Database: inventariohospital
+-- Host: localhost    Database: inventariohospital
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
@@ -30,9 +30,10 @@ CREATE TABLE `catalogoproductos` (
   `PrdStockMinimo` int NOT NULL,
   `PrdEstado` varchar(15) NOT NULL,
   `CprId` int DEFAULT NULL,
+  `InvPadreId` int NOT NULL,
   PRIMARY KEY (`PrdId`),
   KEY `IX_Relationship10` (`CprId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,7 @@ CREATE TABLE `catalogoproductos` (
 
 LOCK TABLES `catalogoproductos` WRITE;
 /*!40000 ALTER TABLE `catalogoproductos` DISABLE KEYS */;
-INSERT INTO `catalogoproductos` VALUES (1,'Producto nuevo medico','Producto nuevo medico',50,10,'Activo',3),(2,'NCDiez','LAFLAME',60,10,'Inactivo',1),(4,'Panadol','Panadol antigripal',80,20,'Activo',1),(5,'Paracetamol','La que la cura todo',20,5,'Activo',3),(9,'asdasdas','dasdasdasdas',100,10,'Inactivo',3),(10,'dasdasaas','Lewis hamilton',70,20,'Activo',2),(11,'Producto prueba','asdasdasdasdas',100,4,'Activo',2),(12,'dsadasdas','saddasfdsfsd',12,1,'Activo',2),(13,'sdfsdfsdfsdf','asdasdasdas',12,1,'Activo',1),(14,'dsfsdfsd','sdfsdfsd',21,12,'Activo',1),(15,'asdasdasd','asdasdasdasd',12,1,'Activo',1),(16,'asdasd','asdasd',12,1,'Activo',1),(17,'asaafsd','sdfsdfsdfsdf',80,21,'Inactivo',6),(18,'NC-20','Descripción de prueba lorem ipsum',12,10,'Activo',2),(19,'Tabcin','Nueva tabcin gripe y tos',100,20,'Inactivo',3);
+INSERT INTO `catalogoproductos` VALUES (1,'Ninguno','Ninguno',0,0,'1',1,0),(2,'NCDiez','LAFLAME',60,10,'0',1,0),(4,'Panadol','Panadol antigripal',80,20,'1',1,0),(5,'Paracetamol','La que la cura todo',20,5,'1',3,0),(9,'asdasdas','dasdasdasdas',100,10,'0',3,0),(10,'dasdasaas','Lewis hamilton',70,20,'1',2,0),(11,'Producto prueba','asdasdasdasdas',100,4,'1',2,0),(12,'dsadasdas','saddasfdsfsd',12,1,'1',2,0),(13,'sdfsdfsdfsdf','asdasdasdas',12,1,'1',1,0),(14,'dsfsdfsd','sdfsdfsd',21,12,'1',1,0),(15,'asdasdasd','asdasdasdasd',12,1,'1',1,0),(16,'asdasd','asdasd',12,1,'1',1,0),(17,'asaafsd','sdfsdfsdfsdf',80,21,'0',6,0),(18,'NC-20','Descripción de prueba lorem ipsum',12,10,'1',2,0),(19,'Tabcin','Nueva tabcin gripe y tos',100,20,'0',3,0),(20,'Acetaminofen','Alivia el dolor de Cuerpo',500,50,'1',2,0);
 /*!40000 ALTER TABLE `catalogoproductos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-29 17:03:32
+-- Dump completed on 2021-05-11 18:52:26

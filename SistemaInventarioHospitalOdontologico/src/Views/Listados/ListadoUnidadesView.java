@@ -5,9 +5,16 @@
  */
 package Views.Listados;
 
+import Controllers.Controllers.InventarioHijoController;
 import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.UnidadesController;
 import Utils.PlaceHolders.TextPrompt;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadHijo;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadNieto;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadNieto;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
 
 /**
  *
@@ -173,13 +180,30 @@ public class ListadoUnidadesView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void tableUnidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUnidadesMouseClicked
-       int seleccion = this.tableUnidades.rowAtPoint(evt.getPoint());
-        
-        InventarioPadreController.AddNombreUnidad(new Object[]{
+      
+        int seleccion = this.tableUnidades.rowAtPoint(evt.getPoint());
+  
+            InventarioPadreController.AddNombreUnidad(new Object[]{
+                Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
+                String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1))
+            }); 
+            
+           /* InventarioHijoController.AddNombreUnidadHijo(new Object[]{
+                Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
+                String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1))
+            });*/
+      
+       
+       /* if (btnSeleccionarUnidadNieto.isSelected()){
+            
+            InventarioHijoController.AddNombreUnidadNieto(new Object[]{
                 Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
                 String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1)),
-                String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 2))
             });
+            txtUnidadPadre.setText(null);
+            txtUnidadHijo.setText(null);
+            
+        } */
         
         this.dispose();    
                   

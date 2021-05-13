@@ -279,7 +279,7 @@ public class InventarioPadreConexion
             JOptionPane.showMessageDialog(null,e);
         }  
         return Kit;
-    }
+    } 
  
     /**
     * 

@@ -11,7 +11,9 @@ import Models.Models.InventarioHijoModel;
 import Utils.Cache.InventarioPadreCache;
 import Utils.Validators.Validaciones;
 import static Views.Listados.ListadoUnidadesView.tableUnidades;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,16 +34,6 @@ import javax.swing.table.TableRowSorter;
 
 public class InventarioHijoController {
  
-    /**
-     * 
-     * @param accion String
-     * @param Id Integer
-     * @param descripcion
-     * @param cantidad
-     * @param unidades
-     * @return Boolean
-     */
-    
     public static Boolean MantenimientoInventarioHijo(String accion, 
             Integer Id, String descripcion, String cantidad ,
             String unidades, JLabel errdescripcion, JLabel errcantidad,
@@ -70,8 +62,8 @@ public class InventarioHijoController {
                 break;
                 
                 case "editar":   
-                   // mntError = InventarioBodegaController.editarInvHijo(Id, 
-                   //        trimmedDescripcion,cantidad,id_padre,trimmedUnidades);              
+                   mntError = InventarioHijoController.editarInvHijo(Id, 
+                   trimmedDescripcion,trimmedCantidad, trimmedUnidades);              
                 break;
             }
         }
@@ -96,13 +88,42 @@ public class InventarioHijoController {
         switch (resultado) 
         {
             case "OK":  
-               /* cache.setInvPId(InventarioBodegaConexion.UltimoInvPId());
-                if(Mantenimiento("insertar",0,trimmedDescripcion,trimmedcantidad,cache.getInvPId(),trimmedUnidades,model)== false){
-                    JOptionPane.showMessageDialog(null, "Producto ingresado con éxito.");   
-                }*/
                 JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
             break;
+            
+            case "errProducto":
+                JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
+                error = true;
+            break;
 
+            default:
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                error = true;
+            break;
+        }
+        return error;
+    }
+    
+    private static boolean editarInvHijo(Integer Id, String trinmedDescripcion, Integer trinmedCantidad, 
+             String trinmedUnidad)
+    {
+
+        boolean error = false; 
+
+        InventarioHijoModel productoModel = new InventarioHijoModel();
+        Integer InvPId = 0;
+        
+        productoModel = InventarioHijoController.setInvHModel(Id,
+                trinmedDescripcion, trinmedCantidad, InvPId, trinmedUnidad);
+        
+        String resultado = InventarioHijoConexion.MantenimientoInventarioHijo("editar", productoModel);
+        
+        switch (resultado) 
+        {
+            case "OK":   
+                JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
+            break;
+            
             default:
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
                 error = true;
@@ -125,18 +146,7 @@ public class InventarioHijoController {
         
         return invHModel;
     }  
-    
-    /**
-     * 
-     * @param seleccion int
-     * @param tableBodega JTable
-     * @param numStock JSpinner
-     * @param txtFechaCaducidad JTextField
-     * @param cmbEstado JComboBox
-     * Método que se encarga de pasar los campos de la tabla a los JTextFields, JSpinner 
-     * y JComboxes correspondientes para poder ser editados y retorna el Id de Lote del Producto.
-     * @return Integer
-     */
+
     public static Integer setDatosEditarFromTable(int seleccion, JTable tableHijo, 
              JTextArea txtDescripcionHijo, JTextField txtCantidadHijo, JTextField txtUnidadHijo)
             
@@ -149,43 +159,15 @@ public class InventarioHijoController {
 
             return InvHId;
         }
-    /**
-     * 
-     * @param tableBodega JTable
-     * @param numStock JSpinner
-     * @param txtFechaCaducidad JTextField
-     * @param cmbEstado JComboBox
-     * Método que se encarga de pasar los campos de la clase InventarioBodegaCache a 
-     * los JTextFields, JSpinner y JComboxes correspondientes para poder ser editados y
-     * retorna el Id de Lote Producto.
-     * @return Integer
-     */
-    public static Integer setDatosEditarFromCache(JTable tableHijo, JTextArea txtDescripcionHijo,
-             JTextField txtCantidadHijo, JTextField txtUnidadHijo)
-    {
-        Integer InvHId = null;
-        InventarioPadreCache inventariopadrecache = new InventarioPadreCache();
-   
-        if(inventariopadrecache.isDatosCompartidos())
-        {   
-            InvHId = inventariopadrecache.getIdH().getInvHId();
-            txtDescripcionHijo.setText(inventariopadrecache.getIdH().getInvHDescripcion());
-            txtCantidadHijo.setText(inventariopadrecache.getIdH().getInvHCantidad().toString());
-            txtUnidadHijo.setText(inventariopadrecache.getIdH().getUndId());
-        }
-        
-        return InvHId;
-    }
-    
+
     public static void AddNombreUnidadHijo(Object[] dataRow)
     {
-        DefaultTableModel model =(DefaultTableModel) tableUnidades.getModel();
         txtUnidadHijo.setText(String.valueOf(dataRow[1]));
     }
         
     /**
      * 
-     * @param tableBodega JTable
+     * @param tableHijo JTable
      * @param fieldBusqueda JTextField
      * Método que se encarga de filtrar la tabla tableBodega
      * a partir de la busqueda del Lote Producto.
@@ -265,15 +247,6 @@ public class InventarioHijoController {
     // **************************************************
     // Métodos Privados
     // **************************************************
-    
-    /**
-     * 
-     * @param msj String 
-     * @param resultado String
-     * Método que se encarga de mostrar en pantalla si la realización ha 
-     * sido realizada con éxito.
-     * @return Boolean
-     */
     
     /**
      * 

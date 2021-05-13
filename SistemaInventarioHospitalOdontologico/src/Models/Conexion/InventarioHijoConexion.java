@@ -92,33 +92,6 @@ public class InventarioHijoConexion
         return Id;
     }     
      
-     public static Integer getIdUnidad(String Nombre)
-    {
-        Integer Unidad= 0;
-        Connection con = null;
-        Statement stm;
-        ResultSet rss;    
-        try 
-        {
-            con = Conexion.getConexion(con);
-            stm = con.createStatement();
-            String query = "SELECT UndId FROM unidades "
-                    + "WHERE UndDescripcion='"+Nombre+"'";
-             
-            rss = stm.executeQuery(query);
-            
-            while (rss.next()) 
-            {
-                Unidad=rss.getInt("UndId");
-            }
-            con.close();
-        } 
-        catch (SQLException e) 
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }  
-        return Unidad;
-    }
     /**
     * 
     * @param accion String

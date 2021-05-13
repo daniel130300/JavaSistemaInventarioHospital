@@ -16,8 +16,12 @@ import Utils.Validators.Validaciones;
 import static Views.Listados.ListadoCatalogoBodegaView.tableProductos;
 import static Views.Listados.ListadoKitsView.tableKits;
 import static Views.Listados.ListadoUnidadesView.tableUnidades;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadHijo;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtKit;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtProducto;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
+import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadNieto;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -127,6 +131,8 @@ public class InventarioPadreController {
         generalValidacionError = InventarioPadreController.validacionesGenerales( trimmedDescripcion,
                trimmedFechaCaducidad, trimmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto,
                errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto );
+        
+        
         
         if(generalValidacionError == false)
         {
@@ -244,7 +250,6 @@ public class InventarioPadreController {
             JTextField txtProducto)
     {
         Integer InvPId = null;
-        InventarioPadreCache productoCache = new InventarioPadreCache();
 
             InvPId = Integer.parseInt(String.valueOf(tablePadre.getModel().getValueAt(seleccion, 0)));
             txtDescripcion.setText(String.valueOf(tablePadre.getModel().getValueAt(seleccion, 2)));
@@ -297,21 +302,21 @@ public class InventarioPadreController {
         return InvPId;
     }
     
+    
      public static void AddNombreProducto(Object[] dataRow)
     {
-        DefaultTableModel model =(DefaultTableModel) tableProductos.getModel();
+        
         txtProducto.setText(String.valueOf(dataRow[1]));
     }
      
     public static void AddNombreUnidad(Object[] dataRow)
     {
-        DefaultTableModel model =(DefaultTableModel) tableUnidades.getModel();
-        txtUnidadPadre.setText(String.valueOf(dataRow[1]));
+        txtUnidadPadre.setText(String.valueOf(dataRow[1])); 
+ 
     }
     
     public static void AddNombreKit(Object[] dataRow)
     {
-        DefaultTableModel model =(DefaultTableModel) tableKits.getModel();
         txtKit.setText(String.valueOf(dataRow[1]));
     }
      

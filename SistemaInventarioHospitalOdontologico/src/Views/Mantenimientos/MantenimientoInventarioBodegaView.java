@@ -6,9 +6,11 @@
 package Views.Mantenimientos;
 
 import Controllers.Controllers.InventarioHijoController;
+import Controllers.Controllers.InventarioNietoController;
 import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.LoginController;
 import Models.Models.InventarioHijoModel;
+import Models.Models.InventarioNietoModel;
 import Models.Models.InventarioPadreModel;
 import Utils.Cache.InventarioPadreCache;
 import Views.Listados.ListadoCatalogoBodegaView;
@@ -30,6 +32,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
    public static Integer Id_Padre = null;
    public static Integer Id_producto = null;
    public static Integer Id_Hijo = null;
+   public static Integer Id_Nieto = null;
     
     ListadoCatalogoBodegaView producto = new ListadoCatalogoBodegaView();
     ListadoKitsView kit = new ListadoKitsView();
@@ -49,6 +52,9 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         InventarioPadreController.setPlaceHolders(this.txtDescripcionNieto, this.txtCantidadNieto, this.txtUnidadNieto,
                 this.txtBuscar2);
         InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
+        InventarioHijoController.FiltroTableInventarioHijo(this.tableHijo, this.txtBuscar1);
+        InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
+        InventarioNietoController.FiltroTableInventarioNieto(this.tableNieto, this.txtBuscar2);
         LlenarDatosPadre();
         ValidadSeleccion();
     }  
@@ -903,6 +909,11 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableNieto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableNietoMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tableNieto);
         if (tableNieto.getColumnModel().getColumnCount() > 0) {
             tableNieto.getColumnModel().getColumn(0).setMaxWidth(80);
@@ -1301,11 +1312,43 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
             this.LimpiarInputsHijo();
         }
         
+        if(!InventarioNietoController.MantenimientoInventarioNieto("insertar", 0,
+            this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
+            this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto))
+        {
+            InventarioNietoModel NietoModel = new InventarioNietoModel();
+            Id_Nieto = NietoModel.getInvHId();
+            InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
+            this.LimpiarInputsNieto();
+        }
+        
     }//GEN-LAST:event_btnAgregarNietoActionPerformed
 
     private void btnEditarNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarNietoActionPerformed
-       
+                if(!InventarioNietoController.MantenimientoInventarioNieto("editar", this.Id_Nieto,
+                this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
+                this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto))
+            {
+                InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
+                this.LimpiarInputsNieto();
+                this.btnAgregarNieto.setEnabled(true);
+                this.btnEditarNieto.setEnabled(false);
+            }
     }//GEN-LAST:event_btnEditarNietoActionPerformed
+
+    private void tableNietoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNietoMouseClicked
+        int seleccion = this.tableNieto.rowAtPoint(evt.getPoint());
+        
+        this.Id_Nieto = InventarioNietoController.setDatosEditarFromTable(seleccion, this.tableNieto, 
+                this.txtDescripcionNieto, this.txtCantidadNieto,this.txtUnidadNieto);
+        
+        if(Id_Nieto != null)
+        {
+            this.btnAgregarNieto.setEnabled(false);
+            this.btnEditarNieto.setEnabled(true);
+            this.btnCancelarNieto.setEnabled(true);
+        }
+    }//GEN-LAST:event_tableNietoMouseClicked
 
     /**
      * @param args the command line arguments

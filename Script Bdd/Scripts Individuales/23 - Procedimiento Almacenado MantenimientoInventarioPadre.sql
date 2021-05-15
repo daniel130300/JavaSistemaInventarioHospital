@@ -20,8 +20,12 @@ BEGIN
 			SET _Estado = "errProducto"; 
 		END IF;
         
-        IF (_PrdId = 20 AND _KitId = 1) !=0 THEN
+        IF (_PrdId = 1 AND _KitId = 1) !=0 THEN
           SET _Estado = "errRegistro";
+        END IF;
+        
+         IF (_PrdId != 1 AND _KitId != 1) !=0 THEN
+          SET _Estado = "errIngresar";
         END IF;
 	
     IF (SELECT COUNT(InvPId) FROM inventariopadre WHERE KitId != 1 AND KitId = _KitId) !=0 THEN
@@ -50,8 +54,12 @@ BEGIN
 			SET _Estado = "errProducto"; 
 		END IF;
         
-	IF (_PrdId = 1 AND _KitId = 1) !=0 THEN
-          SET _Estado = "errRegistro";
+		IF (_PrdId = 1 AND _KitId = 1) !=0 THEN
+			  SET _Estado = "errRegistro";
+			END IF;
+        
+         IF (_PrdId != 1 AND _KitId != 1) !=0 THEN
+          SET _Estado = "errIngresar";
         END IF;
         
     IF (SELECT COUNT(InvPId) FROM inventariopadre WHERE InvPId != _InvPId AND KitId != 1 AND KitId = _KitId) !=0 THEN

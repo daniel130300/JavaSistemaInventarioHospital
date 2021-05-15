@@ -132,7 +132,7 @@ public class BitacoraInventarioProductosView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Bitacora", "Usuario", "Id Inventario", "Código interno del producto", "Accion", "Descripción Cambios", "Fecha"
+                "Id Bitacora", "Usuario", "Código interno del producto", "Accion", "Descripción Cambios", "Fecha", "Nivel (P/H/N)"
             }
         ) {
             boolean[] canEdit = new boolean [] {

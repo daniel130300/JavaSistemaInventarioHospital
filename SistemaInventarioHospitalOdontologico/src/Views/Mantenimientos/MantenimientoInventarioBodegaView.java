@@ -33,6 +33,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
    public static Integer Id_producto = null;
    public static Integer Id_Hijo = null;
    public static Integer Id_Nieto = null;
+   public static Integer numero = 0;
     
     ListadoCatalogoBodegaView producto = new ListadoCatalogoBodegaView();
     ListadoKitsView kit = new ListadoKitsView();
@@ -1040,16 +1041,19 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscar2ActionPerformed
 
     private void btnSeleccionarUnidadNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadNietoActionPerformed
+        numero = 3;
         unidad.setVisible(true);
         unidad.tableUnidades.clearSelection();
     }//GEN-LAST:event_btnSeleccionarUnidadNietoActionPerformed
 
     private void btnSeleccionarUnidadHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadHijoActionPerformed
+        numero = 2;
         unidad.setVisible(true);
         unidad.tableUnidades.clearSelection();
     }//GEN-LAST:event_btnSeleccionarUnidadHijoActionPerformed
 
     private void btnSeleccionarUnidadPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarUnidadPadreActionPerformed
+        numero = 1;
         unidad.setVisible(true);
         unidad.tableUnidades.clearSelection();
         

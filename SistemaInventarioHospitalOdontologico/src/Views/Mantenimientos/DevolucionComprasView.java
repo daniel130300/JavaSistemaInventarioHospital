@@ -5,10 +5,14 @@
  */
 package Views.Mantenimientos;
 
+import Controllers.Controllers.DevolucionCompraController;
 import Controllers.Controllers.LoginController;
+import Models.Conexion.DevolucionCompraConexion;
 import Views.Menus.MenuComprasView;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -16,6 +20,14 @@ import javax.swing.JPanel;
  */
 public class DevolucionComprasView extends javax.swing.JFrame {
 
+   static Integer Id_Compra = 0;
+   static Integer InvPId = 0;
+   static Integer Id_Producto = 0;
+   static Integer Cantidad = 0;
+   static Double Subtotal1 = 0.0;
+   static Double Subtotal2 = 0.0;
+   static Double Total = 0.0;
+    
     /**
      * Creates new form LoginView
      */
@@ -23,8 +35,23 @@ public class DevolucionComprasView extends javax.swing.JFrame {
     {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        this.tableCompras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tableProductos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DevolucionCompraController.LlenarTableDevolucionCompra(tableCompras); 
+        DevolucionCompraController.FiltroTableDevolucionCompra(this.tableCompras, this.txtBuscar); 
+        DevolucionCompraController.FiltroTableDetalleDevolucionCompra(this.tableProductos, this.txtBuscar1);
+        DevolucionCompraController.setPlaceHolders(this.txtBuscar ,this.txtBuscar1);
     }
-
+    
+    public void LimpiarInpust(){
+        this.txtNombreProducto.setText(null);
+        this.txtDescripcionProducto.setText(null);
+        this.txtUnidad.setText(null);
+        this.txtFechaCaducidad.setText(null);
+        this.txtCantidad.setText(null);
+        this.txtPagaImpuesto.setText(null);
+        this.txtPrecio.setText(null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +68,7 @@ public class DevolucionComprasView extends javax.swing.JFrame {
         lblIconoRegresar = new javax.swing.JLabel();
         lblRegresar = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tableProductos1 = new javax.swing.JTable();
+        tableCompras = new javax.swing.JTable();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         pnlMenu1 = new javax.swing.JPanel();
@@ -59,14 +86,15 @@ public class DevolucionComprasView extends javax.swing.JFrame {
         lblDescripcionProducto1 = new javax.swing.JLabel();
         lblPrecioCompraProducto2 = new javax.swing.JLabel();
         lblPrecioCompraProducto3 = new javax.swing.JLabel();
-        txtCantidad2 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         lblFechaCaducidad = new javax.swing.JLabel();
         txtFechaCaducidad = new javax.swing.JTextField();
         btnDevolucionProducto = new javax.swing.JButton();
-        cmbUnidad1 = new javax.swing.JComboBox<>();
-        cmbPagaImpuesto = new javax.swing.JComboBox<>();
         lblBuscar1 = new javax.swing.JLabel();
         txtBuscar1 = new javax.swing.JTextField();
+        txtUnidad = new javax.swing.JTextField();
+        txtPagaImpuesto = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
         pnlUsuario = new javax.swing.JPanel();
         lblIconoUsuarioActual = new javax.swing.JLabel();
         lblUsuarioActual = new javax.swing.JLabel();
@@ -123,7 +151,7 @@ public class DevolucionComprasView extends javax.swing.JFrame {
 
         pnlMenu.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 150, 30));
 
-        tableProductos1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -139,7 +167,12 @@ public class DevolucionComprasView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tableProductos1);
+        tableCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableComprasMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tableCompras);
 
         pnlMenu.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1130, 380));
 
@@ -162,6 +195,7 @@ public class DevolucionComprasView extends javax.swing.JFrame {
 
         txtNombreProducto.setEditable(false);
         txtNombreProducto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNombreProducto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtNombreProducto.setEnabled(false);
         txtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +213,7 @@ public class DevolucionComprasView extends javax.swing.JFrame {
         txtDescripcionProducto.setColumns(20);
         txtDescripcionProducto.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         txtDescripcionProducto.setRows(4);
+        txtDescripcionProducto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtDescripcionProducto.setEnabled(false);
         jScrollPane3.setViewportView(txtDescripcionProducto);
 
@@ -194,15 +229,20 @@ public class DevolucionComprasView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Producto", "Id Padre", "Nombre", "Descripción", "Unidad", "Fecha de Caducidad", "Cantidad", "¿Paga Impuesto?", "Precio compra"
+                "Id Padre", "Nombre", "Descripción", "Unidad", "Fecha de Caducidad", "Cantidad", "¿Paga Impuesto?", "Precio compra"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductosMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tableProductos);
@@ -223,6 +263,7 @@ public class DevolucionComprasView extends javax.swing.JFrame {
         lblPrecioCompraProducto1.setText("Unidad:");
         pnlMenu1.add(lblPrecioCompraProducto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, 20));
 
+        txtCantidad.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtCantidad.setEnabled(false);
         pnlMenu1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 70, -1));
 
@@ -241,14 +282,16 @@ public class DevolucionComprasView extends javax.swing.JFrame {
         lblPrecioCompraProducto3.setText("Precio: ");
         pnlMenu1.add(lblPrecioCompraProducto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, 20));
 
-        txtCantidad2.setEnabled(false);
-        pnlMenu1.add(txtCantidad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 130, -1));
+        txtPrecio.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        txtPrecio.setEnabled(false);
+        pnlMenu1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 130, -1));
 
         lblFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblFechaCaducidad.setForeground(new java.awt.Color(242, 242, 242));
         lblFechaCaducidad.setText("Fecha de caducidad: ");
         pnlMenu1.add(lblFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
+        txtFechaCaducidad.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtFechaCaducidad.setEnabled(false);
         txtFechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,19 +304,13 @@ public class DevolucionComprasView extends javax.swing.JFrame {
         btnDevolucionProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDevolucionProducto.setForeground(new java.awt.Color(242, 242, 242));
         btnDevolucionProducto.setText("Devolución del Producto");
+        btnDevolucionProducto.setEnabled(false);
         btnDevolucionProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDevolucionProductoActionPerformed(evt);
             }
         });
-        pnlMenu1.add(btnDevolucionProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 180, 30));
-
-        cmbUnidad1.setEnabled(false);
-        pnlMenu1.add(cmbUnidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 200, -1));
-
-        cmbPagaImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
-        cmbPagaImpuesto.setEnabled(false);
-        pnlMenu1.add(cmbPagaImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 120, -1));
+        pnlMenu1.add(btnDevolucionProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 180, 30));
 
         lblBuscar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBuscar1.setForeground(new java.awt.Color(242, 242, 242));
@@ -286,6 +323,25 @@ public class DevolucionComprasView extends javax.swing.JFrame {
             }
         });
         pnlMenu1.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 590, -1));
+
+        txtUnidad.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        txtUnidad.setEnabled(false);
+        pnlMenu1.add(txtUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 200, -1));
+
+        txtPagaImpuesto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        txtPagaImpuesto.setEnabled(false);
+        pnlMenu1.add(txtPagaImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 120, 20));
+
+        btnCancelar.setBackground(new java.awt.Color(59, 103, 181));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        pnlMenu1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 120, 30));
 
         pnlGeneral.addTab("Productos", pnlMenu1);
 
@@ -351,7 +407,29 @@ public class DevolucionComprasView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnDevolucionProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionProductoActionPerformed
-        // TODO add your handling code here:
+    
+        int respuesta=JOptionPane.showConfirmDialog(null,"¿Está Seguro de Efectuar la Devolución de este Producto?","AVISO",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        if(respuesta==JOptionPane.YES_OPTION){
+            
+            DevolucionCompraConexion.ActualizarCantidadInventarioPadre(Id_Producto, Cantidad);
+            DevolucionCompraConexion.ActualizarEstadoDetalleCompras(Id_Producto);
+
+            JOptionPane.showMessageDialog(null, "Producto Devuelto con Éxito");
+            DevolucionCompraController.LlenarTableDetalleDevolucionCompra(this.tableProductos,Id_Compra);
+            Subtotal1 =  DevolucionCompraConexion.SubTotal1(Id_Compra, DevolucionCompraConexion.ISV(Id_Compra));
+            Subtotal2 = DevolucionCompraConexion.SubTotal2(Id_Compra);
+            Total = Subtotal1 + Subtotal2;
+            this.txtTotal.setText(String.valueOf("L. "+Total));
+            
+            this.btnDevolucionProducto.setEnabled(false);
+            this.tableProductos.clearSelection();
+            LimpiarInpust();
+            
+        }else{
+            LimpiarInpust();
+            this.btnDevolucionProducto.setEnabled(false);
+            this.tableProductos.clearSelection();
+        }
     }//GEN-LAST:event_btnDevolucionProductoActionPerformed
 
     private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
@@ -361,6 +439,41 @@ public class DevolucionComprasView extends javax.swing.JFrame {
     private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscar1ActionPerformed
+
+    private void tableComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableComprasMouseClicked
+        int seleccion = this.tableCompras.rowAtPoint(evt.getPoint());
+        Id_Compra = Integer.parseInt(String.valueOf(this.tableCompras.getModel().getValueAt(seleccion, 0))); 
+        DevolucionCompraController.LlenarTableDetalleDevolucionCompra(this.tableProductos,Id_Compra); 
+
+        Subtotal1 =  DevolucionCompraConexion.SubTotal1(Id_Compra, DevolucionCompraConexion.ISV(Id_Compra));
+        Subtotal2 = DevolucionCompraConexion.SubTotal2(Id_Compra);
+        
+        Total = Subtotal1 + Subtotal2;
+        this.txtTotal.setText(String.valueOf("L. "+Total));
+    
+    }//GEN-LAST:event_tableComprasMouseClicked
+
+    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
+        int seleccionado = this.tableProductos.rowAtPoint(evt.getPoint());
+
+        this.InvPId = DevolucionCompraController.setDatosDevolucionCompraFromTable(seleccionado, this.tableProductos, 
+                this.txtNombreProducto,this.txtDescripcionProducto, this.txtUnidad, this.txtFechaCaducidad, 
+                this.txtCantidad,this.txtPagaImpuesto, this.txtPrecio);
+        
+        if(InvPId != null)
+        {
+            this.btnDevolucionProducto.setEnabled(true);
+        }
+        
+        this.Id_Producto = Integer.parseInt(String.valueOf(this.tableProductos.getModel().getValueAt(seleccionado, 0)));
+        this.Cantidad = Integer.parseInt(String.valueOf(this.tableProductos.getModel().getValueAt(seleccionado, 5)));
+    }//GEN-LAST:event_tableProductosMouseClicked
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        LimpiarInpust();
+        this.btnDevolucionProducto.setEnabled(false);
+        this.tableProductos.clearSelection();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -16791,10 +16904,9 @@ public class DevolucionComprasView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDevolucionProducto;
     private javax.swing.JPanel btnRegresar;
-    private javax.swing.JComboBox<String> cmbPagaImpuesto;
-    private javax.swing.JComboBox<String> cmbUnidad1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -16822,15 +16934,17 @@ public class DevolucionComprasView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu1;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
+    private javax.swing.JTable tableCompras;
     private javax.swing.JTable tableProductos;
-    private javax.swing.JTable tableProductos1;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCantidad2;
     private javax.swing.JTextArea txtDescripcionProducto;
     private javax.swing.JTextField txtFechaCaducidad;
     private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPagaImpuesto;
+    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

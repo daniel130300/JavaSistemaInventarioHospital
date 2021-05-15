@@ -9,6 +9,7 @@ import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.InventarioNietoConexion;
 import Models.Models.InventarioNietoModel;
 import Utils.Validators.Validaciones;
+import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadNieto;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -50,13 +51,13 @@ public class InventarioNietoController {
         
         Boolean generalValidacionError = false;
         Boolean mntError = false;
-        InventarioHijoController.setErroresToNull(errdescripcion, errcantidad, errunidades );
+        InventarioNietoController.setErroresToNull(errdescripcion, errcantidad, errunidades );
         String trimmedDescripcion = descripcion.trim();
         String trimmedUnidades = unidades.trim();
         Integer trimmedCantidad =Integer.parseInt(cantidad);
         
         
-        generalValidacionError = InventarioHijoController.validacionesGenerales(trimmedDescripcion, cantidad,
+        generalValidacionError = InventarioNietoController.validacionesGenerales(trimmedDescripcion, cantidad,
             trimmedUnidades,errdescripcion, errcantidad,errunidades);
         
        if(generalValidacionError == false)
@@ -101,8 +102,10 @@ public class InventarioNietoController {
        
         switch (resultado) 
         {
-            case "OK":  
-                JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
+            case "OK": 
+                 if(MantenimientoInventarioBodegaView.accion == 3){
+                    JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
+                 }
             break;
             
             case "errProducto":

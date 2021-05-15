@@ -16,6 +16,7 @@ import Utils.Validators.Validaciones;
 import static Views.Listados.ListadoCatalogoBodegaView.tableProductos;
 import static Views.Listados.ListadoKitsView.tableKits;
 import static Views.Listados.ListadoUnidadesView.tableUnidades;
+import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadHijo;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtKit;
@@ -174,7 +175,9 @@ public class InventarioPadreController {
         switch (resultado) 
         {
             case "OK":  
-                   JOptionPane.showMessageDialog(null, "Producto Ingresado Correctamente.");    
+                    if(MantenimientoInventarioBodegaView.accion == 1){
+                        JOptionPane.showMessageDialog(null, "Producto Ingresado Correctamente.");   
+                    }
             break;
             
             case "errProducto":
@@ -183,7 +186,12 @@ public class InventarioPadreController {
             break;
             
             case "errRegistro":
-                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de Ninguno");
+                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de ninguno");
+                error = true;
+            break;
+            
+            case "errIngresar":
+                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit");
                 error = true;
             break;
             
@@ -227,7 +235,12 @@ public class InventarioPadreController {
             break;
             
             case "errRegistro":
-                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de Ninguno");
+                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de ninguno");
+                error = true;
+            break;
+            
+             case "errIngresar":
+                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit");
                 error = true;
             break;
             

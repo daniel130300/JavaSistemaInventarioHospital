@@ -6,9 +6,11 @@
 package Views.Listados;
 
 import Controllers.Controllers.InventarioHijoController;
+import Controllers.Controllers.InventarioNietoController;
 import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.UnidadesController;
 import Utils.PlaceHolders.TextPrompt;
+import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadHijo;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadNieto;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
@@ -182,28 +184,35 @@ public class ListadoUnidadesView extends javax.swing.JFrame {
     private void tableUnidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUnidadesMouseClicked
       
         int seleccion = this.tableUnidades.rowAtPoint(evt.getPoint());
-  
-            InventarioPadreController.AddNombreUnidad(new Object[]{
+        
+           if(MantenimientoInventarioBodegaView.numero == 1){
+               InventarioPadreController.AddNombreUnidad(new Object[]{
                 Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
                 String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1))
-            }); 
-            
-           /* InventarioHijoController.AddNombreUnidadHijo(new Object[]{
+            });
+           } 
+          if(MantenimientoInventarioBodegaView.numero == 2){
+            InventarioHijoController.AddNombreUnidadHijo(new Object[]{
                 Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
                 String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1))
-            });*/
-      
-       
-       /* if (btnSeleccionarUnidadNieto.isSelected()){
+            });
+           } 
+          if(MantenimientoInventarioBodegaView.numero == 3){
+            InventarioNietoController.AddNombreUnidadNieto(new Object[]{
+                Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
+                String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1))
+            });
+          }
+        /*if (btnSeleccionarUnidadNieto.isSelected()){
             
-            InventarioHijoController.AddNombreUnidadNieto(new Object[]{
+            InventarioNietoController.AddNombreUnidadNieto(new Object[]{
                 Integer.parseInt(String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 0))),
                 String.valueOf(this.tableUnidades.getModel().getValueAt(seleccion, 1)),
             });
             txtUnidadPadre.setText(null);
             txtUnidadHijo.setText(null);
             
-        } */
+       } */
         
         this.dispose();    
                   

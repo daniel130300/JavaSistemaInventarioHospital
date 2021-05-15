@@ -11,12 +11,6 @@ import Controllers.Controllers.InventarioPadreController;
 import Controllers.Controllers.UnidadesController;
 import Utils.PlaceHolders.TextPrompt;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadHijo;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadNieto;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadNieto;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
 
 /**
  *

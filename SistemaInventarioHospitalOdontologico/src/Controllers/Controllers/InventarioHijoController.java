@@ -11,6 +11,7 @@ import Models.Models.InventarioHijoModel;
 import Utils.Cache.InventarioPadreCache;
 import Utils.Validators.Validaciones;
 import static Views.Listados.ListadoUnidadesView.tableUnidades;
+import Views.Mantenimientos.MantenimientoInventarioBodegaView;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
@@ -88,7 +89,9 @@ public class InventarioHijoController {
         switch (resultado) 
         {
             case "OK":  
-                JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
+                if(MantenimientoInventarioBodegaView.accion == 2){
+                    JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
+                }
             break;
             
             case "errProducto":

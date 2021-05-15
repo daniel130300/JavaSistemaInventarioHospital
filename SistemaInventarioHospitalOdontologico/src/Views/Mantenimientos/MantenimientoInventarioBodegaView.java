@@ -34,6 +34,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
    public static Integer Id_Hijo = null;
    public static Integer Id_Nieto = null;
    public static Integer numero = 0;
+   public static Integer accion = null;
     
     ListadoCatalogoBodegaView producto = new ListadoCatalogoBodegaView();
     ListadoKitsView kit = new ListadoKitsView();
@@ -1173,6 +1174,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         
         this.rbnHijo.setSelected(false);
         this.rbnPadre.setSelected(false);
+        accion = 3;
 
         LimpiarInputsNieto();
   
@@ -1203,6 +1205,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         
         this.rbnNieto.setSelected(false);
         this.rbnHijo.setSelected(false);
+        accion = 1;
         
         LimpiarInputsHijo();
         LimpiarInputsNieto();
@@ -1235,6 +1238,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         this.rbnPadre.setSelected(false);
         this.rbnNieto.setSelected(false);
         
+        accion = 2;
+        
         LimpiarInputsHijo();
         LimpiarInputsNieto();
     }//GEN-LAST:event_rbnHijoActionPerformed
@@ -1246,22 +1251,23 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
             this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
             this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
             this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
-        {
-            InventarioPadreModel PadreModel = new InventarioPadreModel();
-            Id_Padre = PadreModel.getInvPId();
-            InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
-            this.LimpiarInputsPadre();
-        }
+            {
+                InventarioPadreModel PadreModel = new InventarioPadreModel();
+                Id_Padre = PadreModel.getInvPId();
+                InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
+                this.LimpiarInputsPadre();
+
+                if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
+                this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
+                this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
+                    {
+                        InventarioHijoModel HijoModel = new InventarioHijoModel();
+                        Id_Hijo = HijoModel.getInvHId();
+                        InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
+                        this.LimpiarInputsHijo();
+                    }
+            }
         
-        if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
-            this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
-            this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
-        {
-            InventarioHijoModel HijoModel = new InventarioHijoModel();
-            Id_Hijo = HijoModel.getInvHId();
-            InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
-            this.LimpiarInputsHijo();
-        }
     }//GEN-LAST:event_btnAgregarHijoActionPerformed
 
     private void tableHijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHijoMouseClicked
@@ -1304,27 +1310,31 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
             Id_Padre = PadreModel.getInvPId();
             InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
             this.LimpiarInputsPadre();
-        }
-        
-        if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
+            
+            if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
             this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
             this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
-        {
-            InventarioHijoModel HijoModel = new InventarioHijoModel();
-            Id_Hijo = HijoModel.getInvHId();
-            InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
-            this.LimpiarInputsHijo();
+            {
+                InventarioHijoModel HijoModel = new InventarioHijoModel();
+                Id_Hijo = HijoModel.getInvHId();
+                InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
+                this.LimpiarInputsHijo();
+                
+                if(!InventarioNietoController.MantenimientoInventarioNieto("insertar", 0,
+                this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
+                this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto))
+                {
+                    InventarioNietoModel NietoModel = new InventarioNietoModel();
+                    Id_Nieto = NietoModel.getInvHId();
+                    InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
+                    this.LimpiarInputsNieto();
+                }
+            }
         }
         
-        if(!InventarioNietoController.MantenimientoInventarioNieto("insertar", 0,
-            this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
-            this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto))
-        {
-            InventarioNietoModel NietoModel = new InventarioNietoModel();
-            Id_Nieto = NietoModel.getInvHId();
-            InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
-            this.LimpiarInputsNieto();
-        }
+        
+        
+        
         
     }//GEN-LAST:event_btnAgregarNietoActionPerformed
 

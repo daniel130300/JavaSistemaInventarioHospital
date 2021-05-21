@@ -6,6 +6,7 @@
 package Views.Listados;
 
 import Controllers.Controllers.LoginController;
+import Controllers.Controllers.RegistrarCompraController;
 import java.awt.Color;
 import javax.swing.JPanel;
 import Views.Mantenimientos.RegistrarCompraView;
@@ -22,6 +23,8 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
     public ListadoProductospComprasView() {
         initComponents();
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
+        RegistrarCompraController.LlenarTableInventario(tableInventario);
+        RegistrarCompraController.FiltroTable(tableInventario, txtBuscar);
     }
 
     /**
@@ -45,7 +48,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableProductos = new javax.swing.JTable();
+        tableInventario = new javax.swing.JTable();
         pnlTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblModulo = new javax.swing.JLabel();
@@ -81,7 +84,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(45, 83, 150));
         btnRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(68, 115, 196)));
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -126,23 +129,28 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
         });
         pnlMenu.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 520, -1));
 
-        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tableInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id Producto", "Codigo Interno Producto", "Nombre", "Descripción", "Id Categoría", "Categoría"
+                "Inventario Id", "Codigo Inventario", "Inventario Descripción"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tableProductos);
+        tableInventario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableInventarioMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableInventario);
 
         pnlMenu.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 810, 390));
 
@@ -186,14 +194,18 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        RegistrarCompraView registrarCompraView = new RegistrarCompraView();
-        registrarCompraView.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void tableInventarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableInventarioMouseClicked
+        int seleccion = this.tableInventario.rowAtPoint(evt.getPoint()); 
+        RegistrarCompraView.txtNombreProducto.setText(String.valueOf(this.tableInventario.getModel().getValueAt(seleccion, 2)));
+        
+    }//GEN-LAST:event_tableInventarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -8447,7 +8459,7 @@ public class ListadoProductospComprasView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
-    private javax.swing.JTable tableProductos;
+    private javax.swing.JTable tableInventario;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

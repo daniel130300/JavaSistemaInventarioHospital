@@ -101,10 +101,8 @@ public class InventarioPadreController {
             JLabel errFechaCaducidad, JLabel errCantidad, JLabel errUnidad,
             JLabel errKit, JLabel errProducto)
     {
-        
         Boolean generalValidacionError = false;
         Boolean mntError = false;
-        
         InventarioPadreController.setErroresToNull(errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto);  
         String trimmedDescripcion = Descripcion.trim();
         String trimmedFechaCaducidad = FechaCaducidad.trim();
@@ -112,16 +110,19 @@ public class InventarioPadreController {
         String trinmedKit = Kit.trim();
         String trinmedUnidad = Unidad.trim();
         String trinmedProducto = Producto.trim();
-        Integer CantidadPadre = Integer.parseInt(trimmedCantidad);
+        String CantidadPadre = trimmedCantidad;
         String Nomenclatura = "";
         String N = "Ninguno";
-        
+        System.out.println(trinmedUnidad);
+        generalValidacionError = InventarioPadreController.validacionesGenerales( trimmedDescripcion,
+               trimmedFechaCaducidad, trimmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto,
+               errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto );        
+                
         if(trinmedProducto.compareTo(N)==0){
            Nomenclatura = "KIT";
         }else{
            Nomenclatura = InventarioPadreConexion.getNomenclaturaProducto(trinmedProducto);
         }
-
         Integer UndId = InventarioPadreConexion.getIdUnidad(trinmedUnidad);
         String CorrelativoUnidad = InventarioPadreController.Correlativo_UndId(UndId);
         String CorelativoInvPIdAgregar = InventarioPadreController.Correlativo_PrdPIdAgregar();
@@ -129,9 +130,7 @@ public class InventarioPadreController {
         String trimmedCodigoInternoAgregar = Nomenclatura+"-"+CorrelativoUnidad+"-"+CorelativoInvPIdAgregar;
         String trimmedCodigoInternoEditar = Nomenclatura+"-"+CorrelativoUnidad+"-"+CorelativoInvPIdEditar;
         
-        generalValidacionError = InventarioPadreController.validacionesGenerales( trimmedDescripcion,
-               trimmedFechaCaducidad, trimmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto,
-               errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto );
+
         
         
         
@@ -142,18 +141,17 @@ public class InventarioPadreController {
             {
                 case "insertar":
                     mntError = InventarioPadreController.insertarProducto( trimmedCodigoInternoAgregar,
-                            trimmedDescripcion, trimmedFechaCaducidad, CantidadPadre, 
+                            trimmedDescripcion, trimmedFechaCaducidad, Integer.parseInt(CantidadPadre), 
                             trinmedUnidad, trinmedKit, trinmedProducto);
                 break;
                 
                 case "editar":  
                     mntError = InventarioPadreController.editarProducto(Id, trimmedCodigoInternoEditar,
-                            trimmedDescripcion, trimmedFechaCaducidad, CantidadPadre, 
+                            trimmedDescripcion, trimmedFechaCaducidad,Integer.parseInt( CantidadPadre), 
                             trinmedUnidad, trinmedKit, trinmedProducto);              
                 break;
             }
         }
-        
         return !(mntError == false && generalValidacionError == false);
     }  
     
@@ -169,13 +167,13 @@ public class InventarioPadreController {
         productoModel = InventarioPadreController.setProductoModel(Id, 
                  trinmedCodigoInterno, trinmedDescripcion, trinmedFechaCaducidad, 
                  trinmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto);
-        
         String resultado = InventarioPadreConexion.MantenimientoInventarioPadre("insertar", productoModel);    
-       
+
         switch (resultado) 
         {
             case "OK":  
-                    if(MantenimientoInventarioBodegaView.accion == 1){
+                System.out.println(MantenimientoInventarioBodegaView.accion);
+                    if(MantenimientoInventarioBodegaView.accion.equals(1)){
                         JOptionPane.showMessageDialog(null, "Producto Ingresado Correctamente.");   
                     }
             break;
@@ -280,7 +278,6 @@ public class InventarioPadreController {
             Integer trinmedCantidad, String trinmedUnidad, String trinmedKit,
             String trinmedProducto)
     {
-        
         InventarioPadreModel productoModel = new InventarioPadreModel();
         productoModel.setInvPId(Id);
         productoModel.setInvPCodInterno(trinmedCodigoInterno);
@@ -290,7 +287,6 @@ public class InventarioPadreController {
         productoModel.setUndDescripcion(trinmedUnidad);
         productoModel.setKitNombre(trinmedKit);
         productoModel.setPrdNombre(trinmedProducto);
-        
         return productoModel;
     }
     
@@ -420,6 +416,7 @@ public class InventarioPadreController {
     private static void setErroresToNull(JLabel errDescripcion, JLabel errFechaCaducidad, 
             JLabel errCantidad, JLabel errUnidad, JLabel errKit, JLabel errProducto)
     {
+        errUnidad.setText(null);
         errDescripcion.setText(null);
         errFechaCaducidad.setText(null);
         errCantidad.setText(null);
@@ -434,7 +431,6 @@ public class InventarioPadreController {
            JLabel errUnidad, JLabel errKit, JLabel errProducto)
     {
         boolean error = false;
- 
         if(Validaciones.validarCampoVacio(trinmedDescripcion))
         {
            errDescripcion.setText("La descripción es un campo obligatorio");
@@ -477,11 +473,6 @@ public class InventarioPadreController {
            error = true;
         }  
         
-        if(!Validaciones.validarLetras(trinmedUnidad))
-        {
-           errUnidad.setText("La Unidad ingresada es incorrecto");
-           error = true;
-        }
         
         if(Validaciones.validarCampoVacio(trinmedKit))
         {
@@ -495,11 +486,6 @@ public class InventarioPadreController {
            error = true;
         }
         
-        if(!Validaciones.ValidarNumerosyLetras(trinmedProducto) && Validaciones.ValidarNumerosyLetras(trinmedProducto))
-        {
-            errProducto.setText("El Producto ingesado es incorrecto");
-            error = true;
-        }
 
         return error;
     }

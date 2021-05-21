@@ -34,7 +34,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
    public static Integer Id_Hijo = null;
    public static Integer Id_Nieto = null;
    public static Integer numero = 0;
-   public static Integer accion = null;
+   public static Integer accion = 1;
     
     ListadoCatalogoBodegaView producto = new ListadoCatalogoBodegaView();
     ListadoKitsView kit = new ListadoKitsView();
@@ -43,6 +43,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     
     public MantenimientoInventarioBodegaView() {
         initComponents();
+        System.out.println("");
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tablePadre.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         InventarioPadreController.LlenarTableInventarioPadre(tablePadre); 
@@ -462,6 +463,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         });
         pnlMenu1.add(txtCantidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 90, 20));
 
+        txtProducto.setEditable(false);
         txtProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtProductoMouseClicked(evt);
@@ -496,6 +498,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblErrorDescripcionPadre.setForeground(new java.awt.Color(231, 0, 2));
         pnlMenu1.add(lblErrorDescripcionPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 270, 20));
 
+        txtUnidadPadre.setEditable(false);
         txtUnidadPadre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtUnidadPadreMouseClicked(evt);
@@ -513,6 +516,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblErrorUnidadPadre.setForeground(new java.awt.Color(231, 0, 2));
         pnlMenu1.add(lblErrorUnidadPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 240, 20));
 
+        txtKit.setEditable(false);
         txtKit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtKitMouseClicked(evt);
@@ -719,6 +723,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblNombre8.setText("Unidad:");
         pnlMenu2.add(lblNombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
 
+        txtUnidadHijo.setEditable(false);
         txtUnidadHijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUnidadHijoActionPerformed(evt);
@@ -843,6 +848,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblNombre11.setText("Unidad:");
         pnlMenu3.add(lblNombre11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
 
+        txtUnidadNieto.setEditable(false);
         txtUnidadNieto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUnidadNietoActionPerformed(evt);
@@ -1082,6 +1088,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
             this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
             this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
         {
+            
             InventarioPadreModel PadreModel = new InventarioPadreModel();
             Id_Padre = PadreModel.getInvPId();
             InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
@@ -1181,6 +1188,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_rbnNietoActionPerformed
 
     private void rbnPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPadreActionPerformed
+        System.out.println(accion);
         this.btnAgregarPadre.setEnabled(true);
         this.btnEditarPadre.setEnabled(false);
         this.btnCancelarPadre.setEnabled(true);

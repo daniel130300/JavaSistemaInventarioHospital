@@ -12,6 +12,7 @@ import Models.Models.KitModel;
 import Models.Models.UnidadesModel;
 import Utils.Cache.kitCache;
 import Utils.Estados.Estados;
+import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
 import Views.Mantenimientos.MantenimientoKitsView;
 import static Views.Mantenimientos.MantenimientoKitsView.tableProducto;
@@ -34,7 +35,13 @@ import javax.swing.table.TableRowSorter;
  * @author fgodo
  */
 public class KitController {
-    
+
+    public static void setPlaceHolders(JTextField txtNombreKit, JTextArea txtDescripcion, JTextField txtCantidad)
+    {
+        TextPrompt placeholderFactura = new TextPrompt(" Ingrese el nombre de Kit ", txtNombreKit);
+        TextPrompt placeholderNombre = new TextPrompt(" Ingrese la una descrición ", txtDescripcion);
+        TextPrompt placeholderCorreo = new TextPrompt(" Ingrese un numero Ej: 2,5,6  ", txtCantidad);
+    }    
     
     public static Boolean MantenimientoKit(String accion, Integer id,
             String nombre, String descripcion,String estado, String cantidad,
@@ -434,13 +441,9 @@ public class KitController {
                     {
                     kitmodel.setDtkId(0);
                     kitmodel.setKitId(KitId);
-                        System.out.println(kitmodel.getKitId());
                     kitmodel.setPrdId(Integer.parseInt(String.valueOf( Kittmodel.getValueAt(i, 0))));
-                    System.out.println(kitmodel.getPrdId());
                     kitmodel.setUndId(Integer.parseInt(String.valueOf( Kittmodel.getValueAt(i, 2))));
-                    System.out.println(kitmodel.getUndId());
                     kitmodel.setDtkcCantidad(Integer.parseInt(String.valueOf( Kittmodel.getValueAt(i, 4))));
-                    System.out.println(kitmodel.getDtkcCantidad());
                     String estado = KitConexion.MantenimientoDetalleKits(accion, kitmodel);     
                         if(!estado.equals("OK"))
                         {

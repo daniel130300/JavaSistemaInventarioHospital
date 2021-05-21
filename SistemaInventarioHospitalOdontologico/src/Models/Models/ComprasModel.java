@@ -17,6 +17,72 @@ public class ComprasModel {
     private String CmpNumeroTransferencia;
     private String CmpOrdenCompra;
     private String CmpFotoOrdenCompraPath;
+    private Integer DtcId;
+    private Integer CmpId;    
+    private Integer InvPrdId;
+    private Integer DtcCantidad;
+    private Integer DtcTieneImpuesto;
+    private Double DtcPrecioCompra;
+    private Integer DtcEstado;
+
+    public Integer getCmpId() {
+        return CmpId;
+    }
+
+    public void setCmpId(Integer CmpId) {
+        this.CmpId = CmpId;
+    }
+
+    public Integer getDtcId() {
+        return DtcId;
+    }
+
+    public void setDtcId(Integer DtcId) {
+        this.DtcId = DtcId;
+    }
+
+    public Integer getInvPrdId() {
+        return InvPrdId;
+    }
+
+    public void setInvPrdId(Integer InvPrdId) {
+        this.InvPrdId = InvPrdId;
+    }
+
+    public Integer getDtcCantidad() {
+        return DtcCantidad;
+    }
+
+    public void setDtcCantidad(Integer DtcCantidad) {
+        this.DtcCantidad = DtcCantidad;
+    }
+
+    public Integer getDtcTieneImpuesto() {
+        return DtcTieneImpuesto;
+    }
+
+    public void setDtcTieneImpuesto(Integer DtcTieneImpuesto) {
+        this.DtcTieneImpuesto = DtcTieneImpuesto;
+    }
+
+    public Double getDtcPrecioCompra() {
+        return DtcPrecioCompra;
+    }
+
+    public void setDtcPrecioCompra(Double DtcPrecioCompra) {
+        this.DtcPrecioCompra = DtcPrecioCompra;
+    }
+
+    public Integer getDtcEstado() {
+        return DtcEstado;
+    }
+
+    public void setDtcEstado(Integer DtcEstado) {
+        this.DtcEstado = DtcEstado;
+    }
+    
+    
+    
 
     public Integer getProId() {
         return ProId;

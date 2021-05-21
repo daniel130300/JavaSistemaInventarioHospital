@@ -34,7 +34,10 @@ public class Validaciones
     {
         return num.matches("[0-9]+");
     }
-
+    public static Boolean validarNumerosDouble(String num) 
+    {
+        return num.matches("([0-9]+[.]?|[0-9]*[.][0-9]{0,2})");
+    }
     public static Boolean validarLetras(String letras) 
     {
         return letras.matches("[a-zA-ZÁÉÍÓÚÜÑáéíóúüñ ]+");
@@ -84,9 +87,9 @@ public class Validaciones
         if(N1>0){return  true;}else{return  false;}
     }
     
-    public static boolean validarTabla(JTable proveedor)
+    public static boolean validarTabla(JTable tabla)
     {
-        if(0<proveedor.getRowCount())
+        if(0<tabla.getRowCount())
         {
             return false;
         }

@@ -161,7 +161,7 @@ public class ListadoProveedoresView extends javax.swing.JFrame {
 
     private void tableProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProveedoresMouseClicked
         int seleccion = this.tableProveedores.rowAtPoint(evt.getPoint()); ;
-        CatalogoProductoController.AddRowToJTable(new Object[]{
+            CatalogoProductoController.AddRowToJTable(new Object[]{
                                                             Integer.parseInt(String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 0))),
                                                             String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 1)),
                                                             String.valueOf(this.tableProveedores.getModel().getValueAt(seleccion, 2))

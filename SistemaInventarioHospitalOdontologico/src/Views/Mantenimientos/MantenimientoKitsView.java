@@ -35,6 +35,7 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
     {
         initComponents();
         this.LlenarDatos();
+        KitController.setPlaceHolders(this.txtNombre, this.txtDescripcion, this.txtCantidad);
         KitController.LlenarCmbUnidades(this.cmbUnidad);
         KitController.LlenarCmbProducto(this.cmbProducto);
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
@@ -513,6 +514,7 @@ public class MantenimientoKitsView extends javax.swing.JFrame {
         this.cmbEstado.setEnabled(false);
         this.tableKits.clearSelection();
         this.btnVisualizarTabla.setEnabled(true);
+        LimpiarTable();
         this.LimpiarInputs();
         this.LimpiarErrLabels();
 

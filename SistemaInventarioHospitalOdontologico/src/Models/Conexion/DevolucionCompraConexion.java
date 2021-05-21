@@ -87,7 +87,7 @@ public class DevolucionCompraConexion {
                                  + "dtc.DtctTieneImpuesto, dtc.DtcPrecioCompra "
                                  + "FROM catalogoproductos ctp INNER JOIN inventariopadre ivp " 
                                  + "ON ctp.PrdId = ivp.PrdId INNER JOIN detallecompras dtc " 
-                                 + "ON ivp.InvPId = dtc.InvPadreId INNER JOIN unidades und "
+                                 + "ON ivp.InvPId = dtc.InvPrdId INNER JOIN unidades und "
                                  + "ON ivp.UndId = und.UndId " 
                                  + "WHERE dtc.DtcEstado = 1 AND dtc.CmpId = "+CmpId+"; ";
 
@@ -129,8 +129,8 @@ public class DevolucionCompraConexion {
             stm = con.createStatement();
             String query = "SELECT ROUND(SUM((dtc.DtcPrecioCompra * '"+ISV+"' ) + (dtc.DtcCantidad*dtc.DtcPrecioCompra)), 2) AS TOTAL " 
                           + "FROM inventariopadre ivp INNER JOIN detallecompras dtc " 
-                          + "ON ivp.InvPId = dtc.InvPadreId "
-                          + "WHERE dtc.DtcEstado = 1 AND dtc.CmpId = '"+CmpId+"' AND dtc.DtctTieneImpuesto = upper(\"SI\");";
+                          + "ON ivp.InvPId = dtc.InvPrdId "
+                          + "WHERE dtc.DtcEstado = 1 AND dtc.CmpId = '"+CmpId+"' AND dtc.DtctTieneImpuesto = 1;";
              
             rss = stm.executeQuery(query);
             
@@ -159,8 +159,8 @@ public class DevolucionCompraConexion {
             stm = con.createStatement();
             String query = "SELECT ROUND(SUM(dtc.DtcCantidad*dtc.DtcPrecioCompra), 2) AS TOTAL " 
                           + "FROM inventariopadre ivp INNER JOIN detallecompras dtc " 
-                          + "ON ivp.InvPId = dtc.InvPadreId "
-                          + "WHERE dtc.DtcEstado = 1 AND dtc.CmpId = '"+CmpId+"' AND dtc.DtctTieneImpuesto = upper(\"NO\");";
+                          + "ON ivp.InvPId = dtc.InvPrdId "
+                          + "WHERE dtc.DtcEstado = 1 AND dtc.CmpId = '"+CmpId+"' AND dtc.DtctTieneImpuesto = 0;";
              
             rss = stm.executeQuery(query);
             

@@ -38,16 +38,19 @@ public class ComprasController {
 
         }
     }     
-    public static void SelectFotos(JLabel foto)
+    public static File SelectFotos(JLabel foto )
     {
+        String fnombre="";
+        File arc = null;
         JFileChooser factura = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("3 Formatos Soportados", "jpg","png","jpeg");
         factura.setFileFilter(filtro);
         int selected = factura.showOpenDialog(null);
         if (selected == JFileChooser.APPROVE_OPTION){
             File file = factura.getSelectedFile();
+            arc = file;
             String getselectImage = file.getAbsolutePath();
-            JOptionPane.showMessageDialog(null, getselectImage);
+            fnombre = getselectImage;
             ImageIcon imIco = new ImageIcon(getselectImage);
             
             Image imFit = imIco.getImage();
@@ -55,7 +58,9 @@ public class ComprasController {
             
             
             foto.setIcon(new ImageIcon(imgFit));
+           
         }
+         return arc;
     }
     
     

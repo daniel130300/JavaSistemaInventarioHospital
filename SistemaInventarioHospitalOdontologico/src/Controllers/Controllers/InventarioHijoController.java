@@ -46,7 +46,7 @@ public class InventarioHijoController {
         InventarioHijoController.setErroresToNull(errdescripcion, errcantidad, errunidades );
         String trimmedDescripcion = descripcion.trim();
         String trimmedUnidades = unidades.trim();
-        Integer trimmedCantidad =Integer.parseInt(cantidad);
+        String trimmedCantidad =cantidad;
         
         
         generalValidacionError = InventarioHijoController.validacionesGenerales(trimmedDescripcion, cantidad,
@@ -59,12 +59,12 @@ public class InventarioHijoController {
                 case "insertar":
                     
                     mntError = InventarioHijoController.insertarInvHijo(
-                    trimmedDescripcion,trimmedCantidad, trimmedUnidades);
+                    trimmedDescripcion,Integer.parseInt(trimmedCantidad), trimmedUnidades);
                 break;
                 
                 case "editar":   
                    mntError = InventarioHijoController.editarInvHijo(Id, 
-                   trimmedDescripcion,trimmedCantidad, trimmedUnidades);              
+                   trimmedDescripcion,Integer.parseInt(trimmedCantidad), trimmedUnidades);              
                 break;
             }
         }
@@ -289,13 +289,6 @@ public class InventarioHijoController {
            errunidades.setText("La Unidad es un campo obligatorio");
            error = true;
         }  
-        
-        if(!Validaciones.validarLetras(trimmedunidades))
-        {
-           errunidades.setText("La Unidad ingresada es incorrecto");
-           error = true;
-        }
-        
         
         return error;
     }

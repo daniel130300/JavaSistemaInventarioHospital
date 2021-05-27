@@ -29,6 +29,10 @@ import javax.swing.table.TableRowSorter;
  * @author Maryury Zuniga
  */
 public class InventarioNietoController {
+    
+    public static Boolean generalValidacionError3 = true;
+    //public static Boolean errorNieto = false;
+    
     /**
      * 
      * @param accion
@@ -43,7 +47,7 @@ public class InventarioNietoController {
      * false.
      * @return boolean 
      */
-    public static Boolean MantenimientoInventarioNieto(String accion, 
+    /* public static Boolean MantenimientoInventarioNieto(String accion, 
             Integer Id, String descripcion, String cantidad ,
             String unidades, JLabel errdescripcion, JLabel errcantidad,
             JLabel errunidades)
@@ -78,7 +82,24 @@ public class InventarioNietoController {
         }
 
         return !(mntError == false && generalValidacionError == false); 
+      }*/
+    
+    public static Boolean ValidacionInputsNieto(String descripcion, String cantidad ,
+            String unidades, JLabel errdescripcion, JLabel errcantidad,
+            JLabel errunidades)
+    {
+        InventarioNietoController.setErroresToNull(errdescripcion, errcantidad, errunidades );
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedUnidades = unidades.trim();
+        String trimmedCantidad =cantidad.trim();
+        
+        
+        generalValidacionError3 = InventarioNietoController.validacionesGenerales(trimmedDescripcion, trimmedCantidad,
+            trimmedUnidades,errdescripcion, errcantidad,errunidades);
+
+        return !(generalValidacionError3 == false); 
       }
+    
     /**
      * 
      * @param trimmedDescripcion
@@ -86,39 +107,45 @@ public class InventarioNietoController {
      * @param trimmedUnidades
      * @return boolean
      */
-    private static boolean insertarInvNieto( String trimmedDescripcion,
-       Integer trimmedcantidad, String trimmedUnidades)
+    public static boolean insertarInvNieto( String descripcion,
+       String Cantidad, String unidades)
     {
         boolean error = false;
         Integer id = 0;
         Integer InvHId = 0;
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedUnidades = unidades.trim();
         
         InventarioNietoModel inventarioNModel = new InventarioNietoModel();
 
-        inventarioNModel = InventarioNietoController.setInvNModel(id, 
-                trimmedDescripcion,trimmedcantidad, InvHId, trimmedUnidades);
-        
-        String resultado = InventarioNietoConexion.MantenimientoInventarioNieto("insertar", inventarioNModel);    
-       
-        switch (resultado) 
+        if(generalValidacionError3 == false)
         {
-            case "OK": 
-                 if(MantenimientoInventarioBodegaView.accion == 3){
-                    JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
-                 }
-            break;
-            
-            case "errProducto":
-                JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
-                error = true;
-            break;
+            inventarioNModel = InventarioNietoController.setInvNModel(id, 
+                    trimmedDescripcion, Integer.parseInt(Cantidad), InvHId, trimmedUnidades);
 
-            default:
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                error = true;
-            break;
+            String resultado = InventarioNietoConexion.MantenimientoInventarioNieto("insertar", inventarioNModel);    
+
+            switch (resultado) 
+            {
+                case "OK": 
+                     if(MantenimientoInventarioBodegaView.accion.equals(3)){
+                        JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
+                        System.out.println("Producto Ingresado con éxito.");
+                     }
+                break;
+
+                case "errProducto":
+                    JOptionPane.showMessageDialog(null, "El producto Hijo ya se encuentra registrado.");
+                    error = true;
+                break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    error = true;
+                break;
+            }
         }
-        return error;
+        return !(error == false && generalValidacionError3 == false);
     }
     /**
      * 
@@ -128,32 +155,37 @@ public class InventarioNietoController {
      * @param trinmedUnidad
      * @return 
      */
-    private static boolean editarInvNieto(Integer Id, String trinmedDescripcion, Integer trinmedCantidad, 
-             String trinmedUnidad)
+    public static boolean editarInvNieto(Integer Id, String descripcion, String Cantidad, 
+             String unidades)
     {
 
         boolean error = false; 
 
         InventarioNietoModel productoModel = new InventarioNietoModel();
         Integer InvHId = 0;
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedUnidades = unidades.trim();
         
-        productoModel = InventarioNietoController.setInvNModel(Id,
-                trinmedDescripcion, trinmedCantidad, InvHId, trinmedUnidad);
-        
-        String resultado = InventarioNietoConexion.MantenimientoInventarioNieto("editar", productoModel);
-        
-        switch (resultado) 
+        if(generalValidacionError3 == false)
         {
-            case "OK":   
-                JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
-            break;
-            
-            default:
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                error = true;
-            break;
+            productoModel = InventarioNietoController.setInvNModel(Id,
+                    trimmedDescripcion, Integer.parseInt(Cantidad), InvHId, trimmedUnidades);
+
+            String resultado = InventarioNietoConexion.MantenimientoInventarioNieto("editar", productoModel);
+
+            switch (resultado) 
+            {
+                case "OK":   
+                    JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
+                break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    error = true;
+                break;
+            }
         }
-        return error;
+        return !(error == false && generalValidacionError3 == false);
     }
     /**
      * 
@@ -310,16 +342,16 @@ public class InventarioNietoController {
            errDescripcion.setText("La descripción es un campo obligatorio");
            error = true;
         }
+          
+        if(!Validaciones.validarNumeros(trimmedcantidad))
+        {
+           errcantidad.setText("El Cantidad ingresada es incorrecta");
+           error = true;
+        }
         
         if(Validaciones.validarCampoVacio(trimmedcantidad))
         {
            errcantidad.setText("La Cantidad es un campo obligatorio");
-           error = true;
-        }
-        
-        if(!Validaciones.validarNumeros(trimmedcantidad))
-        {
-           errcantidad.setText("El Cantidad ingresada es incorrecta");
            error = true;
         }
         

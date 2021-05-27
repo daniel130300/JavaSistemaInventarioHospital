@@ -108,7 +108,7 @@ public class Validaciones
     */
      public static Boolean ValidarFormatoFecha(String fecha)
     {
-        String regex= "^\\d{4}([\\-])(0?[1-9]|1[0-2])\\1(3[01]|[12][0-9]|0?[1-9])$";
+        String regex= "^\\d{4}([\\/])(0?[1-9]|1[0-2])\\1(3[01]|[12][0-9]|0?[1-9])$";
         return fecha.matches(regex);
     }
     
@@ -122,12 +122,12 @@ public class Validaciones
     public static Boolean ValidarFecha(String fecha)
     {        
         Date ahora = new Date();
-        SimpleDateFormat convertidor = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat convertidor = new SimpleDateFormat("yyyy/MM/dd");
         String actual = convertidor.format(ahora);
         
             try 
             {
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
                 formatoFecha.setLenient(false);
                 formatoFecha.parse(fecha);
 

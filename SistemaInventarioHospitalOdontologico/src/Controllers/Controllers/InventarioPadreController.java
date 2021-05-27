@@ -13,22 +13,17 @@ import Utils.Cache.InventarioPadreCache;
 import Utils.Estados.Estados;
 import Utils.PlaceHolders.TextPrompt;
 import Utils.Validators.Validaciones;
-import static Views.Listados.ListadoCatalogoBodegaView.tableProductos;
-import static Views.Listados.ListadoKitsView.tableKits;
-import static Views.Listados.ListadoUnidadesView.tableUnidades;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadHijo;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtKit;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtProducto;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadNieto;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -47,8 +42,9 @@ import javax.swing.table.TableRowSorter;
  */
 
 public class InventarioPadreController {
-
-    static DefaultTableModel modelotableProductos = new DefaultTableModel();
+    
+    public static Boolean generalValidacionError1 = true;
+    //public static Boolean errorPadre = false;
     
     // **************************************************
     // Métodos Públicos
@@ -59,7 +55,7 @@ public class InventarioPadreController {
     {
         TextPrompt placeholderProducto = new TextPrompt(" Seleccione el Nombre del producto ", txtProducto);
         TextPrompt placeholderDescripcionPadre = new TextPrompt(" Ingrese la descripción del producto ", txtDescripcionPadre);
-        TextPrompt placeholderFechaCaducidad = new TextPrompt(" Año-Mes-Día ", txtFechaCaducidad);
+        TextPrompt placeholderFechaCaducidad = new TextPrompt(" Año/Mes/Día ", txtFechaCaducidad);
         TextPrompt placeholderCantidadPadre = new TextPrompt(" Ej: 24 ", txtCantidadPadre);
         TextPrompt placeholderUnidadPadre = new TextPrompt(" Seleccione el nombre de la Unidad ", txtUnidadPadre);
         TextPrompt placeholderKit = new TextPrompt(" Seleccione el nombre del Kit ", txtKit);
@@ -94,8 +90,7 @@ public class InventarioPadreController {
      * retorna true, de lo contrario retorna false.
      * @return Boolean
      */
-    
-    public static Boolean MantenimientoInventarioPadre(String accion, 
+    /* public static Boolean MantenimientoInventarioPadre(String accion, 
             Integer Id, String Descripcion, String FechaCaducidad, String Cantidad, String Unidad,
             String Kit,String Producto,  JLabel errDescripcion, 
             JLabel errFechaCaducidad, JLabel errCantidad, JLabel errUnidad,
@@ -110,14 +105,13 @@ public class InventarioPadreController {
         String trinmedKit = Kit.trim();
         String trinmedUnidad = Unidad.trim();
         String trinmedProducto = Producto.trim();
-        String CantidadPadre = trimmedCantidad;
         String Nomenclatura = "";
         String N = "Ninguno";
-        System.out.println(trinmedUnidad);
+        
         generalValidacionError = InventarioPadreController.validacionesGenerales( trimmedDescripcion,
                trimmedFechaCaducidad, trimmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto,
-               errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto );        
-                
+               errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto );    
+        
         if(trinmedProducto.compareTo(N)==0){
            Nomenclatura = "KIT";
         }else{
@@ -130,10 +124,6 @@ public class InventarioPadreController {
         String trimmedCodigoInternoAgregar = Nomenclatura+"-"+CorrelativoUnidad+"-"+CorelativoInvPIdAgregar;
         String trimmedCodigoInternoEditar = Nomenclatura+"-"+CorrelativoUnidad+"-"+CorelativoInvPIdEditar;
         
-
-        
-        
-        
         if(generalValidacionError == false)
         {
             
@@ -141,118 +131,179 @@ public class InventarioPadreController {
             {
                 case "insertar":
                     mntError = InventarioPadreController.insertarProducto( trimmedCodigoInternoAgregar,
-                            trimmedDescripcion, trimmedFechaCaducidad, Integer.parseInt(CantidadPadre), 
+                            trimmedDescripcion, trimmedFechaCaducidad, Integer.parseInt(trimmedCantidad), 
                             trinmedUnidad, trinmedKit, trinmedProducto);
                 break;
                 
                 case "editar":  
                     mntError = InventarioPadreController.editarProducto(Id, trimmedCodigoInternoEditar,
-                            trimmedDescripcion, trimmedFechaCaducidad,Integer.parseInt( CantidadPadre), 
+                            trimmedDescripcion, trimmedFechaCaducidad,Integer.parseInt(trimmedCantidad), 
                             trinmedUnidad, trinmedKit, trinmedProducto);              
                 break;
             }
         }
         return !(mntError == false && generalValidacionError == false);
-    }  
-    
-    private static boolean insertarProducto(String trinmedCodigoInterno, 
-            String trinmedDescripcion, String trinmedFechaCaducidad, Integer trinmedCantidad, 
-            String trinmedUnidad, String trinmedKit, String trinmedProducto)
+    }  */
+     
+     public static Boolean ValidacionInputsPadre(String Descripcion, 
+            String FechaCaducidad, String Cantidad, String Unidad,
+            String Kit,String Producto,  JLabel errDescripcion, 
+            JLabel errFechaCaducidad, JLabel errCantidad, JLabel errUnidad,
+            JLabel errKit, JLabel errProducto)
+    {
+        InventarioPadreController.setErroresToNull(errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto);  
+        String trimmedDescripcion = Descripcion.trim();
+        String trimmedFechaCaducidad = FechaCaducidad.trim();
+        String trimmedCantidad = Cantidad.trim();
+        String trinmedKit = Kit.trim();
+        String trinmedUnidad = Unidad.trim();
+        String trinmedProducto = Producto.trim();
+        
+        generalValidacionError1 = InventarioPadreController.validacionesGenerales( trimmedDescripcion,
+               trimmedFechaCaducidad, trimmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto,
+               errDescripcion, errFechaCaducidad, errCantidad, errUnidad, errKit, errProducto );    
+
+        return !(generalValidacionError1 == false);
+    }
+     
+    public static boolean insertarProducto( 
+            String Descripcion, String FechaCaducidad, String Cantidad, 
+            String Unidad, String Kit, String Producto)
     {
         boolean error = false; 
-        Integer Id = 0;  
+        Integer Id = 0; 
+        String trimmedDescripcion = Descripcion.trim();
+        String trimmedFechaCaducidad = FechaCaducidad.trim();
+        String trinmedKit = Kit.trim();
+        String trinmedUnidad = Unidad.trim();
+        String trinmedProducto = Producto.trim();
+        String Nomenclatura = "";
+        String N = "Ninguno";
         
-        InventarioPadreModel productoModel = new InventarioPadreModel();
-        
-        productoModel = InventarioPadreController.setProductoModel(Id, 
-                 trinmedCodigoInterno, trinmedDescripcion, trinmedFechaCaducidad, 
-                 trinmedCantidad, trinmedUnidad, trinmedKit, trinmedProducto);
-        String resultado = InventarioPadreConexion.MantenimientoInventarioPadre("insertar", productoModel);    
-
-        switch (resultado) 
-        {
-            case "OK":  
-                System.out.println(MantenimientoInventarioBodegaView.accion);
-                    if(MantenimientoInventarioBodegaView.accion.equals(1)){
-                        JOptionPane.showMessageDialog(null, "Producto Ingresado Correctamente.");   
-                    }
-            break;
-            
-            case "errProducto":
-                JOptionPane.showMessageDialog(null, "El Producto ya se encuentra registrado.");
-                error = true;
-            break;
-            
-            case "errRegistro":
-                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de ninguno");
-                error = true;
-            break;
-            
-            case "errIngresar":
-                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit");
-                error = true;
-            break;
-            
-            case "errKit":
-                JOptionPane.showMessageDialog(null, "El Kit ya se encuentra registrado.");
-                error = true;
-            break;
-            
-            default:
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                error = true;
-            break;
+         if(trinmedProducto.compareTo(N)==0){
+           Nomenclatura = "KIT";
+        }else{
+           Nomenclatura = InventarioPadreConexion.getNomenclaturaProducto(trinmedProducto);
         }
-        return error;
+        Integer UndId = InventarioPadreConexion.getIdUnidad(trinmedUnidad);
+        String CorrelativoUnidad = InventarioPadreController.Correlativo_UndId(UndId);
+        String CorelativoInvPIdAgregar = InventarioPadreController.Correlativo_PrdPIdAgregar();
+        String trimmedCodigoInternoAgregar = Nomenclatura+"-"+CorrelativoUnidad+"-"+CorelativoInvPIdAgregar;;
+        
+        if(generalValidacionError1 == false)
+        {
+            InventarioPadreModel productoModel = new InventarioPadreModel();
+
+            productoModel = InventarioPadreController.setProductoModel(Id, 
+                     trimmedCodigoInternoAgregar, trimmedDescripcion, trimmedFechaCaducidad, 
+                     Integer.parseInt(Cantidad), trinmedUnidad, trinmedKit, trinmedProducto);
+            String resultado = InventarioPadreConexion.MantenimientoInventarioPadre("insertar", productoModel);    
+            
+            switch (resultado) 
+            {
+                case "OK":  
+                        if(MantenimientoInventarioBodegaView.accion.equals(1)){
+                            JOptionPane.showMessageDialog(null, "Producto Ingresado Correctamente."); 
+                            System.out.println("Producto Ingresado Correctamente.");
+                        }
+                break;
+
+                case "errProducto":
+                    JOptionPane.showMessageDialog(null, "El Producto ya se encuentra registrado.");
+                    error = true;
+                break;
+                
+                 case "errRegistro":
+                    JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de ninguno");
+                    error = true;
+                break;
+
+                case "errIngresar":
+                    JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit");
+                    error = true;
+                break;
+                
+                case "errKit":
+                    JOptionPane.showMessageDialog(null, "El Kit ya se encuentra registrado.");
+                    error = true;
+                break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    error = true;
+                break;
+            }
+        }
+        return !(error == false && generalValidacionError1 == false);
     }
 
-     private static boolean editarProducto(Integer Id, String CodInterno,
-             String trinmedDescripcion,String trinmedFechaCaducidad, Integer trinmedCantidad, 
-             String trinmedUnidad, String trinmedKit, String trinmedProducto)
+     public static boolean editarProducto(Integer Id,
+             String Descripcion,String FechaCaducidad, String Cantidad, 
+             String Unidad, String Kit, String Producto)
     {
 
         boolean error = false; 
-
-        InventarioPadreModel productoModel = new InventarioPadreModel();
+        String trimmedDescripcion = Descripcion.trim();
+        String trimmedFechaCaducidad = FechaCaducidad.trim();
+        String trinmedKit = Kit.trim();
+        String trinmedUnidad = Unidad.trim();
+        String trinmedProducto = Producto.trim();
+        String Nomenclatura = "";
+        String N = "Ninguno";
         
-        productoModel = InventarioPadreController.setProductoModel(Id, CodInterno,
-                trinmedDescripcion, trinmedFechaCaducidad,trinmedCantidad,
-                trinmedUnidad, trinmedKit, trinmedProducto);
-        
-        String resultado = InventarioPadreConexion.MantenimientoInventarioPadre("editar", productoModel);
-        
-        switch (resultado) 
-        {
-            case "OK":   
-                JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
-            break;
-            
-            case "errProducto":
-                JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
-                error = true;
-            break;
-            
-            case "errRegistro":
-                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de ninguno");
-                error = true;
-            break;
-            
-             case "errIngresar":
-                JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit");
-                error = true;
-            break;
-            
-            case "errKit":
-                JOptionPane.showMessageDialog(null, "El Kit ya se encuentra registrado.");
-                error = true;
-            break;
-            
-            default:
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                error = true;
-            break;
+         if(trinmedProducto.compareTo(N)==0){
+           Nomenclatura = "KIT";
+        }else{
+           Nomenclatura = InventarioPadreConexion.getNomenclaturaProducto(trinmedProducto);
         }
-        return error;
+        Integer UndId = InventarioPadreConexion.getIdUnidad(trinmedUnidad);
+        String CorrelativoUnidad = InventarioPadreController.Correlativo_UndId(UndId);
+        String CorelativoInvPIdEditar = InventarioPadreController.Correlativo_PrdPIdEditar(Id);
+        String trimmedCodigoInternoEditar = Nomenclatura+"-"+CorrelativoUnidad+"-"+CorelativoInvPIdEditar;
+
+        if(generalValidacionError1 == false)
+        {
+            InventarioPadreModel productoModel = new InventarioPadreModel();
+
+            productoModel = InventarioPadreController.setProductoModel(Id, trimmedCodigoInternoEditar,
+                    trimmedDescripcion, trimmedFechaCaducidad, Integer.parseInt(Cantidad),
+                    trinmedUnidad, trinmedKit, trinmedProducto);
+
+            String resultado = InventarioPadreConexion.MantenimientoInventarioPadre("editar", productoModel);
+
+            switch (resultado) 
+            {
+                case "OK":   
+                    JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
+                break;
+
+                case "errProducto":
+                    JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
+                    error = true;
+                break;
+                
+                 case "errRegistro":
+                    JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit diferente de ninguno");
+                    error = true;
+                break;
+
+                 case "errIngresar":
+                    JOptionPane.showMessageDialog(null, "Seleccione un Producto o Kit");
+                    error = true;
+                break;
+                
+                case "errKit":
+                    JOptionPane.showMessageDialog(null, "El Kit ya se encuentra registrado.");
+                    error = true;
+                break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    error = true;
+                break;
+            }
+        }
+        return !(error == false && generalValidacionError1 == false);
     }
      
     public static Integer setDatosEditarFromTable(int seleccion, JTable tablePadre, 
@@ -331,7 +382,7 @@ public class InventarioPadreController {
      
     /**
      * 
-     * @param tableBodega JTable
+     * @param tablePadre JTable
      * @param fieldBusqueda JTextField
      * Método que se encarga de filtrar la tabla tableBodega
      * a partir de la busqueda del Lote Producto.
@@ -385,7 +436,7 @@ public class InventarioPadreController {
       * de la clase InventarioBodegaConexion dependiendo de la acción
       * que el usuario realice.
       */
-    public static void LlenarTableInventarioPadre(JTable tablePadre) 
+    public static void LlenarTableInventarioPadre(JTable tablePadre)  
     {  
         DefaultTableModel modelo = (DefaultTableModel) tablePadre.getModel(); 
         modelo.setRowCount(0);
@@ -399,7 +450,7 @@ public class InventarioPadreController {
                             Padre.get(i).getInvPId(), 
                             Padre.get(i).getInvPCodInterno(),
                             Padre.get(i).getInvPDescripcion(),
-                            Padre.get(i).getInvPFchCaducidad(),
+                            InventarioPadreController.ConvertirFormatoFecha(Padre.get(i).getInvPFchCaducidad()),
                             Padre.get(i).getInvPCantidad(),
                             Padre.get(i).getUndDescripcion(),
                             Padre.get(i).getKitId(),
@@ -431,15 +482,10 @@ public class InventarioPadreController {
            JLabel errUnidad, JLabel errKit, JLabel errProducto)
     {
         boolean error = false;
+        
         if(Validaciones.validarCampoVacio(trinmedDescripcion))
         {
            errDescripcion.setText("La descripción es un campo obligatorio");
-           error = true;
-        }
-                
-        if(Validaciones.validarCampoVacio(trinmedFechaCaducidad))
-        {
-           errFechaCaducidad.setText("La Fecha Caducidad es un campo obligatorio");
            error = true;
         }
         
@@ -449,21 +495,27 @@ public class InventarioPadreController {
             error = true;
          }
         
+        if(Validaciones.validarCampoVacio(trinmedFechaCaducidad))
+        { 
+           errFechaCaducidad.setText("La Fecha Caducidad es un campo obligatorio");
+           error = true;
+        }
+        
         if(Validaciones.ValidarFecha(trinmedFechaCaducidad))
          {
             errFechaCaducidad.setText("La Fecha de Caducidad no debe ser anterior a la actual");
             error = true;
          }
         
-        if(Validaciones.validarCampoVacio(trinmedCantidad))
+        if(!Validaciones.validarNumeros(trinmedCantidad))
         {
-           errCantidad.setText("La Cantidad es un campo obligatorio");
+           errCantidad.setText("La Cantidad ingresada es incorrecta");
            error = true;
         }
         
-        if(!Validaciones.validarNumeros(trinmedCantidad))
+        if(Validaciones.validarCampoVacio(trinmedCantidad))
         {
-           errCantidad.setText("El Cantidad ingresada es incorrecta");
+           errCantidad.setText("La Cantidad es un campo obligatorio");
            error = true;
         }
         
@@ -472,7 +524,6 @@ public class InventarioPadreController {
            errUnidad.setText("La Unidad es un campo obligatorio");
            error = true;
         }  
-        
         
         if(Validaciones.validarCampoVacio(trinmedKit))
         {
@@ -486,7 +537,6 @@ public class InventarioPadreController {
            error = true;
         }
         
-
         return error;
     }
     
@@ -574,4 +624,21 @@ public class InventarioPadreController {
         return correlativo_completo;
     }
 
+   public static String ConvertirFormatoFecha(String fecha)
+    {   
+       final String OLD_FORMAT = "yyyy-MM-dd"; 
+       final String NEW_FORMAT = "yyyy/MM/dd"; 
+       String oldDateString = fecha; 
+       String FechaCaducidad = " "; 
+      try{ 
+          
+       SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT); 
+       Date d = sdf.parse(oldDateString); 
+       sdf.applyPattern(NEW_FORMAT); 
+       FechaCaducidad = sdf.format(d);
+      }catch(Exception ex){
+          JOptionPane.showMessageDialog(null, ex);
+      }
+       return FechaCaducidad;
+    }
 }

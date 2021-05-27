@@ -19,6 +19,7 @@ import Views.Listados.ListadoUnidadesView;
 import Views.Menus.MenuBodegaView;
 import Views.TablasGrande.TablaGrandeMantenimientoInventarioBodegaView;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
@@ -35,15 +36,17 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
    public static Integer Id_Nieto = null;
    public static Integer numero = 0;
    public static Integer accion = 1;
+   static Boolean error1 = true;
+   static Boolean error2 = true;
+   static Boolean error3 = true;
     
     ListadoCatalogoBodegaView producto = new ListadoCatalogoBodegaView();
     ListadoKitsView kit = new ListadoKitsView();
     ListadoUnidadesView unidad = new ListadoUnidadesView();
     
     
-    public MantenimientoInventarioBodegaView() {
+    public MantenimientoInventarioBodegaView(){
         initComponents();
-        System.out.println("");
         LoginController.setLabelUsrLogueado(this.lblUsuarioActual);
         this.tablePadre.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         InventarioPadreController.LlenarTableInventarioPadre(tablePadre); 
@@ -64,6 +67,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
     private void ValidadSeleccion(){
         if(rbnPadre.isSelected()==true){
+            accion = 1;
+            System.out.println(accion);
             this.btnAgregarHijo.setEnabled(false);
             this.btnCancelarHijo.setEnabled(true);
             this.btnEditarHijo.setEnabled(false);
@@ -484,7 +489,7 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         lblErrorFechaCaducidad.setBackground(new java.awt.Color(255, 51, 51));
         lblErrorFechaCaducidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblErrorFechaCaducidad.setForeground(new java.awt.Color(231, 0, 2));
-        pnlMenu1.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 270, 20));
+        pnlMenu1.add(lblErrorFechaCaducidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 380, 20));
 
         txtFechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1082,17 +1087,27 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
     private void btnAgregarPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPadreActionPerformed
 
-        if(!InventarioPadreController.MantenimientoInventarioPadre("insertar", 0,
+        if(!InventarioPadreController.ValidacionInputsPadre(
             this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
             this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
             this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
             this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
         {
-            
-            InventarioPadreModel PadreModel = new InventarioPadreModel();
-            Id_Padre = PadreModel.getInvPId();
-            InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
-            this.LimpiarInputsPadre();
+            error1= false;
+        }
+        
+        if(error1 == false){
+
+            if((!InventarioPadreController.insertarProducto(this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
+            this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
+            this.txtProducto.getText()))){
+             
+                    InventarioPadreModel PadreModel = new InventarioPadreModel();
+                    Id_Padre = PadreModel.getInvPId();
+                    InventarioPadreController.LlenarTableInventarioPadre(this.tablePadre);
+                    this.LimpiarInputsPadre();
+                
+            }   
         }
     }//GEN-LAST:event_btnAgregarPadreActionPerformed
 
@@ -1130,17 +1145,26 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
     private void btnEditarPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPadreActionPerformed
         
-           if(!InventarioPadreController.MantenimientoInventarioPadre("editar", this.Id_Padre,
-                this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
-                this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
-                this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
-                this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
-            {
-                InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
+           if(!InventarioPadreController.ValidacionInputsPadre(
+            this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
+            this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
+            this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
+            this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
+        {
+            error1= false;
+        }
+        
+        if(error1 == false){
+            
+            if((!(InventarioPadreController.editarProducto(Id_Padre,this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
+            this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
+            this.txtProducto.getText())))){
+                InventarioPadreController.LlenarTableInventarioPadre(this.tablePadre);
                 this.LimpiarInputsPadre();
                 this.btnAgregarPadre.setEnabled(true);
                 this.btnEditarPadre.setEnabled(false);
             }
+        }
         
     }//GEN-LAST:event_btnEditarPadreActionPerformed
 
@@ -1151,6 +1175,8 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVisualizarTablaPadreActionPerformed
 
     private void rbnNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnNietoActionPerformed
+        accion = 3;
+        System.out.println(accion);
         this.btnAgregarPadre.setEnabled(false);
         this.btnCancelarPadre.setEnabled(true);
         this.btnEditarPadre.setEnabled(false);
@@ -1181,13 +1207,14 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         
         this.rbnHijo.setSelected(false);
         this.rbnPadre.setSelected(false);
-        accion = 3;
-
+ 
         LimpiarInputsNieto();
   
     }//GEN-LAST:event_rbnNietoActionPerformed
 
     private void rbnPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnPadreActionPerformed
+ 
+        accion = 1;
         System.out.println(accion);
         this.btnAgregarPadre.setEnabled(true);
         this.btnEditarPadre.setEnabled(false);
@@ -1213,14 +1240,15 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         
         this.rbnNieto.setSelected(false);
         this.rbnHijo.setSelected(false);
-        accion = 1;
-        
+ 
         LimpiarInputsHijo();
         LimpiarInputsNieto();
        
     }//GEN-LAST:event_rbnPadreActionPerformed
 
     private void rbnHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnHijoActionPerformed
+        accion = 2;
+        System.out.println(accion);
         this.btnAgregarPadre.setEnabled(false);
         this.btnCancelarPadre.setEnabled(true);
         this.btnEditarPadre.setEnabled(false);
@@ -1246,35 +1274,47 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
         this.rbnPadre.setSelected(false);
         this.rbnNieto.setSelected(false);
         
-        accion = 2;
-        
         LimpiarInputsHijo();
         LimpiarInputsNieto();
     }//GEN-LAST:event_rbnHijoActionPerformed
 
     private void btnAgregarHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHijoActionPerformed
-       
-        if(!InventarioPadreController.MantenimientoInventarioPadre("insertar", 0,
+
+         if(!InventarioPadreController.ValidacionInputsPadre(
             this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
             this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
             this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
-            this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
-            {
-                InventarioPadreModel PadreModel = new InventarioPadreModel();
-                Id_Padre = PadreModel.getInvPId();
-                InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
-                this.LimpiarInputsPadre();
+            this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto)){
+             
+            error1 = false;
+        }
+         if(!InventarioHijoController.ValidacionInputsHijo(
+            this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
+            this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo)){
+            
+            error2 = false;
+         }
+        
+        if(error1 == false && error2 == false){
+            
+            if((!(InventarioPadreController.insertarProducto(this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
+            this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
+            this.txtProducto.getText()))) && (!(InventarioHijoController.insertarInvHijo(
+            this.txtDescripcionHijo.getText(), this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText())))){
+             
+                    InventarioPadreModel PadreModel = new InventarioPadreModel();
+                    Id_Padre = PadreModel.getInvPId();
+                    InventarioPadreController.LlenarTableInventarioPadre(this.tablePadre);
 
-                if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
-                this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
-                this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
-                    {
-                        InventarioHijoModel HijoModel = new InventarioHijoModel();
-                        Id_Hijo = HijoModel.getInvHId();
-                        InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
-                        this.LimpiarInputsHijo();
-                    }
+                    InventarioHijoModel HijoModel = new InventarioHijoModel();
+                    Id_Hijo = HijoModel.getInvHId();
+                    InventarioHijoController.LlenarTableInventarioHijo(this.tableHijo);
+
+                    this.LimpiarInputsPadre();
+                    this.LimpiarInputsHijo();
+                 
             }
+        }
         
     }//GEN-LAST:event_btnAgregarHijoActionPerformed
 
@@ -1295,67 +1335,101 @@ public class MantenimientoInventarioBodegaView extends javax.swing.JFrame {
 
     private void btnEditarHijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarHijoActionPerformed
        
-        if(!InventarioHijoController.MantenimientoInventarioHijo("editar", this.Id_Hijo,
-                this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
-                this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
+        if(!InventarioHijoController.ValidacionInputsHijo(
+            this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
+            this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo)){
+            
+            error2= false;
+         }
+        
+        if(error2== false){
+            
+            if((!(InventarioHijoController.editarInvHijo(this.Id_Hijo,
+                this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),
+                this.txtUnidadHijo.getText()))))
             {
-                InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
+                InventarioHijoController.LlenarTableInventarioHijo(this.tableHijo);
                 this.LimpiarInputsHijo();
                 this.btnAgregarHijo.setEnabled(true);
                 this.btnEditarHijo.setEnabled(false);
             }
+        }
+        
     }//GEN-LAST:event_btnEditarHijoActionPerformed
 
     private void btnAgregarNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNietoActionPerformed
-        
-        if(!InventarioPadreController.MantenimientoInventarioPadre("insertar", 0,
+
+        if(!InventarioPadreController.ValidacionInputsPadre(
             this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
             this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
             this.txtProducto.getText(), this.lblErrorDescripcionPadre,this.lblErrorFechaCaducidad,
-            this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto))
-        {
-            InventarioPadreModel PadreModel = new InventarioPadreModel();
-            Id_Padre = PadreModel.getInvPId();
-            InventarioPadreController.LlenarTableInventarioPadre(tablePadre);
-            this.LimpiarInputsPadre();
-            
-            if(!InventarioHijoController.MantenimientoInventarioHijo("insertar", 0,
+            this.lblErrorCantidadPadre, this.lblErrorUnidadPadre, this.lblErrorKit,this.lblErrorProducto)){
+             
+            error1= false;
+        }
+         if(!InventarioHijoController.ValidacionInputsHijo(
             this.txtDescripcionHijo.getText(),this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText(),
-            this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo))
-            {
-                InventarioHijoModel HijoModel = new InventarioHijoModel();
-                Id_Hijo = HijoModel.getInvHId();
-                InventarioHijoController.LlenarTableInventarioHijo(tableHijo);
-                this.LimpiarInputsHijo();
-                
-                if(!InventarioNietoController.MantenimientoInventarioNieto("insertar", 0,
-                this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
-                this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto))
-                {
+            this.lblErrorDescripcionHijo,this.lblErrorCantidadHijo, this.lblErrorUnidadHijo)){
+            
+            error2= false;
+         }
+        
+          if(!InventarioNietoController.ValidacionInputsNieto(
+            this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
+            this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto)){
+            error3 = false;
+          }
+          
+        if(error1 == false && error2 == false && error3 == false){
+            
+            if((!(InventarioPadreController.insertarProducto(this.txtDescripcionPadre.getText(), this.txtFechaCaducidad.getText(),
+            this.txtCantidadPadre.getText(),this.txtUnidadPadre.getText(), this.txtKit.getText(),
+            this.txtProducto.getText()))) && (!(InventarioHijoController.insertarInvHijo(
+            this.txtDescripcionHijo.getText(), this.txtCantidadHijo.getText(),this.txtUnidadHijo.getText()))) &&
+            (!(InventarioNietoController.insertarInvNieto( this.txtDescripcionNieto.getText(), 
+            this.txtCantidadNieto.getText(), this.txtUnidadNieto.getText())))){
+            
+                    InventarioPadreModel PadreModel = new InventarioPadreModel();
+                    Id_Padre = PadreModel.getInvPId();
+                    InventarioPadreController.LlenarTableInventarioPadre(this.tablePadre);
+                    
+                    InventarioHijoModel HijoModel = new InventarioHijoModel();
+                    Id_Hijo = HijoModel.getInvHId();
+                    InventarioHijoController.LlenarTableInventarioHijo(this.tableHijo);
+                    
                     InventarioNietoModel NietoModel = new InventarioNietoModel();
                     Id_Nieto = NietoModel.getInvHId();
-                    InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
+                    InventarioNietoController.LlenarTableInventarioNieto(this.tableNieto);
+                    
+                    this.LimpiarInputsPadre();
+                    this.LimpiarInputsHijo();
                     this.LimpiarInputsNieto();
-                }
+                    
+                
             }
         }
-        
-        
-        
-        
-        
     }//GEN-LAST:event_btnAgregarNietoActionPerformed
 
     private void btnEditarNietoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarNietoActionPerformed
-                if(!InventarioNietoController.MantenimientoInventarioNieto("editar", this.Id_Nieto,
-                this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
-                this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto))
+        
+        if(!InventarioNietoController.ValidacionInputsNieto(
+            this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),this.txtUnidadNieto.getText(),
+            this.lblErrorDescripcionNieto,this.lblErrorCantidadNieto, this.lblErrorUnidadNieto)){
+            error3 = false;
+          }
+        
+        if(error3 == false){
+            
+            if(!InventarioNietoController.editarInvNieto(this.Id_Nieto,
+                this.txtDescripcionNieto.getText(),this.txtCantidadNieto.getText(),
+                this.txtUnidadNieto.getText()))
             {
-                InventarioNietoController.LlenarTableInventarioNieto(tableNieto);
-                this.LimpiarInputsNieto();
+                InventarioNietoController.LlenarTableInventarioNieto(this.tableNieto);
+                 this.LimpiarInputsNieto();
                 this.btnAgregarNieto.setEnabled(true);
                 this.btnEditarNieto.setEnabled(false);
             }
+        }
     }//GEN-LAST:event_btnEditarNietoActionPerformed
 
     private void tableNietoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNietoMouseClicked

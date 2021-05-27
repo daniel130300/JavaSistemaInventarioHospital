@@ -8,13 +8,9 @@ package Controllers.Controllers;
 import static Controllers.Controllers.GeneralController.FormatoTabla;
 import Models.Conexion.InventarioHijoConexion;
 import Models.Models.InventarioHijoModel;
-import Utils.Cache.InventarioPadreCache;
 import Utils.Validators.Validaciones;
-import static Views.Listados.ListadoUnidadesView.tableUnidades;
 import Views.Mantenimientos.MantenimientoInventarioBodegaView;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.btnSeleccionarUnidadPadre;
 import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadHijo;
-import static Views.Mantenimientos.MantenimientoInventarioBodegaView.txtUnidadPadre;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,7 +31,10 @@ import javax.swing.table.TableRowSorter;
 
 public class InventarioHijoController {
  
-    public static Boolean MantenimientoInventarioHijo(String accion, 
+    public static Boolean generalValidacionError2 = true;
+   // public static Boolean errorHijo= false;
+    
+   /* public static Boolean MantenimientoInventarioHijo(String accion, 
             Integer Id, String descripcion, String cantidad ,
             String unidades, JLabel errdescripcion, JLabel errcantidad,
             JLabel errunidades)
@@ -70,69 +69,95 @@ public class InventarioHijoController {
         }
 
         return !(mntError == false && generalValidacionError == false); 
-      }
+      } */
 
-    private static boolean insertarInvHijo( String trimmedDescripcion,
-       Integer trimmedcantidad, String trimmedUnidades)
+    public static Boolean ValidacionInputsHijo(String descripcion, String cantidad ,
+            String unidades, JLabel errdescripcion, JLabel errcantidad,
+            JLabel errunidades)
+    {
+        InventarioHijoController.setErroresToNull(errdescripcion, errcantidad, errunidades );
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedUnidades = unidades.trim();
+        String trimmedCantidad = cantidad.trim();
+        
+        
+        generalValidacionError2 = InventarioHijoController.validacionesGenerales(trimmedDescripcion, trimmedCantidad,
+            trimmedUnidades,errdescripcion, errcantidad,errunidades);
+
+        return !(generalValidacionError2 == false); 
+      }
+    
+    public static boolean insertarInvHijo(String descripcion,
+       String Cantidad, String unidades)
     {
         boolean error = false;
         Integer id = 0;
         Integer InvPId = 0;
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedUnidades = unidades.trim();
         
         InventarioHijoModel inventarioHModel = new InventarioHijoModel();
 
-        inventarioHModel = InventarioHijoController.setInvHModel(id, 
-                trimmedDescripcion,trimmedcantidad, InvPId, trimmedUnidades);
-        
-        String resultado = InventarioHijoConexion.MantenimientoInventarioHijo("insertar", inventarioHModel);    
-       
-        switch (resultado) 
+        if(generalValidacionError2 == false)
         {
-            case "OK":  
-                if(MantenimientoInventarioBodegaView.accion == 2){
-                    JOptionPane.showMessageDialog(null, "Producto ingresado con éxito."); 
-                }
-            break;
-            
-            case "errProducto":
-                JOptionPane.showMessageDialog(null, "El producto ya se encuentra registrado.");
-                error = true;
-            break;
+            inventarioHModel = InventarioHijoController.setInvHModel(id, 
+                    trimmedDescripcion, Integer.parseInt(Cantidad), InvPId, trimmedUnidades);
 
-            default:
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                error = true;
-            break;
+            String resultado = InventarioHijoConexion.MantenimientoInventarioHijo("insertar", inventarioHModel);    
+
+            switch (resultado) 
+            {
+                case "OK":  
+                    if(MantenimientoInventarioBodegaView.accion.equals(2)){
+                        JOptionPane.showMessageDialog(null, "Producto ingresado con éxito.");  
+                        System.out.println("Producto Ingresado con éxito.");
+                    }
+                break;
+
+                case "errProducto":
+                    JOptionPane.showMessageDialog(null, "El producto Padre ya se encuentra registrado.");
+                    error = true;
+                break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    error = true;
+                break;
+            }
         }
-        return error;
+        return !(error == false && generalValidacionError2 == false);
     }
     
-    private static boolean editarInvHijo(Integer Id, String trinmedDescripcion, Integer trinmedCantidad, 
-             String trinmedUnidad)
+    public static boolean editarInvHijo(Integer Id, String descripcion, String Cantidad, 
+             String unidades)
     {
-
         boolean error = false; 
 
         InventarioHijoModel productoModel = new InventarioHijoModel();
         Integer InvPId = 0;
+        String trimmedDescripcion = descripcion.trim();
+        String trimmedUnidades = unidades.trim();
         
-        productoModel = InventarioHijoController.setInvHModel(Id,
-                trinmedDescripcion, trinmedCantidad, InvPId, trinmedUnidad);
-        
-        String resultado = InventarioHijoConexion.MantenimientoInventarioHijo("editar", productoModel);
-        
-        switch (resultado) 
+        if(generalValidacionError2 == false)
         {
-            case "OK":   
-                JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
-            break;
-            
-            default:
-                JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
-                error = true;
-            break;
+            productoModel = InventarioHijoController.setInvHModel(Id,
+                    trimmedDescripcion, Integer.parseInt(Cantidad), InvPId, trimmedUnidades);
+
+            String resultado = InventarioHijoConexion.MantenimientoInventarioHijo("editar", productoModel);
+
+            switch (resultado) 
+            {
+                case "OK":   
+                    JOptionPane.showMessageDialog(null, "Producto editado con éxito.");       
+                break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al ejecutar la operación.");
+                    error = true;
+                break;
+            }
         }
-        return error;
+        return !(error == false && generalValidacionError2 == false);
     }
     
     private static InventarioHijoModel setInvHModel(Integer id,
@@ -272,15 +297,15 @@ public class InventarioHijoController {
            error = true;
         }
         
-        if(Validaciones.validarCampoVacio(trimmedcantidad))
+        if(!Validaciones.validarNumeros(trimmedcantidad))
         {
-           errcantidad.setText("La Cantidad es un campo obligatorio");
+           errcantidad.setText("La Cantidad ingresada es incorrecta");
            error = true;
         }
         
-        if(!Validaciones.validarNumeros(trimmedcantidad))
+        if(Validaciones.validarCampoVacio(trimmedcantidad))
         {
-           errcantidad.setText("El Cantidad ingresada es incorrecta");
+           errcantidad.setText("La Cantidad es un campo obligatorio");
            error = true;
         }
         

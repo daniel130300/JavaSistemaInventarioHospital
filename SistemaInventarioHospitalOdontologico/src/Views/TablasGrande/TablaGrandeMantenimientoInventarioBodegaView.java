@@ -214,6 +214,7 @@ public class TablaGrandeMantenimientoInventarioBodegaView extends javax.swing.JF
         int seleccion = this.tableBodega.rowAtPoint(evt.getPoint());
         InventarioPadreModel inventario = new  InventarioPadreModel();
         inventario.setInvPId(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 0))));
+        inventario.setInvPCodInterno(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 1)));
         inventario.setInvPDescripcion(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 2)));
         inventario.setInvPFchCaducidad(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion, 3)));
         inventario.setInvPCantidad(Integer.parseInt(String.valueOf(this.tableBodega.getModel().getValueAt(seleccion,4))));

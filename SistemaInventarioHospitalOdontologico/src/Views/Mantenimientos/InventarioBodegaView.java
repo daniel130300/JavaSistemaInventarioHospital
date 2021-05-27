@@ -132,11 +132,11 @@ public class InventarioBodegaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Padre", "Descripción", "Fecha Caducidad", "Cantidad", "Unidad", "Id Kit", "Nombre Kit", "Id Producto", "Nombre Producto"
+                "Id Padre", "Código Interno", "Descripción", "Fecha Caducidad", "Cantidad", "Unidad", "Id Kit", "Nombre Kit", "Id Producto", "lNombre Producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
